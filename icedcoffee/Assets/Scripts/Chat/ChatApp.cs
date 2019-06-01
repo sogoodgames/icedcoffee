@@ -156,7 +156,7 @@ public class ChatApp : App
         CloseChatSelection();
         m_activeChat = c;
 
-        Debug.Log("opening chat: " + c.Friend + "; last visited message: " + m_activeChat.GetLastVisitedMessage().Node);
+        //Debug.Log("opening chat: " + c.Friend + "; last visited message: " + m_activeChat.GetLastVisitedMessage().Node);
 
         // set name
         FriendTitleText.text = c.Friend.ToString();
@@ -243,7 +243,7 @@ public class ChatApp : App
 
     // ------------------------------------------------------------------------
     private void FinishConvo () {
-        Debug.Log("Reached end of convo at node " + m_activeChat.GetLastVisitedMessage().Node);
+        //Debug.Log("Reached end of convo at node " + m_activeChat.GetLastVisitedMessage().Node);
         m_activeChat.finished = true;
 
         // these should be events
