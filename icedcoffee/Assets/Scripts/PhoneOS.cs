@@ -41,6 +41,8 @@ public class PhoneOS : MonoBehaviour
     // ------------------------------------------------------------------------
     // Variables
     // ------------------------------------------------------------------------
+    public bool RunFTUE = true;
+
     public NotificationManager NotificationManager;
     public NotesApp NotesApp;
     public ChatApp ChatApp;
@@ -151,15 +153,9 @@ public class PhoneOS : MonoBehaviour
     }
 
     void OnEnable () {
-        Chat rileyChat = m_allChats[0];
-        foreach(Chat c in m_allChats) {
-            if(c.Friend == Friend.Riley) {
-                rileyChat = c;
-                break;
-            }
+        if(RunFTUE) {
+            StartFTUE();
         }
-        ChatApp.OpenChat(rileyChat);
-        m_activeApp = ChatApp;
     }
     
     // ------------------------------------------------------------------------
@@ -218,6 +214,18 @@ public class PhoneOS : MonoBehaviour
     // ------------------------------------------------------------------------
     // Methods: Private
     // ------------------------------------------------------------------------
+    private void StartFTUE () {
+        Chat rileyChat = m_allChats[0];
+        foreach(Chat c in m_allChats) {
+            if(c.Friend == Friend.Riley) {
+                rileyChat = c;
+                break;
+            }
+        }
+        ChatApp.OpenChat(rileyChat);
+        m_activeApp = ChatApp;
+    }
+
     private void CloseAllApps() {
         foreach(App app in Apps) {
             if(app.IsOpen) {
