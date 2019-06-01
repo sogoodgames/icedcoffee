@@ -90,17 +90,15 @@ public class NotificationManager : MonoBehaviour
     }
 
     public void FoundClueNotif (ClueID id) {
-        if(!NotesApp.clueNotes.ContainsKey(id)) {
-            return;
-        }
-        QueueNotif(NotesApp.Icon, NotesApp.clueNotes[id], NotesApp);
+        Clue clue = PhoneOS.GetClue(id);
+        QueueNotif(NotesApp.Icon, clue.Note, NotesApp);
     }
 
-    public void NewContactNotif (string friendName) {
-        QueueNotif(ChatApp.Icon, NewContactNotifText + friendName, ChatApp);
+    public void NewContactNotif (Friend friend) {
+        QueueNotif(ChatApp.Icon, NewContactNotifText + friend.ToString(), ChatApp);
     }
 
-    public void ForumPostNotif (ForumPostData post) {
+    public void ForumPostNotif (ForumPost post) {
         QueueNotif(ForumApp.Icon, "New Ruddit post!",  ForumApp);
     }
 

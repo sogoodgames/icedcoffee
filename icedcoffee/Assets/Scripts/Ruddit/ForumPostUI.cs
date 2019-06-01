@@ -19,9 +19,9 @@ public class ForumPostUI : MonoBehaviour
         PostContent.SetActive(!PostContent.activeSelf);
     }
 
-    public void SetPhotoContent (ForumPostData post, PhoneOS os) {
+    public void SetPhotoContent (ForumPost post, PhoneOS os) {
         if(post.Photo > -1) {
-            Sprite img = os.PhotoAssets[post.Photo];
+            Sprite img = os.DataLoader.PhotoAssets[post.Photo];
             if(img) {
                 ContentImage.sprite = img;
                 ContentImage.gameObject.SetActive(true);

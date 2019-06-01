@@ -1,14 +1,7 @@
 ﻿using System;   // serializable
 
-public class ForumPostData
+public class ForumPost
 {
-    // ------------------------------------------------------------------------
-    // Variables
-    // ------------------------------------------------------------------------
-    // the order they were unlocked in, so that they appear in your
-    // list of messages in a way that makes sense
-    public int Order = 0;
-
     // ------------------------------------------------------------------------
     // Properties
     // ------------------------------------------------------------------------
@@ -45,7 +38,7 @@ public class ForumPostData
     // ------------------------------------------------------------------------
     // Methods
     // ------------------------------------------------------------------------
-    public ForumPostData (ForumPostSerializable post) {
+    public ForumPost (ForumPostSerializable post) {
         m_username = post.username;
         m_title = post.title;
         m_clueGiven = post.clueGiven;

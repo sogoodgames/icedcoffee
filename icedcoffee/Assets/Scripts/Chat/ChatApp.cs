@@ -32,7 +32,6 @@ public class ChatApp : App
     //Message timing
     public float SkipCooldown = 0.5f;
     public float MaxTimeBetweenMessages = 2f;
-    private float timeSinceLastMessage = 0f;
 
     // internal
     private Chat m_activeChat;
@@ -122,7 +121,7 @@ public class ChatApp : App
                 chatButton.NameText.text = chat.Friend.ToString();
 
                 // set profile pic
-                chatButton.ProfilePic.sprite = PhoneOS.UserIconAssets[chat.Icon];
+                chatButton.ProfilePic.sprite = PhoneOS.DataLoader.UserIconAssets[chat.Icon];
 
                 // show unread notif (if unfinished)
                 if(chat.finished) {
@@ -249,9 +248,9 @@ public class ChatApp : App
 
         // these should be events
         if(m_activeChat.Friend == Friend.Jin) {
-            ChatAttachment.Open(PhoneOS.JinEndingPhoto/*, 1080, 810*/);
+            ChatAttachment.Open(PhoneOS.DataLoader.JinEndingPhoto/*, 1080, 810*/);
         } else if(m_activeChat.Friend == Friend.Emma && m_activeChat.GetLastVisitedMessage().Node == 16) {
-            ChatAttachment.Open(PhoneOS.EmmaEndingPhoto/*, 1078, 1437*/);
+            ChatAttachment.Open(PhoneOS.DataLoader.EmmaEndingPhoto/*, 1078, 1437*/);
         }
     }
 
@@ -265,8 +264,6 @@ public class ChatApp : App
             ChatBubblesParent
         ) as GameObject;
 
-        timeSinceLastMessage = 0f;
-
         // find ChatBubbleUI
         ChatBubbleUI chatBubbleUi = bubble.GetComponent<ChatBubbleUI>();
         if(!chatBubbleUi) {
@@ -277,7 +274,7 @@ public class ChatApp : App
         chatBubbleUi.Text.text = message.Messages[messageIndex];
 
         if(!message.Player) {
-            chatBubbleUi.Icon.sprite = PhoneOS.UserIconAssets[m_activeChat.Icon];
+            chatBubbleUi.Icon.sprite = PhoneOS.DataLoader.UserIconAssets[m_activeChat.Icon];
         }
 
         if(messageIndex == message.Messages.Length - 1 && message.Image >= 0) {
@@ -294,7 +291,7 @@ public class ChatApp : App
             return;
         }
 
-        ChatAttachment.Open(PhoneOS.PhotoAssets[message.Image]/*, message.ImageWidth, message.ImageHeight*/);
+        ChatAttachment.Open(PhoneOS.DataLoader.PhotoAssets[message.Image]/*, message.ImageWidth, message.ImageHeight*/);
     }
 
     // ------------------------------------------------------------------------

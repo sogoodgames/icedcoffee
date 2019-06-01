@@ -84,10 +84,6 @@ public class Chat {
     // ------------------------------------------------------------------------
     // Public Variables
     // ------------------------------------------------------------------------
-    // the order they were unlocked in, so that they appear in your
-    // list of messages in a way that makes sense
-    public int order = 0;
-
     // whether or not the convo is finished
     public bool finished;
 
@@ -126,7 +122,6 @@ public class Chat {
         clueNeeded = serializedChat.clueNeeded;
         icon = serializedChat.icon;
 
-        order = 0;
         lastVisitedMessage = 0;
 
         if(serializedChat.messages == null) {

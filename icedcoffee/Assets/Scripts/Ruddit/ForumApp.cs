@@ -12,7 +12,7 @@ public class ForumApp : App
         base.Open();
 
         int i = 1;
-        foreach(ForumPostData post in PhoneOS.ActiveForumPosts) {
+        foreach(ForumPost post in PhoneOS.ActiveForumPosts) {
             GameObject postObj = Instantiate(
                 ForumPostPrefab,
                 ForumPostParent)
@@ -37,7 +37,7 @@ public class ForumApp : App
                 i++;
 
                 // load profile icon
-                Sprite icon = PhoneOS.UserIconAssets[post.Icon];
+                Sprite icon = PhoneOS.DataLoader.UserIconAssets[post.Icon];
                 if(icon) {
                     postUI.ProfileImage.sprite = icon;
                 }
