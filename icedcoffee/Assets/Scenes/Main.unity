@@ -1104,6 +1104,7 @@ GameObject:
   m_Component:
   - component: {fileID: 107778676}
   - component: {fileID: 107778677}
+  - component: {fileID: 107778678}
   m_Layer: 5
   m_Name: App_Ruddit
   m_TagString: Untagged
@@ -1150,9 +1151,49 @@ MonoBehaviour:
   PhoneOS: {fileID: 1668743989}
   Icon: {fileID: 21300000, guid: 53f1229e3308c214ca15d8be5edcd790, type: 3}
   DoSlideAnimation: 1
+  SlideAnimator: {fileID: 107778678}
   ForumPostParent: {fileID: 1802540390}
   ForumPostPrefab: {fileID: 7251587346829470753, guid: d96fa02a29277da4c93da4a83d2a95a2,
     type: 3}
+--- !u!114 &107778678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 107778675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf11c3803cd50454380445f397d2a8df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AppAnimationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  AppAnimationSpeed: 4000
+  AppAnimationTime: 0.1
+  AppStartX: 1080
 --- !u!1 &125500409
 GameObject:
   m_ObjectHideFlags: 0
@@ -4062,6 +4103,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1121651227}
   - component: {fileID: 1121651228}
+  - component: {fileID: 1121651229}
   m_Layer: 5
   m_Name: App_Chat
   m_TagString: Untagged
@@ -4107,6 +4149,7 @@ MonoBehaviour:
   PhoneOS: {fileID: 1668743989}
   Icon: {fileID: 21300000, guid: 618ed1ad2ad0f694fa10f618c1736e6a, type: 3}
   DoSlideAnimation: 1
+  SlideAnimator: {fileID: 1121651229}
   ChatRunner: {fileID: 348811503}
   ChatSelectionScreen: {fileID: 172776188}
   ChatScreen: {fileID: 557253474}
@@ -4126,6 +4169,45 @@ MonoBehaviour:
   ChatAttachment: {fileID: 188769670}
   typingSFX: {fileID: 383916663}
   messageSFX: {fileID: 925825688}
+--- !u!114 &1121651229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1121651226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf11c3803cd50454380445f397d2a8df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AppAnimationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  AppAnimationSpeed: 4000
+  AppAnimationTime: 0.1
+  AppStartX: 1080
 --- !u!1 &1134960046
 GameObject:
   m_ObjectHideFlags: 0
@@ -4174,6 +4256,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1140524367}
   - component: {fileID: 1140524368}
+  - component: {fileID: 1140524369}
   m_Layer: 5
   m_Name: App_Notes
   m_TagString: Untagged
@@ -4220,9 +4303,49 @@ MonoBehaviour:
   PhoneOS: {fileID: 1668743989}
   Icon: {fileID: 21300000, guid: c58b983713cdef244a2485a9f792a5d1, type: 3}
   DoSlideAnimation: 1
+  SlideAnimator: {fileID: 1140524369}
   NotesParent: {fileID: 1920286767}
   NotePrefab: {fileID: 6879748729205006902, guid: 73c6ec9a89b42e148a09cbf936b1f5e9,
     type: 3}
+--- !u!114 &1140524369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1140524366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf11c3803cd50454380445f397d2a8df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AppAnimationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  AppAnimationSpeed: 4000
+  AppAnimationTime: 0.1
+  AppStartX: 1080
 --- !u!1 &1178127564
 GameObject:
   m_ObjectHideFlags: 0
@@ -5380,6 +5503,7 @@ MonoBehaviour:
   PhoneOS: {fileID: 1668743989}
   Icon: {fileID: 21300000, guid: 0e8ca839e49570f4ca2bd52841d8dd5e, type: 3}
   DoSlideAnimation: 0
+  SlideAnimator: {fileID: 0}
 --- !u!1 &1668743988
 GameObject:
   m_ObjectHideFlags: 0
@@ -5421,33 +5545,6 @@ MonoBehaviour:
   - {fileID: 1121651228}
   - {fileID: 1140524368}
   HomeApp: {fileID: 1640568942}
-  AppAnimationCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  AppAnimationSpeed: 3000
-  AppAnimationTime: 0.01
-  AppStartX: 1080
 --- !u!4 &1668743990
 Transform:
   m_ObjectHideFlags: 0

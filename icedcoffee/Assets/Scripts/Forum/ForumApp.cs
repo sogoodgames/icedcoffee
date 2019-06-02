@@ -53,10 +53,12 @@ public class ForumApp : App
         }
     }
 
-    public override void OnCloseAnimationFinished () {
-        base.OnCloseAnimationFinished();
-        foreach(Transform t in ForumPostParent.transform) {
-            Destroy(t.gameObject);
+    public override void HandleSlideAnimationFinished () {
+        if(m_waitingForClose) {
+            foreach(Transform t in ForumPostParent.transform) {
+                Destroy(t.gameObject);
+            }
         }
+        base.HandleSlideAnimationFinished();
     }
 }

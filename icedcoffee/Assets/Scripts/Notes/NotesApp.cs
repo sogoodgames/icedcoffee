@@ -13,8 +13,8 @@ public class NotesApp : App
         PopulateNotes(); 
     }
 
-    public override void OnCloseAnimationFinished () {
-        base.OnCloseAnimationFinished();
+    public override void HandleSlideAnimationFinished () {
+        base.HandleSlideAnimationFinished();
         foreach(Transform child in NotesParent.transform) {
             Destroy(child.gameObject);
         }

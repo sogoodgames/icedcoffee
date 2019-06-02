@@ -38,7 +38,8 @@ public class ChatApp : App
     // ------------------------------------------------------------------------
     // Methods : MonoBehaviour
     // ------------------------------------------------------------------------
-    public void Awake () {
+    protected override void Awake () {
+        base.Awake();
         ChatRunner.VisitedMessage += DrawChatBubble;
         ChatRunner.VisitedOption += DrawChatOptionBubble;
         ChatRunner.FinishedChat += HandleFinishedChat;
@@ -50,12 +51,7 @@ public class ChatApp : App
     // i have no idea.
     // why am i not using a more elegant solution using ienumerators?
     // because i'm tired.
-    protected override void Update() {
-        base.Update();
-        if(animate) {
-            return;
-        }
-
+    protected void Update() {
         if(m_needsScroll) {
             scrollWait++;
             if(scrollWait >= 3) {
@@ -77,21 +73,21 @@ public class ChatApp : App
     }
 
     // ------------------------------------------------------------------------
-    public override void OnCloseAnimationFinished () {
-        m_activeChat = null;
-        PhoneOS.ReturnButton.SetActive(false);
-        base.OnCloseAnimationFinished();
-        CloseChatSelection();
-        CloseChat();
-        ChatAttachment.Close();
+    public override void HandleSlideAnimationFinished () {
+        bool waitingForClose = m_waitingForClose;
+        base.HandleSlideAnimationFinished();
+
+        if(waitingForClose) {
+            m_activeChat = null;
+            PhoneOS.ReturnButton.SetActive(false);
+            CloseChatSelection();
+            CloseChat();
+            ChatAttachment.Close();
+        }
     }
 
     // ------------------------------------------------------------------------
     public override void Return() {
-        if(animate) {
-            return;
-        }
-        
         if(ChatScreen.activeInHierarchy) {
             CloseChat();
             OpenChatSelection();
@@ -151,10 +147,6 @@ public class ChatApp : App
             Debug.LogError("Trying to open chat with null chat");
             return;
         }
-        if(animate) {
-            return;
-        }
-
         CloseChatSelection();
         m_activeChat = c;
 
@@ -270,9 +262,6 @@ public class ChatApp : App
 
     // ------------------------------------------------------------------------
     public void OpenAttachment (Message message) {
-        if(animate) {
-            return;
-        }
         ChatAttachment.Open(PhoneOS.DataLoader.PhotoAssets[message.Image]/*, message.ImageWidth, message.ImageHeight*/);
     }
 

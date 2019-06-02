@@ -2,82 +2,60 @@
 
 public abstract class App : MonoBehaviour
 {
+    // ------------------------------------------------------------------------
+    // Variables
+    // ------------------------------------------------------------------------
     public PhoneOS PhoneOS;
     public Sprite Icon;
     public bool DoSlideAnimation = true;
-
-    protected bool animate;
-    private float animTime;
-    private int xDir;
-    private bool waitForClose;
+    public SlideAnimation SlideAnimator;
 
     public bool IsOpen {
         get {return gameObject.activeInHierarchy;}
     }
 
-    protected virtual void Update () {
-        if(animate) {
-            float animTimeLinear = animTime / PhoneOS.AppAnimationTime;
-            float animCurve = PhoneOS.AppAnimationCurve.Evaluate(animTimeLinear);
-            transform.Translate(
-                xDir * animCurve * PhoneOS.AppAnimationSpeed * Time.deltaTime,
-                0, 0
-            );
-            animTime += Time.deltaTime;
+    protected bool m_waitingForClose;
 
-            bool reachedDestination = false;
-            if(waitForClose) {
-                reachedDestination = transform.localPosition.x >= PhoneOS.AppStartX;
-            } else {
-                reachedDestination = transform.localPosition.x <= 0.0f;
-            }
-
-            if(reachedDestination) {
-                transform.localPosition = new Vector3(0, transform.localPosition.y, transform.localPosition.z); 
-                animate = false;
-
-                if(waitForClose) {
-                    OnCloseAnimationFinished();
-                }
-            }
+    // ------------------------------------------------------------------------
+    // Methods: MonoBehaviour
+    // ------------------------------------------------------------------------
+    protected virtual void Awake () {
+        if(DoSlideAnimation) {
+            SlideAnimator.SlideAnimationFinished += HandleSlideAnimationFinished;
         }
     }
 
-    public virtual void Open() {
+    // ------------------------------------------------------------------------
+    // Methods: App
+    // ------------------------------------------------------------------------
+    public virtual void Open () {
         gameObject.SetActive(true);
         if(DoSlideAnimation) {
-            PlaySlideInAnimation();
+            m_waitingForClose = false;
+            SlideAnimator.PlaySlideAnimation(-1);
         }
     }
 
-    public virtual void Close() {
+    // ------------------------------------------------------------------------
+    public virtual void Close () {
         if(DoSlideAnimation) {
-            PlaySlideOutAnimation();
+            m_waitingForClose = true;
+            SlideAnimator.PlaySlideAnimation(1);
         } else {
-            OnCloseAnimationFinished();
+            HandleSlideAnimationFinished();
         }
     }
 
-    public virtual void OnCloseAnimationFinished() {
-        gameObject.SetActive(false);
-        waitForClose = false;
+    // ------------------------------------------------------------------------
+    public virtual void HandleSlideAnimationFinished () {
+        if(m_waitingForClose) {
+            gameObject.SetActive(false);
+            m_waitingForClose = false;
+        }
     }
 
+    // ------------------------------------------------------------------------
     public virtual void Return() {
         PhoneOS.GoHome();
-    }
-
-    public void PlaySlideInAnimation () {
-        animate = true;
-        animTime = 0;
-        transform.localPosition = new Vector3(PhoneOS.AppStartX, transform.localPosition.y, transform.localPosition.z);
-        xDir = -1;
-    }
-
-    public void PlaySlideOutAnimation () {
-        animate = true;
-        animTime = 0;
-        waitForClose = true;
-        xDir = 1;
     }
 }

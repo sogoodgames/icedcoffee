@@ -19,11 +19,6 @@ public class PhoneOS : MonoBehaviour
     public List<App> Apps;
     public App HomeApp;
 
-    public AnimationCurve AppAnimationCurve;
-    public float AppAnimationSpeed = 2000;
-    public float AppAnimationTime = 0.5f;
-    public float AppStartX = 1080.0f;
-
     private List<Chat> m_allChats;
     private App m_activeApp;
 
