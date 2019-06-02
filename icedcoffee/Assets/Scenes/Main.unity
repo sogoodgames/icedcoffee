@@ -1833,6 +1833,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 348663661}
   m_CullTransparentMesh: 0
+--- !u!1 &348811502
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 348811504}
+  - component: {fileID: 348811503}
+  m_Layer: 0
+  m_Name: ChatRunner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &348811503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 348811502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fae6d2613406714faa0f5b2e6536c7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxTimeBetweenMessages: 2
+--- !u!4 &348811504
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 348811502}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 139.39897, y: 300.43842, z: -4021.3733}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &349349686
 GameObject:
   m_ObjectHideFlags: 0
@@ -4063,6 +4107,7 @@ MonoBehaviour:
   PhoneOS: {fileID: 1668743989}
   Icon: {fileID: 21300000, guid: 618ed1ad2ad0f694fa10f618c1736e6a, type: 3}
   DoSlideAnimation: 1
+  ChatRunner: {fileID: 348811503}
   ChatSelectionScreen: {fileID: 172776188}
   ChatScreen: {fileID: 557253474}
   ChatButtonsParent: {fileID: 7470853908441363795}
@@ -4081,8 +4126,6 @@ MonoBehaviour:
   ChatAttachment: {fileID: 188769670}
   typingSFX: {fileID: 383916663}
   messageSFX: {fileID: 925825688}
-  SkipCooldown: 0.5
-  MaxTimeBetweenMessages: 2
 --- !u!1 &1134960046
 GameObject:
   m_ObjectHideFlags: 0
@@ -5368,6 +5411,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RunFTUE: 0
   DataLoader: {fileID: 125500410}
+  ChatRunner: {fileID: 348811503}
   NotificationManager: {fileID: 2127045480}
   NotesApp: {fileID: 1140524368}
   ChatApp: {fileID: 1121651228}

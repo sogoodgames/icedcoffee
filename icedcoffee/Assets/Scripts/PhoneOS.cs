@@ -11,6 +11,7 @@ public class PhoneOS : MonoBehaviour
     public bool RunFTUE = true;
 
     public DataLoader DataLoader;
+    public ChatRunner ChatRunner;
     public NotificationManager NotificationManager;
     public NotesApp NotesApp;
     public ChatApp ChatApp;
@@ -82,6 +83,8 @@ public class PhoneOS : MonoBehaviour
         m_allChats = DataLoader.LoadChats();
         m_allForumPosts = DataLoader.LoadForumPosts();
         m_clues = DataLoader.LoadClues();
+
+        ChatRunner.FoundClue += FoundClue;
     }
 
     void OnEnable () {
