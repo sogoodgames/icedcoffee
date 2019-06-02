@@ -52,17 +52,7 @@ public class NotificationManager : MonoBehaviour
 
             // check if notif's time has run out
             if(notif.timeLeft <= 0) {
-                m_notificationQueue.Dequeue();
-
-                // check if we have another queued
-                if(m_notificationQueue.Count > 0) {
-                    NotifInfo nextNotif = m_notificationQueue.Peek();
-                    // if we do, play it
-                    DisplayNotif(nextNotif);
-                } else {
-                    // if we don't, close notif bar
-                    Close();
-                }
+                TryPlayNextNotif();
             }
         }
     }
@@ -71,7 +61,7 @@ public class NotificationManager : MonoBehaviour
         Icon.sprite = notif.sprite;
         Text.text = notif.text;
         Button.onClick.RemoveAllListeners();
-        Button.onClick.AddListener(delegate{PhoneOS.OpenApp(notif.app);});
+        Button.onClick.AddListener(delegate{NotificationClicked(notif.app);});
         NotificationUI.SetActive(true);
 
         notifSound.Play();
@@ -100,6 +90,24 @@ public class NotificationManager : MonoBehaviour
 
     public void ForumPostNotif (ForumPost post) {
         QueueNotif(ForumApp.Icon, "New Ruddit post!",  ForumApp);
+    }
+
+    public void NotificationClicked (App app) {
+        TryPlayNextNotif();
+        PhoneOS.OpenApp(app);
+    }
+
+    private void TryPlayNextNotif () {
+        m_notificationQueue.Dequeue();
+        // check if we have another queued
+        if(m_notificationQueue.Count > 0) {
+            NotifInfo nextNotif = m_notificationQueue.Peek();
+            // if we do, play it
+            DisplayNotif(nextNotif);
+        } else {
+            // if we don't, close notif bar
+            Close();
+        }
     }
 
     private void Close () {
