@@ -20,13 +20,14 @@ public class ForumPostUI : MonoBehaviour
     }
 
     public void SetPhotoContent (ForumPost post, PhoneOS os) {
-        if(post.Photo > -1) {
-            Sprite img = os.DataLoader.PhotoAssets[post.Photo];
+        if(post.Photo != PhotoID.NoPhoto) {
+            Photo photo = os.GetPhoto(post.Photo);
+            Sprite img = os.DataLoader.PhotoAssets[photo.Image];
             if(img) {
                 ContentImage.sprite = img;
                 ContentImage.gameObject.SetActive(true);
                 ContentImage.SetNativeSize();
-                ContentImage.rectTransform.sizeDelta *= post.ImageHeight;
+                ContentImage.rectTransform.sizeDelta *= photo.Height;
             }
         }
     }

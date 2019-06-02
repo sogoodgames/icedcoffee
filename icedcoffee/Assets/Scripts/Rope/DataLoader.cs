@@ -8,6 +8,7 @@ public class DataLoader : MonoBehaviour {
     public List<TextAsset> ChatTextAssets;
     public List<TextAsset> ForumPostTextAssets;
     public List<TextAsset> ClueTextAssets;
+    public List<TextAsset> PhotoTextAssets;
     public List<Sprite> UserIconAssets;
     public List<Sprite> PhotoAssets;
     public Sprite EmmaEndingPhoto;
@@ -83,5 +84,23 @@ public class DataLoader : MonoBehaviour {
             }
         }
         return clues;
+    }
+
+    // ------------------------------------------------------------------------
+    public List<Photo> LoadPhotos() {
+        List<Photo> photos = new List<Photo>();
+
+        foreach(TextAsset textAsset in PhotoTextAssets) {
+            string text = textAsset.text;
+            if(!string.IsNullOrEmpty(text)) {
+                PhotoSerializable photoSer = JsonUtility.FromJson<PhotoSerializable>(text);
+                Photo photo = new Photo(photoSer);
+                photos.Add(photo);
+            } else {
+                Debug.LogError("file empty: " + textAsset.name);
+                break;
+            }
+        }
+        return photos;
     }
 }

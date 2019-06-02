@@ -7,9 +7,7 @@ public class MessageSerializable {
     public bool player; // whether or not it's the player talking
     public ClueID clueGiven; // the clue given (if any)
     public string[] messages; // the text for the messages sent
-    public int image = -1;
-    public float imageHeight;
-    public float imageWidth;
+    public PhotoID image;
 
     // all of the following map by index
     public string[] options; // the text options

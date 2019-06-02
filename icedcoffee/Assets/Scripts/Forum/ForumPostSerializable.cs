@@ -10,6 +10,5 @@ public class ForumPostSerializable {
     public int numComments; // number of comments
     public int time; // minutes ago it was posted
     public int icon; // icon file
-    public int photo; // post image file (optional)
-    public float imageHeight; // image preferred height in-app in pixels
+    public PhotoID photo; // post image file (optional)
 }

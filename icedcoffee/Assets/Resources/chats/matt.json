@@ -129,9 +129,7 @@
             "branch": [
                 10
             ],
-            "image" : 0,
-            "imageHeight" : 1489,
-            "imageWidth" : 930.6
+            "image" : "1"
         },
         {
             "node": 10,

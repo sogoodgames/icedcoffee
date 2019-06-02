@@ -39,16 +39,8 @@ public class Message {
     public int[] Branch {get{return branch;}}
 
     // the index in the resources of the attached image
-    private int image;
-    public int Image {get{return image;}}
-
-    // the height of the image in pixels
-    private float imageHeight;
-    public float ImageHeight {get{return imageHeight;}}
-
-    // the width of the image in pixels
-    private float imageWidth;
-    public float ImageWidth {get{return imageWidth;}}
+    private PhotoID image;
+    public PhotoID Image {get{return image;}}
 
     // ------------------------------------------------------------------------
     // Methods
@@ -62,8 +54,6 @@ public class Message {
         clueNeeded = serializedMessage.clueNeeded;
         branch = serializedMessage.branch;
         image = serializedMessage.image;
-        imageHeight = serializedMessage.imageHeight;
-        imageWidth = serializedMessage.imageWidth;
 
         OptionSelection = -1;
     }

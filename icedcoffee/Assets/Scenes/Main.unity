@@ -1262,6 +1262,15 @@ MonoBehaviour:
   - {fileID: 4900000, guid: 9720fa62cd676e34eae457ea5e8cc8ff, type: 3}
   - {fileID: 4900000, guid: 30bbe59ecddd69b41b03a3859eac1dad, type: 3}
   - {fileID: 4900000, guid: 878fa329d427a9f449006e5b8c38083a, type: 3}
+  PhotoTextAssets:
+  - {fileID: 4900000, guid: d449f36c429c627429bdb5062d3b7cdb, type: 3}
+  - {fileID: 4900000, guid: d2b38fe6f91e3634d952d91a1a738614, type: 3}
+  - {fileID: 4900000, guid: 66cc9be7593eefb41ac42e0bb048ada3, type: 3}
+  - {fileID: 4900000, guid: 321996608cb04584fb99863800ececf4, type: 3}
+  - {fileID: 4900000, guid: 4bb53d8fcbcd620438c2e106a53bac26, type: 3}
+  - {fileID: 4900000, guid: cd352e0d1043a144eb70d6ba193d3d37, type: 3}
+  - {fileID: 4900000, guid: 6d9541f2d5c51b749a6bf38ba1725adb, type: 3}
+  - {fileID: 4900000, guid: 3f1578adf01648d409fc76ac695eaa41, type: 3}
   UserIconAssets:
   - {fileID: 21300000, guid: 4bba63758f76d4c40a2fb53d21f796c0, type: 3}
   - {fileID: 21300000, guid: 8998f468b02536b439e67d3a314de493, type: 3}

@@ -31,3 +31,14 @@ public enum ClueID {
     MattPhone = 15,
     LucienPhone = 16
 }
+
+public enum PhotoID {
+    NoPhoto = 0,
+    BeerSnap = 1,
+    EmmaPic = 2,
+    Gender = 3,
+    LaterHomo = 4,
+    Pizza = 5,
+    Shoe = 6,
+    SquirrelMeme = 7
+}

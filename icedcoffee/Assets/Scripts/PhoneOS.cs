@@ -26,6 +26,7 @@ public class PhoneOS : MonoBehaviour
     private ForumPost m_activeForumPost;
 
     private List<Clue> m_clues;
+    private List<Photo> m_photos;
 
     // ------------------------------------------------------------------------
     // Properties
@@ -70,6 +71,19 @@ public class PhoneOS : MonoBehaviour
         }
     }
 
+    public List<Photo> FoundPhotos {
+        get {
+            // only add found photos
+            List<Photo> photos = new List<Photo>();
+            foreach(Photo photo in m_photos) {
+                if(photo.Found) {
+                    photos.Add(photo);
+                }
+            }
+            return photos;
+        }
+    }
+
     // ------------------------------------------------------------------------
     // Methods: Monobehaviour
     // ------------------------------------------------------------------------
@@ -78,6 +92,7 @@ public class PhoneOS : MonoBehaviour
         m_allChats = DataLoader.LoadChats();
         m_allForumPosts = DataLoader.LoadForumPosts();
         m_clues = DataLoader.LoadClues();
+        m_photos = DataLoader.LoadPhotos();
 
         ChatRunner.FoundClue += FoundClue;
     }
@@ -117,6 +132,13 @@ public class PhoneOS : MonoBehaviour
     public Clue GetClue (ClueID id) {
         Clue clue = m_clues.First(c => c.ClueID == id);
         return clue;
+    }
+
+    // ------------------------------------------------------------------------
+    public Photo GetPhoto (PhotoID id) {
+        Debug.Log("searching for photo with id " + id);
+        Photo photo = m_photos.First(p => p.PhotoID == id);
+        return photo;
     }
 
     // ------------------------------------------------------------------------

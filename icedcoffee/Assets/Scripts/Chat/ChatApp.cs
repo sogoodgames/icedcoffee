@@ -262,7 +262,8 @@ public class ChatApp : App
 
     // ------------------------------------------------------------------------
     public void OpenAttachment (Message message) {
-        ChatAttachment.Open(PhoneOS.DataLoader.PhotoAssets[message.Image]/*, message.ImageWidth, message.ImageHeight*/);
+        Photo photo = PhoneOS.GetPhoto(message.Image);
+        ChatAttachment.Open(PhoneOS.DataLoader.PhotoAssets[photo.Image]);
     }
 
     // ------------------------------------------------------------------------

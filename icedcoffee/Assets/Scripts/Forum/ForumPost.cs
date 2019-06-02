@@ -29,11 +29,8 @@ public class ForumPost
     private int m_icon; // icon file
     public int Icon {get{return m_icon;}}
 
-    private int m_photo; // post image file (optional)
-    public int Photo {get{return m_photo;}}
-
-    private float m_imageHeight; // image preferred height in-app in pixels
-    public float ImageHeight {get{return m_imageHeight;}}
+    private PhotoID m_photo; // post image file (optional)
+    public PhotoID Photo {get{return m_photo;}}
 
     // ------------------------------------------------------------------------
     // Methods
@@ -48,7 +45,6 @@ public class ForumPost
         m_time = post.time;
         m_icon = post.icon;
         m_photo = post.photo;
-        m_imageHeight = post.imageHeight;
     }
 
     // ------------------------------------------------------------------------
