@@ -15,8 +15,10 @@ public class NotesApp : App
 
     public override void HandleSlideAnimationFinished () {
         base.HandleSlideAnimationFinished();
-        foreach(Transform child in NotesParent.transform) {
-            Destroy(child.gameObject);
+        if(m_waitingForClose) {
+            foreach(Transform child in NotesParent.transform) {
+                Destroy(child.gameObject);
+            }
         }
     }
 
