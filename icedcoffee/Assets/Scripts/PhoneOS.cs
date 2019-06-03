@@ -176,7 +176,7 @@ public class PhoneOS : MonoBehaviour
 
         // if a photo needed this clue, mark it found
         foreach(Photo photo in m_photos) {
-            Debug.Log("clue id: " + photo.ClueID + "; looking for: " + id);
+            //Debug.Log("clue id: " + photo.ClueID + "; looking for: " + id);
             if(photo.ClueID == id) {
                 photo.Found = true;
             }
