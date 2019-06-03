@@ -22,7 +22,10 @@ public class PhotoApp : App
             if(photoTile) {
                 //Debug.Log("adding photo: " + photo.Description);
                 Sprite img = PhoneOS.GetPhotoSprite(photo.Image);
+                photoTile.Image.sprite = null;
+                photoTile.Image.preserveAspect = false;
                 photoTile.Image.sprite = img;
+                photoTile.Image.preserveAspect = true;
                 photoTile.Button.onClick.AddListener (
                     delegate {OpenPhoto(img);}
                 );
