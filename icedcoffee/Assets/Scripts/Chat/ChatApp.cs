@@ -24,7 +24,7 @@ public class ChatApp : App
     public GameObject FriendChatBubblePrefab;
     public GameObject MessageOptionPrefab;
     public ScrollRect ChatBubblesScrollRect;
-    public ChatAttachment ChatAttachment;
+    public FullscreenImage FullscreenImage;
 
     //Audio
     public AudioSource typingSFX;
@@ -82,7 +82,7 @@ public class ChatApp : App
             PhoneOS.ReturnButton.SetActive(false);
             CloseChatSelection();
             CloseChat();
-            ChatAttachment.Close();
+            FullscreenImage.Close();
         }
     }
 
@@ -119,7 +119,7 @@ public class ChatApp : App
                 chatButton.NameText.text = chat.Friend.ToString();
 
                 // set profile pic
-                chatButton.ProfilePic.sprite = PhoneOS.DataLoader.UserIconAssets[chat.Icon];
+                chatButton.ProfilePic.sprite = PhoneOS.GetIcon(chat.Icon);
 
                 // show unread notif (if unfinished)
                 if(chat.finished) {
@@ -191,7 +191,7 @@ public class ChatApp : App
         chatBubbleUi.Text.text = message.Messages[messageIndex];
 
         if(!message.Player) {
-            chatBubbleUi.Icon.sprite = PhoneOS.DataLoader.UserIconAssets[m_activeChat.Icon];
+            chatBubbleUi.Icon.sprite = PhoneOS.GetIcon(m_activeChat.Icon);
         }
 
         if(messageIndex == message.Messages.Length - 1 && message.Image >= 0) {
@@ -245,9 +245,9 @@ public class ChatApp : App
     // ------------------------------------------------------------------------
     private void HandleFinishedChat (Chat chat) {
         if(chat.Friend == Friend.Jin) {
-            ChatAttachment.Open(PhoneOS.DataLoader.JinEndingPhoto/*, 1080, 810*/);
+            FullscreenImage.Open(PhoneOS.GetJinEndingPhoto()/*, 1080, 810*/);
         } else if(chat.Friend == Friend.Emma && chat.GetLastVisitedMessage().Node == 16) {
-            ChatAttachment.Open(PhoneOS.DataLoader.EmmaEndingPhoto/*, 1078, 1437*/);
+            FullscreenImage.Open(PhoneOS.GetEmmaEndingPhoto()/*, 1078, 1437*/);
         }
     }
 
@@ -263,7 +263,7 @@ public class ChatApp : App
     // ------------------------------------------------------------------------
     public void OpenAttachment (Message message) {
         Photo photo = PhoneOS.GetPhoto(message.Image);
-        ChatAttachment.Open(PhoneOS.DataLoader.PhotoAssets[photo.Image]);
+        FullscreenImage.Open(PhoneOS.GetPhotoSprite(photo.Image));
     }
 
     // ------------------------------------------------------------------------

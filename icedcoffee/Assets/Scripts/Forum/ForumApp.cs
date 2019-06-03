@@ -11,7 +11,6 @@ public class ForumApp : App
     public override void Open() {
         base.Open();
 
-        int i = 1;
         foreach(ForumPost post in PhoneOS.ActiveForumPosts) {
             GameObject postObj = Instantiate(
                 ForumPostPrefab,
@@ -29,15 +28,8 @@ public class ForumApp : App
                                         + " hours ago";
                 postUI.BodyText.text = post.Body;
 
-                // tint every other image
-                if(i % 2 == 0) {
-                    postUI.BackgroundImg1.color *= 1.2f;
-                    postUI.BackgroundImg2.color *= 1.2f;
-                }
-                i++;
-
                 // load profile icon
-                Sprite icon = PhoneOS.DataLoader.UserIconAssets[post.Icon];
+                Sprite icon = PhoneOS.GetIcon(post.Icon);
                 if(icon) {
                     postUI.ProfileImage.sprite = icon;
                 }

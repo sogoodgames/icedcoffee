@@ -10,7 +10,8 @@ public class PhoneOS : MonoBehaviour
     // ------------------------------------------------------------------------
     public bool RunFTUE = true;
 
-    public DataLoader DataLoader;
+    [SerializeField]
+    private DataLoader DataLoader;
     public ChatRunner ChatRunner;
     public NotificationManager NotificationManager;
     public NotesApp NotesApp;
@@ -76,7 +77,7 @@ public class PhoneOS : MonoBehaviour
             // only add found photos
             List<Photo> photos = new List<Photo>();
             foreach(Photo photo in m_photos) {
-                if(photo.Found) {
+                if(ClueRequirementMet(photo.ClueID)) {
                     photos.Add(photo);
                 }
             }
@@ -136,7 +137,7 @@ public class PhoneOS : MonoBehaviour
 
     // ------------------------------------------------------------------------
     public Photo GetPhoto (PhotoID id) {
-        Debug.Log("searching for photo with id " + id);
+        //Debug.Log("searching for photo with id " + id);
         Photo photo = m_photos.First(p => p.PhotoID == id);
         return photo;
     }
@@ -174,6 +175,26 @@ public class PhoneOS : MonoBehaviour
         }
 
         clue.Unlocked = true;
+    }
+
+    // ------------------------------------------------------------------------
+    // Methods: Data
+    // ------------------------------------------------------------------------
+    public Sprite GetPhotoSprite (int index) {
+        return DataLoader.PhotoAssets[index];
+    }
+
+    public Sprite GetIcon (int index) {
+        return DataLoader.UserIconAssets[index];
+    }
+
+    // todo: more generic method for ending photos
+    public Sprite GetJinEndingPhoto () {
+        return DataLoader.JinEndingPhoto;
+    }
+
+    public Sprite GetEmmaEndingPhoto () {
+        return DataLoader.EmmaEndingPhoto;
     }
 
     // ------------------------------------------------------------------------

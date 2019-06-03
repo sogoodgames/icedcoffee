@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ChatAttachment : MonoBehaviour {
+public class FullscreenImage : MonoBehaviour {
     public Image Image;
 
     public void Open (Sprite img/*, float width, float height*/) {

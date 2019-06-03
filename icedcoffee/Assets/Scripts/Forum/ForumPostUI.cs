@@ -22,7 +22,7 @@ public class ForumPostUI : MonoBehaviour
     public void SetPhotoContent (ForumPost post, PhoneOS os) {
         if(post.Photo != PhotoID.NoPhoto) {
             Photo photo = os.GetPhoto(post.Photo);
-            Sprite img = os.DataLoader.PhotoAssets[photo.Image];
+            Sprite img = os.GetPhotoSprite(photo.Image);
             if(img) {
                 ContentImage.sprite = img;
                 ContentImage.gameObject.SetActive(true);
