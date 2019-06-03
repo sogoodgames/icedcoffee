@@ -1,4 +1,5 @@
 public class Photo {
+    public bool Found;
 
     private PhotoID m_id;
     public PhotoID PhotoID {
@@ -37,5 +38,6 @@ public class Photo {
         m_height = photo.height;
         m_description = photo.description;
         m_clueId = photo.clueID;
+        Found = photo.found;
     }
 }

@@ -8,4 +8,5 @@ public class PhotoSerializable {
     public float width;
     public float height;
     public string description;
+    public bool found;
 }

@@ -77,7 +77,7 @@ public class PhoneOS : MonoBehaviour
             // only add found photos
             List<Photo> photos = new List<Photo>();
             foreach(Photo photo in m_photos) {
-                if(ClueRequirementMet(photo.ClueID)) {
+                if(photo.Found) {
                     photos.Add(photo);
                 }
             }
@@ -171,6 +171,14 @@ public class PhoneOS : MonoBehaviour
         foreach(ForumPost post in m_allForumPosts) {
             if(post.ClueNeeded == id) {
                 NotificationManager.ForumPostNotif(post);
+            }
+        }
+
+        // if a photo needed this clue, mark it found
+        foreach(Photo photo in m_photos) {
+            Debug.Log("clue id: " + photo.ClueID + "; looking for: " + id);
+            if(photo.ClueID == id) {
+                photo.Found = true;
             }
         }
 

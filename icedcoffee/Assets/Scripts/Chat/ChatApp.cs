@@ -194,7 +194,7 @@ public class ChatApp : App
             chatBubbleUi.Icon.sprite = PhoneOS.GetIcon(m_activeChat.Icon);
         }
 
-        if(messageIndex == message.Messages.Length - 1 && message.Image >= 0) {
+        if(messageIndex == message.Messages.Length - 1 && message.Image != PhotoID.NoPhoto) {
             chatBubbleUi.Text.text = message.Messages[messageIndex] + " [click to open attachment]";
             chatBubbleUi.Button.onClick.AddListener(
                 delegate {OpenAttachment(message);}
