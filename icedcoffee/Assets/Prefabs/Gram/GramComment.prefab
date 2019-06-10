@@ -72,7 +72,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 3
     m_MaxSize: 40
-    m_Alignment: 0
+    m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -152,7 +152,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 3
     m_MaxSize: 40
-    m_Alignment: 0
+    m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -170,6 +170,7 @@ GameObject:
   - component: {fileID: 7229657723680697137}
   - component: {fileID: 2408834441012379199}
   - component: {fileID: 714138585011243192}
+  - component: {fileID: 4186796638674123342}
   m_Layer: 5
   m_Name: GramComment
   m_TagString: Untagged
@@ -238,6 +239,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 2
+--- !u!114 &4186796638674123342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4924731459740189155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cd4bd66230661c419fd023884b008e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UserIcon: {fileID: 9193469681155538025}
+  UsernameText: {fileID: 1714546489882195556}
+  CommentText: {fileID: 2208319113974604972}
 --- !u!1 &6313543350291543396
 GameObject:
   m_ObjectHideFlags: 0

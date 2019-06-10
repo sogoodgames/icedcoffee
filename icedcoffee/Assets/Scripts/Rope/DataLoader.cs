@@ -7,6 +7,8 @@ public class DataLoader : MonoBehaviour {
     // ------------------------------------------------------------------------
     public List<TextAsset> ChatTextAssets;
     public List<TextAsset> ForumPostTextAssets;
+    public List<TextAsset> GramPostTextAssets;
+    public List<TextAsset> GramUserTextAssets;
     public List<TextAsset> ClueTextAssets;
     public List<TextAsset> PhotoTextAssets;
     public List<Sprite> UserIconAssets;
@@ -62,6 +64,42 @@ public class DataLoader : MonoBehaviour {
             }
         }
         return posts;
+    }
+
+    // ------------------------------------------------------------------------
+    public List<GramPost> LoadGramPosts() {
+        List<GramPost> posts = new List<GramPost>();
+
+        foreach(TextAsset textAsset in GramPostTextAssets) {
+            string text = textAsset.text;
+            if(!string.IsNullOrEmpty(text)) {
+                GramPostSerializable postSer = JsonUtility.FromJson<GramPostSerializable>(text);
+                GramPost post = new GramPost(postSer);
+                posts.Add(post);
+            } else {
+                Debug.LogError("file empty: " + textAsset.name);
+                break;
+            }
+        }
+        return posts;
+    }
+
+    // ------------------------------------------------------------------------
+    public List<GramUser> LoadGramUsers() {
+        List<GramUser> users = new List<GramUser>();
+
+        foreach(TextAsset textAsset in GramUserTextAssets) {
+            string text = textAsset.text;
+            if(!string.IsNullOrEmpty(text)) {
+                GramUserSerializable userSer = JsonUtility.FromJson<GramUserSerializable>(text);
+                GramUser user = new GramUser(userSer);
+                users.Add(user);
+            } else {
+                Debug.LogError("file empty: " + textAsset.name);
+                break;
+            }
+        }
+        return users;
     }
 
     // ------------------------------------------------------------------------

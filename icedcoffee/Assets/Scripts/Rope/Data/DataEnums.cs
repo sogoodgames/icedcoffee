@@ -12,6 +12,11 @@ public enum Friend {
     Taeyong = 10
 }
 
+public enum GramUserId {
+    Linden = 0,
+    June = 1
+}
+
 public enum ClueID {
     NoClue = 0,
     Pool = 1, // note 2

@@ -26,8 +26,11 @@ public class PhoneOS : MonoBehaviour
     private List<ForumPost> m_allForumPosts;
     private ForumPost m_activeForumPost;
 
+    private List<GramPost> m_allGramPosts;
+
     private List<Clue> m_clues;
     private List<Photo> m_photos;
+    private List<GramUser> m_gramUsers;
 
     // ------------------------------------------------------------------------
     // Properties
@@ -51,6 +54,18 @@ public class PhoneOS : MonoBehaviour
             // only add posts that are available
             List<ForumPost> activePosts = new List<ForumPost>();
             foreach(ForumPost p in m_allForumPosts) {
+                if(ClueRequirementMet(p.ClueNeeded)) {
+                    activePosts.Add(p);
+                }
+            }
+            return activePosts;
+        }
+    }
+
+    public List<GramPost> ActiveGramPosts {
+        get {
+            List<GramPost> activePosts = new List<GramPost>();
+            foreach(GramPost p in m_allGramPosts) {
                 if(ClueRequirementMet(p.ClueNeeded)) {
                     activePosts.Add(p);
                 }
@@ -90,14 +105,20 @@ public class PhoneOS : MonoBehaviour
     // ------------------------------------------------------------------------
     void Awake () {
         Screen.SetResolution(480, 848, false);
+
         m_allChats = DataLoader.LoadChats();
         m_allForumPosts = DataLoader.LoadForumPosts();
+
         m_clues = DataLoader.LoadClues();
         m_photos = DataLoader.LoadPhotos();
+
+        m_gramUsers = DataLoader.LoadGramUsers();
+        m_allGramPosts = DataLoader.LoadGramPosts();
 
         ChatRunner.FoundClue += FoundClue;
     }
 
+    // ------------------------------------------------------------------------
     void OnEnable () {
         if(RunFTUE) {
             StartFTUE();
@@ -133,13 +154,6 @@ public class PhoneOS : MonoBehaviour
     public Clue GetClue (ClueID id) {
         Clue clue = m_clues.First(c => c.ClueID == id);
         return clue;
-    }
-
-    // ------------------------------------------------------------------------
-    public Photo GetPhoto (PhotoID id) {
-        //Debug.Log("searching for photo with id " + id);
-        Photo photo = m_photos.First(p => p.PhotoID == id);
-        return photo;
     }
 
     // ------------------------------------------------------------------------
@@ -191,16 +205,36 @@ public class PhoneOS : MonoBehaviour
     public Sprite GetPhotoSprite (int index) {
         return DataLoader.PhotoAssets[index];
     }
+    
+    // ------------------------------------------------------------------------
+    public Photo GetPhoto (PhotoID id) {
+        //Debug.Log("searching for photo with id " + id);
+        Photo photo = m_photos.First(p => p.PhotoID == id);
+        return photo;
+    }
 
+    // ------------------------------------------------------------------------
+    public GramUser GetGramUser (GramUserId id) {
+        foreach(GramUser user in m_gramUsers) {
+            if(user.UserId == id) {
+                return user;
+            }
+        }
+        return null;
+    }
+
+    // ------------------------------------------------------------------------
     public Sprite GetIcon (int index) {
         return DataLoader.UserIconAssets[index];
     }
 
+    // ------------------------------------------------------------------------
     // todo: more generic method for ending photos
     public Sprite GetJinEndingPhoto () {
         return DataLoader.JinEndingPhoto;
     }
 
+    // ------------------------------------------------------------------------
     public Sprite GetEmmaEndingPhoto () {
         return DataLoader.EmmaEndingPhoto;
     }
@@ -220,6 +254,7 @@ public class PhoneOS : MonoBehaviour
         m_activeApp = ChatApp;
     }
 
+    // ------------------------------------------------------------------------
     private void CloseAllApps() {
         foreach(App app in Apps) {
             if(app.IsOpen) {

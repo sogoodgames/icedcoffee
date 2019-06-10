@@ -1,0 +1,13 @@
+{
+    "user" : "0",
+    "clueGiven" : "0",
+    "clueNeeded" : "0",
+    "description" : "im gay",
+    "postImage" : "1",
+    "comments" : [
+        {
+            "userId" : "1",
+            "comment" : "yeah u are"
+        }
+    ]
+}
