@@ -13,13 +13,13 @@ public class ChatApp : App
     public GameObject ChatScreen;
 
     // chat selection screen
-    public Transform ChatButtonsParent;
+    public RectTransform ChatButtonsParent;
     public GameObject ChatButtonPrefab;
 
     // chat messages screen
     public Text FriendTitleText;
-    public Transform ChatBubblesParent;
-    public Transform ChatOptionsParent;
+    public RectTransform ChatBubblesParent;
+    public RectTransform ChatOptionsParent;
     public GameObject PlayerChatBubblePrefab;
     public GameObject FriendChatBubblePrefab;
     public GameObject MessageOptionPrefab;
@@ -31,7 +31,6 @@ public class ChatApp : App
     public AudioSource messageSFX;
 
     // internal
-    private bool m_needsScroll;
     private Chat m_activeChat;
     private int scrollWait = 0;
 
@@ -44,22 +43,6 @@ public class ChatApp : App
         ChatRunner.VisitedOption += DrawChatOptionBubble;
         ChatRunner.FinishedChat += HandleFinishedChat;
         ChatRunner.SelectedOption += HandleSelectedOption;
-    }
-    
-    // ------------------------------------------------------------------------
-    // why is 3 the magic number of frames to get an accurate scroll position?
-    // i have no idea.
-    // why am i not using a more elegant solution using ienumerators?
-    // because i'm tired.
-    protected void Update() {
-        if(m_needsScroll) {
-            scrollWait++;
-            if(scrollWait >= 3) {
-                ChatBubblesScrollRect.normalizedPosition = new Vector2(0, 0);
-                m_needsScroll = false;
-                scrollWait = 0;
-            }
-        }
     }
 
     // ------------------------------------------------------------------------
@@ -206,7 +189,7 @@ public class ChatApp : App
         messageSFX.Play();
 
         // mark for needing scroll
-        m_needsScroll = true;
+        ScrollChat();
     }
 
     // ------------------------------------------------------------------------
@@ -267,7 +250,7 @@ public class ChatApp : App
     }
 
     // ------------------------------------------------------------------------
-    // Methods : Closing UI
+    // Methods : Other Private
     // ------------------------------------------------------------------------
     private void CloseChat () {
         ChatRunner.StopActiveConversation();
@@ -287,5 +270,10 @@ public class ChatApp : App
             Destroy(child.gameObject);
         }
         ChatSelectionScreen.SetActive(false);
+    }
+
+    private void ScrollChat () {
+        LayoutRebuilder.ForceRebuildLayoutImmediate(ChatBubblesParent);
+        ChatBubblesScrollRect.normalizedPosition = new Vector2(0, 0);
     }
 }
