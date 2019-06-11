@@ -32,7 +32,6 @@ public class ChatApp : App
 
     // internal
     private Chat m_activeChat;
-    private int scrollWait = 0;
 
     // ------------------------------------------------------------------------
     // Methods : MonoBehaviour
