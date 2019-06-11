@@ -17,6 +17,7 @@ public class ForumPostUI : MonoBehaviour
 
     public void ToggleOpenPost () {
         PostContent.SetActive(!PostContent.activeSelf);
+        LayoutRebuilder.ForceRebuildLayoutImmediate(PostContent.GetComponent<RectTransform>());
     }
 
     public void SetPhotoContent (ForumPost post, PhoneOS os) {

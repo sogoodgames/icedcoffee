@@ -16,7 +16,7 @@ public class GramPostUI : MonoBehaviour
     public Image PostImage;
     public Text PostUsernameText;
     public Text DescriptionText;
-    public Transform CommentsParent;
+    public RectTransform CommentsParent;
 
     // ------------------------------------------------------------------------
     // Methods
@@ -57,5 +57,6 @@ public class GramPostUI : MonoBehaviour
         CommentsParent.gameObject.SetActive(
             !CommentsParent.gameObject.activeInHierarchy
         );
+        LayoutRebuilder.ForceRebuildLayoutImmediate(CommentsParent);
     }
 }
