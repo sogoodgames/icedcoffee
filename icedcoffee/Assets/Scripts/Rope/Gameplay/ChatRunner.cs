@@ -13,7 +13,7 @@ public class ChatRunner : MonoBehaviour
     public delegate void OptionDelegate(Message message, int optionIndex);
     public event OptionDelegate VisitedOption;
     
-    // information for gameplay
+    // events for gameplay
     public delegate void FinishedChatDelegate(Chat chat);
     public event FinishedChatDelegate FinishedChat;
 
@@ -23,6 +23,7 @@ public class ChatRunner : MonoBehaviour
     public delegate void SelectedOptionDelegate();
     public event SelectedOptionDelegate SelectedOption;
 
+    // settings
     public float MaxTimeBetweenMessages = 2f;
 
     private Chat m_activeChat;
@@ -163,7 +164,7 @@ public class ChatRunner : MonoBehaviour
 
         // visit all of the messages in this node
         for (int i = 0; i < message.Messages.Length; i++) {
-            float t = 2;
+            float t = MaxTimeBetweenMessages;
             if((message.Node == 0 && i == 0) || message.HasOptions()) {
                 t = 0;
             }
