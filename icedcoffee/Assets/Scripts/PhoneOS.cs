@@ -247,15 +247,7 @@ public class PhoneOS : MonoBehaviour
     // Methods: Private
     // ------------------------------------------------------------------------
     private void StartFTUE () {
-        Chat rileyChat = m_allChats[0];
-        foreach(Chat c in m_allChats) {
-            if(c.Friend == Friend.Riley) {
-                rileyChat = c;
-                break;
-            }
-        }
-        ChatApp.OpenChat(rileyChat);
-        m_activeApp = ChatApp;
+        //TODO
     }
 
     // ------------------------------------------------------------------------

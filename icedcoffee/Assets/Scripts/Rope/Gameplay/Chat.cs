@@ -30,11 +30,16 @@ public class Message {
     private string[] options;
     public string[] Options {get{return options;}}
 
-    // clue required to selection the option (by clue ID)
+    // clue required to selection the option
     private ClueID[] clueNeeded;
     public ClueID[] ClueNeeded {get{return clueNeeded;}}
 
+    // clue that instigates this message
+    private ClueID clueTrigger;
+    public ClueID ClueTrigger {get{return clueTrigger;}}
+
     // option destinations (by message node)
+    // branch = -1 means this is a leaf node
     private int[] branch;
     public int[] Branch {get{return branch;}}
 
@@ -54,6 +59,7 @@ public class Message {
         clueNeeded = serializedMessage.clueNeeded;
         branch = serializedMessage.branch;
         image = serializedMessage.image;
+        clueTrigger = serializedMessage.clueTrigger;
 
         OptionSelection = -1;
     }

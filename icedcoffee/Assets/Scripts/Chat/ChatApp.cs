@@ -226,11 +226,7 @@ public class ChatApp : App
 
     // ------------------------------------------------------------------------
     private void HandleFinishedChat (Chat chat) {
-        if(chat.Friend == Friend.Jin) {
-            FullscreenImage.Open(PhoneOS.GetJinEndingPhoto()/*, 1080, 810*/);
-        } else if(chat.Friend == Friend.Emma && chat.GetLastVisitedMessage().Node == 16) {
-            FullscreenImage.Open(PhoneOS.GetEmmaEndingPhoto()/*, 1078, 1437*/);
-        }
+        // TODO
     }
 
     // ------------------------------------------------------------------------

@@ -1430,49 +1430,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ChatTextAssets:
-  - {fileID: 4900000, guid: 6ec54eb0da9f263469581a17849d7c91, type: 3}
-  - {fileID: 4900000, guid: 93e39637e6f64464ab693d733f971788, type: 3}
-  - {fileID: 4900000, guid: c4fe39acba6d2ff4b87e62aa1c369ff4, type: 3}
-  - {fileID: 4900000, guid: 64151ec8da3aeb948b31bf7ef7ee7441, type: 3}
-  - {fileID: 4900000, guid: 633693ef705b7e64db7858d1b54a4fc8, type: 3}
-  - {fileID: 4900000, guid: 2eb2b4d3caa1c4c418b452a33b88f87f, type: 3}
-  - {fileID: 4900000, guid: e69893b886c9a014496d3547a1da2b00, type: 3}
-  - {fileID: 4900000, guid: b6d63c662a8ce2d47a27680661df4fbb, type: 3}
   - {fileID: 4900000, guid: 163ee71efadbd8845bedde93d0429a39, type: 3}
-  - {fileID: 4900000, guid: b88dcd0e9bdbe754391ec338b4bb2b7a, type: 3}
+  - {fileID: 4900000, guid: 6b8b7cd6e3b0eca46b68ab26a9c40790, type: 3}
   ForumPostTextAssets:
   - {fileID: 4900000, guid: eea0704e44fc3684d903ccb340a05d25, type: 3}
-  - {fileID: 4900000, guid: cfc9ca7046b35944da7cbbab366e86a3, type: 3}
-  - {fileID: 4900000, guid: 0a4b782a05b0a504c8e9e541d164a872, type: 3}
-  - {fileID: 4900000, guid: a25c041dc5562954a84f7382d55f2a8d, type: 3}
-  - {fileID: 4900000, guid: 14934dc2d51501c419d2b723d4386625, type: 3}
-  - {fileID: 4900000, guid: 9f3e0779fabf67e469d0048bd9dbc48a, type: 3}
   - {fileID: 4900000, guid: 0768656ae7a16f043a4bd4873aba7ee4, type: 3}
-  - {fileID: 4900000, guid: f7c6014e8a4d0894dbed7a06fbbeb3c4, type: 3}
-  - {fileID: 4900000, guid: 015ed551cc7d75c438671386a0b40ecc, type: 3}
   GramPostTextAssets:
   - {fileID: 4900000, guid: 186efa8a7652ef74cb94130435658c75, type: 3}
   GramUserTextAssets:
   - {fileID: 4900000, guid: 67834c8957d998b499e4ba715590fb8f, type: 3}
   - {fileID: 4900000, guid: fa0a5dc5edc5ed348aef04f498666f67, type: 3}
   ClueTextAssets:
-  - {fileID: 4900000, guid: 5b5955028f8ca9042ba12616f0f5c3d2, type: 3}
-  - {fileID: 4900000, guid: 52c8373183e0da94ab98e536cce99490, type: 3}
-  - {fileID: 4900000, guid: d127d23763f4b744086aa3b378c6520b, type: 3}
-  - {fileID: 4900000, guid: 2aad70bf4193855469c727b80b18ca9c, type: 3}
-  - {fileID: 4900000, guid: 9896234a53610ef49bef25e28c474138, type: 3}
-  - {fileID: 4900000, guid: 69952885192080b4a9446610c234f56e, type: 3}
-  - {fileID: 4900000, guid: e28a76cab72e20242b3e91b769df5735, type: 3}
-  - {fileID: 4900000, guid: 8d84605b5d7857442b7328b1d63b5de8, type: 3}
-  - {fileID: 4900000, guid: e0ea1baa58603f44c8461ac9d761db1c, type: 3}
-  - {fileID: 4900000, guid: 942bb2778ce96ff47b21fe07f843899d, type: 3}
-  - {fileID: 4900000, guid: 1f650365804a74c4d8969f20ea88d08e, type: 3}
-  - {fileID: 4900000, guid: 4eefd69c7675d1447b0ec186ae687759, type: 3}
-  - {fileID: 4900000, guid: 9c567a2d9189ecb42a31c279d7e10ff5, type: 3}
-  - {fileID: 4900000, guid: 3435dd71bfc60794db30618346816bff, type: 3}
-  - {fileID: 4900000, guid: 9720fa62cd676e34eae457ea5e8cc8ff, type: 3}
-  - {fileID: 4900000, guid: 30bbe59ecddd69b41b03a3859eac1dad, type: 3}
   - {fileID: 4900000, guid: 878fa329d427a9f449006e5b8c38083a, type: 3}
+  - {fileID: 4900000, guid: 5b5955028f8ca9042ba12616f0f5c3d2, type: 3}
+  - {fileID: 4900000, guid: 63b0cb40965a121488314a412e14c26c, type: 3}
+  - {fileID: 4900000, guid: 9c567a2d9189ecb42a31c279d7e10ff5, type: 3}
   PhotoTextAssets:
   - {fileID: 4900000, guid: d449f36c429c627429bdb5062d3b7cdb, type: 3}
   - {fileID: 4900000, guid: d2b38fe6f91e3634d952d91a1a738614, type: 3}

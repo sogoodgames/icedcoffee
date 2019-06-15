@@ -6,13 +6,14 @@ public class MessageSerializable {
     public int node; // the ID for this message
     public bool player; // whether or not it's the player talking
     public ClueID clueGiven; // the clue given (if any)
+    public ClueID clueTrigger; // the clue that instigates this message
     public string[] messages; // the text for the messages sent
     public PhotoID image;
 
     // all of the following map by index
     public string[] options; // the text options
     public ClueID[] clueNeeded; // the clues needed for each option
-    public int[] branch; // the destination for each option (or just the node)
+    public int[] branch; // the next message (-1 means this is a leaf)
 }
 
 [Serializable]

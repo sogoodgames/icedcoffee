@@ -1,0 +1,18 @@
+{
+    "friend": "2",
+    "clueNeeded" : "3",
+    "icon" : "16",
+    "messages": [
+        {
+            "node": 0,
+            "player": "false",
+            "clueGiven": 0,
+            "messages": [
+                "w00t"
+            ],
+            "branch": [
+                1
+            ]
+        }
+    ]
+}
