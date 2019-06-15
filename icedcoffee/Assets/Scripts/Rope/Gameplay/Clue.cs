@@ -33,5 +33,6 @@ public class Clue {
         m_phoneNumberGiven = serializedClue.phoneNumberGiven;
         m_clueID = serializedClue.clueID;
         m_note = serializedClue.note;
+        m_canSend = serializedClue.canSend;
     }
 }
