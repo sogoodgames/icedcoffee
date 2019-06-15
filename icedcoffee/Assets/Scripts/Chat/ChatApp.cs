@@ -155,6 +155,12 @@ public class ChatApp : App
     }
 
     // ------------------------------------------------------------------------
+    public void OpenAttachment (Message message) {
+        Photo photo = PhoneOS.GetPhoto(message.Image);
+        FullscreenImage.Open(PhoneOS.GetPhotoSprite(photo.Image));
+    }
+
+    // ------------------------------------------------------------------------
     // Methods : ChatRunner event handlers
     // ------------------------------------------------------------------------
     private void DrawChatBubble (Message message, int messageIndex) {
@@ -214,7 +220,9 @@ public class ChatApp : App
         if(PhoneOS.ClueRequirementMet(message.ClueNeeded[optionIndex])) {
             // set button text & hook up option function
             messageButton.Text.text = message.Options[optionIndex];
-            SetButtonListener(messageButton.Button, message, optionIndex);
+            messageButton.Button.onClick.AddListener(
+                delegate {ChatRunner.SelectOption(message, optionIndex);}
+            );
             //Debug.Log("created option [" + message.options[i] + "] with index " + i + " for message " + message.node);
         } else {
             // mark it as unavilable
@@ -239,22 +247,7 @@ public class ChatApp : App
     }
 
     // ------------------------------------------------------------------------
-    // Methods : Buttons
-    // ------------------------------------------------------------------------
-    private void SetButtonListener(Button b, Message m, int i) {
-        b.onClick.AddListener(
-            delegate {ChatRunner.SelectOption(m, i);}
-        );
-    }
-
-    // ------------------------------------------------------------------------
-    public void OpenAttachment (Message message) {
-        Photo photo = PhoneOS.GetPhoto(message.Image);
-        FullscreenImage.Open(PhoneOS.GetPhotoSprite(photo.Image));
-    }
-
-    // ------------------------------------------------------------------------
-    // Methods : Other Private
+    // Methods : Private
     // ------------------------------------------------------------------------
     private void CloseChat () {
         ChatRunner.StopActiveConversation();
