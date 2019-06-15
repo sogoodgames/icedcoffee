@@ -3,6 +3,11 @@ public class Clue {
     public bool Unlocked;
     
     // properties
+    private bool m_canSend;
+    public bool CanSend {
+        get{return m_canSend;}
+    }
+
     private Friend m_phoneNumberGiven;
     public Friend PhoneNumberGiven {
         get{return m_phoneNumberGiven;}

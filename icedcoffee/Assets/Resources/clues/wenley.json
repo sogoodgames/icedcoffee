@@ -1,5 +1,6 @@
 {
     "unlocked" : "false",
+    "canSend" : "false",
     "clueID" : "3",
     "phoneNumberGiven" : "2",
     "note" : "Wenley Shen"

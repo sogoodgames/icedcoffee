@@ -1,5 +1,6 @@
 {
     "unlocked" : "false",
+    "canSend" : "true",
     "clueID" : "1",
     "phoneNumberGiven" : "0",
     "note" : "something boutta band"

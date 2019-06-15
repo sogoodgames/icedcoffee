@@ -1,5 +1,6 @@
 {
     "unlocked" : "false",
+    "canSend" : "true",
     "clueID" : "2",
     "phoneNumberGiven" : "0",
     "note" : "wenely reads poetry what a nerd"
