@@ -15,51 +15,51 @@ public class Message {
     // Properties
     // ------------------------------------------------------------------------
     // identifier for this message
-    private int node;
-    public int Node {get{return node;}}
+    private int m_node;
+    public int Node {get{return m_node;}}
 
     // is this the player speaking or not
-    private bool player;
-    public bool Player {get{return player;}}
+    private bool m_player;
+    public bool Player {get{return m_player;}}
 
     // the clue this message gives (if any)
-    private ClueID clueGiven;
-    public ClueID ClueGiven {get{return clueGiven;}}
+    private ClueID m_clueGiven;
+    public ClueID ClueGiven {get{return m_clueGiven;}}
 
     // converstaion options (leave empty if it's a non-player node or this node has messages)
-    private string[] options;
-    public string[] Options {get{return options;}}
+    private string[] m_options;
+    public string[] Options {get{return m_options;}}
 
     // clue required to selection the option
-    private ClueID[] clueNeeded;
-    public ClueID[] ClueNeeded {get{return clueNeeded;}}
+    private ClueID[] m_clueNeeded;
+    public ClueID[] ClueNeeded {get{return m_clueNeeded;}}
 
     // clue that instigates this message
-    private ClueID clueTrigger;
-    public ClueID ClueTrigger {get{return clueTrigger;}}
+    private ClueID m_clueTrigger;
+    public ClueID ClueTrigger {get{return m_clueTrigger;}}
 
     // option destinations (by message node)
     // branch = -1 means this is a leaf node
-    private int[] branch;
-    public int[] Branch {get{return branch;}}
+    private int[] m_branch;
+    public int[] Branch {get{return m_branch;}}
 
     // the index in the resources of the attached image
-    private PhotoID image;
-    public PhotoID Image {get{return image;}}
+    private PhotoID m_image;
+    public PhotoID Image {get{return m_image;}}
 
     // ------------------------------------------------------------------------
     // Methods
     // ------------------------------------------------------------------------
     public Message (MessageSerializable serializedMessage) {
-        node = serializedMessage.node;
-        player = serializedMessage.player;
-        clueGiven = serializedMessage.clueGiven;
+        m_node = serializedMessage.node;
+        m_player = serializedMessage.player;
+        m_clueGiven = serializedMessage.clueGiven;
         Messages = serializedMessage.messages;
-        options = serializedMessage.options;
-        clueNeeded = serializedMessage.clueNeeded;
-        branch = serializedMessage.branch;
-        image = serializedMessage.image;
-        clueTrigger = serializedMessage.clueTrigger;
+        m_options = serializedMessage.options;
+        m_clueNeeded = serializedMessage.clueNeeded;
+        m_branch = serializedMessage.branch;
+        m_image = serializedMessage.image;
+        m_clueTrigger = serializedMessage.clueTrigger;
 
         OptionSelection = -1;
     }
@@ -72,7 +72,7 @@ public class Message {
 
     // ------------------------------------------------------------------------
     public bool HasOptions () {
-        return options != null && options.Length > 0;
+        return m_options != null && m_options.Length > 0;
     }
 }
 
@@ -87,75 +87,77 @@ public class Chat {
     // Properties
     // ------------------------------------------------------------------------
     // the conversation partner
-    private Friend friend;
-    public Friend Friend {get{return friend;}}
+    private Friend m_friend;
+    public Friend Friend {get{return m_friend;}}
 
     // their icon
-    private int icon;
-    public int Icon {get{return icon;}}
+    private int m_icon;
+    public int Icon {get{return m_icon;}}
 
     // the clue required to open the chat 
-    private ClueID clueNeeded;
-    public ClueID ClueNeeded {get{return clueNeeded;}}
+    private ClueID m_clueNeeded;
+    public ClueID ClueNeeded {get{return m_clueNeeded;}}
 
     // all of the messages you trade with them
-    private Message[] messages;
-    public bool HasMessages {get{return messages != null && messages.Length > 0;}}
+    private Message[] m_messages;
+    public bool HasMessages {
+        get{return m_messages != null && m_messages.Length > 0;}
+    }
 
     // only the messages you've visited so far
-    private List<Message> visitedMessages;
-    public List<Message> VisitedMessages {get{return visitedMessages;}}
+    private List<Message> m_visitedMessages;
+    public List<Message> VisitedMessages {get{return m_visitedMessages;}}
 
     // the index (in 'visitedMessages') of the last node read
-    private int lastVisitedMessage = 0;
-    public int LastVisitedMessage {get{return lastVisitedMessage;}}
+    private int m_lastVisitedMessage = 0;
+    public int LastVisitedMessage {get{return m_lastVisitedMessage;}}
 
     // ------------------------------------------------------------------------
     // Methods
     // ------------------------------------------------------------------------
     public Chat (ChatSerializable serializedChat) {
-        friend = serializedChat.friend;
-        clueNeeded = serializedChat.clueNeeded;
-        icon = serializedChat.icon;
+        m_friend = serializedChat.friend;
+        m_clueNeeded = serializedChat.clueNeeded;
+        m_icon = serializedChat.icon;
 
-        lastVisitedMessage = 0;
+        m_lastVisitedMessage = 0;
 
         if(serializedChat.messages == null) {
             return;
         }
 
-        messages = new Message[serializedChat.messages.Length];
-        for (int i = 0; i < messages.Length; i++) {
-            messages[i] = new Message(serializedChat.messages[i]);
+        m_messages = new Message[serializedChat.messages.Length];
+        for (int i = 0; i < m_messages.Length; i++) {
+            m_messages[i] = new Message(serializedChat.messages[i]);
         }
 
-        visitedMessages = new List<Message>();
-        visitedMessages.Add(messages[0]);
+        m_visitedMessages = new List<Message>();
+        m_visitedMessages.Add(m_messages[0]);
     }
 
     // ------------------------------------------------------------------------
     public void VisitMessage (Message m, bool force) {
-        if(visitedMessages == null || m == null) {
+        if(m_visitedMessages == null || m == null) {
             return;
         }
         
         // if we're looping back to a multiple-answer question,
         // don't add it again
-        if(!force && visitedMessages.Contains(m) && (m.Options == null || m.Options.Length > 1)) {
+        if(!force && m_visitedMessages.Contains(m) && (m.Options == null || m.Options.Length > 1)) {
             return;
         }
 
-        if(visitedMessages[visitedMessages.Count - 1].Node == m.Node) {
+        if(m_visitedMessages[m_visitedMessages.Count - 1].Node == m.Node) {
             return;
         }
 
-        visitedMessages.Add(m);
-        lastVisitedMessage = visitedMessages.Count - 1;
+        m_visitedMessages.Add(m);
+        m_lastVisitedMessage = m_visitedMessages.Count - 1;
     }
 
     // ------------------------------------------------------------------------
     public Message GetMessage(int n) {
-        foreach(Message m in messages) {
+        foreach(Message m in m_messages) {
             if(m.Node == n) {
                 return m;
             }
@@ -165,6 +167,6 @@ public class Chat {
 
     // ------------------------------------------------------------------------
     public Message GetLastVisitedMessage () {
-        return visitedMessages[lastVisitedMessage];
+        return m_visitedMessages[m_lastVisitedMessage];
     }
 }
