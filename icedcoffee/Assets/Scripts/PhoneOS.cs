@@ -1,4 +1,8 @@
-﻿using System.Collections.Generic;
+﻿#if (UNITY_EDITOR || DEVELOPMENT_BUILD)
+#define DEBUG
+#endif
+
+using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System.Linq;
@@ -263,6 +267,7 @@ public class PhoneOS : MonoBehaviour
         }
     }
 
+#if DEBUG
     // ------------------------------------------------------------------------
     // Methods: Debug
     // ------------------------------------------------------------------------
@@ -281,4 +286,5 @@ public class PhoneOS : MonoBehaviour
             Debug.Log("clue: " + clue.ClueID + "; state: " + clue.Unlocked);
         }
     }
+#endif
 }

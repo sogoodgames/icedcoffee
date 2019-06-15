@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if DEBUG
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -41,3 +42,4 @@ public class DebugMenu : MonoBehaviour
         PhoneOS.DebugToggleClue(input);
     }
 }
+#endif
