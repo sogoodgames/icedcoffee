@@ -262,4 +262,23 @@ public class PhoneOS : MonoBehaviour
             }
         }
     }
+
+    // ------------------------------------------------------------------------
+    // Methods: Debug
+    // ------------------------------------------------------------------------
+    public void DebugToggleClue (string clueName) {
+        ClueID id = ClueID.NoClue;
+        foreach(Clue clue in m_clues) {
+            if(clue.ClueID.ToString().Equals(clueName)) {
+                id = clue.ClueID;
+                break;
+            }
+        }
+
+        if(id != ClueID.NoClue) {
+            Clue clue = GetClue(id);
+            clue.Unlocked = !clue.Unlocked;
+            Debug.Log("clue: " + clue.ClueID + "; state: " + clue.Unlocked);
+        }
+    }
 }
