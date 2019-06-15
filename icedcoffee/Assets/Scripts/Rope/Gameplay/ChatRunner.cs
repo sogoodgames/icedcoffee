@@ -235,6 +235,12 @@ public class ChatRunner : MonoBehaviour
     }
 
     // ------------------------------------------------------------------------
+    // present clue options
+    private void ReachedLeafNode () {
+        
+    }
+
+    // ------------------------------------------------------------------------
     private void MarkConversationComplete () {
         //Debug.Log("Reached end of convo at node " + m_activeChat.GetLastVisitedMessage().Node);
         m_activeChat.finished = true;

@@ -26,6 +26,10 @@ public class ChatApp : App
     public ScrollRect ChatBubblesScrollRect;
     public FullscreenImage FullscreenImage;
 
+    // clue selection stuff
+    public ClueSelectionUI ClueSelectionUI;
+    public Button OpenClueSelectionButton;
+
     //Audio
     public AudioSource typingSFX;
     public AudioSource messageSFX;
@@ -143,6 +147,11 @@ public class ChatApp : App
         // start chat
         ChatScreen.SetActive(true);
         ChatRunner.StartConversation(m_activeChat);
+    }
+
+    // ------------------------------------------------------------------------
+    public void OpenClueSelection () {
+        ClueSelectionUI.gameObject.SetActive(true);
     }
 
     // ------------------------------------------------------------------------
