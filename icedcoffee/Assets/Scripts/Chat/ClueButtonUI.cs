@@ -6,10 +6,10 @@ public class ClueButtonUI : MonoBehaviour
     public Text Text;
     public Button Button;
 
-    private ClueID clueId;
-
-    public void Init (Clue clue) {
+    public void Init (Clue clue, ChatRunner chatRunner) {
         Text.text = clue.Note;
-        clueId = clue.ClueID;
+        Button.onClick.AddListener ( 
+            delegate { chatRunner.SelectClueOption(clue.ClueID); }
+        );
     }
 }

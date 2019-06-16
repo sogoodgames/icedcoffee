@@ -8,6 +8,7 @@ public class ChatApp : App
     // ------------------------------------------------------------------------
     // Variables
     // ------------------------------------------------------------------------
+    public int PlayerChatIconIndex = 0;
     public ChatRunner ChatRunner;
     public GameObject ChatSelectionScreen;
     public GameObject ChatScreen;
@@ -46,6 +47,8 @@ public class ChatApp : App
         ChatRunner.VisitedOption += DrawChatOptionBubble;
         ChatRunner.FinishedChat += HandleFinishedChat;
         ChatRunner.SelectedOption += HandleSelectedOption;
+        ChatRunner.ReachedLeafNode += HandleReachedLeafNode;
+        ChatRunner.VisitedClueOption += HandleSelectedClueOption;
     }
 
     // ------------------------------------------------------------------------
@@ -69,6 +72,7 @@ public class ChatApp : App
             CloseChatSelection();
             CloseChat();
             FullscreenImage.Close();
+            ClueSelectionUI.Close();
         }
     }
 
@@ -151,7 +155,7 @@ public class ChatApp : App
 
     // ------------------------------------------------------------------------
     public void OpenClueSelection () {
-        ClueSelectionUI.gameObject.SetActive(true);
+        ClueSelectionUI.Open(m_activeChat);
     }
 
     // ------------------------------------------------------------------------
@@ -164,7 +168,7 @@ public class ChatApp : App
     // Methods : ChatRunner event handlers
     // ------------------------------------------------------------------------
     private void DrawChatBubble (Message message, int messageIndex) {
-        // decided which prefab to use
+        // determine which prefab to use
         GameObject prefab;
         if(message.Player) {
             prefab = PlayerChatBubblePrefab;
@@ -172,25 +176,18 @@ public class ChatApp : App
             prefab = FriendChatBubblePrefab;
         }
 
-        // create bubble object
-        GameObject bubble = Instantiate(
-            prefab,
-            ChatBubblesParent
-        ) as GameObject;
+        // determine text and icon
+        string text = message.Messages[messageIndex];
 
-        // find ChatBubbleUI
-        ChatBubbleUI chatBubbleUi = bubble.GetComponent<ChatBubbleUI>();
-        if(!chatBubbleUi) {
-            return;
-        }
-
-        // fill text, icon, and image
-        chatBubbleUi.Text.text = message.Messages[messageIndex];
-
+        Sprite sprite = PhoneOS.GetIcon(PlayerChatIconIndex);
         if(!message.Player) {
-            chatBubbleUi.Icon.sprite = PhoneOS.GetIcon(m_activeChat.Icon);
+            sprite = PhoneOS.GetIcon(m_activeChat.Icon);
         }
 
+        // draw bubble 
+        ChatBubbleUI chatBubbleUi = CreateChatBubble(prefab, text, sprite);
+
+        // create button to show attachment (if has one)
         if(messageIndex == message.Messages.Length - 1 && message.Image != PhotoID.NoPhoto) {
             chatBubbleUi.Text.text = message.Messages[messageIndex] + " [click to open attachment]";
             chatBubbleUi.Button.onClick.AddListener(
@@ -198,12 +195,6 @@ public class ChatApp : App
             );
             chatBubbleUi.Button.interactable = true;
         }
-
-        // play audio
-        messageSFX.Play();
-
-        // mark for needing scroll
-        ScrollChat();
     }
 
     // ------------------------------------------------------------------------
@@ -242,12 +233,71 @@ public class ChatApp : App
     }
 
     // ------------------------------------------------------------------------
+    private void HandleSelectedClueOption (ClueID id) {
+        // hide clue selection UI
+        ClueSelectionUI.Close();
+        OpenClueSelectionButton.gameObject.SetActive(false);
+
+        // draw selected option chat bubble
+        Clue clue = PhoneOS.GetClue(id);
+        CreateChatBubble(
+            PlayerChatBubblePrefab,
+            clue.MessageText,
+            PhoneOS.GetIcon(PlayerChatIconIndex)
+        );
+
+        // play sfx
+        typingSFX.Play();
+    }
+
+    // ------------------------------------------------------------------------
+    private void HandleReachedLeafNode () {
+        // show clue selection button
+        OpenClueSelectionButton.gameObject.SetActive(true);
+    }
+
+    // ------------------------------------------------------------------------
     private void HandleFinishedChat (Chat chat) {
-        // TODO
+        // TODO : not really sure what this means anymore
+        // considering all leaf nodes now trigger showing the clue options
+        // maybe this is when we run out of clues?
     }
 
     // ------------------------------------------------------------------------
     // Methods : Private
+    // ------------------------------------------------------------------------
+    // message-agnostic chat bubble drawing function
+    private ChatBubbleUI CreateChatBubble(
+        GameObject bubblePrefab,
+        string text,
+        Sprite icon
+    ) {
+        // create bubble object
+        GameObject bubble = Instantiate(
+            bubblePrefab,
+            ChatBubblesParent
+        ) as GameObject;
+
+        // find ChatBubbleUI
+        ChatBubbleUI chatBubbleUi = bubble.GetComponent<ChatBubbleUI>();
+        if(chatBubbleUi == null) {
+            Debug.LogError("no chat bubble ui component found on chat bubble prefab");
+            return null;
+        }
+
+        // fill text and sprite
+        chatBubbleUi.Text.text = text;
+        chatBubbleUi.Icon.sprite = icon;
+
+        // play audio
+        messageSFX.Play();
+
+        // mark for needing scroll
+        ScrollChat();
+
+        return chatBubbleUi;
+    }
+
     // ------------------------------------------------------------------------
     private void CloseChat () {
         ChatRunner.StopActiveConversation();
@@ -269,6 +319,7 @@ public class ChatApp : App
         ChatSelectionScreen.SetActive(false);
     }
 
+    // ------------------------------------------------------------------------
     private void ScrollChat () {
         LayoutRebuilder.ForceRebuildLayoutImmediate(ChatBubblesParent);
         ChatBubblesScrollRect.normalizedPosition = new Vector2(0, 0);

@@ -12,6 +12,12 @@ public class ChatRunner : MonoBehaviour
 
     public delegate void OptionDelegate(Message message, int optionIndex);
     public event OptionDelegate VisitedOption;
+
+    public delegate void LeafNodeDelegate();
+    public event LeafNodeDelegate ReachedLeafNode;
+
+    public delegate void ClueOptionDelegate(ClueID clue);
+    public event ClueOptionDelegate VisitedClueOption;
     
     // events for gameplay
     public delegate void FinishedChatDelegate(Chat chat);
@@ -109,12 +115,15 @@ public class ChatRunner : MonoBehaviour
             nextNode = lastMessage.Branch[0];
         }
 
-        // draw the next message
+        // find the next message
         Message nextMessage = m_activeChat.GetMessage(nextNode);
         if(nextMessage == null){
-            MarkConversationComplete();
+            // if this is a leaf node, send leaf node event
+            // don't run more messages
+            ReachedLeafNode();
             return;
         }
+        // if we found a next message, run it
         m_RunMessageCoroutine = RunMessage(nextMessage);
         StartCoroutine(m_RunMessageCoroutine);
     }
@@ -207,6 +216,7 @@ public class ChatRunner : MonoBehaviour
     }
 
     // ------------------------------------------------------------------------
+    // selected a generic (non-clue-related) chat option
     public void SelectOption (Message message, int option) {
         if(message == null) {
             Debug.LogError("Message null.");
@@ -235,9 +245,24 @@ public class ChatRunner : MonoBehaviour
     }
 
     // ------------------------------------------------------------------------
-    // present clue options
-    private void ReachedLeafNode () {
+    // presenting a clue to the conversation
+    public void SelectClueOption (ClueID clue) {
+        Debug.Log("presenting clue: " + clue);
+        Message message = m_activeChat.GetMessageWithClueTrigger(clue);
         
+        if(message == null) {
+            Debug.LogError("Can't find message with clueTrigger " + clue);
+        } else {
+            // log that we've presented this clue
+            m_activeChat.presentedClues.Add(clue);
+
+            // fire event
+            VisitedClueOption(clue);
+
+            // run message triggered by this option
+            m_RunMessageCoroutine = RunMessage(message);
+            StartCoroutine(m_RunMessageCoroutine);
+        }
     }
 
     // ------------------------------------------------------------------------

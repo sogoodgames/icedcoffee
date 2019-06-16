@@ -83,6 +83,9 @@ public class Chat {
     // whether or not the convo is finished
     public bool finished;
 
+    // all of the clues we've presented so far
+    public List<ClueID> presentedClues;
+
     // ------------------------------------------------------------------------
     // Properties
     // ------------------------------------------------------------------------
@@ -133,6 +136,8 @@ public class Chat {
 
         m_visitedMessages = new List<Message>();
         m_visitedMessages.Add(m_messages[0]);
+
+        presentedClues = new List<ClueID>();
     }
 
     // ------------------------------------------------------------------------
@@ -168,5 +173,15 @@ public class Chat {
     // ------------------------------------------------------------------------
     public Message GetLastVisitedMessage () {
         return m_visitedMessages[m_lastVisitedMessage];
+    }
+
+    // ------------------------------------------------------------------------
+    public Message GetMessageWithClueTrigger (ClueID trigger) {
+        foreach(Message m in m_messages) {
+            if(m.ClueTrigger == trigger) {
+                return m;
+            }
+        }
+        return null;
     }
 }

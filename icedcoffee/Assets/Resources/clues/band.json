@@ -3,5 +3,6 @@
     "canSend" : "true",
     "clueID" : "1",
     "phoneNumberGiven" : "0",
-    "note" : "something boutta band"
+    "note" : "something boutta band",
+    "messageText" : "have u heard about this band"
 }

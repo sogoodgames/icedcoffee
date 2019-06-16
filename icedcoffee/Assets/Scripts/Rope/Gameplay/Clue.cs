@@ -23,6 +23,11 @@ public class Clue {
         get{return m_note;}
     }
 
+    private string m_messageText;
+    public string MessageText {
+        get{return m_messageText;}
+    }
+
     public bool Invalid {
         get{return string.IsNullOrEmpty(m_note);}
     }
@@ -34,5 +39,6 @@ public class Clue {
         m_clueID = serializedClue.clueID;
         m_note = serializedClue.note;
         m_canSend = serializedClue.canSend;
+        m_messageText = serializedClue.messageText;
     }
 }

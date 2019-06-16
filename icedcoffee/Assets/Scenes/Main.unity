@@ -4231,6 +4231,7 @@ MonoBehaviour:
   ClueListParent: {fileID: 1564573877}
   ClueUIPrefab: {fileID: 2726926304248218990, guid: 87c4a28613149de4a903ff6aeb858ad2,
     type: 3}
+  ChatRunner: {fileID: 348811503}
 --- !u!1 &749015110
 GameObject:
   m_ObjectHideFlags: 0
