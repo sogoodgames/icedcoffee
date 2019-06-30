@@ -165,8 +165,8 @@ public class ChatApp : App
     }
 
     // ------------------------------------------------------------------------
-    public void OpenAttachment (Message message) {
-        Photo photo = PhoneOS.GetPhoto(message.Image);
+    public void OpenAttachment (PhotoID photoID) {
+        Photo photo = PhoneOS.GetPhoto(photoID);
         FullscreenImage.Open(PhoneOS.GetPhotoSprite(photo.Image));
     }
 
@@ -195,11 +195,11 @@ public class ChatApp : App
 
         // create button to show attachment (if has one)
         if(messageIndex == message.Messages.Length - 1 && message.Image != PhotoID.NoPhoto) {
-            chatBubbleUi.Text.text = message.Messages[messageIndex] + " [click to open attachment]";
-            chatBubbleUi.Button.onClick.AddListener(
-                delegate {OpenAttachment(message);}
+            chatBubbleUi.AddAttachment(
+                message.Messages[messageIndex],
+                message.Image,
+                this
             );
-            chatBubbleUi.Button.interactable = true;
         }
     }
 
@@ -244,11 +244,17 @@ public class ChatApp : App
 
         // draw selected option chat bubble
         Clue clue = PhoneOS.GetClue(id);
-        CreateChatBubble(
+        ChatBubbleUI chatBubbleUI = CreateChatBubble(
             PlayerChatBubblePrefab,
             clue.MessageText,
             PhoneOS.GetIcon(PlayerChatIconIndex)
         );
+
+        // add photo attachment, if has one
+        Photo photo = PhoneOS.GetPhoto(id);
+        if(photo != null) {
+            chatBubbleUI.AddAttachment("", photo.PhotoID, this);
+        }
 
         // play sfx
         typingSFX.Play();
