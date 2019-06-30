@@ -14,12 +14,12 @@ public class NotesApp : App
     }
 
     public override void HandleSlideAnimationFinished () {
-        base.HandleSlideAnimationFinished();
         if(m_waitingForClose) {
             foreach(Transform child in NotesParent.transform) {
                 Destroy(child.gameObject);
             }
         }
+        base.HandleSlideAnimationFinished();
     }
 
     private void PopulateNotes () {

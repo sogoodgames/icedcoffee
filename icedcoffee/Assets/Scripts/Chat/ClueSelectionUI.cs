@@ -12,6 +12,8 @@ public class ClueSelectionUI : MonoBehaviour
     public void Open (Chat chat) {
         // populate clues that you can send in a chat
         foreach(Clue clue in PhoneOS.UnlockedClues) {
+            // don't display clues that we can't send in chats
+            // or clues we've already visited
             if(clue.ClueID == ClueID.NoClue 
                || !clue.CanSend
                || chat.presentedClues.Contains(clue.ClueID)

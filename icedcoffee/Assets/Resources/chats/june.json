@@ -64,6 +64,18 @@
             "branch": [
                 -1
             ]
+        },
+        {
+            "node": 5,
+            "player": "false",
+            "clueGiven": "0",
+            "clueTrigger" : "4",
+            "messages": [
+                "i love pinapple pizza, but idk who that is"
+            ],
+            "branch": [
+                -1
+            ]
         }
     ]
 }

@@ -13,9 +13,11 @@ public enum ClueID {
     NoClue = 0,
     Band = 1,
     Poetry = 2,
-    WenleyNumber = 3
+    WenleyNumber = 3,
+    Pizza = 4
 }
 
 public enum PhotoID {
-    NoPhoto = 0
+    NoPhoto = 0,
+    Pizza = 1
 }

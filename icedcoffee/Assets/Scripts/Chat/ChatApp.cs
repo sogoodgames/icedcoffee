@@ -29,7 +29,8 @@ public class ChatApp : App
 
     // clue selection stuff
     public ClueSelectionUI ClueSelectionUI;
-    public Button OpenClueSelectionButton;
+    public ImageSelectionUI ImageSelectionUI;
+    public GameObject EnterMessageButtons;
 
     //Audio
     public AudioSource typingSFX;
@@ -159,6 +160,11 @@ public class ChatApp : App
     }
 
     // ------------------------------------------------------------------------
+    public void OpenSendImage () {
+        ImageSelectionUI.Open(m_activeChat);
+    }
+
+    // ------------------------------------------------------------------------
     public void OpenAttachment (Message message) {
         Photo photo = PhoneOS.GetPhoto(message.Image);
         FullscreenImage.Open(PhoneOS.GetPhotoSprite(photo.Image));
@@ -235,8 +241,13 @@ public class ChatApp : App
     // ------------------------------------------------------------------------
     private void HandleSelectedClueOption (ClueID id) {
         // hide clue selection UI
-        ClueSelectionUI.Close();
-        OpenClueSelectionButton.gameObject.SetActive(false);
+        if(ClueSelectionUI.gameObject.activeInHierarchy) {
+            ClueSelectionUI.Close();
+        }
+        if(ImageSelectionUI.gameObject.activeInHierarchy) {
+            ImageSelectionUI.Close();
+        }
+        EnterMessageButtons.SetActive(false);
 
         // draw selected option chat bubble
         Clue clue = PhoneOS.GetClue(id);
@@ -253,7 +264,7 @@ public class ChatApp : App
     // ------------------------------------------------------------------------
     private void HandleReachedLeafNode () {
         // show clue selection button
-        OpenClueSelectionButton.gameObject.SetActive(true);
+        EnterMessageButtons.SetActive(true);
     }
 
     // ------------------------------------------------------------------------

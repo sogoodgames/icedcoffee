@@ -13,8 +13,6 @@ public class DataLoader : MonoBehaviour {
     public List<TextAsset> PhotoTextAssets;
     public List<Sprite> UserIconAssets;
     public List<Sprite> PhotoAssets;
-    public Sprite EmmaEndingPhoto;
-    public Sprite JinEndingPhoto;
 
     // ------------------------------------------------------------------------
     // Methods

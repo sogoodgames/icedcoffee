@@ -33,6 +33,15 @@ public class PhotoApp : App
         }
     }
 
+    public override void HandleSlideAnimationFinished () {
+        if(m_waitingForClose) {
+            foreach(Transform child in PhotoGalleryParent.transform) {
+                Destroy(child.gameObject);
+            }
+        }
+        base.HandleSlideAnimationFinished();
+    }
+
     public void OpenPhoto (Sprite sprite) {
         FullscreenImage.Open(sprite);
     }

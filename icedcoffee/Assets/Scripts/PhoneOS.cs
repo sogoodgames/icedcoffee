@@ -96,7 +96,7 @@ public class PhoneOS : MonoBehaviour
             // only add found photos
             List<Photo> photos = new List<Photo>();
             foreach(Photo photo in m_photos) {
-                if(photo.Found) {
+                if(ClueRequirementMet(photo.ClueID)) {
                     photos.Add(photo);
                 }
             }
@@ -218,6 +218,16 @@ public class PhoneOS : MonoBehaviour
     }
 
     // ------------------------------------------------------------------------
+    public Photo GetPhoto (ClueID id) {
+        foreach(Photo photo in m_photos) {
+            if(photo.ClueID == id) {
+                return photo;
+            }
+        }
+        return null;
+    }
+
+    // ------------------------------------------------------------------------
     public GramUser GetGramUser (GramUserId id) {
         foreach(GramUser user in m_gramUsers) {
             if(user.UserId == id) {
@@ -230,17 +240,6 @@ public class PhoneOS : MonoBehaviour
     // ------------------------------------------------------------------------
     public Sprite GetIcon (int index) {
         return DataLoader.UserIconAssets[index];
-    }
-
-    // ------------------------------------------------------------------------
-    // todo: more generic method for ending photos
-    public Sprite GetJinEndingPhoto () {
-        return DataLoader.JinEndingPhoto;
-    }
-
-    // ------------------------------------------------------------------------
-    public Sprite GetEmmaEndingPhoto () {
-        return DataLoader.EmmaEndingPhoto;
     }
 
     // ------------------------------------------------------------------------
