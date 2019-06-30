@@ -14,9 +14,11 @@ public class ClueSelectionUI : MonoBehaviour
         foreach(Clue clue in PhoneOS.UnlockedClues) {
             // don't display clues that we can't send in chats
             // or clues we've already visited
+            // or clues with an image (they'll be in the image selection UI)
             if(clue.ClueID == ClueID.NoClue 
                || !clue.CanSend
                || chat.presentedClues.Contains(clue.ClueID)
+               || PhoneOS.GetPhoto(clue.ClueID) != null
             ) {
                 continue;
             }

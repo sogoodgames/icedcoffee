@@ -212,19 +212,14 @@ public class PhoneOS : MonoBehaviour
     
     // ------------------------------------------------------------------------
     public Photo GetPhoto (PhotoID id) {
-        //Debug.Log("searching for photo with id " + id);
-        Photo photo = m_photos.First(p => p.PhotoID == id);
+        Photo photo = m_photos.FirstOrDefault(p => p.PhotoID == id);
         return photo;
     }
 
     // ------------------------------------------------------------------------
     public Photo GetPhoto (ClueID id) {
-        foreach(Photo photo in m_photos) {
-            if(photo.ClueID == id) {
-                return photo;
-            }
-        }
-        return null;
+        Photo photo = m_photos.FirstOrDefault(p => p.ClueID == id);
+        return photo;
     }
 
     // ------------------------------------------------------------------------
