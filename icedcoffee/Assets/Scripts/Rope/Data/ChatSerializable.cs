@@ -12,7 +12,6 @@ public class MessageSerializable {
 
     // all of the following map by index
     public string[] options; // the text options
-    public ClueID[] clueNeeded; // the clues needed for each option
     public int[] branch; // the next message (-1 means this is a leaf)
 }
 

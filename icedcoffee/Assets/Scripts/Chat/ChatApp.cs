@@ -213,18 +213,11 @@ public class ChatApp : App
         // setup bubble
         MessageButton messageButton = option.GetComponent<MessageButton>();
         
-        // check if clue needs met
-        if(PhoneOS.ClueRequirementMet(message.ClueNeeded[optionIndex])) {
-            // set button text & hook up option function
-            messageButton.Text.text = message.Options[optionIndex];
-            messageButton.Button.onClick.AddListener(
-                delegate {ChatRunner.SelectOption(message, optionIndex);}
-            );
-            //Debug.Log("created option [" + message.options[i] + "] with index " + i + " for message " + message.node);
-        } else {
-            // mark it as unavilable
-            messageButton.Text.text = "[clue needed]";
-        }
+        // set button text & hook up option function
+        messageButton.Text.text = message.Options[optionIndex];
+        messageButton.Button.onClick.AddListener(
+            delegate {ChatRunner.SelectOption(message, optionIndex);}
+        );
     }
 
     // ------------------------------------------------------------------------

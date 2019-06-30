@@ -30,10 +30,6 @@ public class Message {
     private string[] m_options;
     public string[] Options {get{return m_options;}}
 
-    // clue required to selection the option
-    private ClueID[] m_clueNeeded;
-    public ClueID[] ClueNeeded {get{return m_clueNeeded;}}
-
     // clue that instigates this message
     private ClueID m_clueTrigger;
     public ClueID ClueTrigger {get{return m_clueTrigger;}}
@@ -56,7 +52,6 @@ public class Message {
         m_clueGiven = serializedMessage.clueGiven;
         Messages = serializedMessage.messages;
         m_options = serializedMessage.options;
-        m_clueNeeded = serializedMessage.clueNeeded;
         m_branch = serializedMessage.branch;
         m_image = serializedMessage.image;
         m_clueTrigger = serializedMessage.clueTrigger;
