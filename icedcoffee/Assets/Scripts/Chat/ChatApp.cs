@@ -28,15 +28,18 @@ public class ChatApp : App
     public FullscreenImage FullscreenImage;
 
     // clue selection stuff
+    public ChatSelectionUI MessageSelectionUI;
     public ClueSelectionUI ClueSelectionUI;
     public ImageSelectionUI ImageSelectionUI;
-    public GameObject EnterMessageButtons;
+    public ChatSelectionUI EnterMessageButtons;
+    public GameObject LineImage;
 
     //Audio
     public AudioSource typingSFX;
     public AudioSource messageSFX;
 
     // internal
+    private List<ChatSelectionUI> m_chatSelectionObjects;
     private Chat m_activeChat;
 
     // ------------------------------------------------------------------------
@@ -50,6 +53,14 @@ public class ChatApp : App
         ChatRunner.SelectedOption += HandleSelectedOption;
         ChatRunner.ReachedLeafNode += HandleReachedLeafNode;
         ChatRunner.VisitedClueOption += HandleSelectedClueOption;
+
+        // this is a little hard-code-y but idgaf
+        m_chatSelectionObjects = new List<ChatSelectionUI>() {
+            MessageSelectionUI,
+            ClueSelectionUI,
+            ImageSelectionUI,
+            EnterMessageButtons
+        };
     }
 
     // ------------------------------------------------------------------------
@@ -72,8 +83,7 @@ public class ChatApp : App
             PhoneOS.ReturnButton.SetActive(false);
             CloseChatSelection();
             CloseChat();
-            FullscreenImage.Close();
-            ClueSelectionUI.Close();
+            CloseOtherChatSelectionUI(null, false);
         }
     }
 
@@ -152,16 +162,20 @@ public class ChatApp : App
         // start chat
         ChatScreen.SetActive(true);
         ChatRunner.StartConversation(m_activeChat);
+
+        ScrollChat();
     }
 
     // ------------------------------------------------------------------------
     public void OpenClueSelection () {
         ClueSelectionUI.Open(m_activeChat);
+        CloseOtherChatSelectionUI(ClueSelectionUI, false);
     }
 
     // ------------------------------------------------------------------------
     public void OpenSendImage () {
         ImageSelectionUI.Open(m_activeChat);
+        CloseOtherChatSelectionUI(ImageSelectionUI, false);
     }
 
     // ------------------------------------------------------------------------
@@ -234,14 +248,9 @@ public class ChatApp : App
     // ------------------------------------------------------------------------
     private void HandleSelectedClueOption (ClueID id) {
         // hide clue selection UI
-        if(ClueSelectionUI.gameObject.activeInHierarchy) {
-            ClueSelectionUI.Close();
-        }
-        if(ImageSelectionUI.gameObject.activeInHierarchy) {
-            ImageSelectionUI.Close();
-        }
-        EnterMessageButtons.SetActive(false);
-
+        MessageSelectionUI.Open();
+        CloseOtherChatSelectionUI(MessageSelectionUI, true);
+        
         // draw selected option chat bubble
         Clue clue = PhoneOS.GetClue(id);
         ChatBubbleUI chatBubbleUI = CreateChatBubble(
@@ -263,7 +272,8 @@ public class ChatApp : App
     // ------------------------------------------------------------------------
     private void HandleReachedLeafNode () {
         // show clue selection button
-        EnterMessageButtons.SetActive(true);
+        EnterMessageButtons.Open();
+        CloseOtherChatSelectionUI(EnterMessageButtons, true);
     }
 
     // ------------------------------------------------------------------------
@@ -306,6 +316,16 @@ public class ChatApp : App
         ScrollChat();
 
         return chatBubbleUi;
+    }
+
+    // ------------------------------------------------------------------------
+    public void CloseOtherChatSelectionUI (ChatSelectionUI ui, bool drawLine) {
+        foreach(ChatSelectionUI obj in m_chatSelectionObjects) {
+            if(obj != ui) {
+                obj.Close();
+            }
+        }
+        LineImage.SetActive(drawLine);
     }
 
     // ------------------------------------------------------------------------

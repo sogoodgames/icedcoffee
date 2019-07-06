@@ -1,15 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class ImageSelectionUI : MonoBehaviour
+public class ImageSelectionUI : ChatSelectionUI
 {
     public PhoneOS PhoneOS;
     public Transform ImageListParent;
     public GameObject ImageTilePrefab;
     public ChatRunner chatRunner;
+    public ChatApp ChatApp;
 
-    public void Open (Chat chat) {
+    public override void Open (Chat chat) {
         foreach(Photo photo in PhoneOS.FoundPhotos) {
             ClueID clue = photo.ClueID;
             // don't display clues we've already visisted
@@ -31,7 +30,9 @@ public class ImageSelectionUI : MonoBehaviour
         gameObject.SetActive(true);
     }
 
-    public void Close () {
+    public override void Close () {
+        ChatApp.LineImage.SetActive(true);
+        ChatApp.EnterMessageButtons.Open();
         foreach(Transform t in ImageListParent.transform) {
             Destroy(t.gameObject);
         }

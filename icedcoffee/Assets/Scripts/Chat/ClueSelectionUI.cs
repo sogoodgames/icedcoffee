@@ -1,15 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class ClueSelectionUI : MonoBehaviour
+public class ClueSelectionUI : ChatSelectionUI
 {
     public PhoneOS PhoneOS;
     public Transform ClueListParent;
     public GameObject ClueUIPrefab;
     public ChatRunner ChatRunner;
+    public ChatApp ChatApp;
 
-    public void Open (Chat chat) {
+    public override void Open (Chat chat) {
         // populate clues that you can send in a chat
         foreach(Clue clue in PhoneOS.UnlockedClues) {
             // don't display clues that we can't send in chats
@@ -33,7 +32,9 @@ public class ClueSelectionUI : MonoBehaviour
         gameObject.SetActive(true);
     }
 
-    public void Close () {
+    public override void Close () {
+        ChatApp.LineImage.SetActive(true);
+        ChatApp.EnterMessageButtons.Open();
         foreach(Transform t in ClueListParent.transform) {
             Destroy(t.gameObject);
         }
