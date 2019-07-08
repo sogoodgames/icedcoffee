@@ -10,12 +10,14 @@ public class NotificationManager : MonoBehaviour
         public string text;
         public float timeLeft;
         public App app;
+        public bool forceOpenApp;
 
-        public NotifInfo(Sprite s, string t, App a, float maxTime) {
+        public NotifInfo(Sprite s, string t, App a, float maxTime, bool force = false) {
             sprite = s;
             text = t;
             app = a;
             timeLeft = maxTime;
+            forceOpenApp = force;
         }
     }
 
@@ -61,16 +63,18 @@ public class NotificationManager : MonoBehaviour
         Icon.sprite = notif.sprite;
         Text.text = notif.text;
         Button.onClick.RemoveAllListeners();
-        Button.onClick.AddListener(delegate{NotificationClicked(notif.app);});
+        Button.onClick.AddListener(
+            delegate{NotificationClicked(notif.app, notif.forceOpenApp);}
+        );
         NotificationUI.SetActive(true);
 
         notifSound.Play();
     }
 
-    private void QueueNotif (Sprite sprite, string text, App app) {
+    private void QueueNotif (Sprite sprite, string text, App app, bool forceOpen = false) {
         // add this notif to the queue
         m_notificationQueue.Enqueue( new NotifInfo (
-            sprite, text, app, LingerSeconds
+            sprite, text, app, LingerSeconds, forceOpen
         ));
 
         // if this is the only notif, play it immediately
@@ -85,16 +89,16 @@ public class NotificationManager : MonoBehaviour
     }
 
     public void NewContactNotif (Friend friend) {
-        QueueNotif(ChatApp.Icon, NewContactNotifText + friend.ToString(), ChatApp);
+        QueueNotif(ChatApp.Icon, NewContactNotifText + friend.ToString(), ChatApp, true);
     }
 
     public void ForumPostNotif (ForumPost post) {
         QueueNotif(ForumApp.Icon, "New Ruddit post!",  ForumApp);
     }
 
-    public void NotificationClicked (App app) {
+    public void NotificationClicked (App app, bool forceOpen = false) {
         TryPlayNextNotif();
-        PhoneOS.OpenApp(app);
+        PhoneOS.OpenApp(app, forceOpen);
     }
 
     private void TryPlayNextNotif () {

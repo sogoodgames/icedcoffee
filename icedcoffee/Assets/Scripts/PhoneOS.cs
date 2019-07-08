@@ -135,6 +135,14 @@ public class PhoneOS : MonoBehaviour
     // Methods: Phone navigation
     // ------------------------------------------------------------------------
     public void OpenApp (App app) {
+        OpenApp(app, false);
+    }
+
+    // ------------------------------------------------------------------------
+    public void OpenApp (App app, bool force) {
+        if(app.IsOpen && !force) {
+            return;
+        }
         CloseAllApps();
         app.Open();
         m_activeApp = app;
