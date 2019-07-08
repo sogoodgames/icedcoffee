@@ -23,9 +23,9 @@ public class Clue {
         get{return m_note;}
     }
 
-    private string m_messageText;
-    public string MessageText {
-        get{return m_messageText;}
+    private Message m_message;
+    public Message Message {
+        get{return m_message;}
     }
 
     public bool Invalid {
@@ -39,6 +39,6 @@ public class Clue {
         m_clueID = serializedClue.clueID;
         m_note = serializedClue.note;
         m_canSend = serializedClue.canSend;
-        m_messageText = serializedClue.messageText;
+        m_message = new Message(serializedClue.message);
     }
 }

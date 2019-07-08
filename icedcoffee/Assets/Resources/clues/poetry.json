@@ -4,5 +4,12 @@
     "clueID" : "2",
     "phoneNumberGiven" : "0",
     "note" : "wenely reads poetry what a nerd",
-    "messageText" : "know anything about a poetry thing"
+    "message" : {
+        "node" : -1,
+        "player" : true,
+        "clueGiven" : 0,
+        "messages" : [
+            "Know anything about this poetry night?"
+        ]
+    }
 }

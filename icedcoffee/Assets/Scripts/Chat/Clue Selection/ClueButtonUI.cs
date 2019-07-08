@@ -9,7 +9,7 @@ public class ClueButtonUI : MonoBehaviour
     public void Init (Clue clue, ChatRunner chatRunner) {
         Text.text = clue.Note;
         Button.onClick.AddListener ( 
-            delegate { chatRunner.SelectClueOption(clue.ClueID); }
+            delegate { chatRunner.SelectClueOption(clue); }
         );
     }
 }

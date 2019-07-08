@@ -3,5 +3,14 @@
     "canSend" : "true",
     "clueID" : "4",
     "phoneNumberGiven" : "0",
-    "note" : "pinapple pizza"
+    "note" : "pinapple pizza",
+    "message" : {
+        "node" : -1,
+        "player" : true,
+        "clueGiven" : 0,
+        "messages" : [
+            "Pinapple pizza..."
+        ],
+        "image" : 1
+    }
 }

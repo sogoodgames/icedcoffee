@@ -246,24 +246,13 @@ public class ChatApp : App
     }
 
     // ------------------------------------------------------------------------
-    private void HandleSelectedClueOption (ClueID id) {
+    private void HandleSelectedClueOption (Clue clue) {
         // hide clue selection UI
         MessageSelectionUI.Open();
         CloseOtherChatSelectionUI(MessageSelectionUI, true);
         
         // draw selected option chat bubble
-        Clue clue = PhoneOS.GetClue(id);
-        ChatBubbleUI chatBubbleUI = CreateChatBubble(
-            PlayerChatBubblePrefab,
-            clue.MessageText,
-            PhoneOS.GetIcon(PlayerChatIconIndex)
-        );
-
-        // add photo attachment, if has one
-        Photo photo = PhoneOS.GetPhoto(id);
-        if(photo != null) {
-            chatBubbleUI.AddAttachment("", photo.PhotoID, this);
-        }
+        DrawChatBubble(clue.Message, 0);
 
         // play sfx
         typingSFX.Play();

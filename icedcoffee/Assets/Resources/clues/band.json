@@ -4,5 +4,12 @@
     "clueID" : "1",
     "phoneNumberGiven" : "0",
     "note" : "something boutta band",
-    "messageText" : "have u heard about this band"
+    "message" : {
+        "node" : -1,
+        "player" : true,
+        "clueGiven" : 0,
+        "messages" : [
+            "Have you heard about this band?"
+        ]
+    }
 }

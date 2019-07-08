@@ -7,5 +7,5 @@ public class ClueSerializable {
     public ClueID clueID;
     public Friend phoneNumberGiven;
     public string note;
-    public string messageText;
+    public MessageSerializable message;
 }

@@ -3,5 +3,13 @@
     "canSend" : "false",
     "clueID" : "3",
     "phoneNumberGiven" : "2",
-    "note" : "Wenley Shen"
+    "note" : "Wenley Shen",
+    "message" : {
+        "node" : -1,
+        "player" : true,
+        "clueGiven" : 0,
+        "messages" : [
+            "Here's Wenley's phone number."
+        ]
+    }
 }

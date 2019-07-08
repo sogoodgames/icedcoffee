@@ -9,7 +9,7 @@ public class ImageButtonUI : MonoBehaviour
     public void Init (Clue clue, ChatRunner chatRunner, Sprite sprite) {
         Image.sprite = sprite;
         Button.onClick.AddListener ( 
-            delegate { chatRunner.SelectClueOption(clue.ClueID); }
+            delegate { chatRunner.SelectClueOption(clue); }
         );
     }
 }

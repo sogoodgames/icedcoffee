@@ -16,7 +16,7 @@ public class ChatRunner : MonoBehaviour
     public delegate void LeafNodeDelegate();
     public event LeafNodeDelegate ReachedLeafNode;
 
-    public delegate void ClueOptionDelegate(ClueID clue);
+    public delegate void ClueOptionDelegate(Clue clue);
     public event ClueOptionDelegate VisitedClueOption;
     
     // events for gameplay
@@ -246,17 +246,20 @@ public class ChatRunner : MonoBehaviour
 
     // ------------------------------------------------------------------------
     // presenting a clue to the conversation
-    public void SelectClueOption (ClueID clue) {
-        Debug.Log("presenting clue: " + clue);
-        Message message = m_activeChat.GetMessageWithClueTrigger(clue);
+    public void SelectClueOption (Clue clue) {
+        //Debug.Log("presenting clue: " + clue.ClueID);
+        Message message = m_activeChat.GetMessageWithClueTrigger(clue.ClueID);
         
         if(message == null) {
-            Debug.LogError("Can't find message with clueTrigger " + clue);
+            Debug.LogError("Can't find message with clueTrigger " + clue.ClueID);
         } else {
             // log that we've presented this clue
-            m_activeChat.presentedClues.Add(clue);
+            m_activeChat.presentedClues.Add(clue.ClueID);
 
-            // fire event
+            // log the message (don't force)
+            m_activeChat.VisitMessage(clue.Message, true);
+
+            // fire event for UI
             VisitedClueOption(clue);
 
             // run message triggered by this option
