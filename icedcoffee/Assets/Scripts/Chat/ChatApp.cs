@@ -32,7 +32,6 @@ public class ChatApp : App
     public ClueSelectionUI ClueSelectionUI;
     public ImageSelectionUI ImageSelectionUI;
     public ChatSelectionUI EnterMessageButtons;
-    public GameObject LineImage;
 
     //Audio
     public AudioSource typingSFX;
@@ -105,6 +104,9 @@ public class ChatApp : App
     // ------------------------------------------------------------------------
     public void OpenChatSelection () {
         CloseChat();
+
+        // set title
+        FriendTitleText.text = "Contacts";
 
         // populate list of chat buttons
         // we do this every time we open the app in case it's changed
@@ -314,7 +316,6 @@ public class ChatApp : App
                 obj.Close();
             }
         }
-        LineImage.SetActive(drawLine);
     }
 
     // ------------------------------------------------------------------------

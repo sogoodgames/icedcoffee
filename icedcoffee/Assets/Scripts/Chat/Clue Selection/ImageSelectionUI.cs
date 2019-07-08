@@ -31,7 +31,6 @@ public class ImageSelectionUI : ChatSelectionUI
     }
 
     public override void Close () {
-        ChatApp.LineImage.SetActive(true);
         ChatApp.EnterMessageButtons.Open();
         foreach(Transform t in ImageListParent.transform) {
             Destroy(t.gameObject);

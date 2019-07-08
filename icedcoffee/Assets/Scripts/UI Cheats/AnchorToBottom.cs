@@ -4,6 +4,7 @@ using UnityEngine.UI;
 [ExecuteInEditMode]
 public class AnchorToBottom : MonoBehaviour
 {
+    public float YAnchor = 0.0f;
     private RectTransform m_rect;
 
     void Start()
@@ -16,7 +17,7 @@ public class AnchorToBottom : MonoBehaviour
         LayoutRebuilder.ForceRebuildLayoutImmediate(m_rect);
         m_rect.anchoredPosition = new Vector2(
             m_rect.anchoredPosition.x,
-            m_rect.sizeDelta.y / 2
+            m_rect.sizeDelta.y/2 + YAnchor
         );
     }
 }
