@@ -5,8 +5,14 @@ public enum Friend {
 }
 
 public enum GramUserId {
-    Linden = 0,
+    You = 0,
     June = 1
+}
+
+public enum MusicUserId {
+    You = 0,
+    June = 1,
+    Wenley = 2
 }
 
 public enum ClueID {

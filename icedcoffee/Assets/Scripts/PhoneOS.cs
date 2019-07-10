@@ -32,6 +32,8 @@ public class PhoneOS : MonoBehaviour
 
     private List<GramPost> m_allGramPosts;
 
+    private List<MusicUser> m_allMusicUsers;
+
     private List<Clue> m_clues;
     private List<Photo> m_photos;
     private List<GramUser> m_gramUsers;
@@ -118,6 +120,8 @@ public class PhoneOS : MonoBehaviour
 
         m_gramUsers = DataLoader.LoadGramUsers();
         m_allGramPosts = DataLoader.LoadGramPosts();
+
+        m_allMusicUsers = DataLoader.LoadMusicUsers();
 
         ChatRunner.FoundClue += FoundClue;
     }

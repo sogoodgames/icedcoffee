@@ -1,0 +1,22 @@
+{
+    "username" : "Lucien Ye",
+    "userID" : "2",
+    "friendID" : "3",
+    "playlist" : [
+        {
+            "title" : "Waiting Game",
+            "artist" : "Banks",
+            "album" : "Goddess"
+        },
+        {
+            "title" : "Figure 8",
+            "artist" : "FKA twigs",
+            "album" : "M3LL155X"
+        },
+        {
+            "title" : "Weak Spot",
+            "artist" : "FKA twigs",
+            "album" : "EP1"
+        }
+    ]
+}

@@ -1,18 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System;   // serializable
 
-public class SongSerializable : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+[Serializable]
+public class SongSerializable {
+    public string title;
+    public string artist;
+    public string album;
+}
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+[Serializable] 
+public class MusicUserSerializable {
+    public bool isPlayer;
+    public string username;
+    public MusicUserId userID;
+    public Friend friendID;
+    public SongSerializable[] playlist;
 }

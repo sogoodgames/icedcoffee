@@ -11,6 +11,7 @@ public class DataLoader : MonoBehaviour {
     public List<TextAsset> GramUserTextAssets;
     public List<TextAsset> ClueTextAssets;
     public List<TextAsset> PhotoTextAssets;
+    public List<TextAsset> MusicUserTextAssets;
     public List<Sprite> UserIconAssets;
     public List<Sprite> PhotoAssets;
 
@@ -138,5 +139,24 @@ public class DataLoader : MonoBehaviour {
             }
         }
         return photos;
+    }
+
+    // ------------------------------------------------------------------------
+    public List<MusicUser> LoadMusicUsers() {
+        List<MusicUser> users = new List<MusicUser>();
+
+        foreach(TextAsset textAsset in MusicUserTextAssets) {
+            string text = textAsset.text;
+            if(!string.IsNullOrEmpty(text)) {
+                MusicUserSerializable userSer = JsonUtility.FromJson<MusicUserSerializable>(text);
+                MusicUser user = new MusicUser(userSer);
+                users.Add(user);
+                Debug.Log("added user: " + user.Username);
+            } else {
+                Debug.LogError("file empty: " + textAsset.name);
+                break;
+            }
+        }
+        return users;
     }
 }

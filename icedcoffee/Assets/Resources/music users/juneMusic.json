@@ -1,0 +1,22 @@
+{
+    "username" : "Juniper Wilde",
+    "userID" : "1",
+    "friendID" : "1",
+    "playlist" : [
+        {
+            "title" : "still feel.",
+            "artist" : "half.alive",
+            "album" : "runaway"
+        },
+        {
+            "title" : "arrow",
+            "artist" : "half.alive",
+            "album" : "runaway"
+        },
+        {
+            "title" : "RUNAWAY",
+            "artist" : "half.alive",
+            "album" : "runaway"
+        }
+    ]
+}
