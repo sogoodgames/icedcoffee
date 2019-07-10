@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 1113185533709518641}
   - component: {fileID: 1113185533709518640}
   m_Layer: 5
-  m_Name: Text_Artist
+  m_Name: Text_ArtistAlbum
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -361,6 +361,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3774992871313465477}
+  - component: {fileID: 1621318282662328140}
   m_Layer: 5
   m_Name: Song
   m_TagString: Untagged
@@ -391,3 +392,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 963.3, y: 155.2}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1621318282662328140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8385041350329611246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 859c0af0468b5904586fb51d1fc39214, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TitleText: {fileID: 4047694179075304536}
+  ArtistAlbumText: {fileID: 1113185533709518640}

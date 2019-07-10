@@ -11,7 +11,11 @@ public class SongSerializable {
 public class MusicUserSerializable {
     public bool isPlayer;
     public string username;
+    public string playlistName;
+    public int numFollowers;
     public MusicUserId userID;
     public Friend friendID;
+    public ClueID clueNeeded;
+    public ClueID clueGiven;
     public SongSerializable[] playlist;
 }

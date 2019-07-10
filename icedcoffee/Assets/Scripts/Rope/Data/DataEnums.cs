@@ -1,7 +1,8 @@
 public enum Friend {
     NoFriend = 0,
     June = 1,
-    Wenley = 2
+    Wenley = 2,
+    Lucien = 3
 }
 
 public enum GramUserId {
@@ -12,7 +13,7 @@ public enum GramUserId {
 public enum MusicUserId {
     You = 0,
     June = 1,
-    Wenley = 2
+    Lucien = 2
 }
 
 public enum ClueID {

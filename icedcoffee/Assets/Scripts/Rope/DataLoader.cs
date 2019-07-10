@@ -151,7 +151,7 @@ public class DataLoader : MonoBehaviour {
                 MusicUserSerializable userSer = JsonUtility.FromJson<MusicUserSerializable>(text);
                 MusicUser user = new MusicUser(userSer);
                 users.Add(user);
-                Debug.Log("added user: " + user.Username);
+                //Debug.Log("added user: " + user.Username);
             } else {
                 Debug.LogError("file empty: " + textAsset.name);
                 break;

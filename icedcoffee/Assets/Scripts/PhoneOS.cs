@@ -80,6 +80,18 @@ public class PhoneOS : MonoBehaviour
         }
     }
 
+    public List<MusicUser> ActiveMusicUsers {
+        get {
+            List<MusicUser> activeUsers = new List<MusicUser>();
+            foreach(MusicUser user in m_allMusicUsers) {
+                if(ClueRequirementMet(user.ClueNeeded) && !user.IsPlayer) {
+                    activeUsers.Add(user);
+                }
+            }
+            return activeUsers;
+        }
+    }
+
     public List<Clue> UnlockedClues {
         get {
             // only add unlocked clues
@@ -224,24 +236,22 @@ public class PhoneOS : MonoBehaviour
     
     // ------------------------------------------------------------------------
     public Photo GetPhoto (PhotoID id) {
-        Photo photo = m_photos.FirstOrDefault(p => p.PhotoID == id);
-        return photo;
+        return m_photos.FirstOrDefault(p => p.PhotoID == id);
     }
 
     // ------------------------------------------------------------------------
     public Photo GetPhoto (ClueID id) {
-        Photo photo = m_photos.FirstOrDefault(p => p.ClueID == id);
-        return photo;
+        return m_photos.FirstOrDefault(p => p.ClueID == id);
     }
 
     // ------------------------------------------------------------------------
     public GramUser GetGramUser (GramUserId id) {
-        foreach(GramUser user in m_gramUsers) {
-            if(user.UserId == id) {
-                return user;
-            }
-        }
-        return null;
+        return m_gramUsers.FirstOrDefault(u => u.UserId == id);
+    }
+
+    // ------------------------------------------------------------------------
+    public MusicUser GetMusicUser (MusicUserId id) {
+        return m_allMusicUsers.FirstOrDefault(u => u.UserID == id);
     }
 
     // ------------------------------------------------------------------------

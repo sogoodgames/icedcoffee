@@ -44,6 +44,16 @@ public class MusicUser {
         get {return m_username;}
     }
 
+    private string m_playlistName;
+    public string PlaylistName {
+        get {return m_playlistName;}
+    }
+
+    private int m_numFollowers;
+    public int NumFollowers {
+        get {return m_numFollowers;}
+    }
+
     private MusicUserId m_userID;
     public MusicUserId UserID {
         get {return m_userID;}
@@ -52,6 +62,16 @@ public class MusicUser {
     private Friend m_friendID;
     public Friend FriendID {
         get {return m_friendID;}
+    }
+
+    private ClueID m_clueGiven;
+    public ClueID ClueGiven {
+        get {return m_clueGiven;}
+    }
+
+    private ClueID m_clueNeeded;
+    public ClueID ClueNeeded {
+        get {return m_clueNeeded;}
     }
 
     private List<Song> m_playlist;
@@ -65,8 +85,12 @@ public class MusicUser {
     public MusicUser (MusicUserSerializable user) {
         m_isPlayer = user.isPlayer;
         m_username = user.username;
+        m_playlistName = user.playlistName;
         m_userID = user.userID;
         m_friendID = user.friendID;
+        m_numFollowers = user.numFollowers;
+        m_clueGiven = user.clueGiven;
+        m_clueNeeded = user.clueNeeded;
 
         m_playlist = new List<Song>();
         foreach(SongSerializable song in user.playlist) {

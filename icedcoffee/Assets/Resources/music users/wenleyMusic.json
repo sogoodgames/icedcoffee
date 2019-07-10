@@ -1,7 +1,11 @@
 {
     "username" : "Lucien Ye",
+    "playlistName" : "spicy yet brooding",
+    "numFollowers" : 103,
     "userID" : "2",
     "friendID" : "3",
+    "clueNeeded" : "0",
+    "clueGiven" : "0",
     "playlist" : [
         {
             "title" : "Waiting Game",

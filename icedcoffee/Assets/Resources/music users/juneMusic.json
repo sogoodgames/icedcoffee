@@ -1,7 +1,11 @@
 {
     "username" : "Juniper Wilde",
+    "playlistName" : "gay ish",
+    "numFollowers" : 15,
     "userID" : "1",
     "friendID" : "1",
+    "clueNeeded" : "0",
+    "clueGiven" : "0",
     "playlist" : [
         {
             "title" : "still feel.",

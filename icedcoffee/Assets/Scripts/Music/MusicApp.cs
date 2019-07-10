@@ -2,42 +2,45 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GramApp : App
-{
+public class MusicApp : App {
     // ------------------------------------------------------------------------
     // Variables
     // ------------------------------------------------------------------------
-    public Transform GramPostParent;
-    public GameObject GramPostPrefab;
+    public PlaylistUI PlaylistUI;
+    public FriendListUI FriendListUI;
 
     // ------------------------------------------------------------------------
     // Methods
     // ------------------------------------------------------------------------
     public override void Open () {
         base.Open();
-        PopulatePosts();
+        OpenPlayerPlaylist();
     }
 
     // ------------------------------------------------------------------------
     public override void HandleSlideAnimationFinished () {
         if(m_waitingForClose) {
-            foreach(Transform child in GramPostParent.transform) {
-                Destroy(child.gameObject);
-            }
+            PlaylistUI.Close();
+            FriendListUI.Close();
         }
         base.HandleSlideAnimationFinished();
     }
 
     // ------------------------------------------------------------------------
-    private void PopulatePosts () {
-        foreach(GramPost post in PhoneOS.ActiveGramPosts) {
-            GameObject postObj = Instantiate(
-                GramPostPrefab,
-                GramPostParent
-            );
+    public void OpenPlayerPlaylist () {
+        FriendListUI.Close();
+        PlaylistUI.Open(MusicUserId.You);
+    }
 
-            GramPostUI postUI = postObj.GetComponent<GramPostUI>();
-            postUI.SetPostContent(post, PhoneOS);
-        }
+    // ------------------------------------------------------------------------
+    public void OpenPlaylist (MusicUserId id) {
+        FriendListUI.Close();
+        PlaylistUI.Open(id);
+    }
+
+    // ------------------------------------------------------------------------
+    public void OpenFriendList () {
+        PlaylistUI.Close();
+        FriendListUI.Open();
     }
 }
