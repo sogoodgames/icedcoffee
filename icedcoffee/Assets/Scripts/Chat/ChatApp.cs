@@ -171,13 +171,19 @@ public class ChatApp : App
     // ------------------------------------------------------------------------
     public void OpenClueSelection () {
         ClueSelectionUI.Open(m_activeChat);
-        CloseOtherChatSelectionUI(ClueSelectionUI, false);
+        
+        if(ImageSelectionUI.IsOpen) {
+            ImageSelectionUI.Close();
+        }
     }
 
     // ------------------------------------------------------------------------
     public void OpenSendImage () {
         ImageSelectionUI.Open(m_activeChat);
-        CloseOtherChatSelectionUI(ImageSelectionUI, false);
+        
+        if(ClueSelectionUI.IsOpen) {
+            ClueSelectionUI.Close();
+        }
     }
 
     // ------------------------------------------------------------------------

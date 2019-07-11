@@ -6,9 +6,10 @@ public class ClueSelectionUI : ChatSelectionUI
     public Transform ClueListParent;
     public GameObject ClueUIPrefab;
     public ChatRunner ChatRunner;
-    public ChatApp ChatApp;
 
     public override void Open (Chat chat) {
+        ClearButtons();
+        
         // populate clues that you can send in a chat
         foreach(Clue clue in PhoneOS.UnlockedClues) {
             // don't display clues that we can't send in chats
@@ -33,10 +34,13 @@ public class ClueSelectionUI : ChatSelectionUI
     }
 
     public override void Close () {
-        ChatApp.EnterMessageButtons.Open();
+        ClearButtons();
+        gameObject.SetActive(false);
+    }
+
+    private void ClearButtons() {
         foreach(Transform t in ClueListParent.transform) {
             Destroy(t.gameObject);
         }
-        gameObject.SetActive(false);
     }
 }

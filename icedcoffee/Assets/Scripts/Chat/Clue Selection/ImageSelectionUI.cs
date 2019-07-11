@@ -6,9 +6,10 @@ public class ImageSelectionUI : ChatSelectionUI
     public Transform ImageListParent;
     public GameObject ImageTilePrefab;
     public ChatRunner chatRunner;
-    public ChatApp ChatApp;
 
     public override void Open (Chat chat) {
+        ClearButtons();
+        
         foreach(Photo photo in PhoneOS.FoundPhotos) {
             ClueID clue = photo.ClueID;
             // don't display clues we've already visisted
@@ -31,10 +32,13 @@ public class ImageSelectionUI : ChatSelectionUI
     }
 
     public override void Close () {
-        ChatApp.EnterMessageButtons.Open();
+        ClearButtons();
+        gameObject.SetActive(false);
+    }
+
+    private void ClearButtons () {
         foreach(Transform t in ImageListParent.transform) {
             Destroy(t.gameObject);
         }
-        gameObject.SetActive(false);
     }
 }
