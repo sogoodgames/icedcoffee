@@ -100,7 +100,7 @@ public class ChatApp : App
     }
 
     // ------------------------------------------------------------------------
-    // Methods : Public
+    // Methods : Public (Probably Mostly Buttons)
     // ------------------------------------------------------------------------
     public void OpenChatSelection () {
         CloseChat();

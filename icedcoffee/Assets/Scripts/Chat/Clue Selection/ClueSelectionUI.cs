@@ -1,17 +1,42 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 public class ClueSelectionUI : ChatSelectionUI
 {
+    // ------------------------------------------------------------------------
+    // Variables
+    // ------------------------------------------------------------------------
     public PhoneOS PhoneOS;
     public Transform ClueListParent;
     public GameObject ClueUIPrefab;
     public ChatRunner ChatRunner;
 
+    private Chat chat;
+
+    // ------------------------------------------------------------------------
+    // Methods
+    // ------------------------------------------------------------------------
     public override void Open (Chat chat) {
+        CreateButtons(PhoneOS.UnlockedClues);
+        gameObject.SetActive(true);
+        this.chat = chat;
+    }
+
+    // ------------------------------------------------------------------------
+    public override void Close () {
         ClearButtons();
-        
+        gameObject.SetActive(false);
+    }
+
+    // ------------------------------------------------------------------------
+    public void CreateButtons(List<Clue> clues) {
+        if(chat == null) {
+            return;
+        }
+
+        ClearButtons();
         // populate clues that you can send in a chat
-        foreach(Clue clue in PhoneOS.UnlockedClues) {
+        foreach(Clue clue in clues) {
             // don't display clues that we can't send in chats
             // or clues we've already visited
             // or clues with an image (they'll be in the image selection UI)
@@ -29,15 +54,9 @@ public class ClueSelectionUI : ChatSelectionUI
                 buttonUI.Init(clue, ChatRunner);
             }
         }
-
-        gameObject.SetActive(true);
     }
 
-    public override void Close () {
-        ClearButtons();
-        gameObject.SetActive(false);
-    }
-
+    // ------------------------------------------------------------------------
     private void ClearButtons() {
         foreach(Transform t in ClueListParent.transform) {
             Destroy(t.gameObject);
