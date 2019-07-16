@@ -4,15 +4,22 @@ using UnityEngine.UI;
 
 public class NotesApp : App
 {
-    // game
+    // ------------------------------------------------------------------------
+    // Variables
+    // ------------------------------------------------------------------------
     public Transform NotesParent;
     public GameObject NotePrefab;
+    public FullscreenImage FullscreenImage;
 
+    // ------------------------------------------------------------------------
+    // Methods
+    // ------------------------------------------------------------------------
     public override void Open() {
         base.Open();
         PopulateNotes(); 
     }
 
+    // ------------------------------------------------------------------------
     public override void HandleSlideAnimationFinished () {
         if(m_waitingForClose) {
             foreach(Transform child in NotesParent.transform) {
@@ -22,6 +29,12 @@ public class NotesApp : App
         base.HandleSlideAnimationFinished();
     }
 
+    // ------------------------------------------------------------------------
+    public void OpenImageClue (Sprite sprite) {
+        FullscreenImage.Open(sprite);
+    }
+
+    // ------------------------------------------------------------------------
     private void PopulateNotes () {
         foreach(Clue clue in PhoneOS.UnlockedClues) {
             if(clue.ClueID == ClueID.NoClue || clue.PhoneNumberGiven != Friend.NoFriend) {
@@ -31,7 +44,13 @@ public class NotesApp : App
             GameObject noteObj = Instantiate(NotePrefab, NotesParent);
             NoteUI noteUI = noteObj.GetComponent<NoteUI>();
             if(noteUI) {
-                noteUI.Text.text = clue.Note;
+                Photo photo = PhoneOS.GetPhoto(clue.ClueID);
+                if(photo != null) {
+                    Sprite sprite = PhoneOS.GetPhotoSprite(photo.Image);
+                    noteUI.SetContent(this, clue.Note, sprite);
+                } else {
+                    noteUI.SetContent(this, clue.Note);
+                }
             }
         }
     }

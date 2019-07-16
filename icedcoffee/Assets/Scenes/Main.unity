@@ -9021,8 +9021,9 @@ MonoBehaviour:
   DoSlideAnimation: 1
   SlideAnimator: {fileID: 1140524369}
   NotesParent: {fileID: 1005539735}
-  NotePrefab: {fileID: 6879748729205006902, guid: 73c6ec9a89b42e148a09cbf936b1f5e9,
+  NotePrefab: {fileID: 9131741055579379996, guid: 73c6ec9a89b42e148a09cbf936b1f5e9,
     type: 3}
+  FullscreenImage: {fileID: 188769668}
 --- !u!114 &1140524369
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11292,7 +11293,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.27613023}
-  m_AnchoredPosition: {x: 0.0006713867, y: -2.6852493}
+  m_AnchoredPosition: {x: 0.0006713867, y: -2.685257}
   m_SizeDelta: {x: 568, y: 41.97178}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1503581565
