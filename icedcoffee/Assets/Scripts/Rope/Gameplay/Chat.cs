@@ -43,6 +43,10 @@ public class Message {
     private PhotoID m_image;
     public PhotoID Image {get{return m_image;}}
 
+    // whether or not we've read this message
+    private bool m_read;
+    public bool Read {get{return m_read;}}
+
     // ------------------------------------------------------------------------
     // Methods
     // ------------------------------------------------------------------------
@@ -55,7 +59,8 @@ public class Message {
         m_branch = serializedMessage.branch;
         m_image = serializedMessage.image;
         m_clueTrigger = serializedMessage.clueTrigger;
-
+        
+        m_read = false;
         OptionSelection = -1;
     }
 
@@ -69,17 +74,22 @@ public class Message {
     public bool HasOptions () {
         return m_options != null && m_options.Length > 0;
     }
+
+    // ------------------------------------------------------------------------
+    public void Visit () {
+        m_read = true;
+    }
 }
 
 public class Chat {
     // ------------------------------------------------------------------------
     // Public Variables
     // ------------------------------------------------------------------------
-    // whether or not the convo is finished
-    public bool finished;
-
     // all of the clues we've presented so far
     public List<ClueID> presentedClues;
+
+    // whether or not our current message has a next message
+    public bool reachedLeafNode;
 
     // ------------------------------------------------------------------------
     // Properties
@@ -109,6 +119,15 @@ public class Chat {
     // the index (in 'visitedMessages') of the last node read
     private int m_lastVisitedMessage = 0;
     public int LastVisitedMessage {get{return m_lastVisitedMessage;}}
+
+    // whether or not the player has read the most recent message
+    public bool ReadLastMessage {
+        get {
+            Message lastMessage = m_visitedMessages[m_lastVisitedMessage];
+            if(lastMessage == null) return false;
+            return lastMessage.Read;
+        }
+    }
 
     // ------------------------------------------------------------------------
     // Methods
@@ -140,6 +159,9 @@ public class Chat {
         if(m_visitedMessages == null || m == null) {
             return;
         }
+
+        // let the message know we read it
+        m.Visit();
         
         // if we're looping back to a multiple-answer question,
         // don't add it again

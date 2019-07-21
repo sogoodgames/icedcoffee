@@ -20,9 +20,6 @@ public class ChatRunner : MonoBehaviour
     public event ClueOptionDelegate VisitedClueOption;
     
     // events for gameplay
-    public delegate void FinishedChatDelegate(Chat chat);
-    public event FinishedChatDelegate FinishedChat;
-
     public delegate void FoundClueDelegate(ClueID clueID);
     public event FoundClueDelegate FoundClue;
 
@@ -95,7 +92,7 @@ public class ChatRunner : MonoBehaviour
             return;
         }
 
-        if(m_activeChat.finished) {
+        if(m_activeChat.reachedLeafNode) {
             return;
         }
 
@@ -120,7 +117,7 @@ public class ChatRunner : MonoBehaviour
         if(nextMessage == null){
             // if this is a leaf node, send leaf node event
             // don't run more messages
-            ReachedLeafNode();
+            MarkReachedLeafNode();
             return;
         }
         // if we found a next message, run it
@@ -201,7 +198,7 @@ public class ChatRunner : MonoBehaviour
 
         // if we've answered this question multiple times, mark this convo done
         if(m_activeChat.VisitedMessages.FindAll(m => m.Node == message.Node).Count > 1) {
-            MarkConversationComplete();
+            MarkReachedLeafNode();
             return;
         }
 
@@ -269,9 +266,8 @@ public class ChatRunner : MonoBehaviour
     }
 
     // ------------------------------------------------------------------------
-    private void MarkConversationComplete () {
-        //Debug.Log("Reached end of convo at node " + m_activeChat.GetLastVisitedMessage().Node);
-        m_activeChat.finished = true;
-        FinishedChat(m_activeChat);
+    private void MarkReachedLeafNode () {
+        ReachedLeafNode();
+        m_activeChat.reachedLeafNode = true;
     }
 }
