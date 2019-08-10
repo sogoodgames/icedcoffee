@@ -3,6 +3,7 @@
 [Serializable]
 public class ForumPostSerializable {
     public string username; // poster username
+    public Friend userID;
     public string title; // post title
     public ClueID clueGiven; // the clue given (if any)
     public ClueID clueNeeded;

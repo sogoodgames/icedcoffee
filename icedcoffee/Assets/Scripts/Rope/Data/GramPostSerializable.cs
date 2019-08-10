@@ -3,19 +3,19 @@ using System;   // serializable
 [Serializable] 
 public class GramUserSerializable {
     public string username;
-    public GramUserId userId;
+    public Friend userId;
     public int icon;
 }
 
 [Serializable]
 public class GramCommentSerializable {
-    public GramUserId userId;
+    public Friend userId;
     public string comment;
 }
 
 [Serializable]
 public class GramPostSerializable {
-    public GramUserId userId;
+    public Friend userId;
     public ClueID clueGiven;
     public ClueID clueNeeded;
     public string description;

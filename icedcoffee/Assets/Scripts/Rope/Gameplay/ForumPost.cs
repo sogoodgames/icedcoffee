@@ -8,6 +8,9 @@ public class ForumPost
     private string m_username; // poster username
     public string Username {get{return m_username;}}
 
+    private Friend m_userID; // associated friend
+    public Friend UserID {get{return m_userID;}}
+
     private string m_title; // post title
     public string Title {get{return m_title;}}
 
@@ -45,6 +48,7 @@ public class ForumPost
         m_time = post.time;
         m_icon = post.icon;
         m_photo = post.photo;
+        m_userID = post.userID;
     }
 
     // ------------------------------------------------------------------------

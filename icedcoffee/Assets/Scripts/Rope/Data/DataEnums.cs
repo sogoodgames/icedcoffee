@@ -1,19 +1,9 @@
 public enum Friend {
     NoFriend = 0,
-    June = 1,
-    Wenley = 2,
-    Lucien = 3
-}
-
-public enum GramUserId {
-    You = 0,
-    June = 1
-}
-
-public enum MusicUserId {
-    You = 0,
-    June = 1,
-    Lucien = 2
+    You = 1,
+    June = 2,
+    Wenley = 3,
+    Lucien = 4
 }
 
 public enum ClueID {

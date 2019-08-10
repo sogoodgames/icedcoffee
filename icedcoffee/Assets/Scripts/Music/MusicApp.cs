@@ -29,11 +29,11 @@ public class MusicApp : App {
     // ------------------------------------------------------------------------
     public void OpenPlayerPlaylist () {
         FriendListUI.Close();
-        PlaylistUI.Open(MusicUserId.You);
+        PlaylistUI.Open(Friend.You);
     }
 
     // ------------------------------------------------------------------------
-    public void OpenPlaylist (MusicUserId id) {
+    public void OpenPlaylist (Friend id) {
         FriendListUI.Close();
         PlaylistUI.Open(id);
     }

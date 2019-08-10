@@ -9,8 +9,8 @@ public class GramUser {
         get{return m_username;}
     }
 
-    private GramUserId m_userId;
-    public GramUserId UserId {
+    private Friend m_userId;
+    public Friend UserId {
         get{return m_userId;}
     }
 
@@ -33,8 +33,8 @@ public class GramComment {
     // ------------------------------------------------------------------------
     // Properties
     // ------------------------------------------------------------------------
-    private GramUserId m_userId;
-    public GramUserId UserId {
+    private Friend m_userId;
+    public Friend UserId {
         get{return m_userId;}
     }
 
@@ -56,8 +56,8 @@ public class GramPost {
     // ------------------------------------------------------------------------
     // Properties
     // ------------------------------------------------------------------------
-    private GramUserId m_userId;
-    public GramUserId UserId {
+    private Friend m_userId;
+    public Friend UserId {
         get{return m_userId;}
     }
 

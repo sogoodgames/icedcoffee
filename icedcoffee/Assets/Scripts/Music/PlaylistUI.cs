@@ -15,7 +15,7 @@ public class PlaylistUI : MonoBehaviour
     // ------------------------------------------------------------------------
     // Methods
     // ------------------------------------------------------------------------
-    public void Open (MusicUserId id) {
+    public void Open (Friend id) {
         MusicUser user = PhoneOS.GetMusicUser(id);
 
         // set UI text for username, playlist name

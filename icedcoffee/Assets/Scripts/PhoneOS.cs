@@ -245,13 +245,13 @@ public class PhoneOS : MonoBehaviour
     }
 
     // ------------------------------------------------------------------------
-    public GramUser GetGramUser (GramUserId id) {
+    public GramUser GetGramUser (Friend id) {
         return m_gramUsers.FirstOrDefault(u => u.UserId == id);
     }
 
     // ------------------------------------------------------------------------
-    public MusicUser GetMusicUser (MusicUserId id) {
-        return m_allMusicUsers.FirstOrDefault(u => u.UserID == id);
+    public MusicUser GetMusicUser (Friend id) {
+        return m_allMusicUsers.FirstOrDefault(u => u.FriendID == id);
     }
 
     // ------------------------------------------------------------------------

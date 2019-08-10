@@ -23,7 +23,7 @@ public class FriendListUI : MonoBehaviour
             );
 
             FriendUI friendUI = userObj.GetComponent<FriendUI>();
-            friendUI.SetFriendContent(user.Username, user.UserID, MusicApp);
+            friendUI.SetFriendContent(user.Username, user.FriendID, MusicApp);
         }
 
         gameObject.SetActive(true);

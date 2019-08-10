@@ -54,11 +54,6 @@ public class MusicUser {
         get {return m_numFollowers;}
     }
 
-    private MusicUserId m_userID;
-    public MusicUserId UserID {
-        get {return m_userID;}
-    }
-
     private Friend m_friendID;
     public Friend FriendID {
         get {return m_friendID;}
@@ -86,7 +81,6 @@ public class MusicUser {
         m_isPlayer = user.isPlayer;
         m_username = user.username;
         m_playlistName = user.playlistName;
-        m_userID = user.userID;
         m_friendID = user.friendID;
         m_numFollowers = user.numFollowers;
         m_clueGiven = user.clueGiven;

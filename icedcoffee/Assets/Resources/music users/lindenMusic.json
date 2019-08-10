@@ -3,8 +3,7 @@
     "username" : "You",
     "playlistName" : "My Music",
     "numFollowers" : 2,
-    "userID" : "0",
-    "friendID" : "0",
+    "friendID" : "1",
     "clueNeeded" : "0",
     "clueGiven" : "0",
     "playlist" : [
