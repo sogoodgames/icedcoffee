@@ -48,6 +48,7 @@ public class ChatApp : App
         base.Awake();
         ChatRunner.VisitedMessage += DrawChatBubble;
         ChatRunner.VisitedOption += DrawChatOptionBubble;
+        ChatRunner.FinishedChat += HandleFinishedChat;
         ChatRunner.SelectedOption += HandleSelectedOption;
         ChatRunner.ReachedLeafNode += HandleReachedLeafNode;
         ChatRunner.VisitedClueOption += HandleSelectedClueOption;
@@ -124,7 +125,7 @@ public class ChatApp : App
                 chatButton.ProfilePic.sprite = PhoneOS.GetIcon(chat.Icon);
 
                 // show unread notif (if unfinished)
-                if(chat.ReadLastMessage) {
+                if(chat.finished) {
                     chatButton.UnreadNotif.SetActive(false);
                 } else {
                     chatButton.UnreadNotif.SetActive(true);
@@ -270,6 +271,13 @@ public class ChatApp : App
         // show clue selection button
         EnterMessageButtons.Open();
         CloseOtherChatSelectionUI(EnterMessageButtons, true);
+    }
+
+    // ------------------------------------------------------------------------
+    private void HandleFinishedChat (Chat chat) {
+        // TODO : not really sure what this means anymore
+        // considering all leaf nodes now trigger showing the clue options
+        // maybe this is when we run out of clues?
     }
 
     // ------------------------------------------------------------------------
