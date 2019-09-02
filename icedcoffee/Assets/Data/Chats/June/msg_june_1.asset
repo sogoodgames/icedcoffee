@@ -16,9 +16,9 @@ MonoBehaviour:
   Player: 1
   ClueGiven: 0
   ClueTrigger: 0
-  Messages:
-  - test player replyyyy
+  Messages: []
   Image: 0
-  Options: []
+  Options:
+  - test player replyyyy
   Branch: 02000000
   OptionSelection: 0

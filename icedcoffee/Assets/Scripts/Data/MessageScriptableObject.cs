@@ -25,6 +25,11 @@ public class MessageScriptableObject : ScriptableObject
     // ------------------------------------------------------------------------
     // Methods
     // ------------------------------------------------------------------------
+    void OnEnable () {
+        OptionSelection = -1;
+    }
+
+    // ------------------------------------------------------------------------
     public bool MadeSelection () {
         if(!HasOptions()) return true;
         return OptionSelection >= 0;
