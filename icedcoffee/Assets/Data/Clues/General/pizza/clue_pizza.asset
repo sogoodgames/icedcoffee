@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea53281d498974d8d5cab0d762098d, type: 3}
   m_Name: clue_pizza
   m_EditorClassIdentifier: 
-  Unlocked: 0
+  InitialLockState: 1
   CanSend: 1
   ClueID: 4
   PhoneNumberGiven: 0
   Note: pinapple pizza
   Message: {fileID: 11400000, guid: d57d36b9b3ea254488e3237533e9b4d1, type: 2}
+  Unlocked: 0

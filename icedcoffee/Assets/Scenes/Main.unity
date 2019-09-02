@@ -2786,7 +2786,7 @@ MonoBehaviour:
   ImageListParent: {fileID: 457845466}
   ImageTilePrefab: {fileID: 4514202874041515351, guid: af66e9c01c1563f45989867840528d37,
     type: 3}
-  chatRunner: {fileID: 0}
+  chatRunner: {fileID: 348811503}
 --- !u!1 &307490578
 GameObject:
   m_ObjectHideFlags: 0
@@ -14470,7 +14470,7 @@ MonoBehaviour:
   ClueListParent: {fileID: 1358468954}
   ClueUIPrefab: {fileID: 2726926304248218990, guid: 87c4a28613149de4a903ff6aeb858ad2,
     type: 3}
-  ChatRunner: {fileID: 0}
+  ChatRunner: {fileID: 348811503}
 --- !u!1 &2127045474
 GameObject:
   m_ObjectHideFlags: 0

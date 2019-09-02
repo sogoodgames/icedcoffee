@@ -23,11 +23,21 @@ public class ChatScriptableObject : ScriptableObject
     public List<MessageScriptableObject> VisitedMessages {get{return m_visitedMessages;}}
 
     // the index (in 'visitedMessages') of the last node read
-    private int m_lastVisitedMessage = 0;
+    private int m_lastVisitedMessage;
     public int LastVisitedMessage {get{return m_lastVisitedMessage;}}
 
     // ------------------------------------------------------------------------
     // Methods
+    // ------------------------------------------------------------------------
+    void OnEnable () {
+        m_visitedMessages = new List<MessageScriptableObject>();
+        m_visitedMessages.Add(Messages[0]);
+
+        PresentedClues = new List<ClueID>();
+        Finished = false;
+        m_lastVisitedMessage = 0;
+    }
+
     // ------------------------------------------------------------------------
     public void VisitMessage (MessageScriptableObject m, bool force) {
         if(m_visitedMessages == null || m == null) {
