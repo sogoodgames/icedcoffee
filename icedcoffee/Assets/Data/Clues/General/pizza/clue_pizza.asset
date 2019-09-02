@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea53281d498974d8d5cab0d762098d, type: 3}
   m_Name: clue_pizza
   m_EditorClassIdentifier: 
-  Unlocked: 1
+  Unlocked: 0
   CanSend: 1
   ClueID: 4
   PhoneNumberGiven: 0

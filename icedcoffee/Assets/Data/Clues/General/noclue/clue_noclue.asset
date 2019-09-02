@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea53281d498974d8d5cab0d762098d, type: 3}
   m_Name: clue_noclue
   m_EditorClassIdentifier: 
-  Unlocked: 1
+  InitialLockState: 1
   CanSend: 0
   ClueID: 0
   PhoneNumberGiven: 0
   Note: default unlocked clue
   Message: {fileID: 0}
+  Unlocked: 1
