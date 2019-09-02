@@ -239,8 +239,8 @@ public class PhoneOS : MonoBehaviour
     }
 
     // ------------------------------------------------------------------------
-    public ForumPostScriptableObject GetForumUser (Friend id) {
-        return GameData.ForumPosts.FirstOrDefault(u => u.UserID == id);
+    public ForumUserScriptableObject GetForumUser (Friend id) {
+        return GameData.ForumUsers.FirstOrDefault(u => u.UserID == id);
     }
 
     // ------------------------------------------------------------------------

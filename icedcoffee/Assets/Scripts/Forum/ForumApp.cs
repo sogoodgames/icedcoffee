@@ -19,9 +19,11 @@ public class ForumApp : App
 
             ForumPostUI postUI = postObj.GetComponent<ForumPostUI>();
             if(postUI) {
+                ForumUserScriptableObject user = PhoneOS.GetForumUser(post.UserID);
+
                 // set all basic info
                 postUI.TitleText.text = post.Title;
-                postUI.UsernameText.text = "u/" + post.Username;
+                postUI.UsernameText.text = "u/" + user.Username;
                 postUI.MetaInfoText.text = post.NumComments
                                         + " comments / posted "
                                         + post.Time
@@ -29,7 +31,7 @@ public class ForumApp : App
                 postUI.BodyText.text = post.Body;
 
                 // load profile icon
-                Sprite icon = post.Icon;
+                Sprite icon = user.Icon;
                 if(icon) {
                     postUI.ProfileImage.sprite = icon;
                 }

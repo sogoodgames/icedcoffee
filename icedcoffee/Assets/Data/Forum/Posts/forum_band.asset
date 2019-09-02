@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3806dea1cbd2e8d418bac4ee55d4cda7, type: 3}
   m_Name: forum_band
   m_EditorClassIdentifier: 
-  Username: tegansara94
   UserID: 4
   Title: Black Coffee show @ the Varsity Theater on Friday night!!
   ClueGiven: 1
@@ -21,5 +20,4 @@ MonoBehaviour:
     celebrating the first offical album release. make sure to buy some merch!!! ;3
   NumComments: 4
   Time: 10
-  Icon: {fileID: 21300000, guid: 1c61194648926da498b98f0904f60664, type: 3}
   Photo: 0

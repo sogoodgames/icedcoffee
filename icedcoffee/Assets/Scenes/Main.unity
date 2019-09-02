@@ -13203,6 +13203,9 @@ MonoBehaviour:
   _forumPosts:
   - {fileID: 11400000, guid: 3baedd2290451564f8c3047289723d49, type: 2}
   - {fileID: 11400000, guid: 52bfe28d11706914686103a511ae75a6, type: 2}
+  _forumUsers:
+  - {fileID: 11400000, guid: 3689d5600cda3294092b3c8bcd5f9a78, type: 2}
+  - {fileID: 11400000, guid: 982e70f47ee922c41863aaddf463e2db, type: 2}
   _clues:
   - {fileID: 11400000, guid: f4487e5547ef86f4d97e63e2b26e1393, type: 2}
   - {fileID: 11400000, guid: 10a270613bf7779409b057512cb93a57, type: 2}

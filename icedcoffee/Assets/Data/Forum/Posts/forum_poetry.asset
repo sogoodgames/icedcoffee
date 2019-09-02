@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3806dea1cbd2e8d418bac4ee55d4cda7, type: 3}
   m_Name: forum_poetry
   m_EditorClassIdentifier: 
-  Username: artistTM
   UserID: 3
   Title: poetry nite @ highland coffees~
   ClueGiven: 2
@@ -20,5 +19,4 @@ MonoBehaviour:
   Body: somethigh something wenely poetry blah
   NumComments: 1
   Time: 15
-  Icon: {fileID: 21300000, guid: 1c61194648926da498b98f0904f60664, type: 3}
   Photo: 0

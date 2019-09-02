@@ -17,6 +17,8 @@ public class GameData : MonoBehaviour
     [SerializeField]
     private List<ForumPostScriptableObject> _forumPosts;
     [SerializeField]
+    private List<ForumUserScriptableObject> _forumUsers;
+    [SerializeField]
     private List<ClueScriptableObject> _clues;
     [SerializeField]
     private List<PhotoScriptableObject> _photos;
@@ -50,6 +52,10 @@ public class GameData : MonoBehaviour
         get{return _forumPosts;}
     }
 
+    public List<ForumUserScriptableObject> ForumUsers {
+        get{return _forumUsers;}
+    }
+
     public List<ClueScriptableObject> Clues {
         get{return _clues;}
     }
@@ -69,9 +75,4 @@ public class GameData : MonoBehaviour
     public List<Sprite> PhotoAssets {
         get{return _photoAssets;}
     }
-
-    // ------------------------------------------------------------------------
-    // Methods
-    // ------------------------------------------------------------------------
-
 }
