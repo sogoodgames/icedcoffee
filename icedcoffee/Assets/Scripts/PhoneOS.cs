@@ -207,11 +207,6 @@ public class PhoneOS : MonoBehaviour
     // ------------------------------------------------------------------------
     // Methods: Data
     // ------------------------------------------------------------------------
-    public Sprite GetPhotoSprite (int index) {
-        return GameData.PhotoAssets[index];
-    }
-    
-    // ------------------------------------------------------------------------
     public PhotoScriptableObject GetPhoto (PhotoID id) {
         return GameData.Photos.FirstOrDefault(p => p.PhotoID == id);
     }
@@ -229,11 +224,6 @@ public class PhoneOS : MonoBehaviour
     // ------------------------------------------------------------------------
     public MusicUserScriptableObject GetMusicUser (Friend id) {
         return GameData.MusicUsers.FirstOrDefault(u => u.FriendID == id);
-    }
-
-    // ------------------------------------------------------------------------
-    public Sprite GetIcon (int index) {
-        return GameData.UserIconAssets[index];
     }
 
     // ------------------------------------------------------------------------

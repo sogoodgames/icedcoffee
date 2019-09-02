@@ -46,7 +46,7 @@ public class NotesApp : App
             if(noteUI) {
                 PhotoScriptableObject photo = PhoneOS.GetPhoto(clue.ClueID);
                 if(photo != null) {
-                    Sprite sprite = PhoneOS.GetPhotoSprite(photo.Image);
+                    Sprite sprite = photo.Image;
                     noteUI.SetContent(this, clue.Note, sprite);
                 } else {
                     noteUI.SetContent(this, clue.Note);

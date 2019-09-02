@@ -28,11 +28,11 @@ public class GramPostUI : MonoBehaviour
         if(postPhoto == null) return;
 
         // set post photo content
-        Sprite postSprite = os.GetPhotoSprite(postPhoto.Image);
+        Sprite postSprite = postPhoto.Image;
         PostImage.sprite = postSprite;
 
         // set user icons
-        Sprite userIcon = os.GetIcon(user.Icon);
+        Sprite userIcon = user.Icon;
         TitleProfileImage.sprite = userIcon;
 
         // set text

@@ -23,7 +23,7 @@ public class ImageSelectionUI : ChatSelectionUI
                 imageButtonUI.Init(
                     PhoneOS.GetClue(clue),
                     chatRunner,
-                    PhoneOS.GetIcon(photo.Image)
+                    photo.Image
                 );
             }
         }

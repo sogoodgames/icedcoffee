@@ -14,7 +14,7 @@ public class ForumPostScriptableObject : ScriptableObject
     public string Body; // text in the post
     public int NumComments; // number of comments
     public int Time; // minutes ago it was posted
-    public int Icon; // icon file
+    public Sprite Icon; // icon file
     public PhotoID Photo; // post image file (optional)
 
     // ------------------------------------------------------------------------

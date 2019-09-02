@@ -8,7 +8,7 @@ public class PhotoScriptableObject : ScriptableObject
     // ------------------------------------------------------------------------
     public PhotoID PhotoID;
     public ClueID ClueID;
-    public int Image;
+    public Sprite Image;
     public float Width;
     public float Height;
     public string Description;

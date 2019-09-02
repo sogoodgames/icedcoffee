@@ -21,7 +21,7 @@ public class PhotoApp : App
             PhotoTile photoTile = photoObj.GetComponent<PhotoTile>();
             if(photoTile) {
                 //Debug.Log("adding photo: " + photo.Description);
-                Sprite img = PhoneOS.GetPhotoSprite(photo.Image);
+                Sprite img = photo.Image;
                 photoTile.Image.sprite = null;
                 photoTile.Image.preserveAspect = false;
                 photoTile.Image.sprite = img;

@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GramUserScriptableObject
   Username: lindont
   UserId: 1
-  Icon: 0
+  Icon: {fileID: 21300000, guid: a4c4f3c007766034d8f9df5496542f38, type: 3}

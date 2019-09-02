@@ -8,10 +8,9 @@ public class ChatScriptableObject : ScriptableObject
     // Variables
     // ------------------------------------------------------------------------
     public Friend Friend; // the person you're talking to
-    public int Icon; // icon file
+    public Sprite Icon; // icon file
     public ClueID ClueNeeded; // the clue needed to unlock the chat
     public MessageScriptableObject[] Messages; // all of the messages
-
     
     [HideInInspector]
     public bool Finished; // whether or not the convo is finished

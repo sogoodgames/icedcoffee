@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: chat_wenley
   m_EditorClassIdentifier: 
   Friend: 3
-  Icon: 16
+  Icon: {fileID: 21300000, guid: 8998f468b02536b439e67d3a314de493, type: 3}
   ClueNeeded: 3
   Messages:
   - {fileID: 11400000, guid: 113eee48d10ecad40a105f3c7dfd7785, type: 2}

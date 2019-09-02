@@ -20,5 +20,5 @@ MonoBehaviour:
   Body: somethigh something wenely poetry blah
   NumComments: 1
   Time: 15
-  Icon: 13
+  Icon: {fileID: 21300000, guid: 1c61194648926da498b98f0904f60664, type: 3}
   Photo: 0

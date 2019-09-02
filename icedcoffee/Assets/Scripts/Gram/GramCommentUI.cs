@@ -11,7 +11,7 @@ public class GramCommentUI : MonoBehaviour
         GramUserScriptableObject user = os.GetGramUser(comment.UserId);
         if(user == null) return;
 
-        UserIcon.sprite = os.GetIcon(user.Icon);
+        UserIcon.sprite = user.Icon;
         UsernameText.text = user.Username;
         CommentText.text = comment.Comment;
     }

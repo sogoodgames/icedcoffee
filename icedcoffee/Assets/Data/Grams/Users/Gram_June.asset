@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GramUserScriptableObject
   Username: juniper
   UserId: 2
-  Icon: 1
+  Icon: {fileID: 21300000, guid: ce8e15ba658cd7d48a295ae089e23cdd, type: 3}

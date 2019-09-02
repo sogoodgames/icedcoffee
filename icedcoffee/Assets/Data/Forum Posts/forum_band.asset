@@ -21,5 +21,5 @@ MonoBehaviour:
     celebrating the first offical album release. make sure to buy some merch!!! ;3
   NumComments: 4
   Time: 10
-  Icon: 13
+  Icon: {fileID: 21300000, guid: 1c61194648926da498b98f0904f60664, type: 3}
   Photo: 0

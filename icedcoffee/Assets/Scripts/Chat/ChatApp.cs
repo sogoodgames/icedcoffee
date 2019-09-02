@@ -8,7 +8,7 @@ public class ChatApp : App
     // ------------------------------------------------------------------------
     // Variables
     // ------------------------------------------------------------------------
-    public int PlayerChatIconIndex = 0;
+    public Sprite PlayerChatIcon;
     public ChatRunner ChatRunner;
     public GameObject ChatSelectionScreen;
     public GameObject ChatScreen;
@@ -122,7 +122,7 @@ public class ChatApp : App
                 chatButton.NameText.text = chat.Friend.ToString();
 
                 // set profile pic
-                chatButton.ProfilePic.sprite = PhoneOS.GetIcon(chat.Icon);
+                chatButton.ProfilePic.sprite = chat.Icon;
 
                 // show unread notif (if unfinished)
                 if(chat.Finished) {
@@ -189,7 +189,7 @@ public class ChatApp : App
     // ------------------------------------------------------------------------
     public void OpenAttachment (PhotoID photoID) {
         PhotoScriptableObject photo = PhoneOS.GetPhoto(photoID);
-        FullscreenImage.Open(PhoneOS.GetPhotoSprite(photo.Image));
+        FullscreenImage.Open(photo.Image);
     }
 
     // ------------------------------------------------------------------------
@@ -207,9 +207,9 @@ public class ChatApp : App
         // determine text and icon
         string text = message.Messages[messageIndex];
 
-        Sprite sprite = PhoneOS.GetIcon(PlayerChatIconIndex);
+        Sprite sprite = PlayerChatIcon;
         if(!message.Player) {
-            sprite = PhoneOS.GetIcon(m_activeChat.Icon);
+            sprite = m_activeChat.Icon;
         }
 
         // draw bubble 

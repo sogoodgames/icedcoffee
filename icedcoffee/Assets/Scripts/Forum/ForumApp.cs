@@ -29,7 +29,7 @@ public class ForumApp : App
                 postUI.BodyText.text = post.Body;
 
                 // load profile icon
-                Sprite icon = PhoneOS.GetIcon(post.Icon);
+                Sprite icon = post.Icon;
                 if(icon) {
                     postUI.ProfileImage.sprite = icon;
                 }

@@ -8,5 +8,5 @@ public class GramUserScriptableObject : ScriptableObject
     // ------------------------------------------------------------------------
     public string Username;
     public Friend UserId;
-    public int Icon;
+    public Sprite Icon;
 }
