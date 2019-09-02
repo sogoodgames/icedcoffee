@@ -17,9 +17,9 @@ public class ClueSelectionUI : ChatSelectionUI
     // Methods
     // ------------------------------------------------------------------------
     public override void Open (ChatScriptableObject chat) {
-        CreateButtons(PhoneOS.UnlockedClues);
         gameObject.SetActive(true);
         this.chat = chat;
+        CreateButtons(PhoneOS.UnlockedClues);
     }
 
     // ------------------------------------------------------------------------
