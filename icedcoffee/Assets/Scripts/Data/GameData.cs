@@ -21,6 +21,8 @@ public class GameData : MonoBehaviour
     [SerializeField]
     private List<PhotoScriptableObject> _photos;
     [SerializeField]
+    private List<FriendScriptableObject> _friends;
+    [SerializeField]
     private List<Sprite> _userIconAssets;
     [SerializeField]
     private List<Sprite> _photoAssets;
@@ -54,6 +56,10 @@ public class GameData : MonoBehaviour
 
     public List<PhotoScriptableObject> Photos {
         get{return _photos;}
+    }
+
+    public List<FriendScriptableObject> Friends {
+        get{return _friends;}
     }
 
     public List<Sprite> UserIconAssets {

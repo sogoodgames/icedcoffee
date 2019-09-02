@@ -30,6 +30,18 @@ public class PhoneOS : MonoBehaviour
     // ------------------------------------------------------------------------
     // Properties
     // ------------------------------------------------------------------------
+    public List<FriendScriptableObject> ActiveFriends {
+        get {
+            List<FriendScriptableObject> activeFriends = new List<FriendScriptableObject>();
+            foreach(FriendScriptableObject f in GameData.Friends) {
+                if(ClueRequirementMet(f.ContactClue)) {
+                    activeFriends.Add(f);
+                }
+            }
+            return activeFriends;
+        }
+    }
+
     public List<ChatScriptableObject> ActiveChats {
         get {
             // only add chats that are available
@@ -224,6 +236,11 @@ public class PhoneOS : MonoBehaviour
     // ------------------------------------------------------------------------
     public MusicUserScriptableObject GetMusicUser (Friend id) {
         return GameData.MusicUsers.FirstOrDefault(u => u.FriendID == id);
+    }
+
+    // ------------------------------------------------------------------------
+    public ForumPostScriptableObject GetForumUser (Friend id) {
+        return GameData.ForumPosts.FirstOrDefault(u => u.UserID == id);
     }
 
     // ------------------------------------------------------------------------

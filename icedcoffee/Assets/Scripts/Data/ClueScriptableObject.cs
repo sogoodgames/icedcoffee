@@ -13,6 +13,7 @@ public class ClueScriptableObject : ScriptableObject
     public string Note;
     public MessageScriptableObject Message;
 
+    [HideInInspector]
     public bool Unlocked;
 
     // ------------------------------------------------------------------------

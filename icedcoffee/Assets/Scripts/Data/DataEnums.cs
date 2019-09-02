@@ -11,7 +11,8 @@ public enum ClueID {
     Band = 1,
     Poetry = 2,
     WenleyNumber = 3,
-    Pizza = 4
+    Pizza = 4,
+    LucienNumber = 5
 }
 
 public enum PhotoID {
