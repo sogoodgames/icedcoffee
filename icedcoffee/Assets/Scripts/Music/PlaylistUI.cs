@@ -16,7 +16,7 @@ public class PlaylistUI : MonoBehaviour
     // Methods
     // ------------------------------------------------------------------------
     public void Open (Friend id) {
-        MusicUser user = PhoneOS.GetMusicUser(id);
+        MusicUserScriptableObject user = PhoneOS.GetMusicUser(id);
 
         // set UI text for username, playlist name
         UsernameTitleText.text = "by " + user.Username + " // " + user.NumFollowers + " followers";
@@ -24,7 +24,7 @@ public class PlaylistUI : MonoBehaviour
 
         // populate list of songs
         ClearSongList();
-        foreach(Song song in user.Playlist) {
+        foreach(SongScriptableObject song in user.Playlist) {
             GameObject songObj = Instantiate (
                 SongPrefab,
                 PlaylistParent

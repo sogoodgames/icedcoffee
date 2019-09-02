@@ -30,7 +30,7 @@ public class GramApp : App
 
     // ------------------------------------------------------------------------
     private void PopulatePosts () {
-        foreach(GramPost post in PhoneOS.ActiveGramPosts) {
+        foreach(GramPostScriptableObject post in PhoneOS.ActiveGramPosts) {
             GameObject postObj = Instantiate(
                 GramPostPrefab,
                 GramPostParent

@@ -84,7 +84,7 @@ public class NotificationManager : MonoBehaviour
     }
 
     public void FoundClueNotif (ClueID id) {
-        Clue clue = PhoneOS.GetClue(id);
+        ClueScriptableObject clue = PhoneOS.GetClue(id);
         QueueNotif(NotesApp.Icon, clue.Note, NotesApp);
     }
 
@@ -92,7 +92,7 @@ public class NotificationManager : MonoBehaviour
         QueueNotif(ChatApp.Icon, NewContactNotifText + friend.ToString(), ChatApp, true);
     }
 
-    public void ForumPostNotif (ForumPost post) {
+    public void ForumPostNotif (ForumPostScriptableObject post) {
         QueueNotif(ForumApp.Icon, "New Ruddit post!",  ForumApp);
     }
 

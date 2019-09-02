@@ -20,9 +20,9 @@ public class ForumPostUI : MonoBehaviour
         LayoutRebuilder.ForceRebuildLayoutImmediate(PostContent.GetComponent<RectTransform>());
     }
 
-    public void SetPhotoContent (ForumPost post, PhoneOS os) {
+    public void SetPhotoContent (ForumPostScriptableObject post, PhoneOS os) {
         if(post.Photo != PhotoID.NoPhoto) {
-            Photo photo = os.GetPhoto(post.Photo);
+            PhotoScriptableObject photo = os.GetPhoto(post.Photo);
             Sprite img = os.GetPhotoSprite(photo.Image);
             if(img) {
                 ContentImage.sprite = img;

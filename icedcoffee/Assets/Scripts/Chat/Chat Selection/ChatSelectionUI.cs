@@ -10,7 +10,7 @@ public class ChatSelectionUI : MonoBehaviour
         gameObject.SetActive(true);
     }
 
-    public virtual void Open (Chat chat) {
+    public virtual void Open (ChatScriptableObject chat) {
         gameObject.SetActive(true);
     }
 

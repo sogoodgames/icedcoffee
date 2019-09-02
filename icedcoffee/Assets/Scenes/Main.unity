@@ -1361,92 +1361,6 @@ MonoBehaviour:
   AppAnimationSpeed: 4000
   AppAnimationTime: 0.1
   AppStartX: 1080
---- !u!1 &125500409
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 125500411}
-  - component: {fileID: 125500410}
-  m_Layer: 0
-  m_Name: GameData
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &125500410
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 125500409}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 396150fbf2215d44482fb8b2e1ba0bde, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ChatTextAssets:
-  - {fileID: 4900000, guid: 163ee71efadbd8845bedde93d0429a39, type: 3}
-  - {fileID: 4900000, guid: 6b8b7cd6e3b0eca46b68ab26a9c40790, type: 3}
-  ForumPostTextAssets:
-  - {fileID: 4900000, guid: eea0704e44fc3684d903ccb340a05d25, type: 3}
-  - {fileID: 4900000, guid: 0768656ae7a16f043a4bd4873aba7ee4, type: 3}
-  GramPostTextAssets:
-  - {fileID: 4900000, guid: 186efa8a7652ef74cb94130435658c75, type: 3}
-  GramUserTextAssets:
-  - {fileID: 4900000, guid: 67834c8957d998b499e4ba715590fb8f, type: 3}
-  - {fileID: 4900000, guid: fa0a5dc5edc5ed348aef04f498666f67, type: 3}
-  ClueTextAssets:
-  - {fileID: 4900000, guid: 878fa329d427a9f449006e5b8c38083a, type: 3}
-  - {fileID: 4900000, guid: 5b5955028f8ca9042ba12616f0f5c3d2, type: 3}
-  - {fileID: 4900000, guid: 63b0cb40965a121488314a412e14c26c, type: 3}
-  - {fileID: 4900000, guid: 9c567a2d9189ecb42a31c279d7e10ff5, type: 3}
-  - {fileID: 4900000, guid: 4eefd69c7675d1447b0ec186ae687759, type: 3}
-  PhotoTextAssets:
-  - {fileID: 4900000, guid: cd352e0d1043a144eb70d6ba193d3d37, type: 3}
-  MusicUserTextAssets:
-  - {fileID: 4900000, guid: fbfa63e6b4a85e54eb74663b9f6ed002, type: 3}
-  - {fileID: 4900000, guid: 3132d5c7a140d1141b8534159a3ad09a, type: 3}
-  - {fileID: 4900000, guid: 84f3ca9fd3df96e489322dc5d899d3dd, type: 3}
-  UserIconAssets:
-  - {fileID: 21300000, guid: 4bba63758f76d4c40a2fb53d21f796c0, type: 3}
-  - {fileID: 21300000, guid: 8998f468b02536b439e67d3a314de493, type: 3}
-  - {fileID: 21300000, guid: 75e370dd492991a47a222709dd2e14c7, type: 3}
-  - {fileID: 21300000, guid: 2edf400e5a059f64796a730a5c417943, type: 3}
-  - {fileID: 21300000, guid: 3776d19bc50ff384999bc104df9376b8, type: 3}
-  - {fileID: 21300000, guid: 077b5259edb269345aefcc659f5bd489, type: 3}
-  - {fileID: 21300000, guid: e994e4dd569daed48b360bd5f5a11e53, type: 3}
-  - {fileID: 21300000, guid: d71ce492947fca545ae8543c6b3caf67, type: 3}
-  - {fileID: 21300000, guid: f78bdb4f4d5304147a6e198d35d30bc5, type: 3}
-  - {fileID: 21300000, guid: a4c4f3c007766034d8f9df5496542f38, type: 3}
-  - {fileID: 21300000, guid: 5767a35e45483d844b575f6ae61dfee6, type: 3}
-  - {fileID: 21300000, guid: ac38b5f9a14e0154c95f7c13bbbf993f, type: 3}
-  - {fileID: 21300000, guid: 0cc5c9c37ab08af438c3d15f32f5fcc2, type: 3}
-  - {fileID: 21300000, guid: 1c61194648926da498b98f0904f60664, type: 3}
-  - {fileID: 21300000, guid: f1c4359ec85e55f469f867ae4fb971a9, type: 3}
-  - {fileID: 21300000, guid: 9eaafaa671a34f549b1acb29d6841a7b, type: 3}
-  - {fileID: 21300000, guid: ce8e15ba658cd7d48a295ae089e23cdd, type: 3}
-  PhotoAssets:
-  - {fileID: 21300000, guid: 7c92070c6a6095d4196fb1f966160c7b, type: 3}
---- !u!4 &125500411
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 125500409}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 129.0664, y: 302.56592, z: -3890.457}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &151192278
 GameObject:
   m_ObjectHideFlags: 0
@@ -2872,7 +2786,7 @@ MonoBehaviour:
   ImageListParent: {fileID: 457845466}
   ImageTilePrefab: {fileID: 4514202874041515351, guid: af66e9c01c1563f45989867840528d37,
     type: 3}
-  chatRunner: {fileID: 348811503}
+  chatRunner: {fileID: 0}
 --- !u!1 &307490578
 GameObject:
   m_ObjectHideFlags: 0
@@ -3104,10 +3018,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 348811502}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fae6d2613406714faa0f5b2e6536c7f, type: 3}
+  m_Script: {fileID: 11500000, guid: c97efd65a0b20aa42ad1c537853fcfd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxTimeBetweenMessages: 2
+  MaxTimeBetweenMessages: 1
 --- !u!4 &348811504
 Transform:
   m_ObjectHideFlags: 0
@@ -3120,7 +3034,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &349349686
 GameObject:
@@ -10373,7 +10287,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PhoneOS: {fileID: 1668743989}
-  ChatRunner: {fileID: 348811503}
+  ChatRunner: {fileID: 0}
   ClueInputField: {fileID: 727972818}
 --- !u!1 &1385425736
 GameObject:
@@ -11990,7 +11904,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.0025634766, y: -1.7939453}
+  m_AnchoredPosition: {x: 0.0025634766, y: -1.7938843}
   m_SizeDelta: {x: 0, y: 4.4000244}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1597993176
@@ -12326,6 +12240,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1668743990}
   - component: {fileID: 1668743989}
+  - component: {fileID: 1668743991}
   m_Layer: 0
   m_Name: PhoneOS
   m_TagString: Untagged
@@ -12346,7 +12261,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RunFTUE: 0
-  DataLoader: {fileID: 125500410}
+  GameData: {fileID: 1668743991}
   ChatRunner: {fileID: 348811503}
   NotificationManager: {fileID: 2127045480}
   NotesApp: {fileID: 1140524368}
@@ -12374,6 +12289,61 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1668743991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1668743988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d24bbd02065ff9b4d95f08ad24932f11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _musicUsers:
+  - {fileID: 11400000, guid: d87bee7b1ab458b4c8e5d2b1fe0cd08b, type: 2}
+  - {fileID: 11400000, guid: 133d59894bfa1d242bdae27312c52e09, type: 2}
+  - {fileID: 11400000, guid: ada92fa2da864e84f8f641c0144a5eec, type: 2}
+  _chats:
+  - {fileID: 11400000, guid: 640231a3d99db0a40951944af9a6ea51, type: 2}
+  - {fileID: 11400000, guid: ed4772ae3e6ed11429aa92254090d215, type: 2}
+  _gramPosts:
+  - {fileID: 11400000, guid: 9fd3b6772c38c8540a20ba298cfc1b4e, type: 2}
+  _gramUsers:
+  - {fileID: 11400000, guid: 337ebf9975d47d043b6e719e315c1361, type: 2}
+  - {fileID: 11400000, guid: bd3ea0661bbbe3d4894fb96191b01db8, type: 2}
+  _forumPosts:
+  - {fileID: 11400000, guid: 3baedd2290451564f8c3047289723d49, type: 2}
+  - {fileID: 11400000, guid: 52bfe28d11706914686103a511ae75a6, type: 2}
+  _clues:
+  - {fileID: 11400000, guid: f4487e5547ef86f4d97e63e2b26e1393, type: 2}
+  - {fileID: 11400000, guid: 10a270613bf7779409b057512cb93a57, type: 2}
+  - {fileID: 11400000, guid: d5d1004dc28b7f14085745bb79e300c4, type: 2}
+  - {fileID: 11400000, guid: 253e06e095c2c0f4cad06e83fa01cc6f, type: 2}
+  - {fileID: 11400000, guid: 50788892ccec0b645a054632186b6634, type: 2}
+  _photos:
+  - {fileID: 11400000, guid: 43b0afc5ff41ba1478f3902f5cd4f09c, type: 2}
+  _userIconAssets:
+  - {fileID: 21300000, guid: 4bba63758f76d4c40a2fb53d21f796c0, type: 3}
+  - {fileID: 21300000, guid: 8998f468b02536b439e67d3a314de493, type: 3}
+  - {fileID: 21300000, guid: 75e370dd492991a47a222709dd2e14c7, type: 3}
+  - {fileID: 21300000, guid: 2edf400e5a059f64796a730a5c417943, type: 3}
+  - {fileID: 21300000, guid: 3776d19bc50ff384999bc104df9376b8, type: 3}
+  - {fileID: 21300000, guid: 077b5259edb269345aefcc659f5bd489, type: 3}
+  - {fileID: 21300000, guid: e994e4dd569daed48b360bd5f5a11e53, type: 3}
+  - {fileID: 21300000, guid: d71ce492947fca545ae8543c6b3caf67, type: 3}
+  - {fileID: 21300000, guid: f78bdb4f4d5304147a6e198d35d30bc5, type: 3}
+  - {fileID: 21300000, guid: a4c4f3c007766034d8f9df5496542f38, type: 3}
+  - {fileID: 21300000, guid: 5767a35e45483d844b575f6ae61dfee6, type: 3}
+  - {fileID: 21300000, guid: ac38b5f9a14e0154c95f7c13bbbf993f, type: 3}
+  - {fileID: 21300000, guid: 0cc5c9c37ab08af438c3d15f32f5fcc2, type: 3}
+  - {fileID: 21300000, guid: 1c61194648926da498b98f0904f60664, type: 3}
+  - {fileID: 21300000, guid: f1c4359ec85e55f469f867ae4fb971a9, type: 3}
+  - {fileID: 21300000, guid: 9eaafaa671a34f549b1acb29d6841a7b, type: 3}
+  - {fileID: 21300000, guid: ce8e15ba658cd7d48a295ae089e23cdd, type: 3}
+  _photoAssets:
+  - {fileID: 21300000, guid: 7c92070c6a6095d4196fb1f966160c7b, type: 3}
 --- !u!1 &1682885489
 GameObject:
   m_ObjectHideFlags: 0
@@ -12818,7 +12788,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.0025634766, y: -1.5876465}
+  m_AnchoredPosition: {x: 0.0025634766, y: -1.5875854}
   m_SizeDelta: {x: 0, y: 4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1797890244
@@ -14500,7 +14470,7 @@ MonoBehaviour:
   ClueListParent: {fileID: 1358468954}
   ClueUIPrefab: {fileID: 2726926304248218990, guid: 87c4a28613149de4a903ff6aeb858ad2,
     type: 3}
-  ChatRunner: {fileID: 348811503}
+  ChatRunner: {fileID: 0}
 --- !u!1 &2127045474
 GameObject:
   m_ObjectHideFlags: 0

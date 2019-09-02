@@ -11,7 +11,7 @@ public class ForumApp : App
     public override void Open() {
         base.Open();
 
-        foreach(ForumPost post in PhoneOS.ActiveForumPosts) {
+        foreach(ForumPostScriptableObject post in PhoneOS.ActiveForumPosts) {
             GameObject postObj = Instantiate(
                 ForumPostPrefab,
                 ForumPostParent)

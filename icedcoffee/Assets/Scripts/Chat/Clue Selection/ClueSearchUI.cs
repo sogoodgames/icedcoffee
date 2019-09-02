@@ -34,8 +34,8 @@ public class ClueSearchUI : MonoBehaviour
         }
 
         // search clues by 'note' field for string match
-        List<Clue> clues = new List<Clue>();
-        foreach(Clue clue in ChatApp.PhoneOS.UnlockedClues) {
+        List<ClueScriptableObject> clues = new List<ClueScriptableObject>();
+        foreach(ClueScriptableObject clue in ChatApp.PhoneOS.UnlockedClues) {
             if(clue.Note.Contains(InputField.text)) {
                 clues.Add(clue);
             }

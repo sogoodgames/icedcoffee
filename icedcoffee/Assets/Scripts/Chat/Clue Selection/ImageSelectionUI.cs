@@ -7,13 +7,13 @@ public class ImageSelectionUI : ChatSelectionUI
     public GameObject ImageTilePrefab;
     public ChatRunner chatRunner;
 
-    public override void Open (Chat chat) {
+    public override void Open (ChatScriptableObject chat) {
         ClearButtons();
         
-        foreach(Photo photo in PhoneOS.FoundPhotos) {
+        foreach(PhotoScriptableObject photo in PhoneOS.FoundPhotos) {
             ClueID clue = photo.ClueID;
             // don't display clues we've already visisted
-            if(clue == ClueID.NoClue || chat.presentedClues.Contains(clue)) {
+            if(clue == ClueID.NoClue || chat.PresentedClues.Contains(clue)) {
                 continue;
             }
 

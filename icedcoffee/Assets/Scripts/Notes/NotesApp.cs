@@ -36,7 +36,7 @@ public class NotesApp : App
 
     // ------------------------------------------------------------------------
     private void PopulateNotes () {
-        foreach(Clue clue in PhoneOS.UnlockedClues) {
+        foreach(ClueScriptableObject clue in PhoneOS.UnlockedClues) {
             if(clue.ClueID == ClueID.NoClue || clue.PhoneNumberGiven != Friend.NoFriend) {
                 continue;
             }
@@ -44,7 +44,7 @@ public class NotesApp : App
             GameObject noteObj = Instantiate(NotePrefab, NotesParent);
             NoteUI noteUI = noteObj.GetComponent<NoteUI>();
             if(noteUI) {
-                Photo photo = PhoneOS.GetPhoto(clue.ClueID);
+                PhotoScriptableObject photo = PhoneOS.GetPhoto(clue.ClueID);
                 if(photo != null) {
                     Sprite sprite = PhoneOS.GetPhotoSprite(photo.Image);
                     noteUI.SetContent(this, clue.Note, sprite);

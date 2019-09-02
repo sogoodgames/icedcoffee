@@ -11,12 +11,12 @@ public class ClueSelectionUI : ChatSelectionUI
     public GameObject ClueUIPrefab;
     public ChatRunner ChatRunner;
 
-    private Chat chat;
+    private ChatScriptableObject chat;
 
     // ------------------------------------------------------------------------
     // Methods
     // ------------------------------------------------------------------------
-    public override void Open (Chat chat) {
+    public override void Open (ChatScriptableObject chat) {
         CreateButtons(PhoneOS.UnlockedClues);
         gameObject.SetActive(true);
         this.chat = chat;
@@ -29,20 +29,20 @@ public class ClueSelectionUI : ChatSelectionUI
     }
 
     // ------------------------------------------------------------------------
-    public void CreateButtons(List<Clue> clues) {
+    public void CreateButtons(List<ClueScriptableObject> clues) {
         if(chat == null) {
             return;
         }
 
         ClearButtons();
         // populate clues that you can send in a chat
-        foreach(Clue clue in clues) {
+        foreach(ClueScriptableObject clue in clues) {
             // don't display clues that we can't send in chats
             // or clues we've already visited
             // or clues with an image (they'll be in the image selection UI)
             if(clue.ClueID == ClueID.NoClue 
                || !clue.CanSend
-               || chat.presentedClues.Contains(clue.ClueID)
+               || chat.PresentedClues.Contains(clue.ClueID)
                || PhoneOS.GetPhoto(clue.ClueID) != null
             ) {
                 continue;

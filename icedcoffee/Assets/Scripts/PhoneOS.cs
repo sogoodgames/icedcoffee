@@ -15,7 +15,7 @@ public class PhoneOS : MonoBehaviour
     public bool RunFTUE = true;
 
     [SerializeField]
-    private DataLoader DataLoader;
+    private GameData GameData;
     public ChatRunner ChatRunner;
     public NotificationManager NotificationManager;
     public NotesApp NotesApp;
@@ -24,28 +24,17 @@ public class PhoneOS : MonoBehaviour
     public List<App> Apps;
     public App HomeApp;
 
-    private List<Chat> m_allChats;
     private App m_activeApp;
-
-    private List<ForumPost> m_allForumPosts;
-    private ForumPost m_activeForumPost;
-
-    private List<GramPost> m_allGramPosts;
-
-    private List<MusicUser> m_allMusicUsers;
-
-    private List<Clue> m_clues;
-    private List<Photo> m_photos;
-    private List<GramUser> m_gramUsers;
+    private ForumPostScriptableObject m_activeForumPost;
 
     // ------------------------------------------------------------------------
     // Properties
     // ------------------------------------------------------------------------
-    public List<Chat> ActiveChats {
+    public List<ChatScriptableObject> ActiveChats {
         get {
             // only add chats that are available
-            List<Chat> activeChats = new List<Chat>();
-            foreach(Chat c in m_allChats) {
+            List<ChatScriptableObject> activeChats = new List<ChatScriptableObject>();
+            foreach(ChatScriptableObject c in GameData.Chats) {
                 //Debug.Log("checking if clue met for chat " + c.Friend + "; clue needed: " + c.ClueNeeded.ToString());
                 if(ClueRequirementMet(c.ClueNeeded)) {
                     activeChats.Add(c);
@@ -55,11 +44,11 @@ public class PhoneOS : MonoBehaviour
         }
     }
 
-    public List<ForumPost> ActiveForumPosts {
+    public List<ForumPostScriptableObject> ActiveForumPosts {
         get {
             // only add posts that are available
-            List<ForumPost> activePosts = new List<ForumPost>();
-            foreach(ForumPost p in m_allForumPosts) {
+            List<ForumPostScriptableObject> activePosts = new List<ForumPostScriptableObject>();
+            foreach(ForumPostScriptableObject p in GameData.ForumPosts) {
                 if(ClueRequirementMet(p.ClueNeeded)) {
                     activePosts.Add(p);
                 }
@@ -68,10 +57,10 @@ public class PhoneOS : MonoBehaviour
         }
     }
 
-    public List<GramPost> ActiveGramPosts {
+    public List<GramPostScriptableObject> ActiveGramPosts {
         get {
-            List<GramPost> activePosts = new List<GramPost>();
-            foreach(GramPost p in m_allGramPosts) {
+            List<GramPostScriptableObject> activePosts = new List<GramPostScriptableObject>();
+            foreach(GramPostScriptableObject p in GameData.GramPosts) {
                 if(ClueRequirementMet(p.ClueNeeded)) {
                     activePosts.Add(p);
                 }
@@ -80,10 +69,10 @@ public class PhoneOS : MonoBehaviour
         }
     }
 
-    public List<MusicUser> ActiveMusicUsers {
+    public List<MusicUserScriptableObject> ActiveMusicUsers {
         get {
-            List<MusicUser> activeUsers = new List<MusicUser>();
-            foreach(MusicUser user in m_allMusicUsers) {
+            List<MusicUserScriptableObject> activeUsers = new List<MusicUserScriptableObject>();
+            foreach(MusicUserScriptableObject user in GameData.MusicUsers) {
                 if(ClueRequirementMet(user.ClueNeeded) && !user.IsPlayer) {
                     activeUsers.Add(user);
                 }
@@ -92,11 +81,11 @@ public class PhoneOS : MonoBehaviour
         }
     }
 
-    public List<Clue> UnlockedClues {
+    public List<ClueScriptableObject> UnlockedClues {
         get {
             // only add unlocked clues
-            List<Clue> clues = new List<Clue>();
-            foreach(Clue clue in m_clues) {
+            List<ClueScriptableObject> clues = new List<ClueScriptableObject>();
+            foreach(ClueScriptableObject clue in GameData.Clues) {
                 if(ClueRequirementMet(clue.ClueID)) {
                     clues.Add(clue);
                 }
@@ -105,11 +94,11 @@ public class PhoneOS : MonoBehaviour
         }
     }
 
-    public List<Photo> FoundPhotos {
+    public List<PhotoScriptableObject> FoundPhotos {
         get {
             // only add found photos
-            List<Photo> photos = new List<Photo>();
-            foreach(Photo photo in m_photos) {
+            List<PhotoScriptableObject> photos = new List<PhotoScriptableObject>();
+            foreach(PhotoScriptableObject photo in GameData.Photos) {
                 if(ClueRequirementMet(photo.ClueID)) {
                     photos.Add(photo);
                 }
@@ -123,18 +112,6 @@ public class PhoneOS : MonoBehaviour
     // ------------------------------------------------------------------------
     void Awake () {
         Screen.SetResolution(480, 848, false);
-
-        m_allChats = DataLoader.LoadChats();
-        m_allForumPosts = DataLoader.LoadForumPosts();
-
-        m_clues = DataLoader.LoadClues();
-        m_photos = DataLoader.LoadPhotos();
-
-        m_gramUsers = DataLoader.LoadGramUsers();
-        m_allGramPosts = DataLoader.LoadGramPosts();
-
-        m_allMusicUsers = DataLoader.LoadMusicUsers();
-
         ChatRunner.FoundClue += FoundClue;
     }
 
@@ -179,14 +156,14 @@ public class PhoneOS : MonoBehaviour
     // ------------------------------------------------------------------------
     // Methods: Clues
     // ------------------------------------------------------------------------
-    public Clue GetClue (ClueID id) {
-        Clue clue = m_clues.First(c => c.ClueID == id);
+    public ClueScriptableObject GetClue (ClueID id) {
+        ClueScriptableObject clue = GameData.Clues.First(c => c.ClueID == id);
         return clue;
     }
 
     // ------------------------------------------------------------------------
     public bool ClueRequirementMet (ClueID id) {
-        Clue clue = GetClue(id);
+        ClueScriptableObject clue = GetClue(id);
         if(!clue.Invalid) {
             return clue.Unlocked;
         }
@@ -200,7 +177,7 @@ public class PhoneOS : MonoBehaviour
             return;
         }
 
-        Clue clue = GetClue(id);
+        ClueScriptableObject clue = GetClue(id);
         // if this is a phone number, send a new contact notif
         if(clue.PhoneNumberGiven != Friend.NoFriend) {
             NotificationManager.NewContactNotif(clue.PhoneNumberGiven);
@@ -210,14 +187,14 @@ public class PhoneOS : MonoBehaviour
         }
 
         // if it unlocks a ruddit post, send a ruddit notif
-        foreach(ForumPost post in m_allForumPosts) {
+        foreach(ForumPostScriptableObject post in GameData.ForumPosts) {
             if(post.ClueNeeded == id) {
                 NotificationManager.ForumPostNotif(post);
             }
         }
 
         // if a photo needed this clue, mark it found
-        foreach(Photo photo in m_photos) {
+        foreach(PhotoScriptableObject photo in GameData.Photos) {
             //Debug.Log("clue id: " + photo.ClueID + "; looking for: " + id);
             if(photo.ClueID == id) {
                 photo.Found = true;
@@ -231,32 +208,32 @@ public class PhoneOS : MonoBehaviour
     // Methods: Data
     // ------------------------------------------------------------------------
     public Sprite GetPhotoSprite (int index) {
-        return DataLoader.PhotoAssets[index];
+        return GameData.PhotoAssets[index];
     }
     
     // ------------------------------------------------------------------------
-    public Photo GetPhoto (PhotoID id) {
-        return m_photos.FirstOrDefault(p => p.PhotoID == id);
+    public PhotoScriptableObject GetPhoto (PhotoID id) {
+        return GameData.Photos.FirstOrDefault(p => p.PhotoID == id);
     }
 
     // ------------------------------------------------------------------------
-    public Photo GetPhoto (ClueID id) {
-        return m_photos.FirstOrDefault(p => p.ClueID == id);
+    public PhotoScriptableObject GetPhoto (ClueID id) {
+        return GameData.Photos.FirstOrDefault(p => p.ClueID == id);
     }
 
     // ------------------------------------------------------------------------
-    public GramUser GetGramUser (Friend id) {
-        return m_gramUsers.FirstOrDefault(u => u.UserId == id);
+    public GramUserScriptableObject GetGramUser (Friend id) {
+        return GameData.GramUsers.FirstOrDefault(u => u.UserId == id);
     }
 
     // ------------------------------------------------------------------------
-    public MusicUser GetMusicUser (Friend id) {
-        return m_allMusicUsers.FirstOrDefault(u => u.FriendID == id);
+    public MusicUserScriptableObject GetMusicUser (Friend id) {
+        return GameData.MusicUsers.FirstOrDefault(u => u.FriendID == id);
     }
 
     // ------------------------------------------------------------------------
     public Sprite GetIcon (int index) {
-        return DataLoader.UserIconAssets[index];
+        return GameData.UserIconAssets[index];
     }
 
     // ------------------------------------------------------------------------
@@ -281,7 +258,7 @@ public class PhoneOS : MonoBehaviour
     // ------------------------------------------------------------------------
     public void DebugToggleClue (string clueName) {
         ClueID id = ClueID.NoClue;
-        foreach(Clue clue in m_clues) {
+        foreach(ClueScriptableObject clue in GameData.Clues) {
             if(clue.ClueID.ToString().Equals(clueName)) {
                 id = clue.ClueID;
                 break;
@@ -289,7 +266,7 @@ public class PhoneOS : MonoBehaviour
         }
 
         if(id != ClueID.NoClue) {
-            Clue clue = GetClue(id);
+            ClueScriptableObject clue = GetClue(id);
             clue.Unlocked = !clue.Unlocked;
             Debug.Log("clue: " + clue.ClueID + "; state: " + clue.Unlocked);
         }

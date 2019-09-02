@@ -16,7 +16,7 @@ public class FriendListUI : MonoBehaviour
     // ------------------------------------------------------------------------
     public void Open () {
         // populate list of friends
-        foreach(MusicUser user in PhoneOS.ActiveMusicUsers) {
+        foreach(MusicUserScriptableObject user in PhoneOS.ActiveMusicUsers) {
             GameObject userObj = Instantiate (
                 FriendPrefab,
                 FriendListParent

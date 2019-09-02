@@ -12,7 +12,7 @@ public class PhotoApp : App
     public override void Open () {
         base.Open();
 
-        foreach(Photo photo in PhoneOS.FoundPhotos) {
+        foreach(PhotoScriptableObject photo in PhoneOS.FoundPhotos) {
             GameObject photoObj = Instantiate (
                 GalleryTilePrefab,
                 PhotoGalleryParent

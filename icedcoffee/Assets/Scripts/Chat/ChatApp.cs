@@ -39,7 +39,7 @@ public class ChatApp : App
 
     // internal
     private List<ChatSelectionUI> m_chatSelectionObjects;
-    private Chat m_activeChat;
+    private ChatScriptableObject m_activeChat;
 
     // ------------------------------------------------------------------------
     // Methods : MonoBehaviour
@@ -110,7 +110,7 @@ public class ChatApp : App
 
         // populate list of chat buttons
         // we do this every time we open the app in case it's changed
-        foreach(Chat chat in PhoneOS.ActiveChats) {
+        foreach(ChatScriptableObject chat in PhoneOS.ActiveChats) {
             GameObject chatButtonObj = Instantiate(
                 ChatButtonPrefab,
                 ChatButtonsParent
@@ -125,7 +125,7 @@ public class ChatApp : App
                 chatButton.ProfilePic.sprite = PhoneOS.GetIcon(chat.Icon);
 
                 // show unread notif (if unfinished)
-                if(chat.finished) {
+                if(chat.Finished) {
                     chatButton.UnreadNotif.SetActive(false);
                 } else {
                     chatButton.UnreadNotif.SetActive(true);
@@ -145,7 +145,7 @@ public class ChatApp : App
     }
 
     // ------------------------------------------------------------------------
-    public void OpenChat (Chat c) {
+    public void OpenChat (ChatScriptableObject c) {
         if(c == null) {
             Debug.LogError("Trying to open chat with null chat");
             return;
@@ -188,14 +188,14 @@ public class ChatApp : App
 
     // ------------------------------------------------------------------------
     public void OpenAttachment (PhotoID photoID) {
-        Photo photo = PhoneOS.GetPhoto(photoID);
+        PhotoScriptableObject photo = PhoneOS.GetPhoto(photoID);
         FullscreenImage.Open(PhoneOS.GetPhotoSprite(photo.Image));
     }
 
     // ------------------------------------------------------------------------
     // Methods : ChatRunner event handlers
     // ------------------------------------------------------------------------
-    private void DrawChatBubble (Message message, int messageIndex) {
+    private void DrawChatBubble (MessageScriptableObject message, int messageIndex) {
         // determine which prefab to use
         GameObject prefab;
         if(message.Player) {
@@ -226,7 +226,7 @@ public class ChatApp : App
     }
 
     // ------------------------------------------------------------------------
-    private void DrawChatOptionBubble (Message message, int optionIndex) {
+    private void DrawChatOptionBubble (MessageScriptableObject message, int optionIndex) {
         GameObject option = Instantiate(
             MessageOptionPrefab,
             ChatOptionsParent
@@ -254,7 +254,7 @@ public class ChatApp : App
     }
 
     // ------------------------------------------------------------------------
-    private void HandleSelectedClueOption (Clue clue) {
+    private void HandleSelectedClueOption (ClueScriptableObject clue) {
         // hide clue selection UI
         MessageSelectionUI.Open();
         CloseOtherChatSelectionUI(MessageSelectionUI, true);
@@ -274,7 +274,7 @@ public class ChatApp : App
     }
 
     // ------------------------------------------------------------------------
-    private void HandleFinishedChat (Chat chat) {
+    private void HandleFinishedChat (ChatScriptableObject chat) {
         // TODO : not really sure what this means anymore
         // considering all leaf nodes now trigger showing the clue options
         // maybe this is when we run out of clues?

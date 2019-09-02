@@ -21,10 +21,10 @@ public class GramPostUI : MonoBehaviour
     // ------------------------------------------------------------------------
     // Methods
     // ------------------------------------------------------------------------
-    public void SetPostContent (GramPost post, PhoneOS os) {
-        GramUser user = os.GetGramUser(post.UserId);
+    public void SetPostContent (GramPostScriptableObject post, PhoneOS os) {
+        GramUserScriptableObject user = os.GetGramUser(post.UserId);
         if(user == null) return;
-        Photo postPhoto = os.GetPhoto(post.PostImage);
+        PhotoScriptableObject postPhoto = os.GetPhoto(post.PostImage);
         if(postPhoto == null) return;
 
         // set post photo content
@@ -41,7 +41,7 @@ public class GramPostUI : MonoBehaviour
         DescriptionText.text = post.Description;
 
         // set comments
-        foreach(GramComment comment in post.Comments) {
+        foreach(GramCommentScriptableObject comment in post.Comments) {
             GameObject commentObj = Instantiate (
                 CommentPrefab,
                 CommentsParent
