@@ -24,8 +24,8 @@ public class PhoneOS : MonoBehaviour
     public List<App> Apps;
     public App HomeApp;
 
+    private SaveDataLoader SaveDataLoader;
     private App m_activeApp;
-    private ForumPostScriptableObject m_activeForumPost;
 
     // ------------------------------------------------------------------------
     // Properties
@@ -123,7 +123,14 @@ public class PhoneOS : MonoBehaviour
     // Methods: Monobehaviour
     // ------------------------------------------------------------------------
     void Awake () {
+        // load save data
+        SaveDataLoader = new SaveDataLoader();
+        Debug.Log("Loaded save data with start time: " + SaveDataLoader.SaveData.GameStartTime.ToString());
+
+        // set screen resolution
         Screen.SetResolution(480, 848, false);
+
+        // subscribe to game events
         ChatRunner.FoundClue += FoundClue;
     }
 
