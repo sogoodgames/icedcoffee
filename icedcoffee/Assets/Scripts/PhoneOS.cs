@@ -7,6 +7,9 @@ using UnityEngine;
 using System.IO;
 using System.Linq;
 
+// Handles app opening/ closing,
+// clue tracking,
+// and saving
 public class PhoneOS : MonoBehaviour
 {
     // ------------------------------------------------------------------------
@@ -54,6 +57,10 @@ public class PhoneOS : MonoBehaviour
             }
             return activeChats;
         }
+    }
+
+    public List<ForumPostScriptableObject> AllForumPosts {
+        get {return GameData.ForumPosts;}
     }
 
     public List<ForumPostScriptableObject> ActiveForumPosts {
@@ -125,7 +132,13 @@ public class PhoneOS : MonoBehaviour
     void Awake () {
         // load save data
         SaveDataLoader = new SaveDataLoader();
-        Debug.Log("Loaded save data with start time: " + SaveDataLoader.SaveData.GameStartTime.ToString());
+
+        // propagate save data
+        foreach(ClueScriptableObject clueObj in GameData.Clues) {
+            if(SaveDataLoader.SaveData.FoundClues.Contains(clueObj.ClueID)) {
+                clueObj.Unlocked = true;
+            }
+        }
 
         // set screen resolution
         Screen.SetResolution(480, 848, false);
@@ -196,21 +209,11 @@ public class PhoneOS : MonoBehaviour
             return;
         }
 
+        // find clue data
         ClueScriptableObject clue = GetClue(id);
-        // if this is a phone number, send a new contact notif
-        if(clue.PhoneNumberGiven != Friend.NoFriend) {
-            NotificationManager.NewContactNotif(clue.PhoneNumberGiven);
-        } else {
-            // otherwise, send generic clue notif
-            NotificationManager.FoundClueNotif(id); // really should send an event but meh
-        }
 
-        // if it unlocks a ruddit post, send a ruddit notif
-        foreach(ForumPostScriptableObject post in GameData.ForumPosts) {
-            if(post.ClueNeeded == id) {
-                NotificationManager.ForumPostNotif(post);
-            }
-        }
+        // Let notification manager know
+        NotificationManager.FoundClue(clue);
 
         // if a photo needed this clue, mark it found
         foreach(PhotoScriptableObject photo in GameData.Photos) {
@@ -219,6 +222,9 @@ public class PhoneOS : MonoBehaviour
                 photo.Found = true;
             }
         }
+
+        // Let save data manager know
+        SaveDataLoader.FoundClue(id);
 
         clue.Unlocked = true;
     }

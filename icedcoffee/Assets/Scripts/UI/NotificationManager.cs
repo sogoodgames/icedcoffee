@@ -59,6 +59,23 @@ public class NotificationManager : MonoBehaviour
         }
     }
 
+    public void FoundClue (ClueScriptableObject clue) {
+        // if this is a phone number, send a new contact notif
+        if(clue.PhoneNumberGiven != Friend.NoFriend) {
+            NewContactNotif(clue.PhoneNumberGiven);
+        } else {
+            // otherwise, send generic clue notif
+            FoundClueNotif(clue.ClueID); // really should send an event but meh
+        }
+
+        // if it unlocks a ruddit post, send a ruddit notif
+        foreach(ForumPostScriptableObject post in PhoneOS.AllForumPosts) {
+            if(post.ClueNeeded == clue.ClueID) {
+                ForumPostNotif(post);
+            }
+        }
+    }
+
     private void DisplayNotif (NotifInfo notif) {
         Icon.sprite = notif.sprite;
         Text.text = notif.text;
