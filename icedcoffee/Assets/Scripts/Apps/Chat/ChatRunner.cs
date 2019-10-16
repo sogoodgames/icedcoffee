@@ -68,7 +68,7 @@ public class ChatRunner : MonoBehaviour
             // run message
             if(message.Player) {
                 if(message.HasOptions()) {
-                    if(message.MadeSelection()) {
+                    if(message.MadeSelection) {
                         VisitedMessage(message, 0);
                     } else {
                         RunChatOptions(message);
@@ -104,7 +104,7 @@ public class ChatRunner : MonoBehaviour
 
         // find next message in convo
         if(lastMessage.HasOptions()) {
-            if(lastMessage.MadeSelection()) {
+            if(lastMessage.MadeSelection) {
                 // if we made a selection, move to the next message
                 nextNode = lastMessage.Branch[lastMessage.OptionSelection];
             } else {
@@ -208,7 +208,7 @@ public class ChatRunner : MonoBehaviour
         for(int i = 0; i < message.Options.Length; i++) {
             // if we've already been to this conversation option,
             // skip drawing whatever option we selected last time
-            if(message.MadeSelection() && i == message.OptionSelection) {
+            if(message.MadeSelection && i == message.OptionSelection) {
                 continue;
             }
             VisitedOption(message, i);
@@ -226,7 +226,6 @@ public class ChatRunner : MonoBehaviour
         //Debug.Log("selected option " + option + " for message " + message.Node);
 
         // record in message that this option has been chosen
-        message.OptionSelection = option;
         message.Messages = new string[1];
         message.Messages[0] = message.Options[option];
 
@@ -236,6 +235,7 @@ public class ChatRunner : MonoBehaviour
 
         // force record that we visited this message
         m_activeChat.VisitMessage(message, true);
+        message.SelectOption(option);
 
         // fire event
         SelectedOption();
@@ -271,7 +271,7 @@ public class ChatRunner : MonoBehaviour
     // ------------------------------------------------------------------------
     private void MarkConversationComplete () {
         //Debug.Log("Reached end of convo at node " + m_activeChat.GetLastVisitedMessage().Node);
-        m_activeChat.Finished = true;
+        m_activeChat.MarkComplete();
         FinishedChat(m_activeChat);
     }
 }

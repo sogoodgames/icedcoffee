@@ -20,10 +20,10 @@ public class SaveDataLoader {
     // ------------------------------------------------------------------------
     // Methods
     // ------------------------------------------------------------------------
-    public SaveDataLoader () {
-        Load();
-        Debug.Log("Loaded save data with start time: " + _saveData.GameStartTime.ToString());
-        Debug.Log("Found clues: " + _saveData.FoundClues.Count);
+    // first time initialization of new save
+    public void CreateNewSave () {
+        _saveData = new PlayerSaveData();
+        Save();
     }
 
     // ------------------------------------------------------------------------
@@ -43,20 +43,11 @@ public class SaveDataLoader {
     }
 
     // ------------------------------------------------------------------------
-    public void FoundClue (ClueID id) {
-        _saveData.FoundClues.Add(id);
-        Save();
-    }
-
-    // ------------------------------------------------------------------------
-    private void Load () {
+    public void Load () {
         string filePath = GetFilePath();
 
         if(!File.Exists(filePath)) {
-            // if save file doesn't exist yet,
-            // create it and create an empty player save data
-            _saveData = new PlayerSaveData();
-            Save();
+            Debug.LogError("Save file does not exist and load attempted");
             return;
         }
         
@@ -69,7 +60,16 @@ public class SaveDataLoader {
             Debug.LogError("File loading failed; reason: " + e.Message);
         }
 
+        Debug.Log("Loaded save data with start time: " + _saveData.GameStartTime.ToString());
+        Debug.Log("Found clues: " + _saveData.FoundClues.Count);
+
         saveFile.Close();
+    }
+
+    // ------------------------------------------------------------------------
+    public void FoundClue (ClueID id) {
+        _saveData.FoundClues.Add(id);
+        Save();
     }
 
     // ------------------------------------------------------------------------

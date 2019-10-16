@@ -1,5 +1,31 @@
 using UnityEngine;
+using System;
 using System.Collections.Generic;
+
+[Serializable]
+public struct ChatProgressionData {
+    public Friend Friend;
+    // only the messages you've visited so far
+    public List<MessageProgressionData> VisitedMessages;
+    // the index (in 'visitedMessages') of the last node read
+    public int LastVisitedMessage;
+    public List<ClueID> PresentedClues;
+    public bool Finished;
+
+    public ChatProgressionData (
+        Friend friend,
+        List<MessageProgressionData> visitedMessages,
+        int lastMessage,
+        List<ClueID> presentedClues,
+        bool finishedChat
+    ) {
+        Friend = friend;
+        VisitedMessages = visitedMessages;
+        LastVisitedMessage = lastMessage;
+        PresentedClues = presentedClues;
+        Finished = finishedChat;
+    }
+}
 
 [CreateAssetMenu(fileName = "ChatData", menuName = "IcedCoffee/ChatScriptableObject", order = 1)]
 public class ChatScriptableObject : ScriptableObject
@@ -12,29 +38,42 @@ public class ChatScriptableObject : ScriptableObject
     public ClueID ClueNeeded; // the clue needed to unlock the chat
     public MessageScriptableObject[] Messages; // all of the messages
     
-    [HideInInspector]
-    public bool Finished; // whether or not the convo is finished
-    [HideInInspector]
-    public List<ClueID> PresentedClues; // all of the clues we've presented so far
+    private ChatProgressionData m_progressionData;
+    
+    // public accessors for progression data
+    public int LastVisitedMessage {get{return m_progressionData.LastVisitedMessage;}}
+    public bool Finished {get{return m_progressionData.Finished;}}
+    public List<ClueID> PresentedClues {get{return m_progressionData.PresentedClues;}}
 
-    // only the messages you've visited so far
+    // caches all visited messages from progression data
     private List<MessageScriptableObject> m_visitedMessages;
     public List<MessageScriptableObject> VisitedMessages {get{return m_visitedMessages;}}
 
-    // the index (in 'visitedMessages') of the last node read
-    private int m_lastVisitedMessage;
-    public int LastVisitedMessage {get{return m_lastVisitedMessage;}}
-
     // ------------------------------------------------------------------------
     // Methods
-    // ------------------------------------------------------------------------
-    void OnEnable () {
-        m_visitedMessages = new List<MessageScriptableObject>();
-        m_visitedMessages.Add(Messages[0]);
+    // ------------------------------------------------------------------------ 
+    public void ClearProgression () {
+        m_progressionData = new ChatProgressionData(
+            Friend, 
+            new List<MessageProgressionData>(),
+            0,
+            new List<ClueID>(),
+            false
+        );
 
-        PresentedClues = new List<ClueID>();
-        Finished = false;
-        m_lastVisitedMessage = 0;
+        m_visitedMessages = new List<MessageScriptableObject>();
+        AddMessageToProgression(Messages[0]);
+        //Debug.Log("called clear progression on convo: " + Friend);
+    }
+
+    // ------------------------------------------------------------------------
+    public void LoadProgression(ChatProgressionData progressionData) {
+        m_progressionData = progressionData;
+    }
+
+    // ------------------------------------------------------------------------ 
+    public void MarkComplete() {
+        m_progressionData.Finished = true;
     }
 
     // ------------------------------------------------------------------------
@@ -53,8 +92,7 @@ public class ChatScriptableObject : ScriptableObject
             return;
         }
 
-        m_visitedMessages.Add(m);
-        m_lastVisitedMessage = m_visitedMessages.Count - 1;
+        AddMessageToProgression(m);
     }
 
     // ------------------------------------------------------------------------
@@ -69,7 +107,9 @@ public class ChatScriptableObject : ScriptableObject
 
     // ------------------------------------------------------------------------
     public MessageScriptableObject GetLastVisitedMessage () {
-        return m_visitedMessages[m_lastVisitedMessage];
+        //Debug.Log("visited messages lenght: " + m_visitedMessages.Count);
+        //Debug.Log("index: " + m_progressionData.LastVisitedMessage);
+        return m_visitedMessages[m_progressionData.LastVisitedMessage];
     }
 
     // ------------------------------------------------------------------------
@@ -80,5 +120,17 @@ public class ChatScriptableObject : ScriptableObject
             }
         }
         return null;
+    }
+
+    // ------------------------------------------------------------------------
+    private void AddMessageToProgression (MessageScriptableObject m) {
+        // first add messages to progression data and cached data
+        m_progressionData.VisitedMessages.Add(
+            new MessageProgressionData(m.Node, 0, false)
+        );
+        m_visitedMessages.Add(m);
+        // THEN set last visited message index
+        m_progressionData.LastVisitedMessage = m_visitedMessages.Count - 1;
+        Debug.Log("added message to progression: " + m.Node);
     }
 }

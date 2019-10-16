@@ -1,5 +1,19 @@
 using UnityEngine;
+using System;
 using System.Collections.Generic;
+
+[Serializable]
+public struct MessageProgressionData {
+    public int Node;
+    public int OptionSelection;
+    public bool MadeSelection;
+
+    public MessageProgressionData (int node, int selection, bool madeSelection) {
+        Node = node;
+        OptionSelection = selection;
+        MadeSelection = madeSelection;
+    }
+}
 
 [CreateAssetMenu(fileName = "MessageData", menuName = "IcedCoffee/MessageScriptableObject", order = 1)]
 public class MessageScriptableObject : ScriptableObject 
@@ -18,21 +32,24 @@ public class MessageScriptableObject : ScriptableObject
     public string[] Options; // the text options
     public int[] Branch; // the next message (-1 means this is a leaf)
 
-    // the selected option (if any)
-    [HideInInspector]
-    public int OptionSelection;
+    // progression data
+    private MessageProgressionData m_progressionData;
+
+    public int OptionSelection {get{return m_progressionData.OptionSelection;}}
+
+    public bool MadeSelection {
+        get {
+            if(!HasOptions()) return true;
+            return OptionSelection >= 0;
+        } 
+    }
 
     // ------------------------------------------------------------------------
     // Methods
     // ------------------------------------------------------------------------
-    void OnEnable () {
-        OptionSelection = -1;
-    }
-
-    // ------------------------------------------------------------------------
-    public bool MadeSelection () {
-        if(!HasOptions()) return true;
-        return OptionSelection >= 0;
+    public void SelectOption (int option) {
+        m_progressionData.MadeSelection = true;
+        m_progressionData.OptionSelection = option;
     }
 
     // ------------------------------------------------------------------------

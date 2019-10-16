@@ -26,6 +26,7 @@ public class PhoneOS : MonoBehaviour
     public GameObject ReturnButton;
     public List<App> Apps;
     public App HomeApp;
+    public App MainMenuApp;
 
     private SaveDataLoader SaveDataLoader;
     private App m_activeApp;
@@ -130,30 +131,13 @@ public class PhoneOS : MonoBehaviour
     // Methods: Monobehaviour
     // ------------------------------------------------------------------------
     void Awake () {
-        // load save data
-        SaveDataLoader = new SaveDataLoader();
-
-        // propagate save data
-        foreach(ClueScriptableObject clueObj in GameData.Clues) {
-            if(SaveDataLoader.SaveData.FoundClues.Contains(clueObj.ClueID)) {
-                clueObj.Unlocked = true;
-            }
-        }
-
         // set screen resolution
         Screen.SetResolution(480, 848, false);
 
         // subscribe to game events
         ChatRunner.FoundClue += FoundClue;
-    }
 
-    // ------------------------------------------------------------------------
-    void OnEnable () {
-        if(RunFTUE) {
-            StartFTUE();
-        } else {
-            m_activeApp = HomeApp;
-        }
+        m_activeApp = MainMenuApp;
     }
     
     // ------------------------------------------------------------------------
@@ -254,6 +238,55 @@ public class PhoneOS : MonoBehaviour
     // ------------------------------------------------------------------------
     public ForumUserScriptableObject GetForumUser (Friend id) {
         return GameData.ForumUsers.FirstOrDefault(u => u.UserID == id);
+    }
+
+    // ------------------------------------------------------------------------
+    // Methods: Save/Load
+    // ------------------------------------------------------------------------
+    public void StartNewGame () {
+        foreach(ChatScriptableObject chat in GameData.Chats) {
+            chat.ClearProgression();
+        }
+        
+        if(SaveDataLoader == null) {
+            SaveDataLoader = new SaveDataLoader();
+        }
+        SaveDataLoader.CreateNewSave();
+
+        // probably temp, will add FTUE later
+        GoHome();
+    }
+
+    // ------------------------------------------------------------------------
+    public void LoadGame () {
+        if(SaveDataLoader == null) {
+            SaveDataLoader = new SaveDataLoader();
+        }
+        SaveDataLoader.Load();
+        PropagateSaveData();
+    }
+
+    // ------------------------------------------------------------------------
+    // apply save data to game
+    private void PropagateSaveData () {
+        // apply all found clues
+        foreach(ClueScriptableObject clueObj in GameData.Clues) {
+            if(SaveDataLoader.SaveData.FoundClues.Contains(clueObj.ClueID)) {
+                clueObj.Unlocked = true;
+            }
+        }
+
+        // apply all chat progression
+        foreach(ChatScriptableObject chat in GameData.Chats) {
+            // find correspding chat save data
+            ChatProgressionData data =
+                SaveDataLoader.SaveData.ChatProgressionData.FirstOrDefault(
+                    c => c.Friend == chat.Friend
+            );
+
+            // load progression data
+            chat.LoadProgression(data);
+        }
     }
 
     // ------------------------------------------------------------------------
