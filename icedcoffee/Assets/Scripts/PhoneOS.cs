@@ -307,7 +307,9 @@ public class PhoneOS : MonoBehaviour
             );
 
             // load progression data
-            chat.LoadProgression(data);
+            if(!data.Equals(default(ChatProgressionData))) {
+                chat.LoadProgression(data);
+            }
         }
     }
 
