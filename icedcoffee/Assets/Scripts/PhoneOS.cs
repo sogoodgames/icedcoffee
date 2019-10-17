@@ -2,8 +2,9 @@
 #define DEBUG
 #endif
 
-using System.Collections.Generic;
 using UnityEngine;
+
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -251,7 +252,23 @@ public class PhoneOS : MonoBehaviour
         if(SaveDataLoader == null) {
             SaveDataLoader = new SaveDataLoader();
         }
-        SaveDataLoader.CreateNewSave();
+
+        // create list of default found clues and chats
+        List<ClueID> defaultClues = new List<ClueID>();
+        foreach(ClueScriptableObject clueObj in GameData.Clues) {
+            if(clueObj.InitialLockState) {
+                defaultClues.Add(clueObj.ClueID);
+            }
+        }
+
+        List<ChatProgressionData> defaultChats = new List<ChatProgressionData>();
+        foreach(ChatScriptableObject chatObj in GameData.Chats) {
+            if(ClueRequirementMet(chatObj.ClueNeeded)) {
+                defaultChats.Add(chatObj.ProgressionData);
+            }
+        }
+
+        SaveDataLoader.CreateNewSave(defaultChats, defaultClues);
 
         // probably temp, will add FTUE later
         GoHome();
@@ -264,6 +281,11 @@ public class PhoneOS : MonoBehaviour
         }
         SaveDataLoader.Load();
         PropagateSaveData();
+    }
+
+    // ------------------------------------------------------------------------
+    public void SaveGame () {
+        SaveDataLoader.Save();
     }
 
     // ------------------------------------------------------------------------

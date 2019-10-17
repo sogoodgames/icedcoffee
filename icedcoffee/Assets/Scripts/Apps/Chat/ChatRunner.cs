@@ -59,6 +59,8 @@ public class ChatRunner : MonoBehaviour
     // ------------------------------------------------------------------------
     public void RunAllVisitedMessages (ChatScriptableObject chat) {
         foreach(MessageScriptableObject message in chat.VisitedMessages) {
+            Debug.Log("found visited message: " + message.Node);
+
             // record any clues found
             // in case the player missed them last time
             if(message.ClueGiven != ClueID.NoClue) {

@@ -10,10 +10,14 @@ public class PlayerSaveData {
     public List<ChatProgressionData> ChatProgressionData;
 
     // only call constructor when creating new save file
-    public PlayerSaveData () {
-        GameStartTime = DateTime.Now;  
-        FoundClues = new List<ClueID>();
-        ChatProgressionData = new List<ChatProgressionData>();
+    public PlayerSaveData (
+        List<ChatProgressionData> defaultChats,
+        List<ClueID> defaultClues,
+        DateTime startTime
+    ) {
+        GameStartTime = startTime;  
+        FoundClues = defaultClues;
+        ChatProgressionData = defaultChats;
         Debug.Log("Created new save file with game start time: " + GameStartTime.ToString());
     }
 }

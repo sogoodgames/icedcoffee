@@ -196,6 +196,8 @@ public class ChatApp : App
     // Methods : ChatRunner event handlers
     // ------------------------------------------------------------------------
     private void DrawChatBubble (MessageScriptableObject message, int messageIndex) {
+        Save();
+
         // determine which prefab to use
         GameObject prefab;
         if(message.Player) {

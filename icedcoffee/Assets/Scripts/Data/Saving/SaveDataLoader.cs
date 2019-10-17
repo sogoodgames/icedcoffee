@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -21,8 +22,12 @@ public class SaveDataLoader {
     // Methods
     // ------------------------------------------------------------------------
     // first time initialization of new save
-    public void CreateNewSave () {
-        _saveData = new PlayerSaveData();
+    public void CreateNewSave (
+        List<ChatProgressionData> defaultChats,
+        List<ClueID> defaultClues
+    ) {
+        DateTime startTime = DateTime.Now;
+        _saveData = new PlayerSaveData(defaultChats, defaultClues, startTime);
         Save();
     }
 
@@ -38,6 +43,9 @@ public class SaveDataLoader {
         catch (SerializationException e) {
             Debug.LogError("File saving failed; reason: " + e.Message);
         }
+
+        Debug.Log("SAVED.");
+        LogSaveData();
 
         saveFile.Close();
     }
@@ -60,10 +68,20 @@ public class SaveDataLoader {
             Debug.LogError("File loading failed; reason: " + e.Message);
         }
 
-        Debug.Log("Loaded save data with start time: " + _saveData.GameStartTime.ToString());
-        Debug.Log("Found clues: " + _saveData.FoundClues.Count);
+        Debug.Log("LOADED.");
+        LogSaveData();
 
         saveFile.Close();
+    }
+
+    // ------------------------------------------------------------------------
+    private void LogSaveData () {
+        Debug.Log("- Start time: " + _saveData.GameStartTime.ToString());
+        Debug.Log("- Found clues: " + _saveData.FoundClues.Count);
+        Debug.Log("- Chats opened: ");
+        foreach(ChatProgressionData chat in _saveData.ChatProgressionData) {
+            chat.LogData();
+        }
     }
 
     // ------------------------------------------------------------------------

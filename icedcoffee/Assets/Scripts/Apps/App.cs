@@ -55,7 +55,12 @@ public abstract class App : MonoBehaviour
     }
 
     // ------------------------------------------------------------------------
-    public virtual void Return() {
+    public virtual void Return () {
         PhoneOS.GoHome();
+    }
+
+    // ------------------------------------------------------------------------
+    protected void Save () {
+        PhoneOS.SaveGame();
     }
 }

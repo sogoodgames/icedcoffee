@@ -1,6 +1,8 @@
 using UnityEngine;
+
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 [Serializable]
 public struct ChatProgressionData {
@@ -12,6 +14,7 @@ public struct ChatProgressionData {
     public List<ClueID> PresentedClues;
     public bool Finished;
 
+    // ------------------------------------------------------------------------
     public ChatProgressionData (
         Friend friend,
         List<MessageProgressionData> visitedMessages,
@@ -24,6 +27,16 @@ public struct ChatProgressionData {
         LastVisitedMessage = lastMessage;
         PresentedClues = presentedClues;
         Finished = finishedChat;
+    }
+
+    // ------------------------------------------------------------------------
+    public void LogData () {
+        Debug.Log("> chat: " + Friend);
+        Debug.Log(">> last visited message: " + LastVisitedMessage);
+        Debug.Log(">> messages: ");
+        foreach(MessageProgressionData msg in VisitedMessages) {
+            Debug.Log(">>> " + msg.Node);
+        }
     }
 }
 
@@ -41,17 +54,19 @@ public class ChatScriptableObject : ScriptableObject
     private ChatProgressionData m_progressionData;
     
     // public accessors for progression data
+    public ChatProgressionData ProgressionData {get{return m_progressionData;}}
     public int LastVisitedMessage {get{return m_progressionData.LastVisitedMessage;}}
     public bool Finished {get{return m_progressionData.Finished;}}
     public List<ClueID> PresentedClues {get{return m_progressionData.PresentedClues;}}
 
-    // caches all visited messages from progression data
+    // caches all visited messages
+    // (since progression data stores progression objects, not message objects themselves)
     private List<MessageScriptableObject> m_visitedMessages;
     public List<MessageScriptableObject> VisitedMessages {get{return m_visitedMessages;}}
 
     // ------------------------------------------------------------------------
     // Methods
-    // ------------------------------------------------------------------------ 
+    // ------------------------------------------------------------------------
     public void ClearProgression () {
         m_progressionData = new ChatProgressionData(
             Friend, 
@@ -67,8 +82,24 @@ public class ChatScriptableObject : ScriptableObject
     }
 
     // ------------------------------------------------------------------------
-    public void LoadProgression(ChatProgressionData progressionData) {
+    public void LoadProgression (ChatProgressionData progressionData) {
         m_progressionData = progressionData;
+
+        // create visited messages cache
+        m_visitedMessages = new List<MessageScriptableObject>();
+        foreach(MessageProgressionData msgProgression in m_progressionData.VisitedMessages) {
+            // find corresponding message object based on ID
+            MessageScriptableObject msgObject = 
+                Messages.FirstOrDefault (
+                    m => m.Node == msgProgression.Node
+            );
+
+            // give message object progression data
+            msgObject.LoadProgression(msgProgression);
+
+            // add message object to list of visited messages
+            m_visitedMessages.Add(msgObject);
+        }
     }
 
     // ------------------------------------------------------------------------ 

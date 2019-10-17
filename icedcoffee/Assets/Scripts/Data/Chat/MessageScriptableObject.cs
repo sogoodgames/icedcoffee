@@ -56,4 +56,9 @@ public class MessageScriptableObject : ScriptableObject
     public bool HasOptions () {
         return Options != null && Options.Length > 0;
     }
+
+    // ------------------------------------------------------------------------
+    public void LoadProgression (MessageProgressionData data) {
+        m_progressionData = data;
+    }
 }
