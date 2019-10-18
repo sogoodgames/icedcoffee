@@ -205,8 +205,6 @@ public class ChatApp : App
         }
 
         // determine text and icon
-        Debug.Log("message: " + message.Node);
-        Debug.Log("messages size: " + message.Messages.Length);
         string text = message.Messages[messageIndex];
 
         Sprite sprite = PlayerChatIcon;
