@@ -30,7 +30,7 @@ public struct ChatProgressionData {
         Debug.Log("> chat: " + Friend);
         Debug.Log(">> messages: ");
         foreach(MessageProgressionData msg in VisitedMessages) {
-            Debug.Log(">>> " + msg.Node);
+            Debug.Log(">>> " + msg.Node + "; made selection: " + msg.MadeSelection);
         }
     }
 }
@@ -125,7 +125,7 @@ public class ChatScriptableObject : ScriptableObject
     }
 
     // ------------------------------------------------------------------------
-    public void VisitMessage (MessageScriptableObject m, bool force) {
+    public void RecordMessageInProgression (MessageScriptableObject m, bool force) {
         if(m_visitedMessages == null || m == null) {
             return;
         }
@@ -136,7 +136,15 @@ public class ChatScriptableObject : ScriptableObject
             return;
         }
 
+        // if we just logged this message, don't log again
+        // TODO: why is this here and what is it hiding
         if(m_visitedMessages[m_visitedMessages.Count - 1].Node == m.Node) {
+            return;
+        }
+
+        // if this message has options and we haven't selected one yet,
+        // don't add it yet
+        if(!force && m.HasOptions && !m.MadeSelection) {
             return;
         }
 
@@ -172,7 +180,7 @@ public class ChatScriptableObject : ScriptableObject
     private void AddMessageToProgression (MessageScriptableObject m) {
         // first add messages to progression data and cached data
         m_progressionData.VisitedMessages.Add(
-            new MessageProgressionData(m.Node, 0, false, m.IsClueMessage)
+            new MessageProgressionData(m.Node, 0, m.MadeSelection, m.IsClueMessage)
         );
         m_visitedMessages.Add(m);
         Debug.Log("added message to progression: " + m.Node);

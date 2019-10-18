@@ -29,6 +29,9 @@ public class ChatRunner : MonoBehaviour
     public delegate void SelectedOptionDelegate();
     public event SelectedOptionDelegate SelectedOption;
 
+    public delegate void NeedsSaveDelegate();
+    public event NeedsSaveDelegate NeedsSave;
+
     // settings
     public float MaxTimeBetweenMessages = 2f;
 
@@ -67,7 +70,7 @@ public class ChatRunner : MonoBehaviour
 
             // run message
             if(message.Player) {
-                if(message.HasOptions()) {
+                if(message.HasOptions) {
                     if(message.MadeSelection) {
                         VisitedMessage(message, 0);
                     } else {
@@ -103,7 +106,7 @@ public class ChatRunner : MonoBehaviour
         int nextNode = -1;
 
         // find next message in convo
-        if(lastMessage.HasOptions()) {
+        if(lastMessage.HasOptions) {
             if(lastMessage.MadeSelection) {
                 // if we made a selection, move to the next message
                 nextNode = lastMessage.Branch[lastMessage.OptionSelection];
@@ -136,12 +139,12 @@ public class ChatRunner : MonoBehaviour
         }
 
         // record that we visited this message (don't force)
-        m_activeChat.VisitMessage(message, false);
+        m_activeChat.RecordMessageInProgression(message, false);
 
         // draw either player or friend messages
         if(message.Player) {
             // if this has options, draw them; otherwise, draw messages
-            if(message.HasOptions()) {
+            if(message.HasOptions) {
                 RunChatOptions(message);
             } else {
                 m_RunBubblesCoroutine = RunChatBubbles(message);
@@ -157,8 +160,10 @@ public class ChatRunner : MonoBehaviour
             FoundClue(message.ClueGiven);
         }
 
+        NeedsSave();
+
         // if we're not waiting on an option selection, draw the next message
-        if(!message.HasOptions()) {
+        if(!message.HasOptions) {
             MoveConversation();
         }
     }
@@ -174,7 +179,7 @@ public class ChatRunner : MonoBehaviour
         // visit all of the messages in this node
         for (int i = 0; i < message.Messages.Length; i++) {
             float t = MaxTimeBetweenMessages;
-            if((message.Node == 0 && i == 0) || message.HasOptions()) {
+            if((message.Node == 0 && i == 0) || message.HasOptions) {
                 t = 0;
             }
             yield return new WaitForSeconds(t);
@@ -194,7 +199,7 @@ public class ChatRunner : MonoBehaviour
             Debug.LogError("Hecked up script config. NPC has chat options.");
             return;
         }
-        if(!message.HasOptions()) {
+        if(!message.HasOptions) {
             Debug.LogError("Attempting to draw options for message with no options.");
             return;
         }
@@ -233,12 +238,14 @@ public class ChatRunner : MonoBehaviour
         m_RunBubblesCoroutine = RunChatBubbles(message);
         StartCoroutine(m_RunBubblesCoroutine);
 
-        // force record that we visited this message
-        m_activeChat.VisitMessage(message, true);
+        // FIRST update the message's data that we visited it
         message.SelectOption(option);
+        // THEN force record that we visited this message
+        m_activeChat.RecordMessageInProgression(message, true);
 
-        // fire event
+        // fire events
         SelectedOption();
+        NeedsSave();
 
         // run next chat
         MoveConversation();
@@ -256,11 +263,14 @@ public class ChatRunner : MonoBehaviour
             // log that we've presented this clue
             m_activeChat.PresentedClues.Add(clue.ClueID);
 
-            // log the message (don't force)
-            m_activeChat.VisitMessage(clue.Message, true);
-
             // fire event for UI
             VisitedClueOption(clue);
+
+            // log the message 
+            m_activeChat.RecordMessageInProgression(clue.Message, true);
+
+            // fire event for saving
+            NeedsSave();
 
             // run message triggered by this option
             m_RunMessageCoroutine = RunMessage(message);
@@ -273,5 +283,6 @@ public class ChatRunner : MonoBehaviour
         //Debug.Log("Reached end of convo at node " + m_activeChat.GetLastVisitedMessage().Node);
         m_activeChat.MarkComplete();
         FinishedChat(m_activeChat);
+        NeedsSave();
     }
 }

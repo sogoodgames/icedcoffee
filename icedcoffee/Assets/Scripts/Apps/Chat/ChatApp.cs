@@ -52,6 +52,7 @@ public class ChatApp : App
         ChatRunner.SelectedOption += HandleSelectedOption;
         ChatRunner.ReachedLeafNode += HandleReachedLeafNode;
         ChatRunner.VisitedClueOption += HandleSelectedClueOption;
+        ChatRunner.NeedsSave += HandleChatNeedsSave;
 
         // this is a little hard-code-y but idgaf
         m_chatSelectionObjects = new List<ChatSelectionUI>() {
@@ -195,6 +196,11 @@ public class ChatApp : App
     // ------------------------------------------------------------------------
     // Methods : ChatRunner event handlers
     // ------------------------------------------------------------------------
+    private void HandleChatNeedsSave () {
+        Save();
+    }
+
+    // ------------------------------------------------------------------------
     private void DrawChatBubble (MessageScriptableObject message, int messageIndex) {
         // determine which prefab to use
         GameObject prefab;
@@ -223,8 +229,6 @@ public class ChatApp : App
                 this
             );
         }
-
-        Save();
     }
 
     // ------------------------------------------------------------------------
@@ -242,8 +246,6 @@ public class ChatApp : App
         messageButton.Button.onClick.AddListener(
             delegate {ChatRunner.SelectOption(message, optionIndex);}
         );
-
-        Save();
     }
 
     // ------------------------------------------------------------------------
@@ -255,8 +257,6 @@ public class ChatApp : App
 
         // play sfx
         typingSFX.Play();
-
-        Save();
     }
 
     // ------------------------------------------------------------------------
@@ -270,8 +270,6 @@ public class ChatApp : App
 
         // play sfx
         typingSFX.Play();
-
-        Save();
     }
 
     // ------------------------------------------------------------------------
@@ -279,8 +277,6 @@ public class ChatApp : App
         // show clue selection button
         EnterMessageButtons.Open();
         CloseOtherChatSelectionUI(EnterMessageButtons, true);
-
-        Save();
     }
 
     // ------------------------------------------------------------------------
@@ -288,7 +284,6 @@ public class ChatApp : App
         // TODO : not really sure what this means anymore
         // considering all leaf nodes now trigger showing the clue options
         // maybe this is when we run out of clues?
-        Save();
     }
 
     // ------------------------------------------------------------------------

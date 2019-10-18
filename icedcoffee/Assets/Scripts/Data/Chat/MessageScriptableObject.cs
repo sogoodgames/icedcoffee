@@ -46,6 +46,7 @@ public class MessageScriptableObject : ScriptableObject
     // public progression data accessors
     public int OptionSelection {get{return m_progressionData.OptionSelection;}}
     public bool MadeSelection {get{return m_progressionData.MadeSelection;}}
+    public bool HasOptions {get{return Options != null && Options.Length > 0;}}
 
     // ------------------------------------------------------------------------
     // Methods
@@ -63,11 +64,6 @@ public class MessageScriptableObject : ScriptableObject
     public void SelectOption (int option) {
         m_progressionData.MadeSelection = true;
         m_progressionData.OptionSelection = option;
-    }
-
-    // ------------------------------------------------------------------------
-    public bool HasOptions () {
-        return Options != null && Options.Length > 0;
     }
 
     // ------------------------------------------------------------------------
