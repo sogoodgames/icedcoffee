@@ -76,6 +76,10 @@ public class ChatScriptableObject : ScriptableObject
             false
         );
 
+        foreach(MessageScriptableObject messageObj in Messages) {
+            messageObj.ClearProgression();
+        }
+
         m_visitedMessages = new List<MessageScriptableObject>();
         AddMessageToProgression(Messages[0]);
         //Debug.Log("called clear progression on convo: " + Friend);

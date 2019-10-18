@@ -42,6 +42,11 @@ public class MessageScriptableObject : ScriptableObject
     // ------------------------------------------------------------------------
     // Methods
     // ------------------------------------------------------------------------
+    public void ClearProgression () {
+        m_progressionData = new MessageProgressionData(Node, 0, false);
+    }
+
+    // ------------------------------------------------------------------------
     public void SelectOption (int option) {
         m_progressionData.MadeSelection = true;
         m_progressionData.OptionSelection = option;
