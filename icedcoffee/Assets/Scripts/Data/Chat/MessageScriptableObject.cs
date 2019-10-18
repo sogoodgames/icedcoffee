@@ -34,15 +34,10 @@ public class MessageScriptableObject : ScriptableObject
 
     // progression data
     private MessageProgressionData m_progressionData;
-
+    
+    // public progression data accessors
     public int OptionSelection {get{return m_progressionData.OptionSelection;}}
-
-    public bool MadeSelection {
-        get {
-            if(!HasOptions()) return true;
-            return OptionSelection >= 0;
-        } 
-    }
+    public bool MadeSelection {get{return m_progressionData.MadeSelection;}}
 
     // ------------------------------------------------------------------------
     // Methods
