@@ -211,6 +211,12 @@ public class PhoneOS : MonoBehaviour
         // Let save data manager know
         SaveDataLoader.FoundClue(id);
 
+        // if a chat needed this clue, add it to progression data
+        ChatScriptableObject chat;
+        if(chat = GameData.Chats.FirstOrDefault(c => c.ClueNeeded == id)) {
+            SaveDataLoader.FoundChat(chat.ProgressionData);
+        }
+
         clue.Unlocked = true;
     }
 

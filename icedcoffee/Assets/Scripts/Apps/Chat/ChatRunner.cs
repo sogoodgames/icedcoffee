@@ -200,10 +200,10 @@ public class ChatRunner : MonoBehaviour
         }
 
         // if we've answered this question multiple times, mark this convo done
-        if(m_activeChat.VisitedMessages.FindAll(m => m.Node == message.Node).Count > 1) {
+        /*if(m_activeChat.VisitedMessages.FindAll(m => m.Node == message.Node).Count > 1) {
             MarkConversationComplete();
             return;
-        }
+        }*/
 
         for(int i = 0; i < message.Options.Length; i++) {
             // if we've already been to this conversation option,

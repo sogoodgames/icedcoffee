@@ -75,18 +75,14 @@ public class SaveDataLoader {
     }
 
     // ------------------------------------------------------------------------
-    private void LogSaveData () {
-        Debug.Log("- Start time: " + _saveData.GameStartTime.ToString());
-        Debug.Log("- Found clues: " + _saveData.FoundClues.Count);
-        Debug.Log("- Chats opened: ");
-        foreach(ChatProgressionData chat in _saveData.ChatProgressionData) {
-            chat.LogData();
-        }
+    public void FoundClue (ClueID id) {
+        _saveData.FoundClues.Add(id);
+        Save();
     }
 
     // ------------------------------------------------------------------------
-    public void FoundClue (ClueID id) {
-        _saveData.FoundClues.Add(id);
+    public void FoundChat (ChatProgressionData chatProgression) {
+        _saveData.ChatProgressionData.Add(chatProgression);
         Save();
     }
 
@@ -98,5 +94,15 @@ public class SaveDataLoader {
         }
         dir += "/" + FileName;
         return dir;
+    }
+
+    // ------------------------------------------------------------------------
+    private void LogSaveData () {
+        Debug.Log("- Start time: " + _saveData.GameStartTime.ToString());
+        Debug.Log("- Found clues: " + _saveData.FoundClues.Count);
+        Debug.Log("- Chats opened: ");
+        foreach(ChatProgressionData chat in _saveData.ChatProgressionData) {
+            chat.LogData();
+        }
     }
 }

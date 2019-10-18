@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: msg_pizzaclue
   m_EditorClassIdentifier: Assembly-CSharp::MessageScriptableObject
-  Node: -1
+  Node: 101
   Player: 1
   ClueGiven: 0
   ClueTrigger: 0
@@ -21,4 +21,3 @@ MonoBehaviour:
   Image: 1
   Options: []
   Branch: 
-  OptionSelection: 0
