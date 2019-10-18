@@ -196,8 +196,6 @@ public class ChatApp : App
     // Methods : ChatRunner event handlers
     // ------------------------------------------------------------------------
     private void DrawChatBubble (MessageScriptableObject message, int messageIndex) {
-        Save();
-
         // determine which prefab to use
         GameObject prefab;
         if(message.Player) {
@@ -207,6 +205,8 @@ public class ChatApp : App
         }
 
         // determine text and icon
+        Debug.Log("message: " + message.Node);
+        Debug.Log("messages size: " + message.Messages.Length);
         string text = message.Messages[messageIndex];
 
         Sprite sprite = PlayerChatIcon;
