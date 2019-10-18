@@ -7,11 +7,18 @@ public struct MessageProgressionData {
     public int Node;
     public int OptionSelection;
     public bool MadeSelection;
+    public bool IsClueMessage;
 
-    public MessageProgressionData (int node, int selection, bool madeSelection) {
+    public MessageProgressionData (
+        int node,
+        int selection,
+        bool madeSelection,
+        bool clueMessage
+    ) {
         Node = node;
         OptionSelection = selection;
         MadeSelection = madeSelection;
+        IsClueMessage = clueMessage;
     }
 }
 
@@ -23,6 +30,7 @@ public class MessageScriptableObject : ScriptableObject
     // ------------------------------------------------------------------------
     public int Node; // the ID for this message
     public bool Player; // whether or not it's the player talking
+    public bool IsClueMessage; // if this is a message sent when presenting a clue
     public ClueID ClueGiven; // the clue given (if any)
     public ClueID ClueTrigger; // the clue that instigates this message
     public string[] Messages; // the text for the messages sent
@@ -43,7 +51,12 @@ public class MessageScriptableObject : ScriptableObject
     // Methods
     // ------------------------------------------------------------------------
     public void ClearProgression () {
-        m_progressionData = new MessageProgressionData(Node, 0, false);
+        m_progressionData = new MessageProgressionData(
+            Node,
+            0,
+            false,
+            IsClueMessage
+        );
     }
 
     // ------------------------------------------------------------------------

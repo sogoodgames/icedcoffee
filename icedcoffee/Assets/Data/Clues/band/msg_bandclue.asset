@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MessageScriptableObject
   Node: 100
   Player: 1
+  IsClueMessage: 1
   ClueGiven: 0
   ClueTrigger: 0
   Messages:

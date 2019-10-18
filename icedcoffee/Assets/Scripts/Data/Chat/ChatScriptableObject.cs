@@ -79,17 +79,37 @@ public class ChatScriptableObject : ScriptableObject
     }
 
     // ------------------------------------------------------------------------
-    public void LoadProgression (ChatProgressionData progressionData) {
+    public void LoadProgression (
+        ChatProgressionData progressionData,
+        List<ClueScriptableObject> gameClueData
+    ) {
         m_progressionData = progressionData;
 
         // create visited messages cache
         m_visitedMessages = new List<MessageScriptableObject>();
         foreach(MessageProgressionData msgProgression in m_progressionData.VisitedMessages) {
             // find corresponding message object based on ID
-            MessageScriptableObject msgObject = 
-                Messages.FirstOrDefault (
+            MessageScriptableObject msgObject;
+            if(msgProgression.IsClueMessage) {
+                // if it's a clue message, search clues
+                msgObject = gameClueData.First (
+                    c => c.Message != null && c.Message.Node == msgProgression.Node
+                ).Message;
+            }
+            else {
+                // otherwise, search this chat's messages
+                msgObject = Messages.First (
                     m => m.Node == msgProgression.Node
-            );
+                );
+            }
+
+            if(msgObject == null) {
+                Debug.LogError(
+                    "Corresponding message object not found for progression: "
+                    + msgProgression.Node
+                );
+                continue;
+            }
 
             // give message object progression data
             msgObject.LoadProgression(msgProgression);
@@ -152,7 +172,7 @@ public class ChatScriptableObject : ScriptableObject
     private void AddMessageToProgression (MessageScriptableObject m) {
         // first add messages to progression data and cached data
         m_progressionData.VisitedMessages.Add(
-            new MessageProgressionData(m.Node, 0, false)
+            new MessageProgressionData(m.Node, 0, false, m.IsClueMessage)
         );
         m_visitedMessages.Add(m);
         Debug.Log("added message to progression: " + m.Node);

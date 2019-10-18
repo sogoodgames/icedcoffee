@@ -305,17 +305,14 @@ public class PhoneOS : MonoBehaviour
         }
 
         // apply all chat progression
-        foreach(ChatScriptableObject chat in GameData.Chats) {
-            // find correspding chat save data
-            ChatProgressionData data =
-                SaveDataLoader.SaveData.ChatProgressionData.FirstOrDefault(
-                    c => c.Friend == chat.Friend
+        foreach(
+            ChatProgressionData chatProgression in
+            SaveDataLoader.SaveData.ChatProgressionData
+        ) {
+            ChatScriptableObject chatObj = GameData.Chats.First(
+                c => c.Friend == chatProgression.Friend
             );
-
-            // load progression data
-            if(!data.Equals(default(ChatProgressionData))) {
-                chat.LoadProgression(data);
-            }
+            chatObj.LoadProgression(chatProgression, GameData.Clues);
         }
     }
 
