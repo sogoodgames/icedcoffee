@@ -42,7 +42,9 @@ public static class DataValidator {
     }
 
     // ------------------------------------------------------------------------
-    public static ValidationOutput ValidateMessage (MessageScriptableObject message) {
+    public static ValidationOutput ValidateMessage (
+        MessageScriptableObject message
+    ) {
         ValidationOutput output = new ValidationOutput(message.Node.ToString());
 
         // all messages should have:
@@ -87,6 +89,29 @@ public static class DataValidator {
             if(message.IsClueMessage) {
                 output.AddError("Message is marked NPC and as a clue message. NPCs don't present clues; did you mean to mark this as Player?");
             }
+        }
+
+        return output;
+    }
+
+    // ------------------------------------------------------------------------
+    public static ValidationOutput ValidateFriend (
+        FriendScriptableObject friend
+    ) {
+        ValidationOutput output = new ValidationOutput(friend.Name);
+
+        if(friend.Friend == Friend.NoFriend) {
+            output.AddError("Friend type is NoFriend. Please select a friend.");
+        } else if(friend.Friend == Friend.You) {
+            output.AddError("Friend type is You. Please select a friend.");
+        }
+
+        if(string.IsNullOrEmpty(friend.Name)) {
+            output.AddError("Friend name is empty. Please give ur friend a name.");
+        }
+
+        if(friend.Icon == null) {
+            output.AddError("Friend has no icon. Please set icon.");
         }
 
         return output;
