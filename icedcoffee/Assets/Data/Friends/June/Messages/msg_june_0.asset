@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MessageScriptableObject
   Node: 0
   Player: 0
+  IsClueMessage: 0
   ClueGiven: 0
   ClueTrigger: 0
   Messages:
@@ -21,4 +22,3 @@ MonoBehaviour:
   Image: 0
   Options: []
   Branch: 01000000
-  OptionSelection: -1

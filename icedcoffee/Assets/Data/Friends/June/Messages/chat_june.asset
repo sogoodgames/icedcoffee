@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: chat_june
   m_EditorClassIdentifier: 
   Friend: 2
-  Icon: {fileID: 21300000, guid: ce8e15ba658cd7d48a295ae089e23cdd, type: 3}
+  Icon: {fileID: 21300000, guid: 9eaafaa671a34f549b1acb29d6841a7b, type: 3}
   ClueNeeded: 0
   Messages:
   - {fileID: 11400000, guid: dc25861fd3a6a1b488444c870f134fbd, type: 2}
@@ -22,5 +22,3 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2895f0a0bfa159949924504fb5c5bfeb, type: 2}
   - {fileID: 11400000, guid: 6335deb64590791499b4212f0ada8d08, type: 2}
   - {fileID: 11400000, guid: 0ae753bb627b39a489a71bec0a42549e, type: 2}
-  Finished: 0
-  PresentedClues: 

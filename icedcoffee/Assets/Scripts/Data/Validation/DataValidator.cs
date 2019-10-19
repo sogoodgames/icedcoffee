@@ -81,8 +81,8 @@ public static class DataValidator {
             if(message.Options.Length > 0) {
                 output.AddError("Message is marked NPC and has options. Should have >0 messages and 0 options.");
             }
-            if(message.Branch.Length > 1) {
-                output.AddError("Message is marked NPC and has >1 branch. Should have only one branch.");
+            if(message.Branch.Length != 1) {
+                output.AddError("Message is marked NPC and has fewer/more than 1 branch. Should have only one branch.");
             }
             if(message.IsClueMessage) {
                 output.AddError("Message is marked NPC and as a clue message. NPCs don't present clues; did you mean to mark this as Player?");

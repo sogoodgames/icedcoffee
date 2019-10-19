@@ -25,4 +25,14 @@ public static class GameDataEditorUtils {
         EditorGUILayout.LabelField("Message:");
         EditorGUILayout.LabelField(validation.Message.ToString(), msgStyle);
     }
+
+    // ------------------------------------------------------------------------
+    public static void DrawIconField (SerializedProperty iconProperty) {
+        iconProperty.objectReferenceValue = EditorGUILayout.ObjectField(
+            "Chat icon: ",
+            iconProperty.objectReferenceValue,
+            typeof(Sprite),
+            false
+        );
+    }
 }
