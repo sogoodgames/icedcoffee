@@ -30,7 +30,7 @@ public class ChatScriptableObjectEditor : GameDataEditor {
         EditorGUILayout.LabelField("Chat: " + friend, EditorStyles.boldLabel);
         EditorGUILayout.PropertyField(m_friend);
         EditorGUILayout.PropertyField(m_clueNeeded);
-        GameDataEditorUtils.DrawIconField(m_icon);
+        DrawIconField(m_icon);
 
         GUILayout.Space(20);
 
@@ -44,7 +44,7 @@ public class ChatScriptableObjectEditor : GameDataEditor {
             ChatScriptableObject obj = target as ChatScriptableObject;
             validation = DataValidator.ValidateChat(obj);
         }
-        GameDataEditorUtils.DrawValidationOutput(validation);
+        DrawValidationOutput(validation);
 
         serializedObject.ApplyModifiedProperties();
     }

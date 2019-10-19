@@ -61,7 +61,7 @@ public class MessageScriptableObjectEditor : GameDataEditor {
             MessageScriptableObject obj = target as MessageScriptableObject;
             validation = DataValidator.ValidateMessage(obj);
         }
-        GameDataEditorUtils.DrawValidationOutput(validation);
+        DrawValidationOutput(validation);
 
         serializedObject.ApplyModifiedProperties();
     }
