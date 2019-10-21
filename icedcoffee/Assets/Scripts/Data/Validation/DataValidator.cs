@@ -233,4 +233,94 @@ public static class DataValidator {
 
         return output;
     }
+
+    // ------------------------------------------------------------------------
+    public static ValidationOutput ValidateGramPost (GramPostScriptableObject post) {
+        int lastIndex = post.Description.Length < 10 ? post.Description.Length : 10;
+        ValidationOutput output = new ValidationOutput(
+            post.UserId.ToString() + "- " +  post.Description.Substring(0, lastIndex) + "..."
+        );
+
+        if(post.UserId == Friend.NoFriend) {
+            output.AddError("Friend needs to be value other than NoFriend.");
+        }
+
+        if(string.IsNullOrEmpty(post.Description)) {
+            output.AddError("Post has no description.");
+        }
+
+        if(post.PostImage == PhotoID.NoPhoto) {
+            output.AddError("Post has no image.");
+        }
+
+        return output;
+    }
+
+    // ------------------------------------------------------------------------
+    public static ValidationOutput ValidateGramComment (
+        GramCommentScriptableObject comment
+    ) {
+        int lastIndex = comment.Comment.Length < 10 ? comment.Comment.Length : 10; 
+        ValidationOutput output = new ValidationOutput(
+            comment.UserId.ToString() + "- " + comment.Comment.Substring(0, lastIndex) + "..."
+        );
+
+        if(comment.UserId == Friend.NoFriend) {
+            output.AddError("Friend needs to be value other than NoFriend.");
+        }
+
+        if(string.IsNullOrEmpty(comment.Comment)) {
+            output.AddError("Comment is empty.");
+        }
+
+        return output;
+    }
+
+    // ------------------------------------------------------------------------
+    public static ValidationOutput ValidateForumUser (ForumUserScriptableObject user) {
+        ValidationOutput output = new ValidationOutput(user.UserID.ToString());
+
+        if(string.IsNullOrEmpty(user.Username)) {
+            output.AddError("Username empty.");
+        }
+
+        if(user.UserID == Friend.NoFriend) {
+            output.AddError("Friend needs to be value other than NoFriend.");
+        }
+
+        if(user.Icon == null) {
+            output.AddError("Icon empty.");
+        }
+
+        return output;
+    }
+
+    // ------------------------------------------------------------------------
+    public static ValidationOutput ValidateForumPost (ForumPostScriptableObject post) {
+        ValidationOutput output = new ValidationOutput(
+            post.UserID.ToString() + post.Title
+        );
+
+        if(post.UserID == Friend.NoFriend) {
+            output.AddError("Friend needs to be value other than NoFriend.");
+        }
+
+        if(string.IsNullOrEmpty(post.Title)) {
+            output.AddError("Title empty.");
+        }
+
+        if(string.IsNullOrEmpty(post.Body) && post.Photo == PhotoID.NoPhoto) {
+            output.AddError("Both post body and image are empty- fill in at least one.");
+        }
+
+        if(post.Time < 0) {
+            output.AddError("Time must be positive.");
+        }
+
+        if(post.NumComments < 0) {
+            output.AddError("Number of comments must be positive.");
+        }
+
+        return output;
+    }
 }
