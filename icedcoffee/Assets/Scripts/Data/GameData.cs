@@ -29,43 +29,54 @@ public class GameData : MonoBehaviour
     [SerializeField]
     private List<Sprite> _photoAssets;
 
+    private Dictionary<Friend, MusicUserScriptableObject> _musicUsersInstanced;
+    private Dictionary<Friend, ChatScriptableObject> _chatsInstanced;
+    private Dictionary<Friend, GramPostScriptableObject> _gramPostsInstanced;
+    private Dictionary<Friend, GramUserScriptableObject> _gramUsersInstanced;
+    private Dictionary<Friend, ForumPostScriptableObject> _forumPostsInstanced;
+    private Dictionary<Friend, ForumUserScriptableObject> _forumUsersInstanced;
+    private Dictionary<ClueID, ClueScriptableObject> _cluesInstanced;
+    private Dictionary<ClueID, PhotoScriptableObject> _photosInstancedByClue;
+    private Dictionary<PhotoID, PhotoScriptableObject> _photosInstancedById;
+    private Dictionary<Friend, FriendScriptableObject> _friendsInstanced;
+
     // ------------------------------------------------------------------------
     // Properties
     // ------------------------------------------------------------------------
     public List<MusicUserScriptableObject> MusicUsers {
-        get {return _musicUsers;}
+        get {return new List<MusicUserScriptableObject>(_musicUsersInstanced.Values);}
     }
 
     public List<ChatScriptableObject> Chats {
-        get{return _chats;}
+        get{return new List<ChatScriptableObject>(_chatsInstanced.Values);}
     }
 
     public List<GramPostScriptableObject> GramPosts {
-        get{return _gramPosts;}
+        get{return new List<GramPostScriptableObject>(_gramPostsInstanced.Values);}
     }
 
     public List<GramUserScriptableObject> GramUsers {
-        get{return _gramUsers;}
+        get{return new List<GramUserScriptableObject>(_gramUsersInstanced.Values);}
     }
 
     public List<ForumPostScriptableObject> ForumPosts {
-        get{return _forumPosts;}
+        get{return new List<ForumPostScriptableObject>(_forumPostsInstanced.Values);}
     }
 
     public List<ForumUserScriptableObject> ForumUsers {
-        get{return _forumUsers;}
+        get{return new List<ForumUserScriptableObject>(_forumUsersInstanced.Values);}
     }
 
     public List<ClueScriptableObject> Clues {
-        get{return _clues;}
+        get{return new List<ClueScriptableObject>(_cluesInstanced.Values);}
     }
 
     public List<PhotoScriptableObject> Photos {
-        get{return _photos;}
+        get{return new List<PhotoScriptableObject>(_photosInstancedByClue.Values);}
     }
 
     public List<FriendScriptableObject> Friends {
-        get{return _friends;}
+        get{return new List<FriendScriptableObject>(_friendsInstanced.Values);}
     }
 
     public List<Sprite> UserIconAssets {
@@ -74,5 +85,104 @@ public class GameData : MonoBehaviour
 
     public List<Sprite> PhotoAssets {
         get{return _photoAssets;}
+    }
+
+    // ------------------------------------------------------------------------
+    // Methods
+    // ------------------------------------------------------------------------
+    private void Awake () {
+        _musicUsersInstanced = new Dictionary<Friend, MusicUserScriptableObject>();
+        foreach (MusicUserScriptableObject m in _musicUsers) {
+            _musicUsersInstanced.Add(m.FriendID, m);
+        }
+
+        _chatsInstanced = new Dictionary<Friend, ChatScriptableObject>();
+        foreach (ChatScriptableObject c in _chats) {
+            _chatsInstanced.Add(c.Friend, c);
+        }
+
+        _gramPostsInstanced = new Dictionary<Friend, GramPostScriptableObject>();
+        foreach (GramPostScriptableObject g in _gramPosts) {
+            _gramPostsInstanced.Add(g.UserId, g);
+        }
+
+        _gramUsersInstanced = new Dictionary<Friend, GramUserScriptableObject>();
+        foreach (GramUserScriptableObject g in _gramUsers) {
+            _gramUsersInstanced.Add(g.UserId, g);
+        }
+
+        _forumPostsInstanced = new Dictionary<Friend, ForumPostScriptableObject>();
+        foreach (ForumPostScriptableObject f in _forumPosts) {
+            _forumPostsInstanced.Add(f.UserID, f);
+        }
+
+        _forumUsersInstanced = new Dictionary<Friend, ForumUserScriptableObject>();
+        foreach (ForumUserScriptableObject f in _forumUsers) {
+            _forumUsersInstanced.Add(f.UserID, f);
+        }
+
+        _cluesInstanced = new Dictionary<ClueID, ClueScriptableObject>();
+        foreach (ClueScriptableObject c in _clues) {
+            _cluesInstanced.Add(c.ClueID, c);
+        }
+
+        _photosInstancedByClue = new Dictionary<ClueID, PhotoScriptableObject>();
+        foreach (PhotoScriptableObject p in _photos) {
+            _photosInstancedByClue.Add(p.ClueID, p);
+        }
+
+        _photosInstancedById = new Dictionary<PhotoID, PhotoScriptableObject>();
+        foreach (PhotoScriptableObject p in _photos) {
+            _photosInstancedById.Add(p.PhotoID, p);
+        }
+
+        _friendsInstanced = new Dictionary<Friend, FriendScriptableObject>();
+        foreach (FriendScriptableObject f in _friends) {
+            _friendsInstanced.Add(f.Friend, f);
+        }
+    }
+
+    // ------------------------------------------------------------------------
+    public ClueScriptableObject GetClue (ClueID id) {
+        if(_cluesInstanced.ContainsKey(id)) {
+            return _cluesInstanced[id];
+        }
+        return null;
+    }
+
+    // ------------------------------------------------------------------------
+    public PhotoScriptableObject GetPhoto (ClueID id) {
+        if(_photosInstancedByClue.ContainsKey(id)) {
+            return _photosInstancedByClue[id];
+        }
+        return null;
+    }
+
+    // ------------------------------------------------------------------------
+    public PhotoScriptableObject GetPhoto (PhotoID id) {
+        if(_photosInstancedById.ContainsKey(id)) {
+            return _photosInstancedById[id];
+        }
+        return null;
+    }
+
+    // ------------------------------------------------------------------------
+    public GramUserScriptableObject GetGramUser (Friend id) {
+        return _gramUsersInstanced[id];
+    }
+
+    // ------------------------------------------------------------------------
+    public ForumUserScriptableObject GetForumUser (Friend id) {
+        return _forumUsersInstanced[id];
+    }
+
+    // ------------------------------------------------------------------------
+    public MusicUserScriptableObject GetMusicUser (Friend id) {
+        return _musicUsersInstanced[id];
+    }
+
+    // ------------------------------------------------------------------------
+    public ChatScriptableObject GetChat (Friend id) {
+        return _chatsInstanced[id];
     }
 }

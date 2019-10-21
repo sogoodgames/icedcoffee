@@ -189,7 +189,7 @@ public class ChatApp : App
 
     // ------------------------------------------------------------------------
     public void OpenAttachment (PhotoID photoID) {
-        PhotoScriptableObject photo = PhoneOS.GetPhoto(photoID);
+        PhotoScriptableObject photo = PhoneOS.GameData.GetPhoto(photoID);
         FullscreenImage.Open(photo.Image);
     }
 

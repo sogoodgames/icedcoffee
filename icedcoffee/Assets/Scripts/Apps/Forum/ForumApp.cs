@@ -19,7 +19,7 @@ public class ForumApp : App
 
             ForumPostUI postUI = postObj.GetComponent<ForumPostUI>();
             if(postUI) {
-                ForumUserScriptableObject user = PhoneOS.GetForumUser(post.UserID);
+                ForumUserScriptableObject user = PhoneOS.GameData.GetForumUser(post.UserID);
 
                 // set all basic info
                 postUI.TitleText.text = post.Title;

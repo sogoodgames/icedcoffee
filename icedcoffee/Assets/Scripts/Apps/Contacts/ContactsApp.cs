@@ -35,9 +35,9 @@ public class ContactsApp : App
 
             ContactUI contactUI = contactObj.GetComponent<ContactUI>();
             if(contactUI) {
-                GramUserScriptableObject gram = PhoneOS.GetGramUser(friend.Friend);
-                MusicUserScriptableObject music = PhoneOS.GetMusicUser(friend.Friend);
-                ForumUserScriptableObject forum = PhoneOS.GetForumUser(friend.Friend);
+                GramUserScriptableObject gram = PhoneOS.GameData.GetGramUser(friend.Friend);
+                MusicUserScriptableObject music = PhoneOS.GameData.GetMusicUser(friend.Friend);
+                ForumUserScriptableObject forum = PhoneOS.GameData.GetForumUser(friend.Friend);
                 contactUI.SetContent (
                     name:friend.Name,
                     gram:gram != null ? gram.Username : "",

@@ -8,7 +8,7 @@ public class GramCommentUI : MonoBehaviour
     public Text CommentText;
 
     public void SetContent (GramCommentScriptableObject comment, PhoneOS os) {
-        GramUserScriptableObject user = os.GetGramUser(comment.UserId);
+        GramUserScriptableObject user = os.GameData.GetGramUser(comment.UserId);
         if(user == null) return;
 
         UserIcon.sprite = user.Icon;

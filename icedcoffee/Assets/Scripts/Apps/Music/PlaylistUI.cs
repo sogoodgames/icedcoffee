@@ -16,7 +16,7 @@ public class PlaylistUI : MonoBehaviour
     // Methods
     // ------------------------------------------------------------------------
     public void Open (Friend id) {
-        MusicUserScriptableObject user = PhoneOS.GetMusicUser(id);
+        MusicUserScriptableObject user = PhoneOS.GameData.GetMusicUser(id);
 
         // set UI text for username, playlist name
         UsernameTitleText.text = "by " + user.Username + " // " + user.NumFollowers + " followers";

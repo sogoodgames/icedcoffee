@@ -43,7 +43,7 @@ public class ClueSelectionUI : ChatSelectionUI
             if(clue.ClueID == ClueID.NoClue 
                || !clue.CanSend
                || chat.PresentedClues.Contains(clue.ClueID)
-               || PhoneOS.GetPhoto(clue.ClueID) != null
+               || PhoneOS.GameData.GetPhoto(clue.ClueID) != null
             ) {
                 continue;
             }

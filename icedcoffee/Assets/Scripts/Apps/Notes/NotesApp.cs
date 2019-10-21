@@ -44,7 +44,7 @@ public class NotesApp : App
             GameObject noteObj = Instantiate(NotePrefab, NotesParent);
             NoteUI noteUI = noteObj.GetComponent<NoteUI>();
             if(noteUI) {
-                PhotoScriptableObject photo = PhoneOS.GetPhoto(clue.ClueID);
+                PhotoScriptableObject photo = PhoneOS.GameData.GetPhoto(clue.ClueID);
                 if(photo != null) {
                     Sprite sprite = photo.Image;
                     noteUI.SetContent(this, clue.Note, sprite);

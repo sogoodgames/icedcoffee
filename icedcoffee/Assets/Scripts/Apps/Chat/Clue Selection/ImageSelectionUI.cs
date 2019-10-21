@@ -21,7 +21,7 @@ public class ImageSelectionUI : ChatSelectionUI
             ImageButtonUI imageButtonUI = imageTile.GetComponent<ImageButtonUI>();
             if(imageButtonUI) {
                 imageButtonUI.Init(
-                    PhoneOS.GetClue(clue),
+                    PhoneOS.GameData.GetClue(clue),
                     chatRunner,
                     photo.Image
                 );

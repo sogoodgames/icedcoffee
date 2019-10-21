@@ -18,8 +18,7 @@ public class PhoneOS : MonoBehaviour
     // ------------------------------------------------------------------------
     public bool RunFTUE = true;
 
-    [SerializeField]
-    private GameData GameData;
+    public GameData GameData;
     public ChatRunner ChatRunner;
     public NotificationManager NotificationManager;
     public NotesApp NotesApp;
@@ -173,14 +172,8 @@ public class PhoneOS : MonoBehaviour
     // ------------------------------------------------------------------------
     // Methods: Clues
     // ------------------------------------------------------------------------
-    public ClueScriptableObject GetClue (ClueID id) {
-        ClueScriptableObject clue = GameData.Clues.First(c => c.ClueID == id);
-        return clue;
-    }
-
-    // ------------------------------------------------------------------------
     public bool ClueRequirementMet (ClueID id) {
-        ClueScriptableObject clue = GetClue(id);
+        ClueScriptableObject clue = GameData.GetClue(id);
         if(!clue.Invalid) {
             return clue.Unlocked;
         }
@@ -195,7 +188,7 @@ public class PhoneOS : MonoBehaviour
         }
 
         // find clue data
-        ClueScriptableObject clue = GetClue(id);
+        ClueScriptableObject clue = GameData.GetClue(id);
 
         // Let notification manager know
         NotificationManager.FoundClue(clue);
@@ -218,33 +211,6 @@ public class PhoneOS : MonoBehaviour
         }
 
         clue.Unlocked = true;
-    }
-
-    // ------------------------------------------------------------------------
-    // Methods: Data
-    // ------------------------------------------------------------------------
-    public PhotoScriptableObject GetPhoto (PhotoID id) {
-        return GameData.Photos.FirstOrDefault(p => p.PhotoID == id);
-    }
-
-    // ------------------------------------------------------------------------
-    public PhotoScriptableObject GetPhoto (ClueID id) {
-        return GameData.Photos.FirstOrDefault(p => p.ClueID == id);
-    }
-
-    // ------------------------------------------------------------------------
-    public GramUserScriptableObject GetGramUser (Friend id) {
-        return GameData.GramUsers.FirstOrDefault(u => u.UserId == id);
-    }
-
-    // ------------------------------------------------------------------------
-    public MusicUserScriptableObject GetMusicUser (Friend id) {
-        return GameData.MusicUsers.FirstOrDefault(u => u.FriendID == id);
-    }
-
-    // ------------------------------------------------------------------------
-    public ForumUserScriptableObject GetForumUser (Friend id) {
-        return GameData.ForumUsers.FirstOrDefault(u => u.UserID == id);
     }
 
     // ------------------------------------------------------------------------
@@ -346,7 +312,7 @@ public class PhoneOS : MonoBehaviour
         }
 
         if(id != ClueID.NoClue) {
-            ClueScriptableObject clue = GetClue(id);
+            ClueScriptableObject clue = GameData.GetClue(id);
             clue.Unlocked = !clue.Unlocked;
             Debug.Log("clue: " + clue.ClueID + "; state: " + clue.Unlocked);
         }

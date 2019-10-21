@@ -22,9 +22,9 @@ public class GramPostUI : MonoBehaviour
     // Methods
     // ------------------------------------------------------------------------
     public void SetPostContent (GramPostScriptableObject post, PhoneOS os) {
-        GramUserScriptableObject user = os.GetGramUser(post.UserId);
+        GramUserScriptableObject user = os.GameData.GetGramUser(post.UserId);
         if(user == null) return;
-        PhotoScriptableObject postPhoto = os.GetPhoto(post.PostImage);
+        PhotoScriptableObject postPhoto = os.GameData.GetPhoto(post.PostImage);
         if(postPhoto == null) return;
 
         // set post photo content

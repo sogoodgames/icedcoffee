@@ -101,7 +101,7 @@ public class NotificationManager : MonoBehaviour
     }
 
     public void FoundClueNotif (ClueID id) {
-        ClueScriptableObject clue = PhoneOS.GetClue(id);
+        ClueScriptableObject clue = PhoneOS.GameData.GetClue(id);
         QueueNotif(NotesApp.Icon, clue.Note, NotesApp);
     }
 
