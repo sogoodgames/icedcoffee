@@ -195,4 +195,23 @@ public static class DataValidator {
 
         return output;
     }
+
+    // ------------------------------------------------------------------------
+    public static ValidationOutput ValidateSong (SongScriptableObject song) {
+        ValidationOutput output = new ValidationOutput(song.Title);
+
+        if(string.IsNullOrEmpty(song.Title)) {
+            output.AddError("Song title empty.");
+        }
+
+        if(string.IsNullOrEmpty(song.Artist)) {
+            output.AddError("Song artist empty.");
+        }
+
+        if(string.IsNullOrEmpty(song.Album)) {
+            output.AddError("Song album empty.");
+        }
+
+        return output;
+    }
 }
