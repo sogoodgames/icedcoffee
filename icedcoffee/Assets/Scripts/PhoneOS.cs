@@ -93,7 +93,7 @@ public class PhoneOS : MonoBehaviour
         get {
             List<MusicUserScriptableObject> activeUsers = new List<MusicUserScriptableObject>();
             foreach(MusicUserScriptableObject user in GameData.MusicUsers) {
-                if(ClueRequirementMet(user.ClueNeeded) && !user.IsPlayer) {
+                if(ClueRequirementMet(user.ClueNeeded) && user.FriendID != Friend.You) {
                     activeUsers.Add(user);
                 }
             }

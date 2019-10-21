@@ -170,4 +170,29 @@ public static class DataValidator {
 
         return output;
     }
+
+    // ------------------------------------------------------------------------
+    public static ValidationOutput ValidateMusicUser (
+        MusicUserScriptableObject user
+    ) {
+        ValidationOutput output = new ValidationOutput(user.Username);
+
+        if(string.IsNullOrEmpty(user.Username)) {
+            output.AddError("Username empty.");
+        }
+
+        if(user.FriendID == Friend.NoFriend) {
+            output.AddError("Friend needs to be value other than NoFriend.");
+        }
+
+        if(string.IsNullOrEmpty(user.PlaylistName)) {
+            output.AddError("Playlist name empty.");
+        }
+
+        if(user.Playlist.Length < 1) {
+            output.AddError("Playlist empty.");
+        }
+
+        return output;
+    }
 }

@@ -6,7 +6,6 @@ public class MusicUserScriptableObject : ScriptableObject
     // ------------------------------------------------------------------------
     // Variables
     // ------------------------------------------------------------------------
-    public bool IsPlayer;
     public string Username;
     public string PlaylistName;
     public int NumFollowers;
