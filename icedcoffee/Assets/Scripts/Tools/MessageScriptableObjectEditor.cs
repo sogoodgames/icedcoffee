@@ -46,13 +46,18 @@ public class MessageScriptableObjectEditor : GameDataEditor {
         if(m_player.boolValue) {
             EditorGUILayout.LabelField("Player Message Properties", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(m_isClue);
-            EditorGUILayout.PropertyField(m_options, true);
+            if(!m_isClue.boolValue) {
+                EditorGUILayout.PropertyField(m_options, true);
+                EditorGUILayout.PropertyField(m_branch, true);
+            } else {
+                EditorGUILayout.PropertyField(m_messages, true);
+            }
         } else {
             EditorGUILayout.LabelField("NPC Message Properties", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(m_clueTrigger);
             EditorGUILayout.PropertyField(m_messages, true);
+            EditorGUILayout.PropertyField(m_branch, true);
         }
-        EditorGUILayout.PropertyField(m_branch, true);
 
         GUILayout.Space(20);
 

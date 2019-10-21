@@ -55,19 +55,36 @@ public static class DataValidator {
 
         if(message.Player) {
             // player messages should have:
-            // no messages
-            // options
-            // the same number of branches as options
+            // if not a clue message
+            //   no messages
+            //   options
+            //   the same number of branches as options
+            // if a clue message
+            //   messages
+            //   no options or branches
             // no clue trigger (only npc messages are triggered by clues)
-            if(message.Messages.Length > 0) {
-                output.AddError("Message is marked Player and has messages. Should have 0 messages and >0 options.");
+            if(!message.IsClueMessage) {
+                if(message.Options.Length < 1) {
+                    output.AddError("Message is marked Player (and not clue message) and has no options. Should have 0 messages and >0 options.");
+                }
+                if(message.Options.Length != message.Branch.Length) {
+                    output.AddError("Message is marked Player (and not clue message) and the number of options does not equal the number of branches. There should be 1 branch for each option.");
+                }
+                if(message.Messages.Length > 0) {
+                    output.AddError("Message is marked Player (and not clue message) and has messages. Should have 0 messages and >0 options.");
+                }
+            } else {
+                if(message.Messages.Length < 1) {
+                output.AddError("Message is marked Player (clue message) and has no messages. Should have >0 messages and 0 options.");
+                }
+                if(message.Options.Length > 0) {
+                    output.AddError("Message is marked Player (clue message) and has options. Should have >0 messages and 0 options.");
+                }
+                if(message.Branch.Length > 0) {
+                    output.AddError("Message is marked Player (clue message) and has a branch. Clue messages don't have branches; did you mean to make this NOT a clue message, or an NPC message?.");
+                }
             }
-            if(message.Options.Length < 1) {
-                output.AddError("Message is marked Player and has no options. Should have 0 messages and >0 options.");
-            }
-            if(message.Options.Length != message.Branch.Length) {
-                output.AddError("Message is marked Player and the number of options does not equal the number of branches. There should be 1 branch for each option.");
-            }
+
             if(message.ClueTrigger != ClueID.NoClue) {
                 output.AddError("Message is marked Player and has a clue trigger. Player messages are never triggered by clues; did you mean to make this an NPC message?");
             }
