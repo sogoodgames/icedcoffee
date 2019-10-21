@@ -116,4 +116,19 @@ public static class DataValidator {
 
         return output;
     }
+
+    // ------------------------------------------------------------------------
+    public static ValidationOutput ValidateClue (ClueScriptableObject clue) {
+        ValidationOutput output = new ValidationOutput(clue.ClueID.ToString());
+
+        if(string.IsNullOrEmpty(clue.Note)) {
+            output.AddError("Clue note is empty. Please add a note.");
+        }
+
+        if(clue.CanSend && clue.Message == null) {
+            output.AddError("Clue is marked CanSend and doesn't have a message. Please add a message.");
+        }
+
+        return output;
+    }
 }
