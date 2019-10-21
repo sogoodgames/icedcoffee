@@ -148,4 +148,26 @@ public static class DataValidator {
 
         return output;
     }
+
+    // ------------------------------------------------------------------------
+    public static ValidationOutput ValidatePhoto (PhotoScriptableObject photo) {
+        ValidationOutput output = new ValidationOutput(photo.PhotoID.ToString());
+
+        if(photo.Image == null) {
+            output.AddError("No image given. Please add image.");
+        }
+
+        if(photo.Width < 0.01f) {
+            output.AddError("Width is too small. Please input valid width.");
+        }
+        if(photo.Height < 0.01f) {
+            output.AddError("Height is too small. Please input valid width.");
+        }
+
+        if(string.IsNullOrEmpty(photo.Description)) {
+            output.AddError("Photo description is empty. Please add a description.");
+        }
+
+        return output;
+    }
 }
