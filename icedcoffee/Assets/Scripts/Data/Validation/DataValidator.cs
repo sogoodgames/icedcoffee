@@ -214,4 +214,23 @@ public static class DataValidator {
 
         return output;
     }
+
+    // ------------------------------------------------------------------------
+    public static ValidationOutput ValidateGramUser (GramUserScriptableObject user) {
+        ValidationOutput output = new ValidationOutput(user.Username);
+
+        if(string.IsNullOrEmpty(user.Username)) {
+            output.AddError("Username empty.");
+        }
+
+        if(user.UserId == Friend.NoFriend) {
+            output.AddError("Friend needs to be value other than NoFriend.");
+        }
+
+        if(user.Icon == null) {
+            output.AddError("Icon empty.");
+        }
+
+        return output;
+    }
 }
