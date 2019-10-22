@@ -176,21 +176,33 @@ public class GameData : MonoBehaviour
 
     // ------------------------------------------------------------------------
     public GramUserScriptableObject GetGramUser (Friend id) {
-        return _gramUsersInstanced[id];
+        if(_gramPostsInstanced.ContainsKey(id)) {
+            return _gramUsersInstanced[id];
+        }
+        return null;
     }
 
     // ------------------------------------------------------------------------
     public ForumUserScriptableObject GetForumUser (Friend id) {
-        return _forumUsersInstanced[id];
+        if(_forumUsersInstanced.ContainsKey(id)) {
+            return _forumUsersInstanced[id];
+        }
+        return null;
     }
 
     // ------------------------------------------------------------------------
     public MusicUserScriptableObject GetMusicUser (Friend id) {
-        return _musicUsersInstanced[id];
+        if(_musicUsersInstanced.ContainsKey(id)) {
+            return _musicUsersInstanced[id];
+        }
+        return null;
     }
 
     // ------------------------------------------------------------------------
     public ChatScriptableObject GetChat (Friend id) {
-        return _chatsInstanced[id];
+        if(_chatsInstanced.ContainsKey(id)) {
+            return _chatsInstanced[id];
+        }
+        return null;
     }
 }
