@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class GameData : MonoBehaviour
 {
@@ -25,8 +27,6 @@ public class GameData : MonoBehaviour
     [SerializeField]
     private List<FriendScriptableObject> _friends;
     [SerializeField]
-    private List<Sprite> _userIconAssets;
-    [SerializeField]
     private List<Sprite> _photoAssets;
 
     private Dictionary<Friend, MusicUserScriptableObject> _musicUsersInstanced;
@@ -44,11 +44,19 @@ public class GameData : MonoBehaviour
     // Properties
     // ------------------------------------------------------------------------
     public List<MusicUserScriptableObject> MusicUsers {
-        get {return new List<MusicUserScriptableObject>(_musicUsersInstanced.Values);}
+        get {
+            Assert.IsNotNull(_musicUsersInstanced, "Music users list null.");
+            return new List<MusicUserScriptableObject>(
+                _musicUsersInstanced.Values
+            );
+        }
     }
 
     public List<ChatScriptableObject> Chats {
-        get{return new List<ChatScriptableObject>(_chatsInstanced.Values);}
+        get{
+            if(_chatsInstanced == null) Init();
+            return new List<ChatScriptableObject>(_chatsInstanced.Values);
+        }
     }
 
     public List<GramPostScriptableObject> GramPosts {
@@ -79,10 +87,6 @@ public class GameData : MonoBehaviour
         get{return new List<FriendScriptableObject>(_friendsInstanced.Values);}
     }
 
-    public List<Sprite> UserIconAssets {
-        get{return _userIconAssets;}
-    }
-
     public List<Sprite> PhotoAssets {
         get{return _photoAssets;}
     }
@@ -90,9 +94,13 @@ public class GameData : MonoBehaviour
     // ------------------------------------------------------------------------
     // Methods
     // ------------------------------------------------------------------------
-    private void Awake () {
+    public void Init () {
         _musicUsersInstanced = new Dictionary<Friend, MusicUserScriptableObject>();
         foreach (MusicUserScriptableObject m in _musicUsers) {
+            Assert.IsNotNull (
+                m,
+                "Music user null."
+            );
             _musicUsersInstanced.Add(m.FriendID, m);
         }
 

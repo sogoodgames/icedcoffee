@@ -1,12 +1,18 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class MainMenu : App
 {
     // ------------------------------------------------------------------------
+    // Variables
+    // ------------------------------------------------------------------------
+    public Button LoadButton;
+    public Button SaveButton;
+
+    // ------------------------------------------------------------------------
     // Methods
     // ------------------------------------------------------------------------
     public override void Open() {
-        Debug.Log("called main menu open");
         base.Open();
     }
 
@@ -21,6 +27,11 @@ public class MainMenu : App
     }
 
     // ------------------------------------------------------------------------
+    private void OnEnable () {
+        SetupButtons();
+    }
+
+    // ------------------------------------------------------------------------
     public void StartNewGame () {
         PhoneOS.StartNewGame();
         PhoneOS.GoHome();
@@ -30,5 +41,19 @@ public class MainMenu : App
     public void LoadGame () {
         PhoneOS.LoadGame();
         PhoneOS.GoHome();
+    }
+
+    // ------------------------------------------------------------------------
+    public void Exit () {
+        Application.Quit();
+    }
+
+    // ------------------------------------------------------------------------
+    private void SetupButtons () {
+        if(PhoneOS.CanLoadSaveFile) {
+            LoadButton.interactable = true;
+        } else {
+            LoadButton.interactable = false;
+        }
     }
 }

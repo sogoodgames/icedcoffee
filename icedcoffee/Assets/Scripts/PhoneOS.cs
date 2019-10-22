@@ -3,6 +3,7 @@
 #endif
 
 using UnityEngine;
+using UnityEngine.Assertions;
 
 using System.Collections.Generic;
 using System.IO;
@@ -31,9 +32,20 @@ public class PhoneOS : MonoBehaviour
     private SaveDataLoader SaveDataLoader;
     private App m_activeApp;
 
+    private bool m_initialized = false;
+
     // ------------------------------------------------------------------------
     // Properties
     // ------------------------------------------------------------------------
+    public bool CanLoadSaveFile {
+        get { 
+            if(SaveDataLoader == null) {
+                SaveDataLoader = new SaveDataLoader();
+            }
+            return SaveDataLoader.CanLoad;
+        }
+    }
+
     public List<FriendScriptableObject> ActiveFriends {
         get {
             List<FriendScriptableObject> activeFriends = new List<FriendScriptableObject>();
@@ -130,14 +142,10 @@ public class PhoneOS : MonoBehaviour
     // ------------------------------------------------------------------------
     // Methods: Monobehaviour
     // ------------------------------------------------------------------------
+    // VERY IMPORTANT for guarunteeing that all game data is available
+    // upon load
     void Awake () {
-        // set screen resolution
-        Screen.SetResolution(480, 848, false);
-
-        // subscribe to game events
-        ChatRunner.FoundClue += FoundClue;
-
-        m_activeApp = MainMenuApp;
+        Init();
     }
     
     // ------------------------------------------------------------------------
@@ -214,15 +222,37 @@ public class PhoneOS : MonoBehaviour
     }
 
     // ------------------------------------------------------------------------
-    // Methods: Save/Load
+    // Methods: App Lifecycle
     // ------------------------------------------------------------------------
-    public void StartNewGame () {
-        foreach(ChatScriptableObject chat in GameData.Chats) {
-            chat.ClearProgression();
-        }
-        
+    private void Init () {
+        m_initialized = true;
+
+        // set screen resolution
+        Screen.SetResolution(480, 848, false);
+
+        // init game data
+        GameData.Init();
+
+        // create save data loader
         if(SaveDataLoader == null) {
             SaveDataLoader = new SaveDataLoader();
+        }
+
+        // subscribe to game events
+        ChatRunner.FoundClue += FoundClue;
+
+        m_activeApp = MainMenuApp;
+    }
+
+    // ------------------------------------------------------------------------
+    public void StartNewGame () {
+        Debug.Log("attempting start new game. init state: " + m_initialized);
+        if(!m_initialized) {
+            Init();
+        }
+
+        foreach(ChatScriptableObject chat in GameData.Chats) {
+            chat.ClearProgression();
         }
 
         // create list of default found clues and chats
@@ -248,15 +278,21 @@ public class PhoneOS : MonoBehaviour
 
     // ------------------------------------------------------------------------
     public void LoadGame () {
-        if(SaveDataLoader == null) {
-            SaveDataLoader = new SaveDataLoader();
+        if(!m_initialized) {
+            Init();
         }
+
         SaveDataLoader.Load();
         PropagateSaveData();
     }
 
     // ------------------------------------------------------------------------
     public void SaveGame () {
+        Assert.IsTrue(
+            m_initialized,
+            "App not initialized when attempting to save."
+        );
+
         SaveDataLoader.Save();
     }
 

@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class SaveDataLoader {
     // ------------------------------------------------------------------------
@@ -19,6 +20,25 @@ public class SaveDataLoader {
     }
 
     // ------------------------------------------------------------------------
+    // Properties
+    // ------------------------------------------------------------------------
+    private string FilePath {
+        get {
+            string dir = Application.persistentDataPath + "/" + DirectoryName;
+            if(!Directory.Exists(dir)) {
+                Directory.CreateDirectory(dir);
+            }
+            dir += "/" + FileName;
+            return dir;
+        }
+    }
+
+    // tells you whether or not a save file exists to load
+    public bool CanLoad {
+        get { return File.Exists(FilePath); }
+    }
+
+    // ------------------------------------------------------------------------
     // Methods
     // ------------------------------------------------------------------------
     // first time initialization of new save
@@ -26,6 +46,8 @@ public class SaveDataLoader {
         List<ChatProgressionData> defaultChats,
         List<ClueID> defaultClues
     ) {
+        Debug.Log("attempting create new save");
+
         DateTime startTime = DateTime.Now;
         _saveData = new PlayerSaveData(defaultChats, defaultClues, startTime);
         Save();
@@ -33,8 +55,14 @@ public class SaveDataLoader {
 
     // ------------------------------------------------------------------------
     public void Save () {
-        string filePath = GetFilePath();
+        Debug.Log("attempting save");
+
+        string filePath = FilePath;
         FileStream saveFile = File.Create(filePath);
+        Assert.IsTrue(
+            File.Exists(filePath),
+            "Failed to create save file at path " + filePath
+        );
 
         BinaryFormatter formatter = new BinaryFormatter();
         try {
@@ -52,14 +80,18 @@ public class SaveDataLoader {
 
     // ------------------------------------------------------------------------
     public void Load () {
-        string filePath = GetFilePath();
-
-        if(!File.Exists(filePath)) {
-            Debug.LogError("Save file does not exist and load attempted");
-            return;
-        }
+        string filePath = FilePath;
+        Assert.IsTrue(
+            File.Exists(filePath),
+            "Save file does not exist at path " + filePath
+        );
         
         FileStream saveFile = File.Open(filePath, FileMode.Open);
+        Assert.IsNotNull(
+            saveFile,
+            "Tried to load save file, but file not found. Path: " + filePath
+        );
+
         BinaryFormatter formatter = new BinaryFormatter();
         try {
             _saveData = (PlayerSaveData)formatter.Deserialize(saveFile);
@@ -84,16 +116,6 @@ public class SaveDataLoader {
     public void FoundChat (ChatProgressionData chatProgression) {
         _saveData.ChatProgressionData.Add(chatProgression);
         Save();
-    }
-
-    // ------------------------------------------------------------------------
-    private string GetFilePath () {
-        string dir = Application.persistentDataPath + "/" + DirectoryName;
-        if(!Directory.Exists(dir)) {
-            Directory.CreateDirectory(dir);
-        }
-        dir += "/" + FileName;
-        return dir;
     }
 
     // ------------------------------------------------------------------------
