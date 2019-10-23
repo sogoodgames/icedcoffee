@@ -92,7 +92,7 @@ public static class DataValidator {
             // npc messages should have:
             // messages
             // no options
-            // exactly 1 branch
+            // 0 or 1 branch
             // not be a presented clue (only player presents clues)
             if(message.Messages == null || message.Messages.Length < 1) {
                 output.AddError("Message is marked NPC and has no messages. Should have >0 messages and 0 options.");
@@ -100,8 +100,8 @@ public static class DataValidator {
             if(message.Options != null && message.Options.Length > 0) {
                 output.AddError("Message is marked NPC and has options. Should have >0 messages and 0 options.");
             }
-            if(message.Branch == null || message.Branch.Length != 1) {
-                output.AddError("Message is marked NPC and has fewer/more than 1 branch. Should have only one branch.");
+            if(message.Branch != null && message.Branch.Length > 1) {
+                output.AddError("Message is marked NPC and has more than 1 branch. Should have 0 or 1 branch.");
             }
             if(message.IsClueMessage) {
                 output.AddError("Message is marked NPC and as a clue message. NPCs don't present clues; did you mean to mark this as Player?");

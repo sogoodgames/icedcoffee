@@ -1,5 +1,7 @@
-using UnityEngine;
 using System.Collections;
+
+using UnityEngine;
+using UnityEngine.Assertions;
 
 public class ChatRunner : MonoBehaviour
 {
@@ -103,32 +105,39 @@ public class ChatRunner : MonoBehaviour
         }
 
         MessageScriptableObject lastMessage = m_activeChat.GetLastVisitedMessage();
-        int nextNode = -1;
 
-        // find next message in convo
-        if(lastMessage.HasOptions) {
-            if(lastMessage.MadeSelection) {
-                // if we made a selection, move to the next message
-                nextNode = lastMessage.Branch[lastMessage.OptionSelection];
+        // find next message in convo (if this isn't a leaf)
+        if(lastMessage.HasBranch) {
+            int nextNode = -1;
+            // find the next message's node
+            if(lastMessage.HasOptions) {
+                if(lastMessage.MadeSelection) {
+                    // if we made a selection, move to the next message
+                    nextNode = lastMessage.Branch[lastMessage.OptionSelection];
+                } else {
+                    // if we have an unchosen option, don't do anything
+                    return;
+                }
             } else {
-                // if we have an unchosen option, don't do anything
-                return;
+                nextNode = lastMessage.Branch[0];
+            }
+            // run it
+            MessageScriptableObject nextMessage = m_activeChat.GetMessage(nextNode);
+            if(nextMessage != null) {
+                m_RunMessageCoroutine = RunMessage(nextMessage);
+                StartCoroutine(m_RunMessageCoroutine);
+            } else {
+                Assert.IsNotNull(
+                    nextMessage,
+                    "Could not find message with node " + nextNode +
+                    " in chat" + m_activeChat.Friend
+                );
             }
         } else {
-            nextNode = lastMessage.Branch[0];
-        }
-
-        // find the next message
-        MessageScriptableObject nextMessage = m_activeChat.GetMessage(nextNode);
-        if(nextMessage == null){
             // if this is a leaf node, send leaf node event
             // don't run more messages
             ReachedLeafNode();
-            return;
         }
-        // if we found a next message, run it
-        m_RunMessageCoroutine = RunMessage(nextMessage);
-        StartCoroutine(m_RunMessageCoroutine);
     }
 
     // ------------------------------------------------------------------------
