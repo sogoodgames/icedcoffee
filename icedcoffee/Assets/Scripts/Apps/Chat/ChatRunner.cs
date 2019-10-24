@@ -130,7 +130,7 @@ public class ChatRunner : MonoBehaviour
                 Assert.IsNotNull(
                     nextMessage,
                     "Could not find message with node " + nextNode +
-                    " in chat" + m_activeChat.Friend
+                    " in chat" + m_activeChat.ID
                 );
             }
         } else {

@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: 0
   IsClueMessage: 0
+  IsLeafMessage: 1
   ClueGiven: 0
   ClueTrigger: 4
   Messages:
@@ -22,3 +23,4 @@ MonoBehaviour:
   Options: []
   Branch: 
   m_node: 24339
+  Chat: {fileID: 11400000, guid: 05d50fe48439cac4cbe5f01eb832d8a2, type: 2}

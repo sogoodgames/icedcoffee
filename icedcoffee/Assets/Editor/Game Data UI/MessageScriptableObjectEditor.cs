@@ -47,14 +47,7 @@ public class MessageScriptableObjectEditor : Editor {
 
         EditorGUILayout.LabelField("Message", EditorStyles.boldLabel);
         
-        EditorGUILayout.BeginHorizontal();
-        EditorGUI.BeginDisabledGroup(true);
-        EditorGUILayout.IntField("Node:", m_node.intValue);
-        EditorGUI.EndDisabledGroup();
-        if(GUILayout.Button("Generate node")) {
-            m_node.intValue = GenerateNode();
-        }
-        EditorGUILayout.EndHorizontal();
+        GameDataEditorUtils.DrawIdGenerator(m_node);
         
         EditorGUILayout.PropertyField(m_player);
         EditorGUILayout.PropertyField(m_image);
@@ -108,11 +101,6 @@ public class MessageScriptableObjectEditor : Editor {
         GameDataEditorUtils.DrawValidationOutput(validation);
 
         serializedObject.ApplyModifiedProperties();
-    }
-
-    // ------------------------------------------------------------------------
-    public int GenerateNode () {
-        return (int)Random.Range(1, 100000);
     }
 }
 

@@ -32,6 +32,23 @@ public static class GameDataEditorUtils {
     }
 
     // ------------------------------------------------------------------------
+    public static void DrawIdGenerator (SerializedProperty nodeProperty) {
+        EditorGUILayout.BeginHorizontal();
+        EditorGUI.BeginDisabledGroup(true);
+        EditorGUILayout.IntField("Node:", nodeProperty.intValue);
+        EditorGUI.EndDisabledGroup();
+        if(GUILayout.Button("Generate node")) {
+            nodeProperty.intValue = GenerateNode();
+        }
+        EditorGUILayout.EndHorizontal();
+    }
+
+    // ------------------------------------------------------------------------
+    public static int GenerateNode () {
+        return (int)Random.Range(1, 100000);
+    }
+
+    // ------------------------------------------------------------------------
     public static void DrawIconField (SerializedProperty iconProperty) {
         iconProperty.objectReferenceValue = EditorGUILayout.ObjectField(
             "Chat icon: ",

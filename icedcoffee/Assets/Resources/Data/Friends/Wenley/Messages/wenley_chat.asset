@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10eab8dd6cc74904faf830c3f4c17809, type: 3}
   m_Name: wenley_chat
   m_EditorClassIdentifier: 
-  Friend: 3
   Icon: {fileID: 21300000, guid: e994e4dd569daed48b360bd5f5a11e53, type: 3}
   ClueNeeded: 3
   Messages:
@@ -20,3 +19,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 808a5d48e62a9c14ca6736562cc356dd, type: 2}
   - {fileID: 11400000, guid: 92c1175112f0d4640a52cbf94638184f, type: 2}
   - {fileID: 11400000, guid: 8d55ace3f7ceb0542aa7dd54ce8c1594, type: 2}
+  m_id: 80043

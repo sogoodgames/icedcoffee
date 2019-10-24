@@ -70,7 +70,7 @@ public class MessageScriptableObject : ScriptableObject
         }
         Assert.IsFalse(
             index == -1, 
-            "Message" + Node + " not found in chat " + Chat.Friend
+            "Message" + Node + " not found in chat " + Chat.ID
         );
         return index;
     }

@@ -1,12 +1,13 @@
-using UnityEngine;
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+
+using UnityEngine;
 
 [Serializable]
 public struct ChatProgressionData {
-    public Friend Friend;
+    public int ID;
     // only the messages you've visited so far
     public List<MessageProgressionData> VisitedMessages;
     public List<ClueID> PresentedClues;
@@ -14,12 +15,12 @@ public struct ChatProgressionData {
 
     // ------------------------------------------------------------------------
     public ChatProgressionData (
-        Friend friend,
+        int id,
         List<MessageProgressionData> visitedMessages,
         List<ClueID> presentedClues,
         bool finishedChat
     ) {
-        Friend = friend;
+        ID = id;
         VisitedMessages = visitedMessages;
         PresentedClues = presentedClues;
         Finished = finishedChat;
@@ -27,7 +28,7 @@ public struct ChatProgressionData {
 
     // ------------------------------------------------------------------------
     public void LogData () {
-        Debug.Log("> chat: " + Friend);
+        Debug.Log("> chat: " + ID);
         Debug.Log(">> messages: ");
         foreach(MessageProgressionData msg in VisitedMessages) {
             Debug.Log(">>> " + msg.Node + "; made selection: " + msg.MadeSelection);
@@ -41,29 +42,68 @@ public class ChatScriptableObject : ScriptableObject
     // ------------------------------------------------------------------------
     // Variables
     // ------------------------------------------------------------------------
-    public Friend Friend; // the person you're talking to
     public Sprite Icon; // icon file
     public ClueID ClueNeeded; // the clue needed to unlock the chat
     public MessageScriptableObject[] Messages; // all of the messages
     
     private ChatProgressionData m_progressionData;
     
+    // ------------------------------------------------------------------------
+    // Properties
+    // ------------------------------------------------------------------------
+    // auto-generated ID
+    [SerializeField]
+    private int m_id;
+    public int ID {get{return m_id;}}
+
     // public accessors for progression data
     public ChatProgressionData ProgressionData {get{return m_progressionData;}}
     public bool Finished {get{return m_progressionData.Finished;}}
-    public List<ClueID> PresentedClues {get{return m_progressionData.PresentedClues;}}
+    public List<ClueID> PresentedClues {
+        get{return m_progressionData.PresentedClues;}
+    }
 
     // caches all visited messages
-    // (since progression data stores progression objects, not message objects themselves)
+    // (since progression data stores progression objects, 
+    //  not message objects themselves)
     private List<MessageScriptableObject> m_visitedMessages;
-    public List<MessageScriptableObject> VisitedMessages {get{return m_visitedMessages;}}
+    public List<MessageScriptableObject> VisitedMessages { 
+        get{return m_visitedMessages;}
+    }
+
+    // all of the friends in the chat
+    public List<Friend> Friends {
+        get {
+            List<Friend> friends = new List<Friend>();
+            foreach(MessageScriptableObject m in Messages) {
+                // TODO
+                friends.Add(Friend.June);
+            }
+            return friends;
+        }
+    }
+
+    // display name for UI, debug
+    public string DisplayName {
+        get {
+            StringBuilder sb = new StringBuilder("");
+            List<Friend> friends = Friends;
+            for (int i = 0; i < friends.Count; i++) {
+                sb.Append(friends[i].ToString());
+                if(i != friends.Count - 1) {
+                    sb.Append(", ");
+                }
+            }
+            return sb.ToString();
+        }
+    }
 
     // ------------------------------------------------------------------------
     // Methods
     // ------------------------------------------------------------------------
     public void ClearProgression () {
         m_progressionData = new ChatProgressionData(
-            Friend, 
+            m_id, 
             new List<MessageProgressionData>(),
             new List<ClueID>(),
             false

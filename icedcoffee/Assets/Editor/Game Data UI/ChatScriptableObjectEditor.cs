@@ -9,7 +9,7 @@ public class ChatScriptableObjectEditor : Editor {
     // ------------------------------------------------------------------------
     // Variables
     // ------------------------------------------------------------------------
-    private SerializedProperty m_friend;
+    private SerializedProperty m_id;
     private SerializedProperty m_icon;
     private SerializedProperty m_clueNeeded;
     private SerializedProperty m_messages;
@@ -20,7 +20,7 @@ public class ChatScriptableObjectEditor : Editor {
     // Methods
     // ------------------------------------------------------------------------
     private void OnEnable () {
-        m_friend = serializedObject.FindProperty("Friend");
+        m_id = serializedObject.FindProperty("m_id");
         m_icon = serializedObject.FindProperty("Icon");
         m_clueNeeded = serializedObject.FindProperty("ClueNeeded");
         m_messages = serializedObject.FindProperty("Messages");
@@ -30,10 +30,14 @@ public class ChatScriptableObjectEditor : Editor {
     public override void OnInspectorGUI () {
         serializedObject.Update();
 
-        string friend = ((Friend)m_friend.enumValueIndex).ToString();
+        ChatScriptableObject chatObj = target as ChatScriptableObject;
+        Assert.IsNotNull(chatObj, "Can't find chat object on chat editor.");
 
-        EditorGUILayout.LabelField("Chat: " + friend, EditorStyles.boldLabel);
-        EditorGUILayout.PropertyField(m_friend);
+        EditorGUILayout.LabelField(
+            "Chat: " + chatObj.DisplayName,
+            EditorStyles.boldLabel
+        );
+        GameDataEditorUtils.DrawIdGenerator(m_id);
         EditorGUILayout.PropertyField(m_clueNeeded);
         GameDataEditorUtils.DrawIconField(m_icon);
 
@@ -44,15 +48,14 @@ public class ChatScriptableObjectEditor : Editor {
         EditorGUILayout.PropertyField(m_messages, true);
         bool changed = EditorGUI.EndChangeCheck();
         if(changed) {
-            SetMessageChat(target);
+            SetMessageChat(chatObj);
         }
 
         GUILayout.Space(20);
 
         EditorGUILayout.LabelField("Validation", EditorStyles.boldLabel);
         if(GUILayout.Button("Validate") || validation == null) {
-            ChatScriptableObject obj = target as ChatScriptableObject;
-            validation = DataValidator.ValidateChat(obj);
+            validation = DataValidator.ValidateChat(chatObj);
         }
         GameDataEditorUtils.DrawValidationOutput(validation);
 
@@ -60,10 +63,7 @@ public class ChatScriptableObjectEditor : Editor {
     }
 
     // ------------------------------------------------------------------------
-    private void SetMessageChat (Object target) {
-        ChatScriptableObject chat = target as ChatScriptableObject;
-        Assert.IsNotNull(chat, "Can't find chat object on chat editor.");
-
+    private void SetMessageChat (ChatScriptableObject chat) {
         for(int i = 0; i < m_messages.arraySize; i++) {
             SerializedProperty msgProperty = 
                 m_messages.GetArrayElementAtIndex(i);
@@ -80,7 +80,7 @@ public class ChatScriptableObjectEditor : Editor {
             );
 
             msgObject.Chat = chat;
-            Debug.Log("set message " + msgObject.Node + " to chat " + msgObject.Chat.Friend);
+            Debug.Log("set message " + msgObject.Node + " to chat " + msgObject.Chat.ID);
         }
     }
 }

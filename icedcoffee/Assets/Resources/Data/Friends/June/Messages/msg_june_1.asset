@@ -14,9 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: 1
   IsClueMessage: 0
+  IsLeafMessage: 0
   ClueGiven: 0
   ClueTrigger: 0
-  Messages: []
+  Messages:
+  - this is a player reply!
   Image: 0
   Options:
   - this is a player reply!

@@ -24,10 +24,12 @@ public static class DataValidator {
     // Methods
     // ------------------------------------------------------------------------
     public static ValidationOutput ValidateChat (ChatScriptableObject chat) {
-        ValidationOutput output = new ValidationOutput(chat.Friend.ToString());
+        ValidationOutput output = new ValidationOutput(chat.DisplayName);
 
-        if(chat.Friend == Friend.NoFriend) {
-            output.AddError("Must select valid friend (not NoFriend).");
+        foreach(Friend friend in chat.Friends) {
+            if(friend == Friend.NoFriend) {
+                output.AddError("Invalid friend listed (can't be NoFriend).");
+            }
         }
 
         if(chat.Icon == null) {

@@ -312,7 +312,7 @@ public class PhoneOS : MonoBehaviour
             SaveDataLoader.SaveData.ChatProgressionData
         ) {
             ChatScriptableObject chatObj = GameData.Chats.First(
-                c => c.Friend == chatProgression.Friend
+                c => c.ID == chatProgression.ID
             );
             chatObj.LoadProgression(chatProgression, GameData.Clues);
         }

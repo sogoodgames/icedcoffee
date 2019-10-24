@@ -30,7 +30,7 @@ public class GameData : MonoBehaviour
     private List<Sprite> _photoAssets;
 
     private Dictionary<Friend, MusicUserScriptableObject> _musicUsersInstanced;
-    private Dictionary<Friend, ChatScriptableObject> _chatsInstanced;
+    private Dictionary<int, ChatScriptableObject> _chatsInstanced;
     private Dictionary<Friend, GramPostScriptableObject> _gramPostsInstanced;
     private Dictionary<Friend, GramUserScriptableObject> _gramUsersInstanced;
     private Dictionary<Friend, ForumPostScriptableObject> _forumPostsInstanced;
@@ -104,9 +104,9 @@ public class GameData : MonoBehaviour
             _musicUsersInstanced.Add(m.FriendID, m);
         }
 
-        _chatsInstanced = new Dictionary<Friend, ChatScriptableObject>();
+        _chatsInstanced = new Dictionary<int, ChatScriptableObject>();
         foreach (ChatScriptableObject c in _chats) {
-            _chatsInstanced.Add(c.Friend, c);
+            _chatsInstanced.Add(c.ID, c);
         }
 
         _gramPostsInstanced = new Dictionary<Friend, GramPostScriptableObject>();
@@ -199,7 +199,7 @@ public class GameData : MonoBehaviour
     }
 
     // ------------------------------------------------------------------------
-    public ChatScriptableObject GetChat (Friend id) {
+    public ChatScriptableObject GetChat (int id) {
         if(_chatsInstanced.ContainsKey(id)) {
             return _chatsInstanced[id];
         }

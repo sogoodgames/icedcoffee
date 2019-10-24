@@ -120,7 +120,7 @@ public class ChatApp : App
             OpenChatButton chatButton = chatButtonObj.GetComponent<OpenChatButton>();
             if(chatButton) {
                 // set name
-                chatButton.NameText.text = chat.Friend.ToString();
+                chatButton.NameText.text = chat.DisplayName;
 
                 // set profile pic
                 chatButton.ProfilePic.sprite = chat.Icon;
@@ -157,7 +157,7 @@ public class ChatApp : App
         //Debug.Log("opening chat: " + c.Friend + "; last visited message: " + m_activeChat.GetLastVisitedMessage().Node);
 
         // set name
-        FriendTitleText.text = c.Friend.ToString();
+        FriendTitleText.text = c.DisplayName;
 
         // draw chat bubbles for all of the messages we've read so far
         ChatRunner.RunAllVisitedMessages(c);
