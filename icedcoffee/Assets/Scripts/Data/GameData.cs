@@ -28,6 +28,8 @@ public class GameData : MonoBehaviour
     private List<FriendScriptableObject> _friends;
     [SerializeField]
     private List<Sprite> _photoAssets;
+    [SerializeField]
+    private Sprite _groupChatIcon;
 
     private Dictionary<Friend, MusicUserScriptableObject> _musicUsersInstanced;
     private Dictionary<int, ChatScriptableObject> _chatsInstanced;
@@ -91,6 +93,10 @@ public class GameData : MonoBehaviour
         get{return _photoAssets;}
     }
 
+    public Sprite GroupChatIcon {
+        get{return _groupChatIcon;}
+    }
+
     // ------------------------------------------------------------------------
     // Methods
     // ------------------------------------------------------------------------
@@ -148,6 +154,14 @@ public class GameData : MonoBehaviour
         foreach (FriendScriptableObject f in _friends) {
             _friendsInstanced.Add(f.Friend, f);
         }
+    }
+
+    // ------------------------------------------------------------------------
+    public FriendScriptableObject GetFriend (Friend friend) {
+        if(_friendsInstanced.ContainsKey(friend)) {
+            return _friendsInstanced[friend];
+        }
+        return null;
     }
 
     // ------------------------------------------------------------------------

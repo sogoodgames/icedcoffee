@@ -10,7 +10,6 @@ public class ChatScriptableObjectEditor : Editor {
     // Variables
     // ------------------------------------------------------------------------
     private SerializedProperty m_id;
-    private SerializedProperty m_icon;
     private SerializedProperty m_clueNeeded;
     private SerializedProperty m_messages;
 
@@ -21,7 +20,6 @@ public class ChatScriptableObjectEditor : Editor {
     // ------------------------------------------------------------------------
     private void OnEnable () {
         m_id = serializedObject.FindProperty("m_id");
-        m_icon = serializedObject.FindProperty("Icon");
         m_clueNeeded = serializedObject.FindProperty("ClueNeeded");
         m_messages = serializedObject.FindProperty("Messages");
     }
@@ -39,7 +37,6 @@ public class ChatScriptableObjectEditor : Editor {
         );
         GameDataEditorUtils.DrawIdGenerator(m_id);
         EditorGUILayout.PropertyField(m_clueNeeded);
-        GameDataEditorUtils.DrawIconField(m_icon);
 
         GUILayout.Space(20);
 

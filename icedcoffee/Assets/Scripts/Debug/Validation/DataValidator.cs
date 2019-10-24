@@ -36,10 +36,6 @@ public static class DataValidator {
             }
         }
 
-        if(chat.Icon == null) {
-            output.AddError("Chat friend icon is missing.");
-        }
-
         if(chat.Messages == null || chat.Messages.Length == 0) {
             output.AddError("Chat messages empty.");
         }

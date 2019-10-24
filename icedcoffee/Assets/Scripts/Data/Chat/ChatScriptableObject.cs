@@ -42,7 +42,6 @@ public class ChatScriptableObject : ScriptableObject
     // ------------------------------------------------------------------------
     // Variables
     // ------------------------------------------------------------------------
-    public Sprite Icon; // icon file
     public ClueID ClueNeeded; // the clue needed to unlock the chat
     public MessageScriptableObject[] Messages; // all of the messages
     
@@ -76,8 +75,9 @@ public class ChatScriptableObject : ScriptableObject
         get {
             List<Friend> friends = new List<Friend>();
             foreach(MessageScriptableObject m in Messages) {
-                // TODO
-                friends.Add(Friend.June);
+                if(!friends.Contains(m.Sender) && m.Sender != Friend.You) {
+                    friends.Add(m.Sender);
+                }
             }
             return friends;
         }

@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.UI;
 
 public class ChatApp : App
@@ -123,7 +125,24 @@ public class ChatApp : App
                 chatButton.NameText.text = chat.DisplayName;
 
                 // set profile pic
-                chatButton.ProfilePic.sprite = chat.Icon;
+                // group chat icon by default
+                // TODO: maybe generate an icon that's all of the
+                //       friend's icons mushed together?
+                Sprite icon = PhoneOS.GameData.GroupChatIcon;
+                // if there's only one participant, set it to their icon
+                if(chat.Friends.Count == 1) {
+                    FriendScriptableObject friend = 
+                        PhoneOS.GameData.GetFriend(chat.Friends[0]);  
+                    if(friend == null) {
+                        Assert.IsNotNull(
+                            friend,
+                            "Could not find friend[0] for chat " + chat.ID
+                        );
+                    } else {
+                        icon = friend.Icon;
+                    }
+                }
+                chatButton.ProfilePic.sprite = icon;
 
                 // show unread notif (if unfinished)
                 if(chat.Finished) {
@@ -215,7 +234,17 @@ public class ChatApp : App
 
         Sprite sprite = PlayerChatIcon;
         if(!message.Player) {
-            sprite = m_activeChat.Icon;
+            FriendScriptableObject friend = PhoneOS.GameData.GetFriend(
+                message.Sender
+            );
+            if(friend == null) {
+                Assert.IsNotNull(
+                    friend,
+                    "Could not find friend for message " + message.Node
+                );
+                return;
+            }
+            sprite = friend.Icon;
         }
 
         // draw bubble 

@@ -3169,6 +3169,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4f14b2289a15e504bb87df7ba4b2b405, type: 2}
   _photoAssets:
   - {fileID: 21300000, guid: 7c92070c6a6095d4196fb1f966160c7b, type: 3}
+  _groupChatIcon: {fileID: 21300000, guid: 0d101cbf410934445ad4a221577dd40c, type: 3}
 --- !u!4 &312738868
 Transform:
   m_ObjectHideFlags: 0
