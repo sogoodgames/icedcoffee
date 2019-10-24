@@ -1,6 +1,7 @@
 #if UNITY_EDITOR
 
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEditor;
 
 [CustomEditor(typeof(MessageScriptableObject))]
@@ -17,14 +18,16 @@ public class MessageScriptableObjectEditor : Editor {
     private SerializedProperty m_image;
     private SerializedProperty m_options;
     private SerializedProperty m_branch;
+    private SerializedProperty m_chat;
 
     private ValidationOutput validation;
+    private int selection = 0;
     
     // ------------------------------------------------------------------------
     // Methods 
     // ------------------------------------------------------------------------
     private void OnEnable () {
-        m_node = serializedObject.FindProperty("Node");
+        m_node = serializedObject.FindProperty("m_node");
         m_player = serializedObject.FindProperty("Player");
         m_isClue = serializedObject.FindProperty("IsClueMessage");
         m_clueGiven = serializedObject.FindProperty("ClueGiven");
@@ -33,6 +36,7 @@ public class MessageScriptableObjectEditor : Editor {
         m_image = serializedObject.FindProperty("Image");
         m_options = serializedObject.FindProperty("Options");
         m_branch = serializedObject.FindProperty("Branch");
+        m_chat = serializedObject.FindProperty("Chat");
     }
 
     // ------------------------------------------------------------------------
@@ -40,7 +44,16 @@ public class MessageScriptableObjectEditor : Editor {
         serializedObject.Update();
 
         EditorGUILayout.LabelField("Message", EditorStyles.boldLabel);
-        EditorGUILayout.PropertyField(m_node);
+        
+        EditorGUILayout.BeginHorizontal();
+        EditorGUI.BeginDisabledGroup(true);
+        EditorGUILayout.IntField("Node:", m_node.intValue);
+        EditorGUI.EndDisabledGroup();
+        if(GUILayout.Button("Generate node")) {
+            m_node.intValue = GenerateNode();
+        }
+        EditorGUILayout.EndHorizontal();
+        
         EditorGUILayout.PropertyField(m_player);
         EditorGUILayout.PropertyField(m_image);
         EditorGUILayout.PropertyField(m_clueGiven);
@@ -52,7 +65,10 @@ public class MessageScriptableObjectEditor : Editor {
             EditorGUILayout.PropertyField(m_isClue);
             if(!m_isClue.boolValue) {
                 EditorGUILayout.PropertyField(m_options, true);
-                EditorGUILayout.PropertyField(m_branch, true);
+                GameDataEditorUtils.DrawMessageSelection(
+                    m_chat,
+                    m_branch
+                );
             } else {
                 EditorGUILayout.PropertyField(m_messages, true);
             }
@@ -73,6 +89,11 @@ public class MessageScriptableObjectEditor : Editor {
         GameDataEditorUtils.DrawValidationOutput(validation);
 
         serializedObject.ApplyModifiedProperties();
+    }
+
+    // ------------------------------------------------------------------------
+    public int GenerateNode () {
+        return (int)Random.Range(1, 100000);
     }
 }
 

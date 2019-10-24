@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2645a96e8d7f68459c67fb404a80257, type: 3}
   m_Name: wenley_msg_pizza
   m_EditorClassIdentifier: 
-  Node: 100
   Player: 0
   IsClueMessage: 0
   ClueGiven: 0
@@ -22,3 +21,4 @@ MonoBehaviour:
   Image: 0
   Options: []
   Branch: 
+  m_node: 24339

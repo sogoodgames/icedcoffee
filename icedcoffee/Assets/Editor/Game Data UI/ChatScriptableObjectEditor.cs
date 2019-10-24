@@ -1,7 +1,8 @@
 #if UNITY_EDITOR
 
-using UnityEngine;
 using UnityEditor;
+using UnityEngine;
+using UnityEngine.Assertions;
 
 [CustomEditor(typeof(ChatScriptableObject))]
 public class ChatScriptableObjectEditor : Editor {
@@ -39,7 +40,12 @@ public class ChatScriptableObjectEditor : Editor {
         GUILayout.Space(20);
 
         EditorGUILayout.LabelField("Messages", EditorStyles.boldLabel);
+        EditorGUI.BeginChangeCheck();
         EditorGUILayout.PropertyField(m_messages, true);
+        bool changed = EditorGUI.EndChangeCheck();
+        if(changed) {
+            SetMessageChat(target);
+        }
 
         GUILayout.Space(20);
 
@@ -51,6 +57,31 @@ public class ChatScriptableObjectEditor : Editor {
         GameDataEditorUtils.DrawValidationOutput(validation);
 
         serializedObject.ApplyModifiedProperties();
+    }
+
+    // ------------------------------------------------------------------------
+    private void SetMessageChat (Object target) {
+        ChatScriptableObject chat = target as ChatScriptableObject;
+        Assert.IsNotNull(chat, "Can't find chat object on chat editor.");
+
+        for(int i = 0; i < m_messages.arraySize; i++) {
+            SerializedProperty msgProperty = 
+                m_messages.GetArrayElementAtIndex(i);
+            Assert.IsNotNull(
+                msgProperty,
+                "Can't find message property at index " + i
+            );
+
+            MessageScriptableObject msgObject = 
+                msgProperty.objectReferenceValue as MessageScriptableObject;
+            Assert.IsNotNull(
+                msgObject,
+                "Can't find message object at index " + i
+            );
+
+            msgObject.Chat = chat;
+            Debug.Log("set message " + msgObject.Node + " to chat " + msgObject.Chat.Friend);
+        }
     }
 }
 

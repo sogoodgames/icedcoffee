@@ -28,7 +28,6 @@ public class MessageScriptableObject : ScriptableObject
     // ------------------------------------------------------------------------
     // Variables
     // ------------------------------------------------------------------------
-    public int Node; // the ID for this message
     public bool Player; // whether or not it's the player talking
     public bool IsClueMessage; // if this is a message sent when presenting a clue 
     public ClueID ClueGiven; // the clue given (if any)
@@ -40,6 +39,11 @@ public class MessageScriptableObject : ScriptableObject
     public string[] Options; // the text options
     public int[] Branch; // the next message (-1 means this is a leaf)
 
+    // auto-generated ID
+    [SerializeField]
+    private int m_node;
+    public int Node {get{return m_node;}}
+
     // progression data
     private MessageProgressionData m_progressionData;
     
@@ -49,12 +53,37 @@ public class MessageScriptableObject : ScriptableObject
     public bool HasOptions {get{return Options != null && Options.Length > 0;}}
     public bool HasBranch {get{return Branch != null && Branch.Length > 0;}}
 
+#if UNITY_EDITOR
+    // auto-filled parent chat (for validation/tool purposes)
+    public ChatScriptableObject Chat;
+#endif
+
+#if DEBUG
+    public string DebugName {
+        get {
+            string name = "[" + Node + "]";
+            string msg = "";
+            if(Player && Options != null && Options.Length > 0) {
+                msg = Options[0];
+            } else if(Messages != null && Messages.Length > 0){
+                msg = Messages[0];
+            }
+
+            if(!string.IsNullOrEmpty(msg)) {
+                int lastIndex = msg.Length < 20 ? msg.Length : 20; 
+                name += "- " + msg.Substring(0, lastIndex) + "...";
+            }
+            return name;
+        }
+    }
+#endif
+
     // ------------------------------------------------------------------------
     // Methods
     // ------------------------------------------------------------------------
     public void ClearProgression () {
         m_progressionData = new MessageProgressionData(
-            Node,
+            m_node,
             0,
             false,
             IsClueMessage

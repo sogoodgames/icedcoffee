@@ -12,4 +12,15 @@ public class GramPostScriptableObject : ScriptableObject
     public string Description;
     public PhotoID PostImage;
     public GramCommentScriptableObject[] Comments;
+
+#if DEBUG
+    public string DebugName { get {
+        string name = UserId.ToString() + ": ";
+        if(!string.IsNullOrEmpty(Description)) {
+            int lastIndex = Description.Length < 10 ? Description.Length : 10;
+            name += Description.Substring(0, lastIndex) + "...";
+        }
+        return name;
+    }}
+#endif
 }

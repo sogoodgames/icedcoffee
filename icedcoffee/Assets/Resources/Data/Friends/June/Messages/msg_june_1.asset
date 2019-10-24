@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2645a96e8d7f68459c67fb404a80257, type: 3}
   m_Name: msg_june_1
   m_EditorClassIdentifier: 
-  Node: 1
   Player: 1
   IsClueMessage: 0
   ClueGiven: 0
@@ -21,4 +20,6 @@ MonoBehaviour:
   Image: 0
   Options:
   - player reply!
-  Branch: 02000000
+  Branch: 4e0f0000
+  m_node: 177
+  Chat: {fileID: 11400000, guid: 089e21ae28078974882d7c6d2127f066, type: 2}

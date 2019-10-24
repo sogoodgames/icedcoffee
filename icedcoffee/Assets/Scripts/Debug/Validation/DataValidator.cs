@@ -45,12 +45,12 @@ public static class DataValidator {
     public static ValidationOutput ValidateMessage (
         MessageScriptableObject message
     ) {
-        ValidationOutput output = new ValidationOutput(message.Node.ToString());
+        ValidationOutput output = new ValidationOutput(message.DebugName);
 
         // all messages should have:
-        // a non-negative ID
-        if(message.Node < 0) {
-            output.AddError("Message has a negative ID. ID should be >= 0.");
+        // an ID > 0
+        if(message.Node < 1) {
+            output.AddError("Message node should be >0.");
         }
 
         if(message.Player) {
@@ -236,12 +236,7 @@ public static class DataValidator {
 
     // ------------------------------------------------------------------------
     public static ValidationOutput ValidateGramPost (GramPostScriptableObject post) {
-        string name = "";
-        if(!string.IsNullOrEmpty(post.Description)) {
-            int lastIndex = post.Description.Length < 10 ? post.Description.Length : 10;
-            name = post.UserId.ToString() + "- " +  post.Description.Substring(0, lastIndex) + "...";
-        }
-        ValidationOutput output = new ValidationOutput(name);
+        ValidationOutput output = new ValidationOutput(post.DebugName);
 
         if(post.UserId == Friend.NoFriend) {
             output.AddError("Friend needs to be value other than NoFriend.");
@@ -262,12 +257,7 @@ public static class DataValidator {
     public static ValidationOutput ValidateGramComment (
         GramCommentScriptableObject comment
     ) {
-        string name = "";
-        if(!string.IsNullOrEmpty(comment.Comment)) {
-            int lastIndex = comment.Comment.Length < 10 ? comment.Comment.Length : 10; 
-            name = comment.UserId.ToString() + "- " + comment.Comment.Substring(0, lastIndex) + "...";
-        }
-        ValidationOutput output = new ValidationOutput(name);
+        ValidationOutput output = new ValidationOutput(comment.DebugName);
 
         if(comment.UserId == Friend.NoFriend) {
             output.AddError("Friend needs to be value other than NoFriend.");
@@ -301,9 +291,7 @@ public static class DataValidator {
 
     // ------------------------------------------------------------------------
     public static ValidationOutput ValidateForumPost (ForumPostScriptableObject post) {
-        ValidationOutput output = new ValidationOutput(
-            post.UserID.ToString() + post.Title
-        );
+        ValidationOutput output = new ValidationOutput(post.DebugName);
 
         if(post.UserID == Friend.NoFriend) {
             output.AddError("Friend needs to be value other than NoFriend.");

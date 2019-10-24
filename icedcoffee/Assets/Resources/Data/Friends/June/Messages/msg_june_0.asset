@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2645a96e8d7f68459c67fb404a80257, type: 3}
   m_Name: msg_june_0
   m_EditorClassIdentifier: 
-  Node: 0
   Player: 0
   IsClueMessage: 0
   ClueGiven: 0
@@ -22,4 +21,6 @@ MonoBehaviour:
   - this is the second from the same node
   Image: 0
   Options: []
-  Branch: 01000000
+  Branch: 4e0f0000
+  m_node: 3484
+  Chat: {fileID: 11400000, guid: 089e21ae28078974882d7c6d2127f066, type: 2}
