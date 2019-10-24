@@ -46,7 +46,7 @@ public class SaveDataLoader {
         List<ChatProgressionData> defaultChats,
         List<ClueID> defaultClues
     ) {
-        Debug.Log("attempting create new save");
+        //Debug.Log("attempting create new save");
 
         DateTime startTime = DateTime.Now;
         _saveData = new PlayerSaveData(defaultChats, defaultClues, startTime);
@@ -55,7 +55,7 @@ public class SaveDataLoader {
 
     // ------------------------------------------------------------------------
     public void Save () {
-        Debug.Log("attempting save");
+        //Debug.Log("attempting save");
 
         string filePath = FilePath;
         FileStream saveFile = File.Create(filePath);
@@ -73,7 +73,7 @@ public class SaveDataLoader {
         }
 
         Debug.Log("SAVED.");
-        LogSaveData();
+        //LogSaveData();
 
         saveFile.Close();
     }

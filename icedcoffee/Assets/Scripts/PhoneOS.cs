@@ -246,7 +246,7 @@ public class PhoneOS : MonoBehaviour
 
     // ------------------------------------------------------------------------
     public void StartNewGame () {
-        Debug.Log("attempting start new game. init state: " + m_initialized);
+        //Debug.Log("attempting start new game. init state: " + m_initialized);
         if(!m_initialized) {
             Init();
         }

@@ -183,6 +183,6 @@ public class ChatScriptableObject : ScriptableObject
             new MessageProgressionData(m.Node, 0, m.MadeSelection, m.IsClueMessage)
         );
         m_visitedMessages.Add(m);
-        Debug.Log("added message to progression: " + m.Node);
+        //Debug.Log("added message to progression: " + m.Node);
     }
 }
