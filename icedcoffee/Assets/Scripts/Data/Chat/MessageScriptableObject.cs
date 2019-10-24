@@ -1,6 +1,8 @@
-using UnityEngine;
 using System;
 using System.Collections.Generic;
+
+using UnityEngine;
+using UnityEngine.Assertions;
 
 [Serializable]
 public struct MessageProgressionData {
@@ -56,6 +58,22 @@ public class MessageScriptableObject : ScriptableObject
 #if UNITY_EDITOR
     // auto-filled parent chat (for validation/tool purposes)
     public ChatScriptableObject Chat;
+
+    public int GetIndexInChat () {
+        Assert.IsNotNull(Chat, "Message " + Node + " chat not set.");
+        int index = -1;
+        for(int i = 0; i < Chat.Messages.Length; i++) {
+            if(Chat.Messages[i].Node == Node) {
+                index = i;
+                break;
+            }
+        }
+        Assert.IsFalse(
+            index == -1, 
+            "Message" + Node + " not found in chat " + Chat.Friend
+        );
+        return index;
+    }
 #endif
 
 #if DEBUG

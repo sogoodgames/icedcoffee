@@ -63,10 +63,11 @@ public class MessageScriptableObjectEditor : Editor {
         if(m_player.boolValue) {
             EditorGUILayout.LabelField("Player Message Properties", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(m_isClue);
+
             if(!m_isClue.boolValue) {
-                EditorGUILayout.PropertyField(m_options, true);
-                GameDataEditorUtils.DrawMessageSelection(
+                GameDataEditorUtils.DrawPlayerMessageOptions(
                     m_chat,
+                    m_options,
                     m_branch
                 );
             } else {

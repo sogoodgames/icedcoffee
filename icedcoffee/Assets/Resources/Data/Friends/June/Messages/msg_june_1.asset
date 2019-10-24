@@ -19,7 +19,7 @@ MonoBehaviour:
   Messages: []
   Image: 0
   Options:
-  - player reply!
+  - this is a player reply!
   Branch: 4e0f0000
   m_node: 177
   Chat: {fileID: 11400000, guid: 089e21ae28078974882d7c6d2127f066, type: 2}
