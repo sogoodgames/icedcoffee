@@ -26,6 +26,10 @@ public static class DataValidator {
     public static ValidationOutput ValidateChat (ChatScriptableObject chat) {
         ValidationOutput output = new ValidationOutput(chat.DisplayName);
 
+        if(chat.ID < 1) {
+            output.AddError("Chat node should be >0.");
+        }
+
         foreach(Friend friend in chat.Friends) {
             if(friend == Friend.NoFriend) {
                 output.AddError("Invalid friend listed (can't be NoFriend).");
@@ -51,19 +55,22 @@ public static class DataValidator {
 
         // all messages should have:
         // an ID > 0
+        // a sender
         if(message.Node < 1) {
             output.AddError("Message node should be >0.");
+        }
+
+        if(message.Sender == Friend.NoFriend) {
+            output.AddError("Message sender should not be NoFriend.");
         }
 
         if(message.Player) {
             // player messages should have:
             // if not a clue message
-            //   no messages
             //   options
             //   the same number of branches as options
             // if a clue message
             //   messages
-            //   no options or branches
             // no clue trigger (only npc messages are triggered by clues)
             if(!message.IsClueMessage) {
                 if(message.Options == null || message.Options.Length < 1) {
@@ -72,21 +79,11 @@ public static class DataValidator {
                 if(message.Options == null || message.Branch == null || message.Options.Length != message.Branch.Length) {
                     output.AddError("Message is marked Player (and not clue message) and the number of options does not equal the number of branches. There should be 1 branch for each option.");
                 }
-                if(message.Messages != null && message.Messages.Length > 0) {
-                    output.AddError("Message is marked Player (and not clue message) and has messages. Should have 0 messages and >0 options.");
-                }
             } else {
                 if(message.Messages == null || message.Messages.Length < 1) {
-                output.AddError("Message is marked Player (clue message) and has no messages. Should have >0 messages and 0 options.");
-                }
-                if(message.Options != null && message.Options.Length > 0) {
-                    output.AddError("Message is marked Player (clue message) and has options. Should have >0 messages and 0 options.");
-                }
-                if(message.Branch != null && message.Branch.Length > 0) {
-                    output.AddError("Message is marked Player (clue message) and has a branch. Clue messages don't have branches; did you mean to make this NOT a clue message, or an NPC message?.");
+                   output.AddError("Message is marked Player (clue message) and has no messages. Should have >0 messages and 0 options.");
                 }
             }
-
             if(message.ClueTrigger != ClueID.NoClue) {
                 output.AddError("Message is marked Player and has a clue trigger. Player messages are never triggered by clues; did you mean to make this an NPC message?");
             }
@@ -98,9 +95,6 @@ public static class DataValidator {
             // not be a presented clue (only player presents clues)
             if(message.Messages == null || message.Messages.Length < 1) {
                 output.AddError("Message is marked NPC and has no messages. Should have >0 messages and 0 options.");
-            }
-            if(message.Options != null && message.Options.Length > 0) {
-                output.AddError("Message is marked NPC and has options. Should have >0 messages and 0 options.");
             }
             if(!message.IsLeafMessage && (message.Branch == null || message.Branch.Length != 1)) {
                 output.AddError("Message is marked NPC (not leaf node) and doesn't have a single branch. Should have exactly 1.");

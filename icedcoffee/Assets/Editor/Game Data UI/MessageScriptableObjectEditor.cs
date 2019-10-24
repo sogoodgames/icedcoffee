@@ -10,7 +10,7 @@ public class MessageScriptableObjectEditor : Editor {
     // Variables
     // ------------------------------------------------------------------------
     private SerializedProperty m_node;
-    private SerializedProperty m_player;
+    private SerializedProperty m_sender;
     private SerializedProperty m_isClue;
     private SerializedProperty m_isLeaf;
     private SerializedProperty m_clueGiven;
@@ -29,7 +29,7 @@ public class MessageScriptableObjectEditor : Editor {
     // ------------------------------------------------------------------------
     private void OnEnable () {
         m_node = serializedObject.FindProperty("m_node");
-        m_player = serializedObject.FindProperty("Player");
+        m_sender = serializedObject.FindProperty("Sender");
         m_isClue = serializedObject.FindProperty("IsClueMessage");
         m_isLeaf = serializedObject.FindProperty("IsLeafMessage");
         m_clueGiven = serializedObject.FindProperty("ClueGiven");
@@ -45,17 +45,23 @@ public class MessageScriptableObjectEditor : Editor {
     public override void OnInspectorGUI () {
         serializedObject.Update();
 
+        MessageScriptableObject messageObj = target as MessageScriptableObject;
+        Assert.IsNotNull(
+            messageObj,
+            "Can't find message object on message editor "
+        );
+
         EditorGUILayout.LabelField("Message", EditorStyles.boldLabel);
         
         GameDataEditorUtils.DrawIdGenerator(m_node);
         
-        EditorGUILayout.PropertyField(m_player);
+        EditorGUILayout.PropertyField(m_sender);
         EditorGUILayout.PropertyField(m_image);
         EditorGUILayout.PropertyField(m_clueGiven);
 
         GUILayout.Space(20);
 
-        if(m_player.boolValue) {
+        if(messageObj.Player) {
             EditorGUILayout.LabelField("Player Message Properties", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(m_isClue);
 
@@ -79,12 +85,14 @@ public class MessageScriptableObjectEditor : Editor {
                 m_branch.arraySize = 1;
                 ChatScriptableObject chatObj =
                     m_chat.objectReferenceValue as ChatScriptableObject;
-                Assert.IsNotNull(chatObj, "Can't find chat object on message editor.");
-                GameDataEditorUtils.DrawMessageSelectionDropdown (
-                    m_branch,
-                    chatObj,
-                    0
-                );
+                // chat might be null if this is a clue-presenting message
+                if(chatObj != null) {
+                    GameDataEditorUtils.DrawMessageSelectionDropdown (
+                        m_branch,
+                        chatObj,
+                        0
+                    );
+                }
             } else {
                 // if this is a leaf node, clear branches
                 m_branch.ClearArray();
@@ -95,8 +103,8 @@ public class MessageScriptableObjectEditor : Editor {
 
         EditorGUILayout.LabelField("Validation", EditorStyles.boldLabel);
         if(GUILayout.Button("Validate") || validation == null) {
-            MessageScriptableObject obj = target as MessageScriptableObject;
-            validation = DataValidator.ValidateMessage(obj);
+            
+            validation = DataValidator.ValidateMessage(messageObj);
         }
         GameDataEditorUtils.DrawValidationOutput(validation);
 

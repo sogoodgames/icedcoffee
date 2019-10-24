@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2645a96e8d7f68459c67fb404a80257, type: 3}
   m_Name: msg_june_band
   m_EditorClassIdentifier: 
-  Player: 0
+  Sender: 2
   IsClueMessage: 0
   IsLeafMessage: 1
   ClueGiven: 0

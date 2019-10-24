@@ -12,13 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2645a96e8d7f68459c67fb404a80257, type: 3}
   m_Name: msg_clue_band
   m_EditorClassIdentifier: 
-  Node: 200
-  Player: 1
+  Sender: 1
   IsClueMessage: 1
+  IsLeafMessage: 0
   ClueGiven: 0
   ClueTrigger: 0
   Messages:
   - have u heard about this band?
   Image: 0
   Options: []
-  Branch: 
+  Branch: 00000000
+  m_node: 33748
+  Chat: {fileID: 0}
