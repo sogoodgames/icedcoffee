@@ -95,7 +95,6 @@ public class MessageScriptableObjectEditor : Editor {
             } else {
                 // if this is a leaf node, clear branches
                 m_branch.ClearArray();
-                m_branch.arraySize = 0;
             }
         }
 
