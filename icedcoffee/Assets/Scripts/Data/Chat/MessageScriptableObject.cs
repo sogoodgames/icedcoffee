@@ -31,7 +31,8 @@ public class MessageScriptableObject : ScriptableObject
     // Variables
     // ------------------------------------------------------------------------
     public bool Player; // whether or not it's the player talking
-    public bool IsClueMessage; // if this is a message sent when presenting a clue 
+    public bool IsClueMessage; // if this is sent when presenting a clue
+    public bool IsLeafMessage; // if this message has no branches
     public ClueID ClueGiven; // the clue given (if any)
     public ClueID ClueTrigger; // the clue that instigates this message
     public string[] Messages; // the text for the messages sent
@@ -53,7 +54,6 @@ public class MessageScriptableObject : ScriptableObject
     public int OptionSelection {get{return m_progressionData.OptionSelection;}}
     public bool MadeSelection {get{return m_progressionData.MadeSelection;}}
     public bool HasOptions {get{return Options != null && Options.Length > 0;}}
-    public bool HasBranch {get{return Branch != null && Branch.Length > 0;}}
 
 #if UNITY_EDITOR
     // auto-filled parent chat (for validation/tool purposes)

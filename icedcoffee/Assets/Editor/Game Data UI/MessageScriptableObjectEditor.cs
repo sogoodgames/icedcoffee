@@ -12,6 +12,7 @@ public class MessageScriptableObjectEditor : Editor {
     private SerializedProperty m_node;
     private SerializedProperty m_player;
     private SerializedProperty m_isClue;
+    private SerializedProperty m_isLeaf;
     private SerializedProperty m_clueGiven;
     private SerializedProperty m_clueTrigger;
     private SerializedProperty m_messages;
@@ -30,6 +31,7 @@ public class MessageScriptableObjectEditor : Editor {
         m_node = serializedObject.FindProperty("m_node");
         m_player = serializedObject.FindProperty("Player");
         m_isClue = serializedObject.FindProperty("IsClueMessage");
+        m_isLeaf = serializedObject.FindProperty("IsLeafMessage");
         m_clueGiven = serializedObject.FindProperty("ClueGiven");
         m_clueTrigger = serializedObject.FindProperty("ClueTrigger");
         m_messages = serializedObject.FindProperty("Messages");
@@ -76,8 +78,25 @@ public class MessageScriptableObjectEditor : Editor {
         } else {
             EditorGUILayout.LabelField("NPC Message Properties", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(m_clueTrigger);
+            EditorGUILayout.PropertyField(m_isLeaf);
             EditorGUILayout.PropertyField(m_messages, true);
-            EditorGUILayout.PropertyField(m_branch, true);
+    
+            if(!m_isLeaf.boolValue) {
+                // draw branch as a single option (bc there should only be 1)
+                m_branch.arraySize = 1;
+                ChatScriptableObject chatObj =
+                    m_chat.objectReferenceValue as ChatScriptableObject;
+                Assert.IsNotNull(chatObj, "Can't find chat object on message editor.");
+                GameDataEditorUtils.DrawMessageSelectionDropdown (
+                    m_branch,
+                    chatObj,
+                    0
+                );
+            } else {
+                // if this is a leaf node, clear branches
+                m_branch.ClearArray();
+                m_branch.arraySize = 0;
+            }
         }
 
         GUILayout.Space(20);

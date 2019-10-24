@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: 0
   IsClueMessage: 0
+  IsLeafMessage: 0
   ClueGiven: 0
   ClueTrigger: 0
   Messages:
@@ -21,6 +22,6 @@ MonoBehaviour:
   - this is the second from the same node
   Image: 0
   Options: []
-  Branch: 4e0f0000
+  Branch: b1000000
   m_node: 3484
   Chat: {fileID: 11400000, guid: 089e21ae28078974882d7c6d2127f066, type: 2}

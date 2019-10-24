@@ -135,7 +135,7 @@ public static class GameDataEditorUtils {
         
         // draw a popup to select a new message
         EditorGUILayout.BeginHorizontal();
-        EditorGUILayout.LabelField("Branch: ");
+        EditorGUILayout.LabelField("Next message: ");
         selection = EditorGUILayout.Popup(selection, messageNames);
         EditorGUILayout.EndHorizontal();
         

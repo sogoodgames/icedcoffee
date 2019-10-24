@@ -107,7 +107,7 @@ public class ChatRunner : MonoBehaviour
         MessageScriptableObject lastMessage = m_activeChat.GetLastVisitedMessage();
 
         // find next message in convo (if this isn't a leaf)
-        if(lastMessage.HasBranch) {
+        if(!lastMessage.IsLeafMessage) {
             int nextNode = -1;
             // find the next message's node
             if(lastMessage.HasOptions) {
