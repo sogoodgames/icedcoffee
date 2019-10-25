@@ -74,9 +74,14 @@ public class ChatScriptableObject : ScriptableObject
     public List<Friend> Friends {
         get {
             List<Friend> friends = new List<Friend>();
-            foreach(MessageScriptableObject m in Messages) {
-                if(!friends.Contains(m.Sender) && m.Sender != Friend.You) {
-                    friends.Add(m.Sender);
+            if(Messages != null) {
+                foreach(MessageScriptableObject m in Messages) {
+                    if(m != null
+                       && !friends.Contains(m.Sender)
+                       && m.Sender != Friend.You
+                    ){
+                        friends.Add(m.Sender);
+                    }
                 }
             }
             return friends;
@@ -86,6 +91,10 @@ public class ChatScriptableObject : ScriptableObject
     // display name for UI, debug
     public string DisplayName {
         get {
+            if(Messages == null) {
+                return "New Chat";
+            }
+
             StringBuilder sb = new StringBuilder("");
             List<Friend> friends = Friends;
             for (int i = 0; i < friends.Count; i++) {

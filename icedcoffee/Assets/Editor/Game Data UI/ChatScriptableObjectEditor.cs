@@ -71,13 +71,12 @@ public class ChatScriptableObjectEditor : Editor {
 
             MessageScriptableObject msgObject = 
                 msgProperty.objectReferenceValue as MessageScriptableObject;
-            Assert.IsNotNull(
-                msgObject,
-                "Can't find message object at index " + i
-            );
-
-            msgObject.Chat = chat;
-            Debug.Log("set message " + msgObject.Node + " to chat " + msgObject.Chat.ID);
+            
+            // message object might be null if this slot is new
+            if(msgObject != null) {
+                msgObject.Chat = chat;
+                //Debug.Log("set message " + msgObject.Node + " to chat " + msgObject.Chat.ID);
+            }
         }
     }
 }

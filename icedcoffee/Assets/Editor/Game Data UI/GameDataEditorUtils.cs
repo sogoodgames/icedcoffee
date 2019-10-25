@@ -69,7 +69,14 @@ public static class GameDataEditorUtils {
     ) {
         ChatScriptableObject chatObj =
             chatProperty.objectReferenceValue as ChatScriptableObject;
-        Assert.IsNotNull(chatObj, "Can't find chat object on message editor.");
+        
+        if(chatObj == null) {
+            EditorGUILayout.LabelField(
+                "Need to attach message to a chat before you can select" +
+                " the branch messages."
+            );
+            return;
+        }
 
         open = EditorGUILayout.Foldout(open, "Dialogue Options");
         if(!open) {

@@ -85,12 +85,17 @@ public class MessageScriptableObjectEditor : Editor {
                 m_branch.arraySize = 1;
                 ChatScriptableObject chatObj =
                     m_chat.objectReferenceValue as ChatScriptableObject;
-                // chat might be null if this is a clue-presenting message
+
                 if(chatObj != null) {
                     GameDataEditorUtils.DrawMessageSelectionDropdown (
                         m_branch,
                         chatObj,
                         0
+                    );
+                } else {
+                    EditorGUILayout.LabelField(
+                        "Need to attach message to a chat before you can set" +
+                        " what message comes next."
                     );
                 }
             } else {
