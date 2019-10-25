@@ -109,7 +109,7 @@ public class ChatApp : App
         CloseChat();
 
         // set title
-        FriendTitleText.text = "Contacts";
+        FriendTitleText.text = "Chats";
 
         // populate list of chat buttons
         // we do this every time we open the app in case it's changed
