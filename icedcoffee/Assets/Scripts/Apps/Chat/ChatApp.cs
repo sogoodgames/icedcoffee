@@ -230,7 +230,7 @@ public class ChatApp : App
         }
 
         // determine text and icon
-        string text = message.Messages[messageIndex];
+        string text = PreprocessMessage(message.Messages[messageIndex]);
 
         Sprite sprite = PlayerChatIcon;
         if(!message.Player) {
@@ -269,9 +269,12 @@ public class ChatApp : App
 
         // setup bubble
         MessageButton messageButton = option.GetComponent<MessageButton>();
+
+        // process dialogue
+        string text = PreprocessMessage(message.Options[optionIndex]);
         
         // set button text & hook up option function
-        messageButton.Text.text = message.Options[optionIndex];
+        messageButton.Text.text = text;
         messageButton.Button.onClick.AddListener(
             delegate {ChatRunner.SelectOption(message, optionIndex);}
         );
@@ -318,6 +321,17 @@ public class ChatApp : App
     // ------------------------------------------------------------------------
     // Methods : Private
     // ------------------------------------------------------------------------
+    // preprocess messages before displaying (eg, name/pronoun replacement)
+    private string PreprocessMessage (string text) {
+        return DialogueProcesser.PreprocessDialogue(
+            text,
+            PhoneOS.Settings.Name,
+            PhoneOS.Settings.PronounPersonalSubject,
+            PhoneOS.Settings.PronounPersonalObject,
+            PhoneOS.Settings.PronounPossessive
+        );
+    }
+
     // message-agnostic chat bubble drawing function
     private ChatBubbleUI CreateChatBubble(
         GameObject bubblePrefab,

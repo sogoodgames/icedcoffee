@@ -106,6 +106,12 @@ public class ChatRunner : MonoBehaviour
 
         MessageScriptableObject lastMessage = m_activeChat.GetLastVisitedMessage();
 
+        if(lastMessage == null) {
+            Assert.IsNotNull(lastMessage, "Message null in chat "
+                + m_activeChat.ID);
+            return;
+        }
+
         // find next message in convo (if this isn't a leaf)
         if(!lastMessage.IsLeafMessage) {
             int nextNode = -1;
@@ -121,6 +127,7 @@ public class ChatRunner : MonoBehaviour
             } else {
                 nextNode = lastMessage.Branch[0];
             }
+
             // run it
             MessageScriptableObject nextMessage = m_activeChat.GetMessage(nextNode);
             if(nextMessage != null) {

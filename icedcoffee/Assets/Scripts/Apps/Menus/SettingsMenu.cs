@@ -11,6 +11,8 @@ public class SettingsMenu : App
     public InputField PronounsObj;
     public InputField PronounsPos;
     public InputField Name;
+    public Text ExampleText;
+    private string Example = "[name] and [their] dog went to the park. [they-c] had a great time.";
 
     // ------------------------------------------------------------------------
     // Methods
@@ -39,6 +41,8 @@ public class SettingsMenu : App
         PronounsObj.text = PhoneOS.Settings.PronounPersonalObject;
         PronounsPos.text = PhoneOS.Settings.PronounPossessive;
         Name.text = PhoneOS.Settings.Name;
+
+        ReplaceExample();
     }
 
     // ------------------------------------------------------------------------
@@ -63,5 +67,18 @@ public class SettingsMenu : App
         PhoneOS.Settings.PronounPossessive = PronounsPos.text;
         PhoneOS.Settings.Name = Name.text;
         PhoneOS.SaveSettings();
+
+        ReplaceExample();
+    }
+
+    // ------------------------------------------------------------------------ 
+    private void ReplaceExample () {
+        ExampleText.text = DialogueProcesser.PreprocessDialogue(
+            Example,
+            PhoneOS.Settings.Name,
+            PhoneOS.Settings.PronounPersonalSubject,
+            PhoneOS.Settings.PronounPersonalObject,
+            PhoneOS.Settings.PronounPossessive
+        );
     }
 }

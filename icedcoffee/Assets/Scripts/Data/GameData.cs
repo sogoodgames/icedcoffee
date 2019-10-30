@@ -10,7 +10,7 @@ public class GameData : MonoBehaviour
     // ------------------------------------------------------------------------
     public string defaultPronounSubj = "they";
     public string defaultPronounObj = "them";
-    public string defaultPronounPos = "theirs";
+    public string defaultPronounPos = "their";
     public string defaultName = "Alex";
 
     [SerializeField]
