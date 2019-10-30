@@ -18,8 +18,8 @@ MonoBehaviour:
   ClueGiven: 0
   ClueTrigger: 0
   Messages:
-  - this is the first message!
-  - this is the second from the same node
+  - this is the first message! welcome, [name]
+  - this is a pronoun test. your object pronoun is [them]
   Image: 0
   Options: []
   Branch: b1000000
