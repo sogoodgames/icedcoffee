@@ -22,6 +22,8 @@ public abstract class App : MonoBehaviour
     protected virtual void Awake () {
         if(DoSlideAnimation) {
             SlideAnimator.SlideAnimationFinished += HandleSlideAnimationFinished;
+        } else {
+            m_waitingForClose = false;
         }
     }
 

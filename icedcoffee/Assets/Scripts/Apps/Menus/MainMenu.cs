@@ -8,6 +8,7 @@ public class MainMenu : App
     // ------------------------------------------------------------------------
     public Button LoadButton;
     public Button SaveButton;
+    public SettingsMenu SettingsMenu;
 
     // ------------------------------------------------------------------------
     // Methods
@@ -46,6 +47,11 @@ public class MainMenu : App
     // ------------------------------------------------------------------------
     public void Exit () {
         Application.Quit();
+    }
+
+    // ------------------------------------------------------------------------
+    public void OpenSettings () {
+        PhoneOS.OpenApp(SettingsMenu);
     }
 
     // ------------------------------------------------------------------------

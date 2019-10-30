@@ -37,12 +37,14 @@ public class PhoneOS : MonoBehaviour
     // ------------------------------------------------------------------------
     // Properties
     // ------------------------------------------------------------------------
+    public GameSettings Settings {get {return SaveDataLoader.Settings;}}
+
     public bool CanLoadSaveFile {
         get { 
             if(SaveDataLoader == null) {
                 SaveDataLoader = new SaveDataLoader();
             }
-            return SaveDataLoader.CanLoad;
+            return SaveDataLoader.CanLoadSaveData;
         }
     }
 
@@ -157,9 +159,12 @@ public class PhoneOS : MonoBehaviour
 
     // ------------------------------------------------------------------------
     public void OpenApp (App app, bool force) {
+        Assert.IsNotNull(app);
+
         if(app.IsOpen && !force) {
             return;
         }
+
         CloseAllApps();
         app.Open();
         m_activeApp = app;
@@ -272,18 +277,46 @@ public class PhoneOS : MonoBehaviour
 
         SaveDataLoader.CreateNewSave(defaultChats, defaultClues);
 
-        // probably temp, will add FTUE later
+        if(Settings == null) {
+            CreateSettings(save:true);
+        }
+
+        // TODO: probably temp, will add FTUE later
         GoHome();
     }
 
     // ------------------------------------------------------------------------
+    // button in main menu
     public void LoadGame () {
         if(!m_initialized) {
             Init();
         }
 
-        SaveDataLoader.Load();
+        SaveDataLoader.LoadSaveData();
         PropagateSaveData();
+
+        if(Settings == null) {
+            CreateSettings(save:true);
+        }
+        LoadSettings();
+    }
+
+    // ------------------------------------------------------------------------
+    // settings menu uses to init settings obj
+    public void CreateSettings (bool save) {
+        SaveDataLoader.CreateSettings(
+            GameData.defaultPronounSubj,
+            GameData.defaultPronounObj,
+            GameData.defaultPronounPos,
+            GameData.defaultName,
+            save
+        );
+    }
+
+    // ------------------------------------------------------------------------
+    // called every time settings menu is opened
+    public void LoadSettings () {
+        SaveDataLoader.LoadSettings();
     }
 
     // ------------------------------------------------------------------------
@@ -293,7 +326,12 @@ public class PhoneOS : MonoBehaviour
             "App not initialized when attempting to save."
         );
 
-        SaveDataLoader.Save();
+        SaveDataLoader.SavePlayerData();
+    }
+
+    // ------------------------------------------------------------------------
+    public void SaveSettings () {
+        SaveDataLoader.SaveSettings();
     }
 
     // ------------------------------------------------------------------------

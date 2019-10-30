@@ -8,6 +8,11 @@ public class GameData : MonoBehaviour
     // ------------------------------------------------------------------------
     // Variables
     // ------------------------------------------------------------------------
+    public string defaultPronounSubj = "they";
+    public string defaultPronounObj = "them";
+    public string defaultPronounPos = "theirs";
+    public string defaultName = "Alex";
+
     [SerializeField]
     private List<MusicUserScriptableObject> _musicUsers;
     [SerializeField]
