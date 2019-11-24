@@ -13,18 +13,27 @@ public class GramPostUI : MonoBehaviour
     // content references
     public Image TitleProfileImage;
     public Text TitleUsernameText;
+    public Button ProfileButton;
+
     public Image PostImage;
-    public Text PostUsernameText;
     public Text DescriptionText;
     public RectTransform CommentsParent;
+
+    public Text LikesText;
+    public Button LikeButton;
+    
+    // data refs
+    private GramPostScriptableObject postSO;
 
     // ------------------------------------------------------------------------
     // Methods
     // ------------------------------------------------------------------------
     public void SetPostContent (GramPostScriptableObject post, PhoneOS os) {
-        GramUserScriptableObject user = os.GameData.GetGramUser(post.UserId);
+        postSO = post;
+
+        GramUserScriptableObject user = os.GameData.GetGramUser(postSO.UserId);
         if(user == null) return;
-        PhotoScriptableObject postPhoto = os.GameData.GetPhoto(post.PostImage);
+        PhotoScriptableObject postPhoto = os.GameData.GetPhoto(postSO.PostImage);
         if(postPhoto == null) return;
 
         // set post photo content
@@ -37,11 +46,11 @@ public class GramPostUI : MonoBehaviour
 
         // set text
         TitleUsernameText.text = user.Username;
-        PostUsernameText.text = user.Username;
-        DescriptionText.text = post.Description;
+        LikesText.text = postSO.Likes + " likes";
+        DescriptionText.text = postSO.Description;
 
         // set comments
-        foreach(GramCommentScriptableObject comment in post.Comments) {
+        foreach(GramCommentScriptableObject comment in postSO.Comments) {
             GameObject commentObj = Instantiate (
                 CommentPrefab,
                 CommentsParent
@@ -50,6 +59,17 @@ public class GramPostUI : MonoBehaviour
             GramCommentUI commentUI = commentObj.GetComponent<GramCommentUI>();
             commentUI.SetContent(comment, os);
         }
+
+        // enable/ disable like button
+        LikeButton.interactable = !post.Liked;
+    }
+
+    // ------------------------------------------------------------------------
+    public void Like () {
+        postSO.Likes++;
+        postSO.Liked = true;
+        LikesText.text = postSO.Likes + " likes";
+        LikeButton.interactable = false;
     }
 
     // ------------------------------------------------------------------------

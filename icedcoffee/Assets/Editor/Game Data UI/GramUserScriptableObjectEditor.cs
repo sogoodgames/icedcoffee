@@ -11,6 +11,9 @@ public class GramUserScriptableObjectEditor : Editor {
     private SerializedProperty m_username;
     private SerializedProperty m_friend;
     private SerializedProperty m_icon;
+    private SerializedProperty m_followers;
+    private SerializedProperty m_following;
+    private SerializedProperty m_description;
 
     private ValidationOutput validation;
 
@@ -21,6 +24,9 @@ public class GramUserScriptableObjectEditor : Editor {
         m_username = serializedObject.FindProperty("Username");
         m_friend = serializedObject.FindProperty("UserId");
         m_icon = serializedObject.FindProperty("Icon");
+        m_followers = serializedObject.FindProperty("NumFollowers");
+        m_following = serializedObject.FindProperty("NumFollowing");
+        m_description = serializedObject.FindProperty("Description");
     }
 
     // ------------------------------------------------------------------------
@@ -33,6 +39,9 @@ public class GramUserScriptableObjectEditor : Editor {
         );
         EditorGUILayout.PropertyField(m_username);
         EditorGUILayout.PropertyField(m_friend);
+        EditorGUILayout.PropertyField(m_followers);
+        EditorGUILayout.PropertyField(m_following);
+        EditorGUILayout.PropertyField(m_description);
         GameDataEditorUtils.DrawIconField(m_icon);
 
         GUILayout.Space(20);

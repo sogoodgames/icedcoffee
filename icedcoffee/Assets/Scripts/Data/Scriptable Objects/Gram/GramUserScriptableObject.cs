@@ -7,6 +7,9 @@ public class GramUserScriptableObject : ScriptableObject
     // Properties
     // ------------------------------------------------------------------------
     public string Username;
+    public int NumFollowers;
+    public int NumFollowing;
+    public string Description;
     public Friend UserId;
     public Sprite Icon;
 }

@@ -14,6 +14,7 @@ public class GramPostScriptableObjectEditor : Editor {
     private SerializedProperty m_description;
     private SerializedProperty m_image;
     private SerializedProperty m_comments;
+    private SerializedProperty m_likes;
 
     private ValidationOutput validation;
 
@@ -27,6 +28,7 @@ public class GramPostScriptableObjectEditor : Editor {
         m_description = serializedObject.FindProperty("Description");
         m_image = serializedObject.FindProperty("PostImage");
         m_comments = serializedObject.FindProperty("Comments");
+        m_likes = serializedObject.FindProperty("Likes");
     }
 
     // ------------------------------------------------------------------------
@@ -42,6 +44,7 @@ public class GramPostScriptableObjectEditor : Editor {
         EditorGUILayout.PropertyField(m_id);
         EditorGUILayout.PropertyField(m_description);
         EditorGUILayout.PropertyField(m_image);
+        EditorGUILayout.PropertyField(m_likes);
 
         GUILayout.Space(20);
 

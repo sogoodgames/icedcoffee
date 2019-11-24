@@ -13,5 +13,8 @@ MonoBehaviour:
   m_Name: gram_player
   m_EditorClassIdentifier: 
   Username: lindont
+  NumFollowers: 23
+  NumFollowing: 154
+  Description: hMMMM yEAHHH
   UserId: 1
   Icon: {fileID: 21300000, guid: 4bba63758f76d4c40a2fb53d21f796c0, type: 3}
