@@ -14948,6 +14948,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PhoneOS: {fileID: 1668743989}
+  AudioSource: {fileID: 519420030}
   PlaylistTitleText: {fileID: 154422913}
   UsernameTitleText: {fileID: 461146005}
   PlaylistParent: {fileID: 973584155}

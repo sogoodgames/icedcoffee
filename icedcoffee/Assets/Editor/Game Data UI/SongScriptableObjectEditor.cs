@@ -11,6 +11,7 @@ public class SongScriptableObjectEditor : Editor {
     private SerializedProperty m_title;
     private SerializedProperty m_artist;
     private SerializedProperty m_album;
+    private SerializedProperty m_song;
 
     private ValidationOutput validation;
 
@@ -21,6 +22,7 @@ public class SongScriptableObjectEditor : Editor {
         m_title = serializedObject.FindProperty("Title");
         m_artist = serializedObject.FindProperty("Artist");
         m_album = serializedObject.FindProperty("Album");
+        m_song = serializedObject.FindProperty("Song");
     }
 
     // ------------------------------------------------------------------------
@@ -34,6 +36,7 @@ public class SongScriptableObjectEditor : Editor {
         EditorGUILayout.PropertyField(m_title);
         EditorGUILayout.PropertyField(m_artist);
         EditorGUILayout.PropertyField(m_album);
+        EditorGUILayout.PropertyField(m_song);
 
         GUILayout.Space(20);
 

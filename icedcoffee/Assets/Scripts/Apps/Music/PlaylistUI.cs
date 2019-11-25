@@ -7,6 +7,8 @@ public class PlaylistUI : MonoBehaviour
     // Variables
     // ------------------------------------------------------------------------
     public PhoneOS PhoneOS;
+    public AudioSource AudioSource;
+
     public Text PlaylistTitleText;
     public Text UsernameTitleText;
     public Transform PlaylistParent;
@@ -31,7 +33,11 @@ public class PlaylistUI : MonoBehaviour
             );
 
             SongUI songUI = songObj.GetComponent<SongUI>();
-            songUI.SetSongContent(song.Title, song.Artist, song.Album);
+            songUI.SetSongContent(song);
+
+            songUI.PlayButton.onClick.AddListener (
+                delegate {PlaySong(song);}
+            );
         }
 
         gameObject.SetActive(true);
@@ -41,6 +47,18 @@ public class PlaylistUI : MonoBehaviour
     public void Close () {
         ClearSongList();
         gameObject.SetActive(false);
+    }
+
+    // ------------------------------------------------------------------------
+    public void PlaySong(SongScriptableObject song) {
+        if(song.Song == null) {
+            return;
+        }
+
+        Debug.Log("playing " + song.Title);
+
+        AudioSource.clip = song.Song;
+        AudioSource.Play();
     }
 
     // ------------------------------------------------------------------------

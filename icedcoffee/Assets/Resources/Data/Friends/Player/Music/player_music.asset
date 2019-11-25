@@ -13,10 +13,13 @@ MonoBehaviour:
   m_Name: player_music
   m_EditorClassIdentifier: 
   Username: You
-  PlaylistName: krap
+  PlaylistName: my music
   NumFollowers: 4444
   FriendID: 1
   ClueNeeded: 0
   ClueGiven: 0
   Playlist:
-  - {fileID: 11400000, guid: 6b762669b8689cb4f916d0db5f930294, type: 2}
+  - {fileID: 11400000, guid: fb06e4844dedd4548a7a3fb0f21b92ed, type: 2}
+  - {fileID: 11400000, guid: 6e16147cdb2313d4cbf60a6a014c2e89, type: 2}
+  - {fileID: 11400000, guid: 19b2928a371c1244a81288145d85fdac, type: 2}
+  - {fileID: 11400000, guid: 5a0eb2ec67f403242b3f6e69045b7c79, type: 2}

@@ -8,12 +8,16 @@ public class SongUI : MonoBehaviour
     // ------------------------------------------------------------------------
     public Text TitleText;
     public Text ArtistAlbumText;
+    public Button PlayButton;
+
+    private SongScriptableObject m_song;
 
     // ------------------------------------------------------------------------
     // Methods
     // ------------------------------------------------------------------------
-    public void SetSongContent(string title, string artist, string album) {
-        TitleText.text = title;
-        ArtistAlbumText.text = artist + " // " + album;
+    public void SetSongContent(SongScriptableObject song) {
+        m_song = song;
+        TitleText.text = m_song.Title;
+        ArtistAlbumText.text = m_song.Artist + " // " + m_song.Album;
     }
 }

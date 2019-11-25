@@ -9,4 +9,5 @@ public class SongScriptableObject : ScriptableObject
     public string Title;
     public string Artist;
     public string Album;
+    public AudioClip Song;
 }
