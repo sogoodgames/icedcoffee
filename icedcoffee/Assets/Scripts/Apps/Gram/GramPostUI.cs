@@ -66,8 +66,7 @@ public class GramPostUI : MonoBehaviour
 
     // ------------------------------------------------------------------------
     public void Like () {
-        postSO.Likes++;
-        postSO.Liked = true;
+        postSO.Like();
         LikesText.text = postSO.Likes + " likes";
         LikeButton.interactable = false;
     }

@@ -260,6 +260,10 @@ public class PhoneOS : MonoBehaviour
             chat.ClearProgression();
         }
 
+        foreach(GramPostScriptableObject post in GameData.GramPosts) {
+            post.ClearProgression();
+        }
+
         // create list of default found clues and chats
         List<ClueID> defaultClues = new List<ClueID>();
         foreach(ClueScriptableObject clueObj in GameData.Clues) {
@@ -275,7 +279,14 @@ public class PhoneOS : MonoBehaviour
             }
         }
 
-        SaveDataLoader.CreateNewSave(defaultChats, defaultClues);
+        List<GramPostProgressionData> defaultGrams = new List<GramPostProgressionData>();
+        foreach(GramPostScriptableObject p in GameData.GramPosts) {
+            if(ClueRequirementMet(p.ClueNeeded)) {
+                defaultGrams.Add(p.ProgressionData);
+            }
+        }
+
+        SaveDataLoader.CreateNewSave(defaultChats, defaultClues, defaultGrams);
 
         if(Settings == null) {
             CreateSettings(save:true);

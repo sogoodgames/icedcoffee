@@ -63,10 +63,11 @@ public class SaveDataLoader {
     // first time initialization of new save file
     public void CreateNewSave (
         List<ChatProgressionData> defaultChats,
-        List<ClueID> defaultClues
+        List<ClueID> defaultClues,
+        List<GramPostProgressionData> defaultGrams
     ) {
         DateTime startTime = DateTime.Now;
-        _saveData = new PlayerSaveData(defaultChats, defaultClues, startTime);
+        _saveData = new PlayerSaveData(defaultChats, defaultClues, defaultGrams, startTime);
         SavePlayerData();
     }
 
@@ -185,6 +186,12 @@ public class SaveDataLoader {
     // ------------------------------------------------------------------------
     public void FoundChat (ChatProgressionData chatProgression) {
         _saveData.ChatProgressionData.Add(chatProgression);
+        SavePlayerData();
+    }
+
+    // ------------------------------------------------------------------------
+    public void FoundGram (GramPostProgressionData gramProgression) {
+        _saveData.GramPostProgressionData.Add(gramProgression);
         SavePlayerData();
     }
 

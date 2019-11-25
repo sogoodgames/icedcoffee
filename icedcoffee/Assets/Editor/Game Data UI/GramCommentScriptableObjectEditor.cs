@@ -9,6 +9,7 @@ public class GramCommentScriptableObjectEditor : Editor {
     // Variables 
     // ------------------------------------------------------------------------
     private SerializedProperty m_id;
+    private SerializedProperty m_friend;
     private SerializedProperty m_comment;
 
     private ValidationOutput validation;
@@ -17,7 +18,8 @@ public class GramCommentScriptableObjectEditor : Editor {
     // Methods
     // ------------------------------------------------------------------------
     private void OnEnable () {
-        m_id = serializedObject.FindProperty("UserId");
+        m_id = serializedObject.FindProperty("m_id");
+        m_friend = serializedObject.FindProperty("UserId");
         m_comment = serializedObject.FindProperty("Comment");
     }
 
@@ -25,13 +27,14 @@ public class GramCommentScriptableObjectEditor : Editor {
     public override void OnInspectorGUI () {
         serializedObject.Update();
 
-        string friend = ((Friend)m_id.enumValueIndex).ToString();
+        string friend = ((Friend)m_friend.enumValueIndex).ToString();
 
         EditorGUILayout.LabelField(
             "Gram Comment: " + friend,
             EditorStyles.boldLabel
         );
-        EditorGUILayout.PropertyField(m_id);
+        GameDataEditorUtils.DrawIdGenerator(m_id);
+        EditorGUILayout.PropertyField(m_friend);
         EditorGUILayout.PropertyField(m_comment);
 
         GUILayout.Space(20);
