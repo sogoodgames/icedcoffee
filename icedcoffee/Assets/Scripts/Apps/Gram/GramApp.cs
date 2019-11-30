@@ -10,6 +10,7 @@ public class GramApp : App
     // feed
     public GameObject Feed;
     public Transform FeedPostsParent;
+
     // profile
     public GameObject Profile;
     public Transform ProfilePostsParent;
@@ -17,6 +18,10 @@ public class GramApp : App
     public Text ProfileStatsText;
     public Text ProfileDescriptionText;
     public Image ProfileIcon;
+
+    // create post
+    public CreateGramPostUI CreatePost;
+
     // prefabs
     public GameObject GramPostPrefab;
 
@@ -61,6 +66,7 @@ public class GramApp : App
     // ------------------------------------------------------------------------
     public void OpenFeed () {
         CloseProfile();
+        CloseCreatePost();
         Feed.SetActive(true);
 
         foreach(GramPostScriptableObject post in PhoneOS.ActiveGramPosts) {
@@ -87,8 +93,14 @@ public class GramApp : App
     }
 
     // ------------------------------------------------------------------------
+    public void OpenPlayerProfile () {
+        OpenProfile(Friend.You);
+    }
+
+    // ------------------------------------------------------------------------
     public void OpenProfile (Friend friend) {
         CloseFeed();
+        CloseCreatePost();
         Profile.SetActive(true);
 
         m_activeFriend = friend;
@@ -123,5 +135,17 @@ public class GramApp : App
             Destroy(child.gameObject);
         }
         Profile.SetActive(false);
+    }
+
+    // ------------------------------------------------------------------------
+    public void OpenCreatePost () {
+        CloseFeed();
+        CloseProfile();
+        CreatePost.gameObject.SetActive(true);
+    }
+
+    // ------------------------------------------------------------------------
+    public void CloseCreatePost () {
+        CreatePost.gameObject.SetActive(false);
     }
 }
