@@ -227,6 +227,14 @@ public class PhoneOS : MonoBehaviour
     }
 
     // ------------------------------------------------------------------------
+    public void CreateGramPost (GramPostScriptableObject postSO) {
+        // add to active list of gram objects
+        GameData.AddGramPost(postSO);
+        // add to progression data
+        SaveDataLoader.FoundGram(postSO.ProgressionData);
+    }
+
+    // ------------------------------------------------------------------------
     // Methods: App Lifecycle
     // ------------------------------------------------------------------------
     private void Init () {
@@ -371,10 +379,21 @@ public class PhoneOS : MonoBehaviour
             GramPostProgressionData gramProgression in
             SaveDataLoader.SaveData.GramPostProgressionData
         ) {
-            GramPostScriptableObject gramObj = GameData.GramPosts.First(
+            GramPostScriptableObject gramObj = GameData.GramPosts.FirstOrDefault(
                 g => g.ID == gramProgression.ID
             );
-            gramObj.LoadProgression(gramProgression);
+            if(gramObj != null) {
+                gramObj.LoadProgression(gramProgression);
+            } else {
+                // if we can't find a gram object, that's because this is
+                // a user-created post.
+                GramPostScriptableObject postSO = new GramPostScriptableObject();
+                postSO.SetupPlayerPost (
+                    gramProgression.Description,
+                    gramProgression.PhotoID
+                );
+                GameData.AddGramPost(postSO);
+            }
         }
     }
 

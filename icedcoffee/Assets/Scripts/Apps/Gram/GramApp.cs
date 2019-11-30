@@ -65,6 +65,7 @@ public class GramApp : App
     // Methods: Gram
     // ------------------------------------------------------------------------
     public void OpenFeed () {
+        CloseFeed();
         CloseProfile();
         CloseCreatePost();
         Feed.SetActive(true);
@@ -99,6 +100,7 @@ public class GramApp : App
 
     // ------------------------------------------------------------------------
     public void OpenProfile (Friend friend) {
+        CloseProfile();
         CloseFeed();
         CloseCreatePost();
         Profile.SetActive(true);
@@ -139,13 +141,15 @@ public class GramApp : App
 
     // ------------------------------------------------------------------------
     public void OpenCreatePost () {
+        CloseCreatePost();
         CloseFeed();
         CloseProfile();
-        CreatePost.gameObject.SetActive(true);
+
+        CreatePost.Open();
     }
 
     // ------------------------------------------------------------------------
     public void CloseCreatePost () {
-        CreatePost.gameObject.SetActive(false);
+        CreatePost.Close();
     }
 }

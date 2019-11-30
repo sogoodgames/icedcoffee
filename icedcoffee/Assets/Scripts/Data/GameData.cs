@@ -38,7 +38,6 @@ public class GameData : MonoBehaviour
 
     private Dictionary<Friend, MusicUserScriptableObject> _musicUsersInstanced;
     private Dictionary<int, ChatScriptableObject> _chatsInstanced;
-    private Dictionary<Friend, GramPostScriptableObject> _gramPostsInstanced;
     private Dictionary<Friend, GramUserScriptableObject> _gramUsersInstanced;
     private Dictionary<Friend, ForumPostScriptableObject> _forumPostsInstanced;
     private Dictionary<Friend, ForumUserScriptableObject> _forumUsersInstanced;
@@ -67,7 +66,7 @@ public class GameData : MonoBehaviour
     }
 
     public List<GramPostScriptableObject> GramPosts {
-        get{return new List<GramPostScriptableObject>(_gramPostsInstanced.Values);}
+        get{return new List<GramPostScriptableObject>(_gramPosts);}
     }
 
     public List<GramUserScriptableObject> GramUsers {
@@ -120,11 +119,6 @@ public class GameData : MonoBehaviour
             _chatsInstanced.Add(c.ID, c);
         }
 
-        _gramPostsInstanced = new Dictionary<Friend, GramPostScriptableObject>();
-        foreach (GramPostScriptableObject g in _gramPosts) {
-            _gramPostsInstanced.Add(g.UserId, g);
-        }
-
         _gramUsersInstanced = new Dictionary<Friend, GramUserScriptableObject>();
         foreach (GramUserScriptableObject g in _gramUsers) {
             _gramUsersInstanced.Add(g.UserId, g);
@@ -159,6 +153,11 @@ public class GameData : MonoBehaviour
         foreach (FriendScriptableObject f in _friends) {
             _friendsInstanced.Add(f.Friend, f);
         }
+    }
+
+    // ------------------------------------------------------------------------
+    public void AddGramPost (GramPostScriptableObject postSO) {
+        _gramPosts.Add(postSO);
     }
 
     // ------------------------------------------------------------------------

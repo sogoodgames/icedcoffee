@@ -12,6 +12,13 @@ public class GramPostProgressionData {
     public int Likes;
     public List<int> PostedComments;
 
+    // only need to save comment & photo if this is ugc
+    public bool IsPlayerPost;
+    public string Description;
+    public PhotoID PhotoID;
+
+    // ------------------------------------------------------------------------
+    // use for regular posts
     public GramPostProgressionData (
         int id,
         int likes,
@@ -25,6 +32,23 @@ public class GramPostProgressionData {
         foreach(GramCommentScriptableObject commentObj in comments) {
             PostedComments.Add(commentObj.ID);
         }
+    }
+
+    // ------------------------------------------------------------------------
+    // use for user posts
+    public GramPostProgressionData (
+        int id, 
+        string description,
+        PhotoID photoID
+    ) {
+        ID = id;
+        Description = description;
+        PhotoID = photoID;
+        IsPlayerPost = true;
+
+        Liked = false;
+        Likes = 0;
+        PostedComments = new List<int>();
     }
 }
 
@@ -103,6 +127,28 @@ public class GramPostScriptableObject : ScriptableObject
     // ------------------------------------------------------------------------
     // Methods
     // ------------------------------------------------------------------------
+    public void SetupPlayerPost (string description, PhotoID photo) {
+        Description = description;
+        PostImage = photo;
+        
+        UserId = Friend.You;
+        ClueGiven = ClueID.NoClue;
+        ClueNeeded = ClueID.NoClue;
+        StartLikes = 0;
+
+        StartComments = new GramCommentScriptableObject[0];
+        AllComments = new List<GramCommentScriptableObject>();
+
+        m_id = (int)UnityEngine.Random.Range(1, 100000);
+
+        m_progressionData = new GramPostProgressionData(
+            m_id, 
+            Description,
+            PostImage
+        );
+    }
+
+    // ------------------------------------------------------------------------
     public void ClearProgression () {
         m_progressionData = new GramPostProgressionData(
             m_id,
@@ -114,6 +160,13 @@ public class GramPostScriptableObject : ScriptableObject
     // ------------------------------------------------------------------------
     public void LoadProgression (GramPostProgressionData progressionData) {
         m_progressionData = progressionData;
+
+        // load photo and caption only if this is a player-created post
+        // (because there is no matching post in the game data)
+        if(m_progressionData.IsPlayerPost) {
+            Description = m_progressionData.Description;
+            PostImage = m_progressionData.PhotoID;
+        }
     }
 
     // ------------------------------------------------------------------------
