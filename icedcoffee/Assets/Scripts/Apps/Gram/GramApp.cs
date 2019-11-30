@@ -70,7 +70,7 @@ public class GramApp : App
             );
 
             GramPostUI postUI = postObj.GetComponent<GramPostUI>();
-            postUI.SetPostContent(post, PhoneOS);
+            postUI.SetPostContent(post, this);
 
             postUI.ProfileButton.onClick.AddListener (
                 delegate {OpenProfile(post.UserId);}
@@ -108,7 +108,7 @@ public class GramApp : App
             );
 
             GramPostUI postUI = postObj.GetComponent<GramPostUI>();
-            postUI.SetPostContent(post, PhoneOS);
+            postUI.SetPostContent(post, this);
         }
 
         ProfileUsernameText.text = gramUser.Username;

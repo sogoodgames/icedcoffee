@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.UI;
 
 public class GramPostUI : MonoBehaviour
@@ -23,13 +25,16 @@ public class GramPostUI : MonoBehaviour
     public Button LikeButton;
     
     // data refs
+    private GramApp GramApp;
     private GramPostScriptableObject postSO;
 
     // ------------------------------------------------------------------------
     // Methods
     // ------------------------------------------------------------------------
-    public void SetPostContent (GramPostScriptableObject post, PhoneOS os) {
+    public void SetPostContent (GramPostScriptableObject post, GramApp app) {
         postSO = post;
+        PhoneOS os = app.PhoneOS;
+        GramApp = app;
 
         GramUserScriptableObject user = os.GameData.GetGramUser(postSO.UserId);
         if(user == null) return;
@@ -66,9 +71,21 @@ public class GramPostUI : MonoBehaviour
 
     // ------------------------------------------------------------------------
     public void Like () {
+        if(postSO == null) {
+            Assert.IsNotNull(postSO, "Post scriptable object null.");
+            return;
+        }
+
+        if(GramApp == null) {
+            Assert.IsNotNull(GramApp, "GramApp null.");
+            return;
+        }
+
         postSO.Like();
         LikesText.text = postSO.Likes + " likes";
         LikeButton.interactable = false;
+
+        GramApp.Save();
     }
 
     // ------------------------------------------------------------------------

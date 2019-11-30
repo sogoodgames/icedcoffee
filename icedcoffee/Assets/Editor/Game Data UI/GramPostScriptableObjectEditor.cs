@@ -14,7 +14,8 @@ public class GramPostScriptableObjectEditor : Editor {
     private SerializedProperty m_clueNeeded;
     private SerializedProperty m_description;
     private SerializedProperty m_image;
-    private SerializedProperty m_comments;
+    private SerializedProperty m_startComments;
+    private SerializedProperty m_allComments;
     private SerializedProperty m_likes;
 
     private ValidationOutput validation;
@@ -29,7 +30,8 @@ public class GramPostScriptableObjectEditor : Editor {
         m_clueNeeded = serializedObject.FindProperty("ClueNeeded");
         m_description = serializedObject.FindProperty("Description");
         m_image = serializedObject.FindProperty("PostImage");
-        m_comments = serializedObject.FindProperty("Comments");
+        m_startComments = serializedObject.FindProperty("StartComments");
+        m_allComments = serializedObject.FindProperty("AllComments");
         m_likes = serializedObject.FindProperty("StartLikes");
     }
 
@@ -58,7 +60,8 @@ public class GramPostScriptableObjectEditor : Editor {
         GUILayout.Space(20);
 
         EditorGUILayout.LabelField("Comments", EditorStyles.boldLabel);
-        EditorGUILayout.PropertyField(m_comments, true);
+        EditorGUILayout.PropertyField(m_allComments, true);
+        EditorGUILayout.PropertyField(m_startComments, true);
 
         GUILayout.Space(20);
 

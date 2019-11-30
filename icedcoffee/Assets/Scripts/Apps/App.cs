@@ -62,7 +62,7 @@ public abstract class App : MonoBehaviour
     }
 
     // ------------------------------------------------------------------------
-    protected void Save () {
+    public void Save () {
         PhoneOS.SaveGame();
     }
 }

@@ -18,6 +18,9 @@ MonoBehaviour:
   Description: im linden and i think my arms are sOOO NICEE
   StartLikes: 3
   PostImage: 1
-  Comments:
+  StartComments:
   - {fileID: 11400000, guid: 597621ea71ab14f4bbbe3b94b041c9c8, type: 2}
+  AllComments:
+  - {fileID: 11400000, guid: 597621ea71ab14f4bbbe3b94b041c9c8, type: 2}
+  - {fileID: 11400000, guid: 2b2a6333f5dbdd24da42f27fcc2e1683, type: 2}
   m_id: 7105

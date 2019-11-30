@@ -365,6 +365,17 @@ public class PhoneOS : MonoBehaviour
             );
             chatObj.LoadProgression(chatProgression, GameData.Clues);
         }
+
+        // apply all gram progression
+        foreach(
+            GramPostProgressionData gramProgression in
+            SaveDataLoader.SaveData.GramPostProgressionData
+        ) {
+            GramPostScriptableObject gramObj = GameData.GramPosts.First(
+                g => g.ID == gramProgression.ID
+            );
+            gramObj.LoadProgression(gramProgression);
+        }
     }
 
     // ------------------------------------------------------------------------

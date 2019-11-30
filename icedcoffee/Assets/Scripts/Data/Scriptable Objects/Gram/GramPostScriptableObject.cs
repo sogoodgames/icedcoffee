@@ -1,20 +1,30 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using UnityEngine;
+using UnityEngine.Assertions;
 
 [Serializable]
-public struct GramPostProgressionData {
+public class GramPostProgressionData {
     public int ID;
     public bool Liked;
     public int Likes;
     public List<int> PostedComments;
 
-    public GramPostProgressionData (int id, int likes) {
+    public GramPostProgressionData (
+        int id,
+        int likes,
+        GramCommentScriptableObject[] comments
+    ) {
         ID = id;
         Likes = likes;
         Liked = false;
+        
         PostedComments = new List<int>();
+        foreach(GramCommentScriptableObject commentObj in comments) {
+            PostedComments.Add(commentObj.ID);
+        }
     }
 }
 
@@ -30,7 +40,10 @@ public class GramPostScriptableObject : ScriptableObject
     public string Description;
     public int StartLikes;
     public PhotoID PostImage;
-    public GramCommentScriptableObject[] Comments;
+    [SerializeField]
+    private GramCommentScriptableObject[] StartComments;
+    [SerializeField]
+    private List<GramCommentScriptableObject> AllComments;
 
     // ------------------------------------------------------------------------
     // Properties
@@ -43,6 +56,29 @@ public class GramPostScriptableObject : ScriptableObject
     private GramPostProgressionData m_progressionData;
     public GramPostProgressionData ProgressionData {
         get{return m_progressionData;}
+    }
+
+    // TODO: if we find performance is an issue, maybe cache comments 
+    // like how messages in a chat are cached-
+    // however, i doubt there will be more than ~10 comments ever on a gram post
+    public List<GramCommentScriptableObject> Comments {
+        get {
+            List<GramCommentScriptableObject> comments =
+                new List<GramCommentScriptableObject>();
+            foreach(int id in m_progressionData.PostedComments) {
+                GramCommentScriptableObject commentObj = 
+                    AllComments.FirstOrDefault(c => c.ID == id);
+                if(commentObj != null) {
+                    comments.Add(commentObj);
+                } else {
+                    Assert.IsNotNull(
+                        commentObj,
+                        "Did not find comment object that matches ID " + id
+                    );
+                }
+            }
+            return comments;
+        }
     }
 
     public bool Liked {
@@ -68,7 +104,11 @@ public class GramPostScriptableObject : ScriptableObject
     // Methods
     // ------------------------------------------------------------------------
     public void ClearProgression () {
-        m_progressionData = new GramPostProgressionData(m_id, StartLikes);
+        m_progressionData = new GramPostProgressionData(
+            m_id,
+            StartLikes,
+            StartComments
+        );
     }
 
     // ------------------------------------------------------------------------
@@ -80,5 +120,10 @@ public class GramPostScriptableObject : ScriptableObject
     public void Like () {
         m_progressionData.Likes++;
         m_progressionData.Liked = true;
+    }
+
+    // ------------------------------------------------------------------------
+    public void RecordCommentInProgression (GramCommentScriptableObject comment) {
+        m_progressionData.PostedComments.Add(comment.ID);
     }
 }
