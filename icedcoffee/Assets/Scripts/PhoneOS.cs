@@ -5,6 +5,7 @@
 using UnityEngine;
 using UnityEngine.Assertions;
 
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -291,6 +292,7 @@ public class PhoneOS : MonoBehaviour
         foreach(GramPostScriptableObject p in GameData.GramPosts) {
             if(ClueRequirementMet(p.ClueNeeded)) {
                 defaultGrams.Add(p.ProgressionData);
+                p.InitOldPost(DateTime.Now);
             }
         }
 
@@ -388,10 +390,7 @@ public class PhoneOS : MonoBehaviour
                 // if we can't find a gram object, that's because this is
                 // a user-created post.
                 GramPostScriptableObject postSO = new GramPostScriptableObject();
-                postSO.SetupPlayerPost (
-                    gramProgression.Description,
-                    gramProgression.PhotoID
-                );
+                postSO.LoadProgression(gramProgression);
                 GameData.AddGramPost(postSO);
             }
         }

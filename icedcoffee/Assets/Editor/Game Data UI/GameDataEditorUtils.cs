@@ -59,6 +59,28 @@ public static class GameDataEditorUtils {
     }
 
     // ------------------------------------------------------------------------
+    public static void DrawDateTimeField (
+        SerializedProperty days,
+        SerializedProperty hours,
+        SerializedProperty minutes
+    ) {
+        days.intValue = EditorGUILayout.IntField(
+            "Days relative to game start:",
+            days.intValue 
+        );
+
+        hours.intValue = EditorGUILayout.IntField(
+            "Hour of day posted (24):",
+            hours.intValue 
+        );
+
+        minutes.intValue = EditorGUILayout.IntField(
+            "Minute posted:",
+            minutes.intValue 
+        );
+    }
+
+    // ------------------------------------------------------------------------
     // chatProperty: the parent chat that contains these messages
     // optionArrayProperty: the list of potential dialogue options
     // branchArrayProperty: the branches that the options lead to

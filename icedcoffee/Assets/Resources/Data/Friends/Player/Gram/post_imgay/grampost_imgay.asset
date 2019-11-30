@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: grampost_imgay
   m_EditorClassIdentifier: 
   UserId: 1
+  PostType: 0
   ClueGiven: 0
   ClueNeeded: 0
   Description: im linden and i think my arms are sOOO NICEE
@@ -23,4 +24,7 @@ MonoBehaviour:
   AllComments:
   - {fileID: 11400000, guid: 597621ea71ab14f4bbbe3b94b041c9c8, type: 2}
   - {fileID: 11400000, guid: 2b2a6333f5dbdd24da42f27fcc2e1683, type: 2}
+  PostTimeDays: 2
+  PostTimeHour: 8
+  PostTimeMinute: 5
   m_id: 7105

@@ -23,6 +23,8 @@ public class GramPostUI : MonoBehaviour
 
     public Text LikesText;
     public Button LikeButton;
+
+    public Text TimePostedText;
     
     // data refs
     private GramApp GramApp;
@@ -53,6 +55,8 @@ public class GramPostUI : MonoBehaviour
         TitleUsernameText.text = user.Username;
         LikesText.text = postSO.Likes + " likes";
         DescriptionText.text = postSO.Description;
+
+        TimePostedText.text = postSO.TimePosted.ToString();
 
         // set comments
         foreach(GramCommentScriptableObject comment in postSO.Comments) {

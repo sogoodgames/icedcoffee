@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+
+using UnityEngine;
 using UnityEngine.UI;
 
 public class CreateGramPostUI : MonoBehaviour
@@ -69,9 +71,10 @@ public class CreateGramPostUI : MonoBehaviour
 
         // create gram post
         GramPostScriptableObject postSO = new GramPostScriptableObject();
-        postSO.SetupPlayerPost (
+        postSO.CreatePlayerPost (
             CaptionInputField.text,
-            InputPhotoID
+            InputPhotoID,
+            DateTime.Now.Ticks
         );
 
         // add to progression

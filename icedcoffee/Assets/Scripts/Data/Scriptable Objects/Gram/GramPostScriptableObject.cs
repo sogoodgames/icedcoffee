@@ -5,25 +5,35 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Assertions;
 
+public enum GramPostType {
+    OldPost = 0, // posts which are authored to appear when the game starts
+    NewNpcPost = 1, // posts which appear during the gameplay
+    PlayerPost = 2 // posts which the player writes
+}
+
 [Serializable]
 public class GramPostProgressionData {
     public int ID;
     public bool Liked;
     public int Likes;
     public List<int> PostedComments;
+    public GramPostType PostType;
+    public long PostTimeTicks;
 
-    // only need to save comment & photo if this is ugc
-    public bool IsPlayerPost;
+    // only need to save content if this is ugc
+    // (because ugc won't have a matching object in Resources)
     public string Description;
     public PhotoID PhotoID;
 
     // ------------------------------------------------------------------------
     // use for regular posts
     public GramPostProgressionData (
+        GramPostType postType,
         int id,
         int likes,
         GramCommentScriptableObject[] comments
     ) {
+        PostType = postType;
         ID = id;
         Likes = likes;
         Liked = false;
@@ -39,12 +49,14 @@ public class GramPostProgressionData {
     public GramPostProgressionData (
         int id, 
         string description,
-        PhotoID photoID
+        PhotoID photoID,
+        long postTimeTicks
     ) {
+        PostType = GramPostType.PlayerPost;
         ID = id;
         Description = description;
         PhotoID = photoID;
-        IsPlayerPost = true;
+        PostTimeTicks = postTimeTicks;
 
         Liked = false;
         Likes = 0;
@@ -59,6 +71,7 @@ public class GramPostScriptableObject : ScriptableObject
     // Variables
     // ------------------------------------------------------------------------
     public Friend UserId;
+    public GramPostType PostType;
     public ClueID ClueGiven;
     public ClueID ClueNeeded;
     public string Description;
@@ -68,6 +81,18 @@ public class GramPostScriptableObject : ScriptableObject
     private GramCommentScriptableObject[] StartComments;
     [SerializeField]
     private List<GramCommentScriptableObject> AllComments;
+
+    // once we instantiate this object, save the post time in the progression
+    // as datetime ticks
+    // # days relative to start of game when post was made
+    [SerializeField]
+    private int PostTimeDays;
+    // hour the post was posted
+    [SerializeField]
+    private int PostTimeHour;
+    // minute the post was posted
+    [SerializeField]
+    private int PostTimeMinute;
 
     // ------------------------------------------------------------------------
     // Properties
@@ -79,7 +104,15 @@ public class GramPostScriptableObject : ScriptableObject
 
     private GramPostProgressionData m_progressionData;
     public GramPostProgressionData ProgressionData {
-        get{return m_progressionData;}
+        get{ return m_progressionData; }
+    }
+
+    public DateTime TimePosted { 
+        get { return new DateTime(
+                m_progressionData.PostTimeTicks,
+                DateTimeKind.Local
+            ); 
+        }
     }
 
     // TODO: if we find performance is an issue, maybe cache comments 
@@ -127,14 +160,44 @@ public class GramPostScriptableObject : ScriptableObject
     // ------------------------------------------------------------------------
     // Methods
     // ------------------------------------------------------------------------
-    public void SetupPlayerPost (string description, PhotoID photo) {
+    // convert the age of the post from the content settings
+    // into an actual date time
+    public void InitOldPost (DateTime gameStartTime) {
+        if(PostType != GramPostType.OldPost) {
+            Debug.LogError("Trying to init an old post, but SO isn't marked as such.");
+            return;
+        }
+
+        DateTime dateTime = new DateTime(
+            year:gameStartTime.Year,
+            month:gameStartTime.Month,
+            day:gameStartTime.Day - PostTimeDays,
+            hour:PostTimeHour,
+            minute:PostTimeMinute,
+            second:(int)UnityEngine.Random.Range(0,59)
+        );
+        m_progressionData.PostTimeTicks = dateTime.Ticks;
+    }
+
+    // ------------------------------------------------------------------------
+    // initialization for when you actually post it
+    public void Post (DateTime actualPostTime) {
+        if(PostType != GramPostType.NewNpcPost) {
+            Debug.LogError("Trying to post a new NPC post, but SO isn't marked as such.");
+            return;
+        }
+
+        m_progressionData.PostTimeTicks = actualPostTime.Ticks;
+    }
+
+    // ------------------------------------------------------------------------
+    public void CreatePlayerPost (
+        string description,
+        PhotoID photo,
+        long postTimeTicks
+    ) {
         Description = description;
         PostImage = photo;
-        
-        UserId = Friend.You;
-        ClueGiven = ClueID.NoClue;
-        ClueNeeded = ClueID.NoClue;
-        StartLikes = 0;
 
         StartComments = new GramCommentScriptableObject[0];
         AllComments = new List<GramCommentScriptableObject>();
@@ -144,13 +207,17 @@ public class GramPostScriptableObject : ScriptableObject
         m_progressionData = new GramPostProgressionData(
             m_id, 
             Description,
-            PostImage
+            PostImage,
+            postTimeTicks
         );
+
+        SetupDefaultPlayerData();
     }
 
     // ------------------------------------------------------------------------
     public void ClearProgression () {
         m_progressionData = new GramPostProgressionData(
+            PostType,
             m_id,
             StartLikes,
             StartComments
@@ -163,9 +230,11 @@ public class GramPostScriptableObject : ScriptableObject
 
         // load photo and caption only if this is a player-created post
         // (because there is no matching post in the game data)
-        if(m_progressionData.IsPlayerPost) {
+        if(PostType == GramPostType.PlayerPost) {
             Description = m_progressionData.Description;
             PostImage = m_progressionData.PhotoID;
+
+            SetupDefaultPlayerData();
         }
     }
 
@@ -178,5 +247,13 @@ public class GramPostScriptableObject : ScriptableObject
     // ------------------------------------------------------------------------
     public void RecordCommentInProgression (GramCommentScriptableObject comment) {
         m_progressionData.PostedComments.Add(comment.ID);
+    }
+
+    // ------------------------------------------------------------------------
+    private void SetupDefaultPlayerData () {
+        UserId = Friend.You;
+        ClueGiven = ClueID.NoClue;
+        ClueNeeded = ClueID.NoClue;
+        StartLikes = 0;
     }
 }

@@ -17,6 +17,10 @@ public class GramPostScriptableObjectEditor : Editor {
     private SerializedProperty m_startComments;
     private SerializedProperty m_allComments;
     private SerializedProperty m_likes;
+    private SerializedProperty m_postType;
+    private SerializedProperty m_days;
+    private SerializedProperty m_hour;
+    private SerializedProperty m_minute;
 
     private ValidationOutput validation;
 
@@ -33,6 +37,10 @@ public class GramPostScriptableObjectEditor : Editor {
         m_startComments = serializedObject.FindProperty("StartComments");
         m_allComments = serializedObject.FindProperty("AllComments");
         m_likes = serializedObject.FindProperty("StartLikes");
+        m_postType = serializedObject.FindProperty("PostType");
+        m_days = serializedObject.FindProperty("PostTimeDays");
+        m_hour = serializedObject.FindProperty("PostTimeHour");
+        m_minute = serializedObject.FindProperty("PostTimeMinute");
     }
 
     // ------------------------------------------------------------------------
@@ -46,11 +54,26 @@ public class GramPostScriptableObjectEditor : Editor {
             EditorStyles.boldLabel
         );
         GameDataEditorUtils.DrawIdGenerator(m_id);
+
+        EditorGUILayout.PropertyField(m_postType);
+        bool canEditFriend = true;
+        if((GramPostType)m_postType.enumValueIndex == GramPostType.PlayerPost) {
+            m_friend.enumValueIndex = (int)Friend.You;
+            canEditFriend = false;
+        }
+        EditorGUI.BeginDisabledGroup(!canEditFriend);
         EditorGUILayout.PropertyField(m_friend);
+        EditorGUI.EndDisabledGroup();
+
+        EditorGUILayout.PropertyField(m_likes);
+        GameDataEditorUtils.DrawDateTimeField(m_days, m_hour, m_minute);
+
+        GUILayout.Space(20);
+
+        EditorGUILayout.LabelField("Content", EditorStyles.boldLabel);
         EditorGUILayout.PropertyField(m_description);
         EditorGUILayout.PropertyField(m_image);
-        EditorGUILayout.PropertyField(m_likes);
-
+        
         GUILayout.Space(20);
 
         EditorGUILayout.LabelField("Clues", EditorStyles.boldLabel);
