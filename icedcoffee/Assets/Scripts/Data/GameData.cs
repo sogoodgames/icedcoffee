@@ -195,7 +195,7 @@ public class GameData : MonoBehaviour
 
     // ------------------------------------------------------------------------
     public GramUserScriptableObject GetGramUser (Friend id) {
-        if(_gramPostsInstanced.ContainsKey(id)) {
+        if(_gramUsersInstanced.ContainsKey(id)) {
             return _gramUsersInstanced[id];
         }
         return null;
