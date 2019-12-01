@@ -100,6 +100,8 @@ public class PhoneOS : MonoBehaviour
                     activePosts.Add(p);
                 }
             }
+            // sort chronologically
+            activePosts = activePosts.OrderByDescending(p => p.TimePosted).ToList();
             return activePosts;
         }
     }

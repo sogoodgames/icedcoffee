@@ -9,11 +9,13 @@ public class GramApp : App
     // ------------------------------------------------------------------------
     // feed
     public GameObject Feed;
-    public Transform FeedPostsParent;
+    public RectTransform FeedPostsParent;
+    public ScrollRect FeedPostsScrollRect;
 
     // profile
     public GameObject Profile;
-    public Transform ProfilePostsParent;
+    public RectTransform ProfilePostsParent;
+    public ScrollRect ProfilePostsScrollRect;
     public Text ProfileUsernameText;
     public Text ProfileStatsText;
     public Text ProfileDescriptionText;
@@ -83,6 +85,8 @@ public class GramApp : App
                 delegate {OpenProfile(post.UserId);}
             );
         }
+
+        ScrollToTop(FeedPostsScrollRect, FeedPostsParent);
     }
 
     // ------------------------------------------------------------------------
@@ -129,6 +133,8 @@ public class GramApp : App
         ProfileStatsText.text = posts + " posts - " + gramUser.NumFollowers + " followers - " + gramUser.NumFollowing + " following";
         ProfileDescriptionText.text = gramUser.Description;
         ProfileIcon.sprite = gramUser.Icon;
+
+        ScrollToTop(ProfilePostsScrollRect, ProfilePostsParent);
     }
 
     // ------------------------------------------------------------------------
@@ -151,5 +157,14 @@ public class GramApp : App
     // ------------------------------------------------------------------------
     public void CloseCreatePost () {
         CreatePost.Close();
+    }
+
+    // ------------------------------------------------------------------------
+    private void ScrollToTop (
+        ScrollRect scrollRect,
+        RectTransform parentRect
+    ) {
+        LayoutRebuilder.ForceRebuildLayoutImmediate(parentRect);
+        scrollRect.normalizedPosition = new Vector2(0, 1);
     }
 }

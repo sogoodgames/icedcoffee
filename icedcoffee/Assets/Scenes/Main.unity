@@ -9761,8 +9761,10 @@ MonoBehaviour:
   SlideAnimator: {fileID: 869594721}
   Feed: {fileID: 441800348}
   FeedPostsParent: {fileID: 1999910141}
+  FeedPostsScrollRect: {fileID: 441800351}
   Profile: {fileID: 849164449}
   ProfilePostsParent: {fileID: 733546381}
+  ProfilePostsScrollRect: {fileID: 1807730431}
   ProfileUsernameText: {fileID: 2121672895}
   ProfileStatsText: {fileID: 2134446529}
   ProfileDescriptionText: {fileID: 1493974114}
