@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
@@ -248,7 +249,12 @@ public class ChatApp : App
         }
 
         // draw bubble 
-        ChatBubbleUI chatBubbleUi = CreateChatBubble(prefab, text, sprite);
+        ChatBubbleUI chatBubbleUi = CreateChatBubble(
+            prefab,
+            text,
+            sprite,
+            message.PostTime
+        );
 
         // create button to show attachment (if has one)
         if(messageIndex == message.Messages.Length - 1 && message.Image != PhotoID.NoPhoto) {
@@ -336,7 +342,8 @@ public class ChatApp : App
     private ChatBubbleUI CreateChatBubble(
         GameObject bubblePrefab,
         string text,
-        Sprite icon
+        Sprite icon,
+        DateTime timePosted
     ) {
         // create bubble object
         GameObject bubble = Instantiate(
@@ -352,8 +359,7 @@ public class ChatApp : App
         }
 
         // fill text and sprite
-        chatBubbleUi.Text.text = text;
-        chatBubbleUi.Icon.sprite = icon;
+        chatBubbleUi.Setup(text, icon, timePosted);
 
         // play audio
         messageSFX.Play();

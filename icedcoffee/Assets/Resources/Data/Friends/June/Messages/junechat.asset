@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10eab8dd6cc74904faf830c3f4c17809, type: 3}
   m_Name: junechat
   m_EditorClassIdentifier: 
-  Icon: {fileID: 21300000, guid: 077b5259edb269345aefcc659f5bd489, type: 3}
   ClueNeeded: 0
   Messages:
   - {fileID: 11400000, guid: dc25861fd3a6a1b488444c870f134fbd, type: 2}
@@ -21,4 +20,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c6212767589aac4489103c0b5d60e370, type: 2}
   - {fileID: 11400000, guid: 4a3bd006573794344bd0ad46574d8007, type: 2}
   - {fileID: 11400000, guid: db8f48444562a50499c4465e8cdb89db, type: 2}
+  - {fileID: 11400000, guid: 6c3d9af7c5870e942a8941ec6936386f, type: 2}
   m_id: 55897

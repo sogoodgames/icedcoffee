@@ -6,7 +6,7 @@ using System.Text;
 using UnityEngine;
 
 [Serializable]
-public struct ChatProgressionData {
+public class ChatProgressionData {
     public int ID;
     // only the messages you've visited so far
     public List<MessageProgressionData> VisitedMessages;
@@ -227,10 +227,11 @@ public class ChatScriptableObject : ScriptableObject
 
     // ------------------------------------------------------------------------
     private void AddMessageToProgression (MessageScriptableObject m) {
-        // first add messages to progression data and cached data
-        m_progressionData.VisitedMessages.Add(
-            new MessageProgressionData(m.Node, 0, m.MadeSelection, m.IsClueMessage)
-        );
+        // set post time
+        m.RecordTimeSent(DateTime.Now);
+
+        // add messages to progression data and cached data
+        m_progressionData.VisitedMessages.Add(m.ProgressionData);
         m_visitedMessages.Add(m);
         //Debug.Log("added message to progression: " + m.Node);
     }

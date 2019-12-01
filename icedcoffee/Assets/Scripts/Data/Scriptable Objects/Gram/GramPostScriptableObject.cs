@@ -226,11 +226,11 @@ public class GramPostScriptableObject : ScriptableObject
 
     // ------------------------------------------------------------------------
     public void LoadProgression (GramPostProgressionData progressionData) {
-        m_progressionData = progressionData;
+        m_progressionData = progressionData; 
 
         // load photo and caption only if this is a player-created post
         // (because there is no matching post in the game data)
-        if(PostType == GramPostType.PlayerPost) {
+        if(m_progressionData.PostType == GramPostType.PlayerPost) {
             Description = m_progressionData.Description;
             PostImage = m_progressionData.PhotoID;
 
@@ -251,6 +251,7 @@ public class GramPostScriptableObject : ScriptableObject
 
     // ------------------------------------------------------------------------
     private void SetupDefaultPlayerData () {
+        PostType = GramPostType.PlayerPost;
         UserId = Friend.You;
         ClueGiven = ClueID.NoClue;
         ClueNeeded = ClueID.NoClue;

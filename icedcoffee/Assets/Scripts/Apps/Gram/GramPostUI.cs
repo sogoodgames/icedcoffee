@@ -39,9 +39,15 @@ public class GramPostUI : MonoBehaviour
         GramApp = app;
 
         GramUserScriptableObject user = os.GameData.GetGramUser(postSO.UserId);
-        if(user == null) return;
+        if(user == null) {
+            Assert.IsNotNull(user, "GramUser " + postSO.UserId + " not found.");
+            return;
+        }
         PhotoScriptableObject postPhoto = os.GameData.GetPhoto(postSO.PostImage);
-        if(postPhoto == null) return;
+        if(postPhoto == null) {
+            Assert.IsNotNull(postPhoto, "Post photo not found.");
+            return;
+        }
 
         // set post photo content
         Sprite postSprite = postPhoto.Image;
@@ -56,7 +62,9 @@ public class GramPostUI : MonoBehaviour
         LikesText.text = postSO.Likes + " likes";
         DescriptionText.text = postSO.Description;
 
-        TimePostedText.text = postSO.TimePosted.ToString();
+        TimePostedText.text = DialogueProcesser.FormatDateTime(
+            postSO.TimePosted
+        );
 
         // set comments
         foreach(GramCommentScriptableObject comment in postSO.Comments) {

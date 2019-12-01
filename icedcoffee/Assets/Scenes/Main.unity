@@ -11830,8 +11830,8 @@ MonoBehaviour:
   ClueSelectionUI: {fileID: 2094733899}
   ImageSelectionUI: {fileID: 285215599}
   EnterMessageButtons: {fileID: 1613817766}
-  typingSFX: {fileID: 0}
-  messageSFX: {fileID: 0}
+  typingSFX: {fileID: 519420030}
+  messageSFX: {fileID: 519420030}
 --- !u!114 &1121651229
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,4 +1,6 @@
-﻿public static class DialogueProcesser
+﻿using System;
+
+public static class DialogueProcesser
 {
     // ------------------------------------------------------------------------
     // Methods
@@ -24,6 +26,21 @@
         output = output.Replace("[their-c]", posUppercase);
         
         return output;
+    }
+
+    // ------------------------------------------------------------------------
+    public static string FormatTime (DateTime time) {
+        return time.ToString("HH:mm tt");
+    }
+
+    // ------------------------------------------------------------------------
+    public static string FormatDateTime (DateTime time) {
+        string text = FormatTime(time); 
+        // only add the date if this message was sent more than a day ago
+        if(time.Day != DateTime.Now.Day) {
+            text = time.ToString("d MMM ") + text;
+        }
+        return text;
     }
 
     // ------------------------------------------------------------------------

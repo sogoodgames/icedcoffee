@@ -5,22 +5,26 @@ using UnityEngine;
 using UnityEngine.Assertions;
 
 [Serializable]
-public struct MessageProgressionData {
+public class MessageProgressionData {
     public int Node;
     public int OptionSelection;
     public bool MadeSelection;
     public bool IsClueMessage;
+    public long PostTimeTicks;
 
     public MessageProgressionData (
         int node,
         int selection,
         bool madeSelection,
-        bool clueMessage
+        bool clueMessage,
+        long timeTicks
     ) {
         Node = node;
         OptionSelection = selection;
         MadeSelection = madeSelection;
         IsClueMessage = clueMessage;
+        PostTimeTicks = timeTicks;
+        Debug.Log("Set post time to: " + timeTicks);
     }
 }
 
@@ -54,9 +58,19 @@ public class MessageScriptableObject : ScriptableObject
     // Properties
     // ------------------------------------------------------------------------
     // public progression data accessors
+    public MessageProgressionData ProgressionData {get{return m_progressionData;}}
     public int OptionSelection {get{return m_progressionData.OptionSelection;}}
     public bool MadeSelection {get{return m_progressionData.MadeSelection;}}
     public bool HasOptions {get{return Options != null && Options.Length > 0;}}
+
+    public DateTime PostTime {
+        get {
+            return new DateTime(
+                m_progressionData.PostTimeTicks,
+                DateTimeKind.Local
+            );
+        }
+    }
 
     public bool Player {get{return Sender == Friend.You;}}
 
@@ -107,12 +121,19 @@ public class MessageScriptableObject : ScriptableObject
     // ------------------------------------------------------------------------
     // Methods
     // ------------------------------------------------------------------------
+    public void RecordTimeSent (DateTime time) {
+        m_progressionData.PostTimeTicks = time.Ticks;
+        Debug.Log("time ticks set to " + time.Ticks);
+    }
+
+    // ------------------------------------------------------------------------
     public void ClearProgression () {
         m_progressionData = new MessageProgressionData(
             m_node,
             0,
             false,
-            IsClueMessage
+            IsClueMessage,
+            0
         );
     }
 

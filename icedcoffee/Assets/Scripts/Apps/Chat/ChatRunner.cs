@@ -279,11 +279,11 @@ public class ChatRunner : MonoBehaviour
             // log that we've presented this clue
             m_activeChat.PresentedClues.Add(clue.ClueID);
 
-            // fire event for UI
-            VisitedClueOption(clue);
-
-            // log the message 
+            // FIRST log the message 
             m_activeChat.RecordMessageInProgression(clue.Message, true);
+
+            // THEN fire event for UI
+            VisitedClueOption(clue);
 
             // fire event for saving
             NeedsSave();

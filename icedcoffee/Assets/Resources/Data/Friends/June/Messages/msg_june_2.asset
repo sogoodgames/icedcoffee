@@ -18,7 +18,7 @@ MonoBehaviour:
   ClueGiven: 0
   ClueTrigger: 0
   Messages:
-  - 'noice! pls present: poetry clue'
+  - 'this is branch response 1! pls present: poetry clue'
   Image: 0
   Options: []
   Branch: 
