@@ -2,7 +2,7 @@ using System;
 
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "GramCommentData", menuName = "IcedCoffee/GramCommentScriptableObject", order = 1)]
+[CreateAssetMenu(fileName = "GramCommentData", menuName = "IcedCoffee/ScriptableObjects/GramComment", order = 1)]
 public class GramCommentScriptableObject : ScriptableObject 
 {
     // ------------------------------------------------------------------------

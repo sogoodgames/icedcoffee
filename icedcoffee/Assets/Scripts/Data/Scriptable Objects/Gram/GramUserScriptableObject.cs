@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "GramUserData", menuName = "IcedCoffee/GramUserScriptableObject", order = 1)]
+[CreateAssetMenu(fileName = "GramUserData", menuName = "IcedCoffee/ScriptableObjects/GramUser", order = 1)]
 public class GramUserScriptableObject : ScriptableObject 
 {
     // ------------------------------------------------------------------------

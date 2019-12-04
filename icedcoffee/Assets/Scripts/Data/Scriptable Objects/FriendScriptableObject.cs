@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(fileName = "FriendData", menuName = "IcedCoffee/FriendScriptableObject", order = 1)]
+[CreateAssetMenu(fileName = "FriendData", menuName = "IcedCoffee/ScriptableObjects/Friend", order = 1)]
 public class FriendScriptableObject : ScriptableObject 
 {
     // ------------------------------------------------------------------------

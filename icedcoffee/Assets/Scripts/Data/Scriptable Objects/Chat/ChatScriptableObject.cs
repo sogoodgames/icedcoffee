@@ -36,7 +36,7 @@ public class ChatProgressionData {
     }
 }
 
-[CreateAssetMenu(fileName = "ChatData", menuName = "IcedCoffee/ChatScriptableObject", order = 1)]
+[CreateAssetMenu(fileName = "ChatData", menuName = "IcedCoffee/ScriptableObjects/Chat", order = 1)]
 public class ChatScriptableObject : ScriptableObject
 {
     // ------------------------------------------------------------------------

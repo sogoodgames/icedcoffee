@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "PhotoData", menuName = "IcedCoffee/PhotoScriptableObject", order = 1)]
+[CreateAssetMenu(fileName = "PhotoData", menuName = "IcedCoffee/ScriptableObjects/Photo", order = 1)]
 public class PhotoScriptableObject : ScriptableObject 
 {
     // ------------------------------------------------------------------------

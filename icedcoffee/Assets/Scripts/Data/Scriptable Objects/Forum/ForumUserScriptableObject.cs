@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(fileName = "ForumUserData", menuName = "IcedCoffee/ForumUserScriptableObject", order = 1)]
+[CreateAssetMenu(fileName = "ForumUserData", menuName = "IcedCoffee/ScriptableObjects/ForumUser", order = 1)]
 public class ForumUserScriptableObject : ScriptableObject 
 {
     // ------------------------------------------------------------------------

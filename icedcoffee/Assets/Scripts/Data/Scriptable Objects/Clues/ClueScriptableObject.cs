@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "ClueData", menuName = "IcedCoffee/ClueScriptableObject", order = 1)]
+[CreateAssetMenu(fileName = "ClueData", menuName = "IcedCoffee/ScriptableObjects/Clue", order = 1)]
 public class ClueScriptableObject : ScriptableObject 
 {
     // ------------------------------------------------------------------------

@@ -64,7 +64,7 @@ public class GramPostProgressionData {
     }
 }
 
-[CreateAssetMenu(fileName = "GramPostData", menuName = "IcedCoffee/GramPostScriptableObject", order = 1)]
+[CreateAssetMenu(fileName = "GramPostData", menuName = "IcedCoffee/ScriptableObjects/GramPost", order = 1)]
 public class GramPostScriptableObject : ScriptableObject 
 {
     // ------------------------------------------------------------------------

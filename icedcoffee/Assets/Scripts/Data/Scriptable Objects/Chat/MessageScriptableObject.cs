@@ -28,7 +28,7 @@ public class MessageProgressionData {
     }
 }
 
-[CreateAssetMenu(fileName = "MessageData", menuName = "IcedCoffee/MessageScriptableObject", order = 1)]
+[CreateAssetMenu(fileName = "MessageData", menuName = "IcedCoffee/ScriptableObjects/Message", order = 1)]
 public class MessageScriptableObject : ScriptableObject 
 {
     // ------------------------------------------------------------------------
