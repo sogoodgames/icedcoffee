@@ -15,13 +15,11 @@ public class ForumPostScriptableObject : ScriptableObject
     public int Time; // minutes ago it was posted
     public PhotoID Photo; // post image file (optional)
 
-#if DEBUG
     public string DebugName {
         get {
             return UserID.ToString() + "- " + Title;
         }
     }
-#endif
 
     // ------------------------------------------------------------------------
     // Methods

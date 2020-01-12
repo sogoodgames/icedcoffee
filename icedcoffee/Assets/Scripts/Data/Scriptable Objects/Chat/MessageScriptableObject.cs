@@ -24,7 +24,7 @@ public class MessageProgressionData {
         MadeSelection = madeSelection;
         IsClueMessage = clueMessage;
         PostTimeTicks = timeTicks;
-        Debug.Log("Set post time to: " + timeTicks);
+        //Debug.Log("Set post time to: " + timeTicks);
     }
 }
 
@@ -77,7 +77,6 @@ public class MessageScriptableObject : ScriptableObject
     // ------------------------------------------------------------------------
     // Debug Properties
     // ------------------------------------------------------------------------
-#if UNITY_EDITOR
     // auto-filled parent chat (for validation/tool purposes)
     public ChatScriptableObject Chat;
 
@@ -96,9 +95,7 @@ public class MessageScriptableObject : ScriptableObject
         );
         return index;
     }
-#endif
 
-#if DEBUG
     public string DebugName {
         get {
             string name = "[" + Node + "]";
@@ -116,7 +113,6 @@ public class MessageScriptableObject : ScriptableObject
             return name;
         }
     }
-#endif
 
     // ------------------------------------------------------------------------
     // Methods

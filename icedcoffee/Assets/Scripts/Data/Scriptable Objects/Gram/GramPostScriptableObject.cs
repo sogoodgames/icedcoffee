@@ -146,7 +146,6 @@ public class GramPostScriptableObject : ScriptableObject
         get { return m_progressionData.Likes; }
     }
 
-#if DEBUG
     public string DebugName { get {
         string name = UserId.ToString() + ": ";
         if(!string.IsNullOrEmpty(Description)) {
@@ -155,7 +154,6 @@ public class GramPostScriptableObject : ScriptableObject
         }
         return name;
     }}
-#endif
 
     // ------------------------------------------------------------------------
     // Methods

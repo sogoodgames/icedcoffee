@@ -19,7 +19,6 @@ public class GramCommentScriptableObject : ScriptableObject
     private int m_id;
     public int ID {get{return m_id;}}
 
-#if DEBUG
     public string DebugName {
         get {
             string name = UserId.ToString();
@@ -30,5 +29,4 @@ public class GramCommentScriptableObject : ScriptableObject
             return name;
         }
     }
-#endif
 }
