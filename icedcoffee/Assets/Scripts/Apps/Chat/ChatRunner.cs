@@ -192,6 +192,12 @@ public class ChatRunner : MonoBehaviour
             yield break;
         }
 
+        // if this was multiple-choice, only visit the message we chose
+        if(message.MadeSelection) {
+            VisitedMessage(message, message.OptionSelection);
+            yield break;
+        }
+
         // visit all of the messages in this node
         for (int i = 0; i < message.Messages.Length; i++) {
             float t = MaxTimeBetweenMessages;
@@ -226,7 +232,7 @@ public class ChatRunner : MonoBehaviour
             return;
         }*/
 
-        for(int i = 0; i < message.Options.Length; i++) {
+        for(int i = 0; i < message.Messages.Length; i++) {
             // if we've already been to this conversation option,
             // skip drawing whatever option we selected last time
             if(message.MadeSelection && i == message.OptionSelection) {
@@ -246,18 +252,14 @@ public class ChatRunner : MonoBehaviour
 
         //Debug.Log("selected option " + option + " for message " + message.Node);
 
-        // record in message that this option has been chosen
-        message.Messages = new string[1];
-        message.Messages[0] = message.Options[option];
-
-        // run chosen message
-        m_RunBubblesCoroutine = RunChatBubbles(message);
-        StartCoroutine(m_RunBubblesCoroutine);
-
         // FIRST update the message's data that we visited it
         message.SelectOption(option);
         // THEN force record that we visited this message
         m_activeChat.RecordMessageInProgression(message, true);
+
+        // THENN run chosen message
+        m_RunBubblesCoroutine = RunChatBubbles(message);
+        StartCoroutine(m_RunBubblesCoroutine);
 
         // fire events
         SelectedOption();
@@ -276,6 +278,9 @@ public class ChatRunner : MonoBehaviour
         if(message == null) {
             Debug.LogError("Can't find message with clueTrigger " + clue.ClueID);
         } else {
+            // ensure clue message initialized
+            clue.Message.ClearProgression();
+
             // log that we've presented this clue
             m_activeChat.PresentedClues.Add(clue.ClueID);
 

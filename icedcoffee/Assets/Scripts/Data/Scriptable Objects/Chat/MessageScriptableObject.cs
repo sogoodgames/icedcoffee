@@ -40,11 +40,8 @@ public class MessageScriptableObject : ScriptableObject
     public ClueID ClueGiven; // the clue given (if any)
     public ClueID ClueTrigger; // the clue that instigates this message
     public string[] Messages; // the text for the messages sent
-    public PhotoID Image;
-
-    // all of the following map by index
-    public string[] Options; // the text options
     public int[] Branch; // the next message (-1 means this is a leaf)
+    public PhotoID Image;
 
     // auto-generated ID
     [SerializeField]
@@ -61,7 +58,7 @@ public class MessageScriptableObject : ScriptableObject
     public MessageProgressionData ProgressionData {get{return m_progressionData;}}
     public int OptionSelection {get{return m_progressionData.OptionSelection;}}
     public bool MadeSelection {get{return m_progressionData.MadeSelection;}}
-    public bool HasOptions {get{return Options != null && Options.Length > 0;}}
+    public bool HasOptions {get{return Branch.Length > 1;}}
 
     public DateTime PostTime {
         get {
@@ -99,17 +96,15 @@ public class MessageScriptableObject : ScriptableObject
     public string DebugName {
         get {
             string name = "[" + Node + "]";
-            string msg = "";
-            if(Player && Options != null && Options.Length > 0) {
-                msg = Options[0];
-            } else if(Messages != null && Messages.Length > 0){
-                msg = Messages[0];
+
+            if(Messages != null && Messages.Length > 0) {
+                string msg = Messages[0];
+                if(!string.IsNullOrEmpty(msg)) {
+                    int lastIndex = msg.Length < 20 ? msg.Length : 20; 
+                    name += "- " + msg.Substring(0, lastIndex) + "...";
+                }
             }
 
-            if(!string.IsNullOrEmpty(msg)) {
-                int lastIndex = msg.Length < 20 ? msg.Length : 20; 
-                name += "- " + msg.Substring(0, lastIndex) + "...";
-            }
             return name;
         }
     }
@@ -117,9 +112,24 @@ public class MessageScriptableObject : ScriptableObject
     // ------------------------------------------------------------------------
     // Methods
     // ------------------------------------------------------------------------
+    public void InitFromData (MessageParseData data) {
+        m_node = data.id;
+        Sender = data.sender;
+        IsClueMessage = data.isClue;
+        IsLeafMessage = data.isLeaf;
+        ClueGiven = data.clueGiven;
+        ClueTrigger = data.clueTrigger;
+        Messages = data.messages;
+        Image = data.image;
+        Branch = data.branches;
+
+        ClearProgression();
+    }
+
+    // ------------------------------------------------------------------------
     public void RecordTimeSent (DateTime time) {
         m_progressionData.PostTimeTicks = time.Ticks;
-        Debug.Log("time ticks set to " + time.Ticks);
+        //Debug.Log("time ticks set to " + time.Ticks);
     }
 
     // ------------------------------------------------------------------------

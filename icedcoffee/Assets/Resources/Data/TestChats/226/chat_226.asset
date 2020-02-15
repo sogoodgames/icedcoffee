@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10eab8dd6cc74904faf830c3f4c17809, type: 3}
+  m_Name: chat_226
+  m_EditorClassIdentifier: 
+  ClueNeeded: 1
+  Messages:
+  - {fileID: 11400000, guid: 669db9fb7e103ae489a9547c2b4c373b, type: 2}
+  - {fileID: 11400000, guid: e1668907688441c4b8520976ccb6e445, type: 2}
+  - {fileID: 11400000, guid: 1e1d73e2c96db5543bbd7ff0dc9b4a7a, type: 2}
+  m_id: 226

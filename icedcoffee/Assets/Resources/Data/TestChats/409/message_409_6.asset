@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2645a96e8d7f68459c67fb404a80257, type: 3}
+  m_Name: message_409_6
+  m_EditorClassIdentifier: 
+  Sender: 1
+  IsClueMessage: 0
+  IsLeafMessage: 0
+  ClueGiven: 0
+  ClueTrigger: 0
+  Messages:
+  - 'daniel i lOVE BOBA '
+  - Haha omg Travis.
+  Branch: 0800000007000000
+  Image: 0
+  m_node: 6
+  Chat: {fileID: 0}

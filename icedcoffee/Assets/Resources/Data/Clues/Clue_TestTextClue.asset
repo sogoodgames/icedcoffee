@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea53281d498974d8d5cab0d762098d, type: 3}
+  m_Name: Clue_TestTextClue
+  m_EditorClassIdentifier: 
+  InitialLockState: 0
+  CanSend: 1
+  ClueID: 8
+  PhoneNumberGiven: 0
+  Note: ffff
+  Message: {fileID: 11400000, guid: a1a82561db8ddd54cb31b40a121c78dd, type: 2}
+  Unlocked: 0

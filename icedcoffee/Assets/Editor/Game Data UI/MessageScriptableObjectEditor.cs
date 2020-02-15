@@ -17,7 +17,6 @@ public class MessageScriptableObjectEditor : Editor {
     private SerializedProperty m_clueTrigger;
     private SerializedProperty m_messages;
     private SerializedProperty m_image;
-    private SerializedProperty m_options;
     private SerializedProperty m_branch;
     private SerializedProperty m_chat;
 
@@ -36,7 +35,6 @@ public class MessageScriptableObjectEditor : Editor {
         m_clueTrigger = serializedObject.FindProperty("ClueTrigger");
         m_messages = serializedObject.FindProperty("Messages");
         m_image = serializedObject.FindProperty("Image");
-        m_options = serializedObject.FindProperty("Options");
         m_branch = serializedObject.FindProperty("Branch");
         m_chat = serializedObject.FindProperty("Chat");
     }
@@ -68,7 +66,7 @@ public class MessageScriptableObjectEditor : Editor {
             if(!m_isClue.boolValue) {
                 GameDataEditorUtils.DrawPlayerMessageOptions(
                     m_chat,
-                    m_options,
+                    m_messages,
                     m_branch
                 );
             } else {

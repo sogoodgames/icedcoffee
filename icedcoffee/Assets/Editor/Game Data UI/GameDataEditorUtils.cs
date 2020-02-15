@@ -82,11 +82,11 @@ public static class GameDataEditorUtils {
 
     // ------------------------------------------------------------------------
     // chatProperty: the parent chat that contains these messages
-    // optionArrayProperty: the list of potential dialogue options
+    // messageArrayProperty: the list of potential dialogue options
     // branchArrayProperty: the branches that the options lead to
     public static void DrawPlayerMessageOptions (
         SerializedProperty chatProperty,
-        SerializedProperty optionArrayProperty,
+        SerializedProperty messageArrayProperty,
         SerializedProperty branchArrayProperty
     ) {
         ChatScriptableObject chatObj =
@@ -108,18 +108,18 @@ public static class GameDataEditorUtils {
         // how many options & corresponding branches
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.LabelField("Number of options: ");
-        optionArrayProperty.arraySize = EditorGUILayout.IntField(
-            optionArrayProperty.arraySize
+        messageArrayProperty.arraySize = EditorGUILayout.IntField(
+            messageArrayProperty.arraySize
         );
-        branchArrayProperty.arraySize = optionArrayProperty.arraySize;
+        branchArrayProperty.arraySize = messageArrayProperty.arraySize;
         EditorGUILayout.EndHorizontal();
 
         // iterate all elements of the potential dialogue options
-        for (int i = 0; i < optionArrayProperty.arraySize; i++) {
+        for (int i = 0; i < messageArrayProperty.arraySize; i++) {
             EditorGUILayout.BeginVertical(EditorStyles.textArea);
             // dialogue field
             SerializedProperty dialogueOptionProperty =
-                optionArrayProperty.GetArrayElementAtIndex(i);
+                messageArrayProperty.GetArrayElementAtIndex(i);
             Assert.IsNotNull(
                 dialogueOptionProperty,
                 "Can't find option property at index " + i

@@ -32,8 +32,6 @@ public class GameData : MonoBehaviour
     [SerializeField]
     private List<FriendScriptableObject> _friends;
     [SerializeField]
-    private List<Sprite> _photoAssets;
-    [SerializeField]
     private Sprite _groupChatIcon;
 
     private Dictionary<Friend, MusicUserScriptableObject> _musicUsersInstanced;
@@ -93,10 +91,6 @@ public class GameData : MonoBehaviour
         get{return new List<FriendScriptableObject>(_friendsInstanced.Values);}
     }
 
-    public List<Sprite> PhotoAssets {
-        get{return _photoAssets;}
-    }
-
     public Sprite GroupChatIcon {
         get{return _groupChatIcon;}
     }
@@ -141,7 +135,9 @@ public class GameData : MonoBehaviour
 
         _photosInstancedByClue = new Dictionary<ClueID, PhotoScriptableObject>();
         foreach (PhotoScriptableObject p in _photos) {
-            _photosInstancedByClue.Add(p.ClueID, p);
+            if(p.ClueID != ClueID.NoClue) {
+                _photosInstancedByClue.Add(p.ClueID, p);
+            }
         }
 
         _photosInstancedById = new Dictionary<PhotoID, PhotoScriptableObject>();
