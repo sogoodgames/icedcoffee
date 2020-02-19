@@ -26,8 +26,8 @@ public class MusicUserScriptableObjectEditor : Editor {
         m_playlistName = serializedObject.FindProperty("PlaylistName");
         m_numFollowers = serializedObject.FindProperty("NumFollowers");
         m_friendID = serializedObject.FindProperty("FriendID");
-        m_clueNeeded = serializedObject.FindProperty("ClueNeeded");
-        m_clueGiven = serializedObject.FindProperty("ClueGiven");
+        m_clueNeeded = serializedObject.FindProperty("ClueNeededSO");
+        m_clueGiven = serializedObject.FindProperty("ClueGivenSO");
         m_playlist = serializedObject.FindProperty("Playlist");
     }
 

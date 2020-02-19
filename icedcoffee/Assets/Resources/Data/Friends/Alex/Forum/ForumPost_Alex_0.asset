@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UserID: 7
   Title: god I wish that were me
-  ClueGiven: 7
-  ClueNeeded: 0
+  ClueGivenSO: {fileID: 11400000, guid: 4ea5cd11c93a9e04a84375fd2d62125a, type: 2}
+  ClueNeededSO: {fileID: 0}
   Body: (the teacup)
   NumComments: 35
   Time: 100

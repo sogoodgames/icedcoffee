@@ -30,8 +30,8 @@ public class GramPostScriptableObjectEditor : Editor {
     private void OnEnable () {
         m_id = serializedObject.FindProperty("m_id");
         m_friend = serializedObject.FindProperty("UserId");
-        m_clueGiven = serializedObject.FindProperty("ClueGiven");
-        m_clueNeeded = serializedObject.FindProperty("ClueNeeded");
+        m_clueGiven = serializedObject.FindProperty("ClueGivenSO");
+        m_clueNeeded = serializedObject.FindProperty("ClueNeededSO");
         m_description = serializedObject.FindProperty("Description");
         m_image = serializedObject.FindProperty("PostImage");
         m_startComments = serializedObject.FindProperty("StartComments");

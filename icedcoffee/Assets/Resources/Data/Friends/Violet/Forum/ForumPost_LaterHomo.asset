@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UserID: 3
   Title: later
-  ClueGiven: 8
-  ClueNeeded: 0
+  ClueGivenSO: {fileID: 11400000, guid: 0c78728e34bd435419af02b0d571ce69, type: 2}
+  ClueNeededSO: {fileID: 0}
   Body: '...'
   NumComments: 2
   Time: 69

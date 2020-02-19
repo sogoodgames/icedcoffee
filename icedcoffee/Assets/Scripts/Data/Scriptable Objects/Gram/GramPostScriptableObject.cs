@@ -72,8 +72,8 @@ public class GramPostScriptableObject : ScriptableObject
     // ------------------------------------------------------------------------
     public Friend UserId;
     public GramPostType PostType;
-    public ClueID ClueGiven;
-    public ClueID ClueNeeded;
+    public ClueScriptableObject ClueGivenSO;
+    public ClueScriptableObject ClueNeededSO;
     public string Description;
     public int StartLikes;
     public PhotoScriptableObject PostImage;
@@ -101,6 +101,14 @@ public class GramPostScriptableObject : ScriptableObject
     [SerializeField]
     private int m_id;
     public int ID {get{return m_id;}}
+
+    public ClueID ClueNeeded {
+        get{ return ClueNeededSO == null? ClueID.NoClue : ClueNeededSO.ClueID;}
+    }
+
+    public ClueID ClueGiven {
+        get{ return ClueGivenSO == null? ClueID.NoClue : ClueGivenSO.ClueID;}
+    }
 
     private GramPostProgressionData m_progressionData;
     public GramPostProgressionData ProgressionData {
@@ -254,8 +262,8 @@ public class GramPostScriptableObject : ScriptableObject
     private void SetupDefaultPlayerData () {
         PostType = GramPostType.PlayerPost;
         UserId = Friend.You;
-        ClueGiven = ClueID.NoClue;
-        ClueNeeded = ClueID.NoClue;
+        ClueGivenSO = null;
+        ClueNeededSO = null;
         StartLikes = 0;
     }
 }
