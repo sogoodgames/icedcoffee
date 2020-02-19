@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 [CreateAssetMenu(fileName = "PhotoData", menuName = "IcedCoffee/ScriptableObjects/Photo", order = 1)]
 public class PhotoScriptableObject : ScriptableObject 

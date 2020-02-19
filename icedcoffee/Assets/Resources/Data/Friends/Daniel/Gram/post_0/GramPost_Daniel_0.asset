@@ -18,7 +18,7 @@ MonoBehaviour:
   ClueNeeded: 0
   Description: henlo
   StartLikes: 15
-  PostImage: 3
+  PostImage: {fileID: 11400000, guid: 711df04fa83d3914391796dce8973037, type: 2}
   StartComments:
   - {fileID: 11400000, guid: 39ab55c31d8310841aa27c597fb05ab2, type: 2}
   AllComments:

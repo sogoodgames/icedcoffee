@@ -238,7 +238,7 @@ public static class DataValidator {
             output.AddError("Post has no description.");
         }
 
-        if(post.PostImage == PhotoID.NoPhoto) {
+        if(post.PostImage == null) {
             output.AddError("Post has no image.");
         }
 

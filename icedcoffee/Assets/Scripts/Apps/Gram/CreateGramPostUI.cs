@@ -14,14 +14,14 @@ public class CreateGramPostUI : MonoBehaviour
     public Button UploadButton;
     public GameObject GalleryTilePrefab;
 
-    private PhotoID InputPhotoID;
+    private PhotoScriptableObject InputPhoto;
 
     // ------------------------------------------------------------------------
     // Methods
     // ------------------------------------------------------------------------
     void Update () {
         UploadButton.interactable = !(
-            InputPhotoID == PhotoID.NoPhoto ||
+            InputPhoto == null ||
             string.IsNullOrEmpty(CaptionInputField.text)
         );    
     }
@@ -43,7 +43,7 @@ public class CreateGramPostUI : MonoBehaviour
                 photoTile.Image.preserveAspect = true;
 
                 photoTile.Button.onClick.AddListener (
-                    delegate {SetInputImage(photo.PhotoID);}
+                    delegate {SetInputImage(photo);}
                 );
             }
         }
@@ -57,13 +57,13 @@ public class CreateGramPostUI : MonoBehaviour
     }
 
     // ------------------------------------------------------------------------
-    public void SetInputImage (PhotoID id) {
-        InputPhotoID = id;
+    public void SetInputImage (PhotoScriptableObject photo) {
+        InputPhoto = photo;
     }
 
     // ------------------------------------------------------------------------
     public void CreatePost () {
-        if(InputPhotoID == PhotoID.NoPhoto ||
+        if(InputPhoto == null ||
             string.IsNullOrEmpty(CaptionInputField.text)
         ) {
             return;
@@ -73,7 +73,7 @@ public class CreateGramPostUI : MonoBehaviour
         GramPostScriptableObject postSO = new GramPostScriptableObject();
         postSO.CreatePlayerPost (
             CaptionInputField.text,
-            InputPhotoID,
+            InputPhoto,
             DateTime.Now.Ticks
         );
 

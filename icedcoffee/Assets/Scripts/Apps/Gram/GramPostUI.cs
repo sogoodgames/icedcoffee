@@ -43,15 +43,14 @@ public class GramPostUI : MonoBehaviour
             Assert.IsNotNull(user, "GramUser " + postSO.UserId + " not found.");
             return;
         }
-        PhotoScriptableObject postPhoto = os.GameData.GetPhoto(postSO.PostImage);
-        if(postPhoto == null) {
-            Assert.IsNotNull(postPhoto, "Post photo not found.");
-            return;
-        }
 
         // set post photo content
-        Sprite postSprite = postPhoto.Image;
-        PostImage.sprite = postSprite;
+        PhotoScriptableObject photoSO = postSO.PostImage; 
+        if(photoSO != null) {
+            PostImage.sprite = photoSO.Image;
+        } else {
+            Debug.LogError("Gram post image missing.");
+        }
 
         // set user icons
         Sprite userIcon = user.Icon;

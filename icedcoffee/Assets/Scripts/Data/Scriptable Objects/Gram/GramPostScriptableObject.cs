@@ -49,13 +49,13 @@ public class GramPostProgressionData {
     public GramPostProgressionData (
         int id, 
         string description,
-        PhotoID photoID,
+        PhotoID photoId,
         long postTimeTicks
     ) {
         PostType = GramPostType.PlayerPost;
         ID = id;
         Description = description;
-        PhotoID = photoID;
+        PhotoID = photoId;
         PostTimeTicks = postTimeTicks;
 
         Liked = false;
@@ -76,7 +76,7 @@ public class GramPostScriptableObject : ScriptableObject
     public ClueID ClueNeeded;
     public string Description;
     public int StartLikes;
-    public PhotoID PostImage;
+    public PhotoScriptableObject PostImage;
     [SerializeField]
     private GramCommentScriptableObject[] StartComments;
     [SerializeField]
@@ -191,7 +191,7 @@ public class GramPostScriptableObject : ScriptableObject
     // ------------------------------------------------------------------------
     public void CreatePlayerPost (
         string description,
-        PhotoID photo,
+        PhotoScriptableObject photo,
         long postTimeTicks
     ) {
         Description = description;
@@ -205,7 +205,7 @@ public class GramPostScriptableObject : ScriptableObject
         m_progressionData = new GramPostProgressionData(
             m_id, 
             Description,
-            PostImage,
+            PostImage.PhotoID,
             postTimeTicks
         );
 
@@ -223,14 +223,17 @@ public class GramPostScriptableObject : ScriptableObject
     }
 
     // ------------------------------------------------------------------------
-    public void LoadProgression (GramPostProgressionData progressionData) {
+    public void LoadProgression (
+        GramPostProgressionData progressionData,
+        GameData gameData
+    ) {
         m_progressionData = progressionData; 
 
         // load photo and caption only if this is a player-created post
         // (because there is no matching post in the game data)
         if(m_progressionData.PostType == GramPostType.PlayerPost) {
             Description = m_progressionData.Description;
-            PostImage = m_progressionData.PhotoID;
+            PostImage = gameData.GetPhoto(m_progressionData.PhotoID);
 
             SetupDefaultPlayerData();
         }
