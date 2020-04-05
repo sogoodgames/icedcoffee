@@ -13772,7 +13772,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.653586}
   m_AnchorMax: {x: 0.89629596, y: 0.7076432}
-  m_AnchoredPosition: {x: 17.300003, y: 1.3798981}
+  m_AnchoredPosition: {x: 17.299988, y: 1.3798828}
   m_SizeDelta: {x: -23.4, y: -5.14}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1371953606
@@ -20435,6 +20435,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PhoneOS: {fileID: 1668743989}
+  ParentLayoutGroup: {fileID: 1870818293}
+  ChildLayoutGroup: {fileID: 1358468955}
   ClueListParent: {fileID: 1358468954}
   ClueUIPrefab: {fileID: 2726926304248218990, guid: 87c4a28613149de4a903ff6aeb858ad2,
     type: 3}

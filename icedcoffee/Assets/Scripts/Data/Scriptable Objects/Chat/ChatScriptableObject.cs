@@ -287,6 +287,6 @@ public class ChatScriptableObject : ScriptableObject
         // add messages to progression data and cached data
         m_progressionData.VisitedMessages.Add(m.ProgressionData);
         m_visitedMessages.Add(m);
-        Debug.Log("added message to progression: " + m.Sender + m.Node);
+        //Debug.Log("added message to progression: " + m.Sender + m.Node);
     }
 }
