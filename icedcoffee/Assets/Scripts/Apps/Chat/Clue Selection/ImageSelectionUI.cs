@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class ImageSelectionUI : ChatSelectionUI
 {
     public PhoneOS PhoneOS;
-    public Transform ImageListParent;
+    public RectTransform ImageListParent;
     public GameObject ImageTilePrefab;
     public ChatRunner chatRunner;
 
@@ -29,6 +30,7 @@ public class ImageSelectionUI : ChatSelectionUI
         }
 
         gameObject.SetActive(true);
+        LayoutRebuilder.ForceRebuildLayoutImmediate(ImageListParent);
     }
 
     public override void Close () {

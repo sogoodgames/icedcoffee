@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2645a96e8d7f68459c67fb404a80257, type: 3}
+  m_Name: message_409_0
+  m_EditorClassIdentifier: 
+  Sender: 7
+  IsClueMessage: 0
+  IsLeafMessage: 0
+  ClueGiven: 0
+  ClueTrigger: 0
+  Messages:
+  - Hey everybody, I just added [name] to the chat! Please give [them] a warm welcome
+    and introduce yourself :)
+  - '[name] already knows this, but for example-'
+  - "I\u2019m Alex! I\u2019m your fearless leader/ dance instructor/ sheep herder."
+  Branch: 01000000
+  Image: 0
+  m_node: 0
+  Chat: {fileID: 0}

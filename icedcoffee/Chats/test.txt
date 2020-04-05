@@ -1,0 +1,75 @@
+{
+Name: Test
+Clue: NoClue
+}
+
+++
+Sender: Alex 
+id: 0
+Branches: 1
+Messages:
+Hey everybody, I just added [name] to the chat! Please give [them] a warm welcome and introduce yourself :)
+[name] already knows this, but for example-
+I’m Alex! I’m your fearless leader/ dance instructor/ sheep herder.
+
+++
+Sender: Daniel
+id: 1
+Branches: 2
+Messages:
+hi, I’m Daniel~~ I make music and i drink boba
+my favorite order is matcha tea with an espresso shot and brown sugar boba
+
+++
+Sender: Violet
+id: 2
+Branches: 3
+Messages:
+“i drink boba” is an understatement hehehehe
+he keeps a boba diary
+
+++
+Sender: Travis
+id: 3
+Image: TravisPhoto
+Branches: 4
+Messages:
+Hey, I'm Travis. ;)
+
+++
+Sender: Daniel
+id: 4
+Branches: 5
+Messages:
+TRAVIS STOPPP YOU'RE TOO HOT
+
+++
+Sender: Violet
+id: 5
+Branches: 6
+Messages:
+travis why ru like thissssssssss
+
+++
+Sender: You 
+id: 6
+Branches: 8, 7
+Messages: 
+daniel i lOVE BOBA 
+Haha omg Travis.
+
+++
+Sender: Travis 
+id: 7
+Messages:
+;)
+
+++
+Sender: Daniel 
+id: 8
+Clue Given: DanielNumber
+Messages:
+yhEAH
+here's my number
+so we can like
+get boba soon 

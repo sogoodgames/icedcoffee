@@ -49,13 +49,13 @@ public class GramPostProgressionData {
     public GramPostProgressionData (
         int id, 
         string description,
-        PhotoID photoID,
+        PhotoID photoId,
         long postTimeTicks
     ) {
         PostType = GramPostType.PlayerPost;
         ID = id;
         Description = description;
-        PhotoID = photoID;
+        PhotoID = photoId;
         PostTimeTicks = postTimeTicks;
 
         Liked = false;
@@ -64,7 +64,7 @@ public class GramPostProgressionData {
     }
 }
 
-[CreateAssetMenu(fileName = "GramPostData", menuName = "IcedCoffee/GramPostScriptableObject", order = 1)]
+[CreateAssetMenu(fileName = "GramPostData", menuName = "IcedCoffee/ScriptableObjects/GramPost", order = 1)]
 public class GramPostScriptableObject : ScriptableObject 
 {
     // ------------------------------------------------------------------------
@@ -72,11 +72,11 @@ public class GramPostScriptableObject : ScriptableObject
     // ------------------------------------------------------------------------
     public Friend UserId;
     public GramPostType PostType;
-    public ClueID ClueGiven;
-    public ClueID ClueNeeded;
+    public ClueScriptableObject ClueGivenSO;
+    public ClueScriptableObject ClueNeededSO;
     public string Description;
     public int StartLikes;
-    public PhotoID PostImage;
+    public PhotoScriptableObject PostImage;
     [SerializeField]
     private GramCommentScriptableObject[] StartComments;
     [SerializeField]
@@ -101,6 +101,14 @@ public class GramPostScriptableObject : ScriptableObject
     [SerializeField]
     private int m_id;
     public int ID {get{return m_id;}}
+
+    public ClueID ClueNeeded {
+        get{ return ClueNeededSO == null? ClueID.NoClue : ClueNeededSO.ClueID;}
+    }
+
+    public ClueID ClueGiven {
+        get{ return ClueGivenSO == null? ClueID.NoClue : ClueGivenSO.ClueID;}
+    }
 
     private GramPostProgressionData m_progressionData;
     public GramPostProgressionData ProgressionData {
@@ -146,7 +154,6 @@ public class GramPostScriptableObject : ScriptableObject
         get { return m_progressionData.Likes; }
     }
 
-#if DEBUG
     public string DebugName { get {
         string name = UserId.ToString() + ": ";
         if(!string.IsNullOrEmpty(Description)) {
@@ -155,7 +162,6 @@ public class GramPostScriptableObject : ScriptableObject
         }
         return name;
     }}
-#endif
 
     // ------------------------------------------------------------------------
     // Methods
@@ -193,7 +199,7 @@ public class GramPostScriptableObject : ScriptableObject
     // ------------------------------------------------------------------------
     public void CreatePlayerPost (
         string description,
-        PhotoID photo,
+        PhotoScriptableObject photo,
         long postTimeTicks
     ) {
         Description = description;
@@ -207,7 +213,7 @@ public class GramPostScriptableObject : ScriptableObject
         m_progressionData = new GramPostProgressionData(
             m_id, 
             Description,
-            PostImage,
+            PostImage.PhotoID,
             postTimeTicks
         );
 
@@ -225,14 +231,17 @@ public class GramPostScriptableObject : ScriptableObject
     }
 
     // ------------------------------------------------------------------------
-    public void LoadProgression (GramPostProgressionData progressionData) {
+    public void LoadProgression (
+        GramPostProgressionData progressionData,
+        GameData gameData
+    ) {
         m_progressionData = progressionData; 
 
         // load photo and caption only if this is a player-created post
         // (because there is no matching post in the game data)
         if(m_progressionData.PostType == GramPostType.PlayerPost) {
             Description = m_progressionData.Description;
-            PostImage = m_progressionData.PhotoID;
+            PostImage = gameData.GetPhoto(m_progressionData.PhotoID);
 
             SetupDefaultPlayerData();
         }
@@ -253,8 +262,8 @@ public class GramPostScriptableObject : ScriptableObject
     private void SetupDefaultPlayerData () {
         PostType = GramPostType.PlayerPost;
         UserId = Friend.You;
-        ClueGiven = ClueID.NoClue;
-        ClueNeeded = ClueID.NoClue;
+        ClueGivenSO = null;
+        ClueNeededSO = null;
         StartLikes = 0;
     }
 }

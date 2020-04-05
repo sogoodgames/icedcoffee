@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "MusicUserData", menuName = "IcedCoffee/MusicUserScriptableObject", order = 1)]
+[CreateAssetMenu(fileName = "MusicUserData", menuName = "IcedCoffee/ScriptableObjects/MusicUser", order = 1)]
 public class MusicUserScriptableObject : ScriptableObject 
 {
     // ------------------------------------------------------------------------
@@ -10,7 +10,18 @@ public class MusicUserScriptableObject : ScriptableObject
     public string PlaylistName;
     public int NumFollowers;
     public Friend FriendID;
-    public ClueID ClueNeeded;
-    public ClueID ClueGiven;
+    public ClueScriptableObject ClueNeededSO;
+    public ClueScriptableObject ClueGivenSO;
     public SongScriptableObject[] Playlist;
+
+    // ------------------------------------------------------------------------
+    // Properties
+    // ------------------------------------------------------------------------
+    public ClueID ClueNeeded {
+        get{ return ClueNeededSO == null? ClueID.NoClue : ClueNeededSO.ClueID;}
+    }
+
+    public ClueID ClueGiven {
+        get{ return ClueGivenSO == null? ClueID.NoClue : ClueGivenSO.ClueID;}
+    }
 }

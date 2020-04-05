@@ -103,7 +103,7 @@ public class SaveDataLoader {
             Debug.LogError("File saving failed; reason: " + e.Message);
         }
 
-        Debug.Log("SAVED PROGRESSION.");
+        //Debug.Log("SAVED PROGRESSION.");
         //LogSaveData();
 
         saveFile.Close();

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b48c4f7bd86f124c90951b1402f57cc, type: 3}
+  m_Name: GramUser_Stephanie
+  m_EditorClassIdentifier: 
+  Username: steph-ha-neat
+  NumFollowers: 567
+  NumFollowing: 3578
+  Description: Futch fitness phreak
+  UserId: 5
+  Icon: {fileID: 21300000, guid: 13acbb178a0b3d8488d30a6e449aa3aa, type: 3}

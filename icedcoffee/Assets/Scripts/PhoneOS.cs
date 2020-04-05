@@ -387,12 +387,12 @@ public class PhoneOS : MonoBehaviour
                 g => g.ID == gramProgression.ID
             );
             if(gramObj != null) {
-                gramObj.LoadProgression(gramProgression);
+                gramObj.LoadProgression(gramProgression, GameData);
             } else {
                 // if we can't find a gram object, that's because this is
                 // a user-created post.
                 GramPostScriptableObject postSO = new GramPostScriptableObject();
-                postSO.LoadProgression(gramProgression);
+                postSO.LoadProgression(gramProgression, GameData);
                 GameData.AddGramPost(postSO);
             }
         }

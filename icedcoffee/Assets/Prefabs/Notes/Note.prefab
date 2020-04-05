@@ -207,7 +207,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NotesApp: {fileID: 0}
   Text: {fileID: 5089841918943647614}
-  Image: {fileID: 5970084795572191724}
+  PhotoTile: {fileID: 3001612800268988667}
   Button: {fileID: 60377601517337797}
 --- !u!1001 &5974001776416727355
 PrefabInstance:
@@ -334,6 +334,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 5974001776416727355}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3001612800268988667 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8881155667756536256, guid: 9fce66d17f5fb4d4b9f9ed85d36d3799,
+    type: 3}
+  m_PrefabInstance: {fileID: 5974001776416727355}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58f4c78c12fa39747952cf8b5fca692e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &60377601517337797 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5922633651023748606, guid: 9fce66d17f5fb4d4b9f9ed85d36d3799,
@@ -344,17 +356,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &5970084795572191724 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 17427857740767447, guid: 9fce66d17f5fb4d4b9f9ed85d36d3799,
-    type: 3}
-  m_PrefabInstance: {fileID: 5974001776416727355}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

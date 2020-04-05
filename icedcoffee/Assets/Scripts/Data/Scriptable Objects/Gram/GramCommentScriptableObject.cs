@@ -2,7 +2,7 @@ using System;
 
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "GramCommentData", menuName = "IcedCoffee/GramCommentScriptableObject", order = 1)]
+[CreateAssetMenu(fileName = "GramCommentData", menuName = "IcedCoffee/ScriptableObjects/GramComment", order = 1)]
 public class GramCommentScriptableObject : ScriptableObject 
 {
     // ------------------------------------------------------------------------
@@ -19,7 +19,6 @@ public class GramCommentScriptableObject : ScriptableObject
     private int m_id;
     public int ID {get{return m_id;}}
 
-#if DEBUG
     public string DebugName {
         get {
             string name = UserId.ToString();
@@ -30,5 +29,4 @@ public class GramCommentScriptableObject : ScriptableObject
             return name;
         }
     }
-#endif
 }

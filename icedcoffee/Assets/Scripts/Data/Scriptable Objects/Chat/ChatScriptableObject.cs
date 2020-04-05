@@ -5,6 +5,42 @@ using System.Text;
 
 using UnityEngine;
 
+// for use in editor generating MessageScriptableObjects
+// from parsed text data
+public struct MessageParseData {
+    public int id;
+    public Friend sender;
+    public string[] messages;
+    public bool isLeaf;
+    public bool isClue;
+    public ClueID clueGiven;
+    public ClueID clueTrigger;
+    public int[] branches;
+    public PhotoID image;
+
+    public MessageParseData (
+        int id,
+        Friend sender,
+        string[] messages,
+        bool isLeaf,
+        bool isClue,
+        ClueID clueGiven,
+        ClueID clueTrigger,
+        int[] branches,
+        PhotoID image
+    ) {
+        this.id = id;
+        this.sender = sender;
+        this.messages = messages;
+        this.isLeaf = isLeaf;
+        this.isClue = isClue;
+        this.clueGiven = clueGiven;
+        this.clueTrigger = clueTrigger;
+        this.branches = branches;
+        this.image = image;
+    }
+}
+
 [Serializable]
 public class ChatProgressionData {
     public int ID;
@@ -36,7 +72,7 @@ public class ChatProgressionData {
     }
 }
 
-[CreateAssetMenu(fileName = "ChatData", menuName = "IcedCoffee/ChatScriptableObject", order = 1)]
+[CreateAssetMenu(fileName = "ChatData", menuName = "IcedCoffee/ScriptableObjects/Chat", order = 1)]
 public class ChatScriptableObject : ScriptableObject
 {
     // ------------------------------------------------------------------------
@@ -110,6 +146,24 @@ public class ChatScriptableObject : ScriptableObject
     // ------------------------------------------------------------------------
     // Methods
     // ------------------------------------------------------------------------
+    // for use generating in the editor from parsed text files
+    public void InitMetadata (
+        int id,
+        string name,
+        ClueID clueNeeded
+    ) {
+        m_id = id;
+        ClueNeeded = clueNeeded;
+    } 
+
+    // ------------------------------------------------------------------------
+    // for use generating in the editor from parsed text files
+    public void InitFromData (MessageScriptableObject[] messages) {
+        Messages = messages;
+        ClearProgression();
+    }
+
+    // ------------------------------------------------------------------------
     public void ClearProgression () {
         m_progressionData = new ChatProgressionData(
             m_id, 
@@ -181,7 +235,7 @@ public class ChatScriptableObject : ScriptableObject
         
         // if we're looping back to a multiple-answer question,
         // don't add it again
-        if(!force && m_visitedMessages.Contains(m) && (m.Options == null || m.Options.Length > 1)) {
+        if(!force && m_visitedMessages.Contains(m)) {
             return;
         }
 
@@ -233,6 +287,6 @@ public class ChatScriptableObject : ScriptableObject
         // add messages to progression data and cached data
         m_progressionData.VisitedMessages.Add(m.ProgressionData);
         m_visitedMessages.Add(m);
-        //Debug.Log("added message to progression: " + m.Node);
+        //Debug.Log("added message to progression: " + m.Sender + m.Node);
     }
 }

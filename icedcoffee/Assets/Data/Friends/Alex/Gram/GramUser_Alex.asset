@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b48c4f7bd86f124c90951b1402f57cc, type: 3}
+  m_Name: GramUser_Alex
+  m_EditorClassIdentifier: 
+  Username: alexwaslike
+  NumFollowers: 8765
+  NumFollowing: 1864
+  Description: instructor at urban soul dance academy - beg hip-hop m/w/f 7pm
+  UserId: 7
+  Icon: {fileID: 21300000, guid: 61e991093b16b0a41afce830baa11992, type: 3}

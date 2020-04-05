@@ -1,5 +1,7 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+
+using UnityEngine;
+using UnityEngine.UI;
 
 public class ClueSelectionUI : ChatSelectionUI
 {
@@ -7,7 +9,9 @@ public class ClueSelectionUI : ChatSelectionUI
     // Variables
     // ------------------------------------------------------------------------
     public PhoneOS PhoneOS;
-    public Transform ClueListParent;
+    public VerticalLayoutGroup ParentLayoutGroup;
+    public VerticalLayoutGroup ChildLayoutGroup;
+    public RectTransform ClueListParent;
     public GameObject ClueUIPrefab;
     public ChatRunner ChatRunner;
 
@@ -17,9 +21,10 @@ public class ClueSelectionUI : ChatSelectionUI
     // Methods
     // ------------------------------------------------------------------------
     public override void Open (ChatScriptableObject chat) {
-        gameObject.SetActive(true);
         this.chat = chat;
         CreateButtons(PhoneOS.UnlockedClues);
+
+        gameObject.SetActive(true);
     }
 
     // ------------------------------------------------------------------------
@@ -35,6 +40,7 @@ public class ClueSelectionUI : ChatSelectionUI
         }
 
         ClearButtons();
+
         // populate clues that you can send in a chat
         foreach(ClueScriptableObject clue in clues) {
             // don't display clues that we can't send in chats
@@ -54,6 +60,18 @@ public class ClueSelectionUI : ChatSelectionUI
                 buttonUI.Init(clue, ChatRunner);
             }
         }
+
+        /*ChildLayoutGroup.CalculateLayoutInputHorizontal();
+        ChildLayoutGroup.CalculateLayoutInputVertical();
+        ChildLayoutGroup.SetLayoutHorizontal();
+        ChildLayoutGroup.SetLayoutVertical();*/
+
+        ParentLayoutGroup.CalculateLayoutInputHorizontal();
+        ParentLayoutGroup.CalculateLayoutInputVertical();
+        ParentLayoutGroup.SetLayoutHorizontal();
+        ParentLayoutGroup.SetLayoutVertical();
+
+        LayoutRebuilder.ForceRebuildLayoutImmediate(ClueListParent);
     }
 
     // ------------------------------------------------------------------------

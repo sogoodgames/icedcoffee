@@ -1,0 +1,25 @@
+{
+Name: DanielTest
+Clue: DanielNumber
+}
+
+++
+Sender: Daniel 
+id: 0
+Messages:
+hi!
+this is danny phantom
+
+++
+Sender: Daniel 
+id: 2
+Clue Trigger: TaeClue
+Messages:
+same tho LOL
+
+++
+Sender: Daniel 
+id: 3
+Clue Trigger: TestTextClue
+Messages:
+hashtag relatablee

@@ -277,7 +277,7 @@ public class ChatApp : App
         MessageButton messageButton = option.GetComponent<MessageButton>();
 
         // process dialogue
-        string text = PreprocessMessage(message.Options[optionIndex]);
+        string text = PreprocessMessage(message.Messages[optionIndex]);
         
         // set button text & hook up option function
         messageButton.Text.text = text;

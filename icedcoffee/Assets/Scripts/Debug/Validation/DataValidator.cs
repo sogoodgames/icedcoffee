@@ -52,8 +52,8 @@ public static class DataValidator {
         // all messages should have:
         // an ID > 0
         // a sender
-        if(message.Node < 1) {
-            output.AddError("Message node should be >0.");
+        if(message.Node < 0) {
+            output.AddError("Message node should be >= 0.");
         }
 
         if(message.Sender == Friend.NoFriend) {
@@ -69,10 +69,10 @@ public static class DataValidator {
             //   messages
             // no clue trigger (only npc messages are triggered by clues)
             if(!message.IsClueMessage) {
-                if(message.Options == null || message.Options.Length < 1) {
+                if(message.Messages == null || message.Messages.Length < 1) {
                     output.AddError("Message is marked Player (and not clue message) and has no options. Should have 0 messages and >0 options.");
                 }
-                if(message.Options == null || message.Branch == null || message.Options.Length != message.Branch.Length) {
+                if(message.Messages == null || message.Branch == null || message.Messages.Length != message.Branch.Length) {
                     output.AddError("Message is marked Player (and not clue message) and the number of options does not equal the number of branches. There should be 1 branch for each option.");
                 }
             } else {
@@ -238,7 +238,7 @@ public static class DataValidator {
             output.AddError("Post has no description.");
         }
 
-        if(post.PostImage == PhotoID.NoPhoto) {
+        if(post.PostImage == null) {
             output.AddError("Post has no image.");
         }
 

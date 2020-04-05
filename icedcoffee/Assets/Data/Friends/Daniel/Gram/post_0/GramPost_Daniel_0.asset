@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0386c9bfa64d174196a5e2f0e7d48a6, type: 3}
+  m_Name: GramPost_Daniel_0
+  m_EditorClassIdentifier: 
+  UserId: 4
+  PostType: 0
+  ClueGiven: 0
+  ClueNeeded: 0
+  Description: henlo
+  StartLikes: 15
+  PostImage: {fileID: 11400000, guid: 711df04fa83d3914391796dce8973037, type: 2}
+  StartComments:
+  - {fileID: 11400000, guid: 39ab55c31d8310841aa27c597fb05ab2, type: 2}
+  AllComments:
+  - {fileID: 11400000, guid: 39ab55c31d8310841aa27c597fb05ab2, type: 2}
+  PostTimeDays: 0
+  PostTimeHour: 11
+  PostTimeMinute: 34
+  m_id: 86547

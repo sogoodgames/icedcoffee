@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5433cfa90c40d83479ecce479f31bcff, type: 3}
+  m_Name: Photo_LaterHomo
+  m_EditorClassIdentifier: 
+  PhotoID: 8
+  ClueID: 0
+  Image: {fileID: 21300000, guid: 2f135f197bc305c46b47889471807d59, type: 3}
+  Width: 613
+  Height: 716
+  Description: later homo
+  Found: 0

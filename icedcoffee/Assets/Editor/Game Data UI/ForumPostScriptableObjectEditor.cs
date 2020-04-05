@@ -25,8 +25,8 @@ public class ForumPostScriptableObjectEditor : Editor {
     private void OnEnable () {
         m_id = serializedObject.FindProperty("UserID");
         m_title = serializedObject.FindProperty("Title");
-        m_clueGiven = serializedObject.FindProperty("ClueGiven");
-        m_clueNeeded = serializedObject.FindProperty("ClueNeeded");
+        m_clueGiven = serializedObject.FindProperty("ClueGivenSO");
+        m_clueNeeded = serializedObject.FindProperty("ClueNeededSO");
         m_body = serializedObject.FindProperty("Body");
         m_numComments = serializedObject.FindProperty("NumComments");
         m_time = serializedObject.FindProperty("Time");
